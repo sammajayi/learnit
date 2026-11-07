@@ -5,6 +5,7 @@ import { ADDR } from "@learnit/backend/chain";
 import { fmtGD } from "@learnit/backend/format";
 import { Badge, Card, CardHeader, Notice, PageHeader, Stat } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
+import { useAdmin } from "@/components/admin/AdminProvider";
 import { usePool, usePoolHistory } from "@/components/admin/data";
 import { ErrorNote, SafeTx, dayLabel, gdNum, shortAddr } from "@/components/admin/bits";
 import { BarChart, LineChart } from "@/components/admin/charts";
@@ -12,6 +13,7 @@ import { BarChart, LineChart } from "@/components/admin/charts";
 const gdText = (v: number) => `${v.toLocaleString("en", { maximumFractionDigits: v < 10 ? 2 : 0 })} G$`;
 
 export default function Pool() {
+  const { address: wallet } = useAdmin();
   const pool = usePool();
   const history = usePoolHistory(14);
   const addr = ADDR.rewardsPool;
@@ -21,7 +23,9 @@ export default function Pool() {
     return (
       <div className="grid gap-6">
         <PageHeader title="Rewards pool" />
-        <Notice tone="info" title="The RewardsPool is not set up yet">Set NEXT_PUBLIC_REWARDS_POOL_ADDRESS after you deploy the contracts, then reload.</Notice>
+        {wallet
+          ? <Notice tone="info" title="The RewardsPool is not set up yet">Set NEXT_PUBLIC_REWARDS_POOL_ADDRESS after you deploy the contracts, then reload.</Notice>
+          : <Notice tone="info" title="No rewards pool yet">Pool numbers will appear here once rewards go live.</Notice>}
       </div>
     );
   }
@@ -45,7 +49,7 @@ export default function Pool() {
 
       <ErrorNote error={pool.error} />
 
-      {d && d.balance < d.dailyBudget && !d.paused && (
+      {wallet && d && d.balance < d.dailyBudget && !d.paused && (
         <Notice tone="warning" title="The pool holds less than one day's budget">Rewards will start failing once it runs out. Send more G$ from the Safe with approve, then deposit.</Notice>
       )}
 

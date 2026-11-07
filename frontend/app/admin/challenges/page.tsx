@@ -69,7 +69,9 @@ export default function Challenges() {
     return (
       <div className="grid gap-6">
         <PageHeader title="Challenges" />
-        <Notice tone="info" title="The StreakVault is not set up yet">Set NEXT_PUBLIC_STREAK_VAULT_ADDRESS after you deploy the contracts, then reload.</Notice>
+        {address
+          ? <Notice tone="info" title="The StreakVault is not set up yet">Set NEXT_PUBLIC_STREAK_VAULT_ADDRESS after you deploy the contracts, then reload.</Notice>
+          : <Notice tone="info" title="No challenges yet">Challenges will appear here once staking goes live.</Notice>}
       </div>
     );
   }
@@ -94,7 +96,7 @@ export default function Challenges() {
             ) : !cohorts.data?.length ? (
               <EmptyState icon={Flame} title="No challenges yet">Create the first one below.</EmptyState>
             ) : (
-              <CohortTimeline cohorts={cohorts.data} now={now} />
+              <CohortTimeline cohorts={cohorts.data} now={now} canAct={!!address} />
             )}
           </div>
         </Card>

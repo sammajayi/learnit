@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { fmtGD } from "@learnit/backend/format";
 import { Badge, Card, CardHeader, Notice, PageHeader } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
+import { useAdmin } from "@/components/admin/AdminProvider";
 import { cohortStatus, useCohorts, usePool, usePublicStats, useVaultPaused } from "@/components/admin/data";
 import { ErrorNote, dayLabel, fillActivity, fillDays, gdNum } from "@/components/admin/bits";
 import { BarChart, Delta, HBars, Sparkline, delta } from "@/components/admin/charts";
@@ -25,6 +26,7 @@ function Kpi({ label, value, unit, series, summary, hint }: { label: string; val
 }
 
 export default function Overview() {
+  const { address } = useAdmin();
   const stats = usePublicStats();
   const cohorts = useCohorts();
   const pool = usePool();
@@ -60,7 +62,8 @@ export default function Overview() {
     <div className="grid gap-8">
       <PageHeader title="Overview" description="LearnIt's public performance dashboard: people, G$ claimed and on-chain activity. Totals only, no personal data." />
 
-      <section aria-labelledby="attention">
+      {/* Operator to-do list. Visitors see the numbers, not the warnings, so it only shows once a wallet is connected. */}
+      {address && <section aria-labelledby="attention">
         <h2 id="attention" className="sr-only">Needs attention</h2>
         {cohorts.isLoading || pool.isLoading ? <Sk className="h-14 rounded-input" /> : attention.length ? (
           <ul className="grid gap-2">
@@ -76,7 +79,7 @@ export default function Overview() {
         ) : (
           <Notice tone="success" title="Nothing needs attention">Challenges are running, and the pool is funded and paying out.</Notice>
         )}
-      </section>
+      </section>}
 
       <ErrorNote error={stats.error} />
 

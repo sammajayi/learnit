@@ -17,7 +17,7 @@ const axisDate = (s: number) => new Date(s * 1000).toLocaleDateString("en", { mo
  * One bar per challenge on a shared calendar, so overlaps, gaps and the length of each run are visible at a glance.
  * Light sage is the join window (first day), solid sage the rest of the run. Coral marks a challenge waiting to be finalized.
  */
-export function CohortTimeline({ cohorts, now }: { cohorts: Cohort[]; now: number }) {
+export function CohortTimeline({ cohorts, now, canAct = false }: { cohorts: Cohort[]; now: number; canAct?: boolean }) {
   const [all, setAll] = useState(false);
   const rows = all ? cohorts : cohorts.slice(0, SHOWN);
 
@@ -62,7 +62,7 @@ export function CohortTimeline({ cohorts, now }: { cohorts: Cohort[]; now: numbe
                 <p className="tabular text-xs text-muted">
                   {when(c.start)} to {when(c.end)} ({length} days). Stake {fmtGD(c.min)} to {fmtGD(c.max)} G$.
                 </p>
-                {status === "finalize" && <CopyCommand command={`npx tsx --env-file=.env scripts/finalize-cohort.mts ${c.id} --send`} />}
+                {canAct && status === "finalize" && <CopyCommand command={`npx tsx --env-file=.env scripts/finalize-cohort.mts ${c.id} --send`} />}
               </li>
             );
           })}
