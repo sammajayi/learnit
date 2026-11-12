@@ -33,8 +33,11 @@ const voucherTypes = {
 
 const dayStartUtc = () => { const d = new Date(); d.setUTCHours(0, 0, 0, 0); return d; };
 
-export async function earnedTodayUtc(root: string) {
-  const rows = await db.voucher.findMany({ where: { root, createdAt: { gte: dayStartUtc() } }, select: { amount: true } });
+/** The database, or a transaction on it. */
+type Client = Pick<typeof db, "voucher" | "lessonAttempt">;
+
+export async function earnedTodayUtc(root: string, client: Client = db) {
+  const rows = await client.voucher.findMany({ where: { root, createdAt: { gte: dayStartUtc() } }, select: { amount: true } });
   return rows.reduce((s, r) => s + BigInt(r.amount), 0n);
 }
 
@@ -44,35 +47,42 @@ export async function issueVoucher(user: User, attempt: { id: string; lessonId: 
   if (!key || !ADDR.rewardsPool) return null;
   const cfg = rewardConfig();
 
-  let amount: bigint;
-  if (attempt.kind === "checkpoint") {
-    if (!firstCheckpointPass) return null;
-    amount = cfg.checkpoint;
-  } else {
-    amount = cfg.lesson;
-    const todays = await db.voucher.findMany({ where: { reason: "lesson", createdAt: { gte: dayStartUtc() }, sourceId: { in: (await db.lessonAttempt.findMany({ where: { userId: user.id, kind: "lesson", localDate: attempt.localDate, passed: true }, select: { id: true } })).map((a) => a.id) } } });
-    if (todays.length >= cfg.maxLessonsPerDay) return null;
-    const sameLesson = await db.lessonAttempt.count({ where: { userId: user.id, lessonId: attempt.lessonId, passed: true, localDate: attempt.localDate, id: { in: todays.map((t) => t.sourceId) } } });
-    if (sameLesson > 0) return null; // one reward per lesson per day
-  }
+  if (attempt.kind === "checkpoint" && !firstCheckpointPass) return null;
+  const amount = attempt.kind === "checkpoint" ? cfg.checkpoint : cfg.lesson;
 
   const v = await readVerification(user.wallet as `0x${string}`);
   if (!v.verified || !v.root) return null;
   if (v.verifiedUntil && v.verifiedUntil <= new Date()) return null;
-  const earned = await earnedTodayUtc(v.root);
-  if (earned + amount > cfg.dailyCap) return null; // contract would reject it anyway
+  const root = v.root;
 
-  const nonce = BigInt("0x" + randomBytes(16).toString("hex"));
-  const expiry = BigInt(Math.floor(Date.now() / 1000) + cfg.expirySeconds);
-  const account = privateKeyToAccount(key);
-  const signature = await account.signTypedData({
-    domain: { name: "LearnItRewards", version: "1", chainId: CHAIN_ID, verifyingContract: ADDR.rewardsPool },
-    types: voucherTypes, primaryType: "Voucher",
-    message: { root: v.root, amount, nonce, expiry },
-  });
-  return db.voucher.create({
-    data: { root: v.root, amount: amount.toString(), nonce: nonce.toString(), expiry: Number(expiry), reason: attempt.kind, sourceId: attempt.id, signature },
-  });
+  // The limits below are "read what was issued so far, then issue one more". Two requests running at once
+  // would each read the same total and both issue, going over the limit. So every issue for one GoodDollar
+  // identity takes a lock first and the checks and the insert happen inside it, one request at a time. The
+  // lock is released when the transaction ends. Different identities do not wait on each other.
+  return db.$transaction(async (tx) => {
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtextextended(${"voucher:" + root.toLowerCase()}, 0))`;
+
+    if (attempt.kind !== "checkpoint") {
+      const todays = await tx.voucher.findMany({ where: { reason: "lesson", createdAt: { gte: dayStartUtc() }, sourceId: { in: (await tx.lessonAttempt.findMany({ where: { userId: user.id, kind: "lesson", localDate: attempt.localDate, passed: true }, select: { id: true } })).map((a) => a.id) } } });
+      if (todays.length >= cfg.maxLessonsPerDay) return null;
+      const sameLesson = await tx.lessonAttempt.count({ where: { userId: user.id, lessonId: attempt.lessonId, passed: true, localDate: attempt.localDate, id: { in: todays.map((t) => t.sourceId) } } });
+      if (sameLesson > 0) return null; // one reward per lesson per day
+    }
+    const earned = await earnedTodayUtc(root, tx);
+    if (earned + amount > cfg.dailyCap) return null; // contract would reject it anyway
+
+    const nonce = BigInt("0x" + randomBytes(16).toString("hex"));
+    const expiry = BigInt(Math.floor(Date.now() / 1000) + cfg.expirySeconds);
+    const account = privateKeyToAccount(key);
+    const signature = await account.signTypedData({
+      domain: { name: "LearnItRewards", version: "1", chainId: CHAIN_ID, verifyingContract: ADDR.rewardsPool },
+      types: voucherTypes, primaryType: "Voucher",
+      message: { root, amount, nonce, expiry },
+    });
+    return tx.voucher.create({
+      data: { root, amount: amount.toString(), nonce: nonce.toString(), expiry: Number(expiry), reason: attempt.kind, sourceId: attempt.id, signature },
+    });
+  }, { maxWait: 15_000, timeout: 20_000 }); // the database can take seconds to wake up, and a burst of requests queues on the lock
 }
 
 /** Signs and records a weekly league bonus voucher for a verified root. `sourceId` is the LeagueBonus row id. */
