@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ChevronDown, Coins, Download } from "lucide-react";
+import { Coins, Download } from "lucide-react";
 import { fmtGD } from "@learnit/backend/format";
 import { Button, Card, CardHeader, EmptyState, PageHeader, Stat } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
@@ -65,33 +65,8 @@ export default function Ubi() {
             </div>
           </Card>
 
-          {ubi.allTime.claims === 0 ? (
+          {ubi.allTime.claims === 0 && (
             <EmptyState icon={Coins} title="No claims recorded yet">Claims appear here after someone claims from the LearnIt home screen.</EmptyState>
-          ) : (
-            <Card className="overflow-hidden">
-              <details className="group">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-medium text-ink [&::-webkit-details-marker]:hidden">
-                  View as a table
-                  <ChevronDown size={16} aria-hidden className="text-muted transition-transform duration-150 group-open:rotate-180" />
-                </summary>
-              <table className="tabular w-full text-left text-sm">
-                <caption className="sr-only">G$ claimed per UTC day, last 30 days</caption>
-                <thead className="border-y border-line bg-sunken/60 text-xs text-muted">
-                  <tr><th scope="col" className="px-5 py-3 font-medium">Day</th><th scope="col" className="px-3 py-3 text-right font-medium">Claims</th><th scope="col" className="px-3 py-3 text-right font-medium">People</th><th scope="col" className="px-5 py-3 text-right font-medium">G$</th></tr>
-                </thead>
-                <tbody className="divide-y divide-line">
-                  {[...days].reverse().map((d) => (
-                    <tr key={d.day} className={d.claims === 0 ? "text-muted" : "text-ink"}>
-                      <th scope="row" className="px-5 py-2.5 font-medium">{label(d.day)}</th>
-                      <td className="px-3 py-2.5 text-right">{d.claims}</td>
-                      <td className="px-3 py-2.5 text-right">{d.claimers}</td>
-                      <td className="px-5 py-2.5 text-right font-medium">{fmtGD(d.total, 2, false)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              </details>
-            </Card>
           )}
           <p className="text-xs text-muted">Updated {new Date(data!.generatedAt).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}. Refreshes every few minutes.</p>
         </>
