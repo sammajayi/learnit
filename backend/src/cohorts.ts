@@ -42,8 +42,8 @@ const CHUNK = 5_000n; // public Celo RPCs reject eth_getLogs over wide block ran
 const seen = new Map<number, { upTo: bigint; users: Set<string> }>(); // per cohort: how far we scanned, so later calls only read the new blocks
 
 /** Distinct stakers in a cohort. Scans Staked logs in chunks from VAULT_DEPLOY_BLOCK. A failed scan returns what was found so far instead of breaking the page. */
-export async function memberCount(id: number) {
-  const v = vault(); if (!v) return 0;
+async function scanStakers(id: number) {
+  const v = vault(); if (!v) return new Set<string>();
   const entry = seen.get(id) ?? { upTo: BigInt(process.env.VAULT_DEPLOY_BLOCK || 0) - 1n, users: new Set<string>() };
   seen.set(id, entry);
   try {
@@ -59,7 +59,17 @@ export async function memberCount(id: number) {
   } catch (e) {
     console.error("memberCount scan failed", id, e instanceof Error ? e.message.split("\n")[0] : e);
   }
-  return entry.users.size;
+  return entry.users;
+}
+
+export async function memberCount(id: number) {
+  return (await scanStakers(id)).size;
+}
+
+/** The wallet addresses that have ever staked in a cohort. Nobody can withdraw before it ends, so while
+ *  it is still live this is exactly who currently has a stake riding on it. */
+export async function stakersOf(id: number) {
+  return scanStakers(id);
 }
 
 export async function myState(id: number, user: User) {
