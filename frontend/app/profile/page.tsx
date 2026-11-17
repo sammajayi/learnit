@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAuth } from "@/lib/useAuth";
 import { ArrowRight, BadgeCheck, BookOpen, Check, CheckCircle2, Copy, Flame, Lock, LogOut, ScanFace, Snowflake } from "lucide-react";
 import { useMe } from "@/lib/useMe";
 import { useToday } from "@/lib/useToday";
@@ -19,7 +19,7 @@ import { cn } from "@/lib/cn";
 
 export default function Profile() {
   const ok = useAuthGate();
-  const { logout } = usePrivy();
+  const { logout } = useAuth();
   const { data: me } = useMe();
   const { data: t } = useToday();
   const [copied, setCopied] = useState(false);

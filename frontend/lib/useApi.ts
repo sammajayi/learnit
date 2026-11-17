@@ -1,10 +1,10 @@
 "use client";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAuth } from "./useAuth";
 import { useCallback, useRef } from "react";
 
 /** fetch wrapper that attaches the Privy access token. The returned function never changes identity. */
 export function useApi() {
-  const { getAccessToken } = usePrivy();
+  const { getAccessToken } = useAuth();
   const ref = useRef(getAccessToken);
   ref.current = getAccessToken;
   return useCallback(async <T,>(path: string, init?: RequestInit): Promise<T> => {

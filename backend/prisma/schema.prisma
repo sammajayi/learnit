@@ -12,6 +12,7 @@ model User {
   id              String   @id @default(cuid())
   privyUserId     String   @unique
   wallet          String   @unique
+  email           String?  // from the auth provider's linked email, if any; used for off-app notifications
   whitelistedRoot String?
   verifiedUntil   DateTime?
   gasTopupTx      String?
