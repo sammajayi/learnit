@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Check, Clock, Flame, RotateCcw, Target, Volume2, VolumeX, X } from "lucide-react";
@@ -23,6 +24,7 @@ const isCheckpoint = (id: string) => id.endsWith("-cp");
 
 export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) => void }) {
   const api = useApi();
+  const qc = useQueryClient();
   const reduce = useReducedMotion();
   const [data, setData] = useState<Loaded | null>(null);
   const [err, setErr] = useState<string | null>(null);
@@ -78,8 +80,10 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
     try {
       const r = await api<Result>(`${base}/submit`, { method: "POST", body: JSON.stringify({ token: data.token, answers }) });
       setResult(r); onDone?.(r);
+      // Queries are cached for a minute, so without this the path, streak and points stay stale after a pass.
+      for (const key of ["today", "me", "leaderboard", "cohorts", "vouchers"]) void qc.invalidateQueries({ queryKey: [key] });
     } catch (e) { setErr(e instanceof Error ? e.message : "Submit failed"); }
-  }, [api, data, base, onDone]);
+  }, [api, qc, data, base, onDone]);
 
   const next = useCallback(() => {
     if (!data) return;
