@@ -40,7 +40,7 @@ export function Home() {
     <AppShell>
       <header className="flex flex-col gap-1">
         <p className="text-sm text-muted">{new Date().toLocaleDateString("en", { weekday: "long", month: "long", day: "numeric" })}</p>
-        {me ? <h1 className="text-display-md text-ink sm:text-[2rem]">{greeting()}{first ? `, ${first}` : ""}</h1> : <Sk className="mt-1 h-9 w-64 rounded-lg" />}
+        {me ? <h1 className="font-display text-display-md text-ink sm:text-[2rem]">{greeting()}{first ? `, ${first}` : ""}</h1> : <Sk className="mt-1 h-9 w-64 rounded-lg" />}
         <p className="text-[15px] text-muted">
           {!t ? " " : t.todayDone ? "Today's lesson is done. Your streak is safe." : t.streak > 0 ? "One lesson today keeps your streak going." : "Your next lesson takes about ten minutes."}
         </p>
@@ -152,12 +152,12 @@ function RewardsCard({ verified }: { verified: boolean }) {
         <p className="text-sm font-semibold text-ink">Lesson rewards</p>
         <Link href="/earn" className="inline-flex items-center gap-1 text-sm font-medium text-muted transition hover:text-ink">Open <ArrowUpRight size={14} aria-hidden /></Link>
       </div>
-      <p className="tabular mt-4 text-3xl font-semibold tracking-[-0.02em] text-ink">{fmtGD(data.earnedToday)} <span className="text-base font-medium text-muted">G$ today</span></p>
+      <p className="font-mono tabular mt-4 text-3xl font-semibold tracking-[-0.02em] text-ink">{fmtGD(data.earnedToday)} <span className="text-base font-medium text-muted"><span className="font-mono">G$</span> <span className="font-sans">today</span></span></p>
       <Progress className="mt-4" value={cap > 0n ? Number((earned * 1000n) / cap) / 1000 : 0} label="Share of today's reward cap earned" />
       <p className="mt-2 text-xs text-muted tabular">{fmtGD(data.capRemaining)} G$ left under today&apos;s cap</p>
       {ready.length > 0 && (
         <Link href="/earn" className="mt-5 flex items-center justify-between rounded-input bg-coral-50 px-4 py-3 text-sm font-medium text-coral-700 ring-1 ring-inset ring-coral-100 transition hover:bg-coral-100">
-          <span><span className="tabular font-semibold">{fmtGD(pending)} G$</span> ready to claim</span>
+          <span><span className="font-mono tabular font-semibold">{fmtGD(pending)} G$</span> ready to claim</span>
           <ArrowRight size={16} aria-hidden />
         </Link>
       )}
@@ -168,7 +168,7 @@ function RewardsCard({ verified }: { verified: boolean }) {
 function QuickLinks() {
   const links = [
     { href: "/stake", Icon: PiggyBank, title: "Streak challenge", body: "Stake G$ on a daily streak challenge" },
-    { href: "/league", Icon: Trophy, title: "Weekly league", body: "Top 3 share a G$ bonus" },
+    { href: "/leaderboard", Icon: Trophy, title: "Leaderboard", body: "Weekly top 3 share a G$ bonus" },
     { href: "/earn", Icon: Coins, title: "Rewards", body: "Claim what you've earned" },
   ];
   return (

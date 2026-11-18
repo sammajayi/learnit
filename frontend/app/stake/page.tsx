@@ -149,13 +149,13 @@ export default function Stake() {
   const amt = wei !== null && !outOfBounds ? Number(formatUnits(wei, 18)).toLocaleString("en", { maximumFractionDigits: 4 }) : null;
   const stats = (cls: string, compact = false) => c ? (
       <>
-      {!compact && <p className={`px-4 py-3 text-sm text-muted sm:hidden ${cls}`}><span className="tabular font-semibold text-ink">{fmtGD(c.pot)} G$</span> staked by <span className="tabular font-semibold text-ink">{c.members}</span> {c.members === 1 ? "person" : "people"}</p>}
+      {!compact && <p className={`px-4 py-3 text-sm text-muted sm:hidden ${cls}`}><span className="font-mono tabular font-semibold text-ink">{fmtGD(c.pot)} G$</span> staked by <span className="tabular font-semibold text-ink">{c.members}</span> {c.members === 1 ? "person" : "people"}</p>}
       <dl className={`${compact ? "grid" : "hidden sm:grid"} grid-cols-2 divide-line sm:divide-x ${compact ? "" : "sm:grid-cols-4"} ${cls}`}>
         {[
-          { Icon: PiggyBank, k: "Total staked", v: <><span className="tabular">{fmtGD(c.pot)}</span> <span className="text-sm font-medium text-muted">G$</span></> },
+          { Icon: PiggyBank, k: "Total staked", v: <><span className="font-mono tabular">{fmtGD(c.pot)}</span> <span className="font-mono text-sm font-medium text-muted">G$</span></> },
           { Icon: Users, k: "People in", v: <span className="tabular">{c.members}</span> },
           { Icon: CalendarDays, k: "Length", v: <>{days} <span className="text-sm font-medium text-muted">days</span></> },
-          { Icon: SlidersHorizontal, k: "Stake limits", v: <span className="tabular text-lg">{fmtGD(c.min, 0)}–{fmtGD(c.max, 0)}</span> },
+          { Icon: SlidersHorizontal, k: "Stake limits", v: <span className="font-mono tabular text-lg">{fmtGD(c.min, 0)}–{fmtGD(c.max, 0)}</span> },
         ].slice(0, compact ? 2 : 4).map(({ Icon, k, v }) => (
           <div key={k} className="px-4 py-3.5 sm:px-6 sm:py-5">
             <dt className="flex items-center gap-1.5 text-[13px] font-medium text-muted"><Icon size={14} aria-hidden />{k}</dt>
@@ -213,7 +213,7 @@ export default function Stake() {
                     <li key={o.id} className="grid gap-3 py-4 last:pb-0 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-4">
                       <div className="min-w-0">
                         <p className="text-sm font-medium text-ink">{len} day challenge <span className="font-normal text-muted">&middot; {fmtDate(o.start)} to {fmtDate(o.end)}</span></p>
-                        <p className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-ink"><span className="tabular">{fmtGD(o.mine!.payout)}</span> <span className="text-sm font-medium text-muted">G$</span></p>
+                        <p className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-ink"><span className="font-mono tabular">{fmtGD(o.mine!.payout)}</span> <span className="font-mono text-sm font-medium text-muted">G$</span></p>
                       </div>
                       <Button variant="outline" onClick={() => withdraw(o.id)} loading={here} disabled={busy && !here} block className="sm:w-auto">{here && step ? STEP_LABEL[step] : "Withdraw"}</Button>
                     </li>
@@ -243,7 +243,7 @@ export default function Stake() {
                     <div className="flex flex-wrap items-end justify-between gap-4">
                       <div>
                         <p className="text-sm font-medium text-muted">Your stake</p>
-                        <p className="tabular mt-1 flex items-center gap-2 text-[2rem] font-semibold leading-none tracking-[-0.03em] text-ink"><GMark size={26} />{fmtGD(c.mine!.stake)}</p>
+                        <p className="font-mono tabular mt-1 flex items-center gap-2 text-[2rem] font-semibold leading-none tracking-[-0.03em] text-ink"><GMark size={26} />{fmtGD(c.mine!.stake)}</p>
                       </div>
                       <p className="text-sm text-muted"><span className="tabular font-semibold text-ink">{c.progress.completed}</span> of {days} days</p>
                     </div>
@@ -290,7 +290,7 @@ export default function Stake() {
                       {[c.min, c.max].map((w, i) => (
                         <button key={i} type="button" disabled={!!blocker} onClick={() => { /* min rounds up, max rounds down, so the preset is always in range */ setAmount(String(Number(i === 0 ? (BigInt(w) + 10n ** 16n - 1n) / 10n ** 16n : BigInt(w) / 10n ** 16n) / 100)); setErr(null); }}
                           className="inline-flex h-11 items-center gap-1.5 rounded-full border border-line bg-surface px-4 text-sm font-medium text-ink-2 transition hover:border-ink/30 disabled:opacity-50">
-                          <span className="text-muted">{i === 0 ? "Min" : "Max"}</span><span className="tabular">{fmtGD(w)} G$</span>
+                          <span className="text-muted">{i === 0 ? "Min" : "Max"}</span><span className="font-mono tabular">{fmtGD(w)} G$</span>
                         </button>
                       ))}
                     </div>
@@ -317,7 +317,7 @@ export default function Stake() {
                   return (
                     <div className="mt-6 rounded-card bg-sage-50 p-5 ring-1 ring-inset ring-sage-100 sm:p-6">
                       <p className="text-sm font-semibold text-sage-700">You finished all {days} days</p>
-                      <p className="mt-2 flex items-baseline gap-2 text-4xl font-semibold tracking-[-0.03em] text-ink"><span className="tabular">{fmtGD(c.mine!.payout)}</span><span className="text-lg font-medium text-muted">G$</span></p>
+                      <p className="mt-2 flex items-baseline gap-2 text-4xl font-semibold tracking-[-0.03em] text-ink"><span className="font-mono tabular">{fmtGD(c.mine!.payout)}</span><span className="font-mono text-lg font-medium text-muted">G$</span></p>
                       <p className="mt-1 text-sm text-ink-2">{share > 0n ? `Your ${fmtGD(c.mine!.stake)} G$ back, plus ${fmtGD(share.toString())} G$ extra.` : "Your stake, back in full."}</p>
                       <Button onClick={() => withdraw(c.id)} loading={busy} size="lg" block className="mt-5 sm:w-auto">{busy ? STEP_LABEL[step!] : "Withdraw"}</Button>
                     </div>

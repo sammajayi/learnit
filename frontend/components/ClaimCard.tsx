@@ -62,7 +62,7 @@ export function ClaimCard() {
         </div>
         {data.canClaim ? (
           <>
-            <p className="tabular mt-4 text-[2.5rem] font-semibold leading-none tracking-[-0.03em]">{fmtGD(data.claimable)} <span className="text-lg font-medium text-white/60">G$</span></p>
+            <p className="font-mono tabular mt-4 text-[2.5rem] font-semibold leading-none tracking-[-0.03em]">{fmtGD(data.claimable)} <span className="text-lg font-medium text-white/60">G$</span></p>
             <p className="mt-2 text-sm text-white/70">Ready to claim today</p>
             <Button onClick={claim} loading={busy} disabled={!sdk} size="lg" block className="mt-6">
               {busy ? "Claiming..." : "Claim G$"}

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { AppSignIn } from "@/components/AppSignIn";
 import { LoginScreen } from "@/components/LoginScreen";
 import { RedirectIfSignedIn } from "@/components/RedirectIfSignedIn";
 
@@ -11,11 +13,15 @@ export const metadata: Metadata = {
 };
 
 /** The public landing page. The app itself lives at /home. */
-export default function Landing() {
+export default async function Landing() {
+  // On the app subdomain, / is a plain sign-in screen; the marketing page is for the apex domain.
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const h = await headers();
+  const onApp = !!appUrl && (h.get("x-forwarded-host") ?? h.get("host")) === new URL(appUrl).host;
   return (
     <>
       <RedirectIfSignedIn />
-      <LoginScreen />
+      {onApp ? <AppSignIn /> : <LoginScreen />}
     </>
   );
 }

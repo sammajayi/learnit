@@ -72,4 +72,33 @@ export async function leaderboardFor(user: User): Promise<{ weekKey: string; gro
   return { weekKey: key, groupIndex: mine.groupIndex, rows, endsAt: weekRange(key).end.toISOString() };
 }
 
+const ALL_TIME_LIMIT = 50;
+const ALL_TIME_TTL_MS = 60_000;
+let allTimeCache: { at: number; rows: { userId: string; wallet: string; name: string; avatarUrl: string | null; points: number }[] } | null = null;
+
+/** Same points as a league week, summed over every lesson and checkpoint ever passed (each counted once). */
+const POINTS_SQL = `SELECT "userId", SUM(CASE WHEN kind = 'checkpoint' THEN ${POINTS_PER_CHECKPOINT} ELSE ${POINTS_PER_LESSON} END)::bigint AS points
+  FROM (SELECT DISTINCT "userId", "lessonId", kind FROM lesson_attempts WHERE passed) t GROUP BY "userId"`;
+
+/** The all-time top 50, plus the learner's own rank when they are outside it. No prizes: only the weekly top 3 earn a bonus. */
+export async function allTimeLeaderboard(user: User) {
+  if (!allTimeCache || Date.now() - allTimeCache.at > ALL_TIME_TTL_MS) {
+    const top = await db.$queryRawUnsafe<{ userId: string; points: bigint }[]>(`${POINTS_SQL} ORDER BY points DESC, "userId" LIMIT ${ALL_TIME_LIMIT}`);
+    const users = await db.user.findMany({ where: { id: { in: top.map((t) => t.userId) } }, select: { id: true, wallet: true, username: true, displayName: true, hasAvatar: true, avatarVersion: true } });
+    const byId = new Map(users.map((u) => [u.id, u]));
+    allTimeCache = {
+      at: Date.now(),
+      rows: top.flatMap((t) => {
+        const u = byId.get(t.userId);
+        return u ? [{ userId: t.userId, wallet: u.wallet, name: nameFor(u), avatarUrl: avatarUrlFor(u), points: Number(t.points) }] : [];
+      }),
+    };
+  }
+  const rows = allTimeCache.rows.map((r, i) => ({ ...r, rank: i + 1 }));
+  if (rows.some((r) => r.userId === user.id)) return { rows, you: null as { rank: number; points: number } | null };
+  const mine = await db.$queryRawUnsafe<{ points: bigint; rank: bigint }[]>(
+    `WITH p AS (${POINTS_SQL}) SELECT points, (SELECT COUNT(*) FROM p p2 WHERE p2.points > p.points) + 1 AS rank FROM p WHERE "userId" = $1`, user.id);
+  return { rows, you: mine[0] ? { rank: Number(mine[0].rank), points: Number(mine[0].points) } : null };
+}
+
 export { weekRange };

@@ -99,7 +99,7 @@ export default function Profile() {
 
         <div className="grid content-start gap-6">
           <Card className="p-6">
-            <CardHeader title="Edit profile" description="How you appear in the weekly league." className="mb-6" />
+            <CardHeader title="Edit profile" description="How you appear on the leaderboard." className="mb-6" />
             <ProfileEditor />
           </Card>
 

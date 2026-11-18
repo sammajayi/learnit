@@ -128,6 +128,8 @@ export type PublicStats = {
   learning: { attempts: number; passed: number; learnersWithPass: number };
   activity?: ActivityDay[]; // newest first; absent until the backend is redeployed
   ubi: { allTime: Omit<UbiDay, "day">; today: Omit<UbiDay, "day">; days: UbiDay[] };
+  /** All-time G$ moved through LearnIt, in wei. A part is null when it could not be read; absent until the backend is redeployed. */
+  gUsed?: { ubi: string; rewards: string | null; staked: string | null; total: string | null };
 };
 
 /** Aggregate numbers anyone may read (no sign-in). Served from a five-minute cache. */

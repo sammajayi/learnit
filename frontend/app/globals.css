@@ -15,7 +15,8 @@
   --ink-2: #334155;       /* body text */
   --muted: #5b6577;       /* secondary text, 5.4:1 on canvas */
   --line: #e7e2d8;        /* hairline borders */
-  --line-strong: #d6cfc2;
+  --line-strong: #d6cfc2; /* dividers and quiet fills; too faint to mark a control */
+  --control: #8f8778;     /* borders of inputs and outline buttons, 3.6:1 on white (WCAG 1.4.11) */
 
   --sage-50: #eef3ef;
   --sage-100: #dce6de;

@@ -10,6 +10,8 @@ nextEnv.loadEnvConfig(root, process.env.NODE_ENV !== "production", console, true
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["@learnit/backend"],
+  // The leaderboard used to live at /league.
+  async redirects() { return [{ source: "/league", destination: "/leaderboard", permanent: false }]; },
   experimental: { outputFileTracingRoot: root },
   webpack: (config) => {
     config.resolve.fallback = { ...config.resolve.fallback, fs: false, net: false, tls: false };

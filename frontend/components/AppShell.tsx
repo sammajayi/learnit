@@ -14,7 +14,7 @@ export const NAV: NavItem[] = [
   { href: "/home", label: "Home", Icon: Home },
   { href: "/learn", label: "Learn", Icon: BookOpen },
   { href: "/chat", label: "Chat", Icon: MessageCircle, soon: true },
-  { href: "/league", label: "League", Icon: Trophy },
+  { href: "/leaderboard", label: "Leaderboard", Icon: Trophy },
   // One menu for money: Rewards and Stake are two tabs inside it (see RewardsTabs).
   { href: "/earn", label: "Rewards", Icon: Coins, match: ["/stake"] },
 ];

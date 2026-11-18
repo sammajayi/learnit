@@ -73,7 +73,7 @@ export function Onboarding() {
         <AnimatePresence mode="wait" initial={false}>
           {step === 0 && (
             <motion.div key="s0" {...anim} className="flex flex-1 flex-col">
-              <h1 className="mt-3 text-display-lg text-ink">What would you like to learn?</h1>
+              <h1 className="mt-3 font-display text-display-lg text-ink">What would you like to learn?</h1>
               <p className="mt-3 text-[15px] text-muted">Pick one to start. You can switch any time and keep your progress.</p>
               <div className="mt-8"><LanguageCards value={course} onSelect={setCourse} /></div>
               <Button onClick={() => setStep(1)} disabled={!course} size="lg" variant="secondary" iconRight={ArrowRight} className="mt-10 w-full sm:w-auto sm:self-end">Continue</Button>
@@ -82,8 +82,8 @@ export function Onboarding() {
 
           {step === 1 && (
             <motion.div key="s1" {...anim} className="flex flex-1 flex-col">
-              <h1 className="mt-3 text-display-lg text-ink">Set up your profile</h1>
-              <p className="mt-3 text-[15px] text-muted">Add a photo and a username for the weekly league. You can skip this and do it later.</p>
+              <h1 className="mt-3 font-display text-display-lg text-ink">Set up your profile</h1>
+              <p className="mt-3 text-[15px] text-muted">Add a photo and a username for the leaderboard. You can skip this and do it later.</p>
               <div className="mt-8"><ProfileEditor submitLabel="Save and continue" allowSkipSave onDone={() => setStep(2)} /></div>
               <div className="mt-4 flex items-center justify-between">
                 <Button variant="ghost" size="sm" icon={ArrowLeft} onClick={() => setStep(0)} className="-ml-3">Back</Button>
@@ -94,7 +94,7 @@ export function Onboarding() {
 
           {step === 2 && (
             <motion.div key="s2" {...anim} className="flex flex-1 flex-col">
-              <h1 className="mt-3 text-display-lg text-ink">How LearnIt works</h1>
+              <h1 className="mt-3 font-display text-display-lg text-ink">How LearnIt works</h1>
               <ul className="mt-8 grid gap-3">
                 {HOW.map(({ Icon, title, body }) => (
                   <li key={title} className="flex gap-4 rounded-card border border-line bg-surface p-5 shadow-card">

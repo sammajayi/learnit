@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/inter";
+import "@fontsource/fraunces/latin-500.css";
+import "@fontsource/fraunces/latin-600.css";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
