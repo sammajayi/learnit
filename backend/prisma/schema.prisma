@@ -12,6 +12,8 @@ model User {
   id              String   @id @default(cuid())
   privyUserId     String   @unique
   wallet          String   @unique
+  email           String?  // from the auth provider's linked email, if any; used for off-app notifications
+  riskEmailSentDate String? // local YYYY-MM-DD of the last stake-at-risk email, so one evening never gets two
   whitelistedRoot String?
   verifiedUntil   DateTime?
   gasTopupTx      String?

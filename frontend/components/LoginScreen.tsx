@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAuth } from "@/lib/useAuth";
 import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet } from "lucide-react";
 import { LANGS } from "@/lib/languages";
 import { Badge, Button, Card } from "./ui";
@@ -16,7 +16,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 /** The public landing page. Every call to action opens Privy sign-in. */
 export function LoginScreen() {
-  const { login } = usePrivy();
+  const { login } = useAuth();
   const email = () => login({ loginMethods: ["email"] });
   const wallet = () => login({ loginMethods: ["wallet"] });
 

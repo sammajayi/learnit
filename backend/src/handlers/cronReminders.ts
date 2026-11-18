@@ -2,6 +2,8 @@ import { timingSafeEqual } from "node:crypto";
 import { db } from "../db";
 import { configurePush, isDue, reminderFor, send } from "../push";
 import { streakCount } from "../streak";
+import { configureEmail, sendEmail } from "../email";
+import { findAtRisk, riskEmail } from "../stakeRisk";
 
 const authorized = (req: Request) => {
   const secret = process.env.CRON_SECRET;
@@ -13,15 +15,22 @@ const authorized = (req: Request) => {
 
 /**
  * Run every hour by .github/workflows/reminders.yml (sends Authorization: Bearer CRON_SECRET).
- * Sends today's reminder to anyone whose chosen hour it is, who has not learned yet today.
+ * Push: sends today's reminder to anyone whose chosen hour it is, who has not learned yet today.
+ * Email: separately warns anyone with a live stake who has not learned today and is due their evening
+ * check-in, whether or not they also have a push subscription. Each channel is independently optional.
  */
 export async function GET(req: Request) {
   if (!authorized(req)) return Response.json({ error: "Unauthorized" }, { status: 401 });
-  if (!configurePush()) return Response.json({ error: "Push is not configured" }, { status: 503 });
 
+  const push = configurePush() ? await sendPushReminders() : { note: "push not configured" };
+  const email = configureEmail() ? await sendRiskEmails() : { note: "email not configured" };
+  return Response.json({ push, email });
+}
+
+async function sendPushReminders() {
   const subs = await db.pushSubscription.findMany({ include: { user: { select: { id: true, timezone: true, course: true } } } });
   const due = subs.map((s) => ({ s, ...isDue(s, s.user.timezone) })).filter((x) => x.due);
-  if (due.length === 0) return Response.json({ checked: subs.length, sent: 0 });
+  if (due.length === 0) return { checked: subs.length, due: 0, sent: 0, skipped: 0, removed: 0, failed: 0 };
 
   // Who already learned today, and what is their streak? One query for everyone due.
   const userIds = [...new Set(due.map((d) => d.s.userId))];
@@ -44,5 +53,22 @@ export async function GET(req: Request) {
       else { failed++; console.error("push failed", code); }
     }
   }
-  return Response.json({ checked: subs.length, due: due.length, sent, skipped, removed, failed });
+  return { checked: subs.length, due: due.length, sent, skipped, removed, failed };
+}
+
+async function sendRiskEmails() {
+  const atRisk = await findAtRisk();
+  let sent = 0, failed = 0;
+  for (const u of atRisk) {
+    const { subject, html } = riskEmail(u.daysLeft, u.course === "es" ? "es" : "fr");
+    try {
+      await sendEmail(u.email, subject, html);
+      await db.user.update({ where: { id: u.id }, data: { riskEmailSentDate: u.today } });
+      sent++;
+    } catch (e) {
+      failed++; // leave riskEmailSentDate untouched so the next hourly run retries
+      console.error("risk email failed", e instanceof Error ? e.message : e);
+    }
+  }
+  return { due: atRisk.length, sent, failed };
 }

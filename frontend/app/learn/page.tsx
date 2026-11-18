@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAuth } from "@/lib/useAuth";
 import { Flame, Snowflake } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { LearnSkeleton } from "@/components/Skeletons";
@@ -11,7 +11,7 @@ import { langOf } from "@/lib/languages";
 import { useToday } from "@/lib/useToday";
 
 export default function Learn() {
-  const { ready, authenticated } = usePrivy();
+  const { ready, authenticated } = useAuth();
   const router = useRouter();
   useEffect(() => { if (ready && !authenticated) router.replace("/"); }, [ready, authenticated, router]);
   const { data } = useToday();
