@@ -189,3 +189,25 @@ model PushSubscription {
   @@index([reminderHour])
   @@map("push_subscriptions")
 }
+
+/// One row per Staked event on the vault, so the people in a challenge are a database count and not a scan of the chain.
+model StakeEvent {
+  id       String @id @default(cuid())
+  cohortId Int
+  wallet   String // as emitted by the vault (checksummed)
+  amount   String // what the vault actually received
+  block    BigInt
+  txHash   String
+  logIndex Int
+
+  @@unique([txHash, logIndex])
+  @@index([cohortId])
+  @@map("stake_events")
+}
+
+/// How far each chain reader has got, so the next run starts there and not at the vault's deploy block.
+model ChainCursor {
+  key   String @id
+  block BigInt // last block fully read
+  @@map("chain_cursors")
+}

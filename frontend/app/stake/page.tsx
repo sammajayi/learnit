@@ -18,7 +18,7 @@ import { useAuthGate } from "@/components/useAuthGate";
 import { StakeSkeleton } from "@/components/Skeletons";
 
 type Cohort = {
-  id: number; start: number; end: number; min: string; max: string; pot: string; settled: boolean; voided: boolean; resultsFinal: boolean; bonusBps: number; voidableAt: number | null; joinable: boolean; members: number;
+  id: number; start: number; end: number; min: string; max: string; pot: string; settled: boolean; voided: boolean; resultsFinal: boolean; bonusBps: number; voidableAt: number | null; joinable: boolean; members: number | null;
   mine: { stake: string; finished: boolean; withdrawn: boolean; payout: string } | null;
   progress: { required: string[]; done: boolean[]; completed: number } | null;
 };
@@ -56,11 +56,20 @@ export default function Stake() {
   const live = Boolean(ADDR.streakVault);
   const busy = step !== null;
 
-  const { data } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: ok });
+  const { data, isError, refetch, isFetching } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: ok, retry: 3 });
   // Checked before the stake form is shown, so nobody hits a revert.
   const paused = useQuery({ queryKey: ["paused", "vault"], enabled: ok && live && !!pc, staleTime: 30_000,
     queryFn: () => pc!.readContract({ address: ADDR.streakVault, abi: streakVaultAbi, functionName: "paused" }) });
 
+  if (!data && isError) return (
+    <AppShell>
+      <PageHeader eyebrow="Rewards and staking" title="Streak challenge" action={<RewardsTabs />} />
+      <Notice tone="warning" className="mt-6" title="We could not load your challenges"
+        action={<Button variant="outline" size="sm" loading={isFetching} onClick={() => void refetch()}>Try again</Button>}>
+        Your stake is safe. This is a loading problem, not a problem with your account.
+      </Notice>
+    </AppShell>
+  );
   if (!data) return <StakeSkeleton />;
 
   const c = data.cohorts[0];
@@ -151,11 +160,11 @@ export default function Stake() {
   const amt = wei !== null && !outOfBounds ? Number(formatUnits(wei, 18)).toLocaleString("en", { maximumFractionDigits: 4 }) : null;
   const stats = (cls: string, compact = false) => c ? (
       <>
-      {!compact && <p className={`px-4 py-3 text-sm text-muted sm:hidden ${cls}`}><span className="font-mono tabular font-semibold text-ink">{fmtGD(c.pot)} G$</span> staked by <span className="tabular font-semibold text-ink">{c.members}</span> {c.members === 1 ? "person" : "people"}</p>}
+      {!compact && <p className={`px-4 py-3 text-sm text-muted sm:hidden ${cls}`}><span className="font-mono tabular font-semibold text-ink">{fmtGD(c.pot)} G$</span> staked by <span className="tabular font-semibold text-ink">{c.members ?? "…"}</span> {c.members === 1 ? "person" : "people"}</p>}
       <dl className={`${compact ? "grid" : "hidden sm:grid"} grid-cols-2 divide-line sm:divide-x ${compact ? "" : "sm:grid-cols-4"} ${cls}`}>
         {[
           { Icon: PiggyBank, k: "Total staked", v: <><span className="font-mono tabular">{fmtGD(c.pot)}</span> <span className="font-mono text-sm font-medium text-muted">G$</span></> },
-          { Icon: Users, k: "People in", v: <span className="tabular">{c.members}</span> },
+          { Icon: Users, k: "People in", v: <span className="tabular">{c.members ?? "…"}</span> },
           { Icon: CalendarDays, k: "Length", v: <>{days} <span className="text-sm font-medium text-muted">days</span></> },
           { Icon: SlidersHorizontal, k: "Stake limits", v: <span className="font-mono tabular text-lg">{fmtGD(c.min, 0)}–{fmtGD(c.max, 0)}</span> },
         ].slice(0, compact ? 2 : 4).map(({ Icon, k, v }) => (
