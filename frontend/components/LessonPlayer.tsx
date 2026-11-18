@@ -10,9 +10,10 @@ import { useApi } from "@/lib/useApi";
 import type { PublicExercise } from "@learnit/backend/lessons";
 import { fmtGD } from "@learnit/backend/format";
 import { LessonSkeleton } from "./Skeletons";
+import { StakePrompt } from "./StakePrompt";
 import { playCorrect, playTap, playWrong, soundEnabled, setSoundEnabled } from "@/lib/sounds";
 
-type Loaded = { id: string; title: string; speechLang: string; token: string; intro?: { target: string; english: string }[]; exercises: PublicExercise[] };
+type Loaded = { id: string; title: string; speechLang: string; token: string; intro?: { target: string; english: string }[]; tip?: { title: string; body: string } | null; exercises: PublicExercise[] };
 type Pair = { target: string; english: string };
 type Ans = number | string[] | Pair[];
 type Feedback = { correct: boolean; answer: unknown };
@@ -66,13 +67,13 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
     try {
       // Plain fetch: this endpoint needs no login token, only the signed start token, so it skips the auth round trip.
       const res = await fetch(`/api/lessons/${data.id}/check`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ token: data.token, exerciseId: ex.id, answer: cur }) });
-      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? "Check failed");
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? "We could not check that answer. Try again.");
       const r = (await res.json()) as Feedback;
       r.correct ? playCorrect() : playWrong();
       record(ex.id, cur);
       if (!r.correct && !missed.current.includes(queue[pos])) missed.current.push(queue[pos]);
       setFb(r);
-    } catch (e) { setErr(e instanceof Error ? e.message : "Check failed"); } finally { setBusy(false); }
+    } catch (e) { setErr(e instanceof Error ? e.message : "We could not check that answer. Try again."); } finally { setBusy(false); }
   }, [data, ex, cur, queue, pos, record]);
 
   const submit = useCallback(async (answers: Record<string, Ans>) => {
@@ -82,7 +83,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
       setResult(r); onDone?.(r);
       // Queries are cached for a minute, so without this the path, streak and points stay stale after a pass.
       for (const key of ["today", "me", "leaderboard", "cohorts", "vouchers"]) void qc.invalidateQueries({ queryKey: [key] });
-    } catch (e) { setErr(e instanceof Error ? e.message : "Submit failed"); }
+    } catch (e) { setErr(e instanceof Error ? e.message : "We could not submit your answers. Try again in a moment."); }
   }, [api, qc, data, base, onDone]);
 
   const next = useCallback(() => {
@@ -122,7 +123,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   );
   if (!data) return <LessonSkeleton />;
   if (result) return <Results r={result} id={id} />;
-  if (data.intro?.length && !introSeen) return <Intro words={data.intro} lang={data.speechLang} title={data.title} onStart={() => setIntroSeen(true)} />;
+  if (data.intro?.length && !introSeen) return <Intro words={data.intro} tip={data.tip} lang={data.speechLang} title={data.title} onStart={() => setIntroSeen(true)} />;
   if (!ex) return <LessonSkeleton label="Submitting your answers" />;
 
   const total = data.exercises.length;
@@ -179,7 +180,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
             <motion.div key="check" initial={false} className="border-t border-line bg-surface/90 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 backdrop-blur-md">
               <div className="mx-auto flex max-w-2xl items-center justify-between gap-4 px-5">
                 <p className="hidden text-sm text-muted sm:block">{cur === null ? "Pick an answer to continue" : <>Press <kbd className="rounded border border-line-strong bg-canvas px-1.5 py-0.5 font-sans text-xs">Enter</kbd> to check</>}</p>
-                <Button onClick={check} disabled={cur === null} loading={busy} size="lg" variant="secondary" className="max-sm:w-full sm:min-w-[180px]">Check</Button>
+                <Button onClick={check} disabled={cur === null} loading={busy} size="lg" variant="secondary" className="max-sm:w-full sm:min-w-[180px]">Check answer</Button>
               </div>
             </motion.div>
           ) : null}
@@ -349,7 +350,7 @@ function Results({ r, id }: { r: Result; id: string }) {
   const body = r.passed
     ? `Your streak is now ${r.streak} day${r.streak === 1 ? "" : "s"}. Nicely done.`
     : r.tooFast ? `You got it right, but a pass needs at least ${r.minSeconds} seconds. Slow down and listen to each word.`
-    : "You need 80% to pass. Try again and the words you missed will come up first.";
+    : "So close. Pass at 80% to keep your streak today. Have another go and the words you missed will come up first.";
   return (
     <main className="mx-auto flex min-h-[100dvh] max-w-lg flex-col justify-center px-5 py-12">
       <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
@@ -375,13 +376,14 @@ function Results({ r, id }: { r: Result; id: string }) {
             ))}
           </dl>
           <div className="grid gap-3 p-6">
-            {pending && <div className="flex items-center justify-center gap-2 rounded-input bg-sunken px-4 py-3 text-sm text-muted"><span className="h-2 w-2 animate-pulse rounded-full bg-sage-500" /> Working out your reward...</div>}
+            {pending && <div className="flex items-center justify-center gap-2 rounded-input bg-sunken px-4 py-3 text-sm text-muted"><span className="h-2 w-2 animate-pulse rounded-full bg-sage-500" /> Working out your reward…</div>}
             {voucher && (
               <ButtonLink href="/earn" variant="subtle" size="lg" block className="justify-between px-5">
                 <span className="flex items-center gap-2.5"><span className="grid h-7 w-7 place-items-center rounded-full bg-sage-600 text-[10px] font-semibold text-white">G$</span>You earned {fmtGD(voucher.amount)} G$</span>
                 <span className="flex items-center gap-1 text-sm">Claim <ArrowRight size={15} aria-hidden /></span>
               </ButtonLink>
             )}
+            {r.passed && !review && <StakePrompt />}
             {r.passed && !pending && !voucher && review && <Notice tone="info">Your reward is being reviewed. It will show up in Rewards once that clears.</Notice>}
             <ButtonLink href="/learn" size="lg" block variant={voucher ? "secondary" : "primary"} iconRight={ArrowRight}>{r.passed ? "Continue" : "Back to your path"}</ButtonLink>
           </div>
@@ -392,7 +394,7 @@ function Results({ r, id }: { r: Result; id: string }) {
 }
 
 /** Shown before the questions so a complete beginner meets each word, and hears it, before being asked about it. */
-function Intro({ words, lang, title, onStart }: { words: { target: string; english: string }[]; lang: string; title: string; onStart: () => void }) {
+function Intro({ words, tip, lang, title, onStart }: { words: { target: string; english: string }[]; tip?: { title: string; body: string } | null; lang: string; title: string; onStart: () => void }) {
   const reduce = useReducedMotion();
   return (
     <div className="flex min-h-[100dvh] flex-col bg-canvas">
@@ -405,7 +407,7 @@ function Intro({ words, lang, title, onStart }: { words: { target: string; engli
       <main className="mx-auto w-full max-w-2xl flex-1 px-5 pb-36 pt-10 sm:pt-14">
         <p className="text-eyebrow uppercase text-sage-700">New words</p>
         <h1 className="mt-3 text-display-md text-ink sm:text-[2rem]">Meet the words first</h1>
-        <p className="mt-2 text-[15px] text-muted">Tap a word to hear it. Then you&apos;ll practise them.</p>
+        <p className="mt-2 text-[15px] text-muted">Tap a word to hear it. Then you will practise them.</p>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {words.map((w, i) => (
             <motion.li key={w.target} initial={reduce ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}>
@@ -416,6 +418,13 @@ function Intro({ words, lang, title, onStart }: { words: { target: string; engli
             </motion.li>
           ))}
         </ul>
+        {tip && (
+          <section aria-labelledby="grammar-tip" className="mt-8 rounded-card border border-line bg-sage-50 p-5">
+            <p className="text-eyebrow uppercase text-sage-700">Grammar tip</p>
+            <h2 id="grammar-tip" className="mt-2 text-lg font-semibold tracking-[-0.01em] text-ink">{tip.title}</h2>
+            <p className="mt-1.5 text-[15px] leading-relaxed text-ink-2">{tip.body}</p>
+          </section>
+        )}
       </main>
       <div className="fixed inset-x-0 bottom-0 border-t border-line bg-surface/90 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 backdrop-blur-md">
         <div className="mx-auto flex max-w-2xl items-center justify-between gap-4 px-5">
