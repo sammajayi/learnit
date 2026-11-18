@@ -19,14 +19,32 @@ describe("currentUnitFor", () => {
   });
 });
 
-describe("A1 content", () => {
+describe("course content", () => {
   for (const lang of ["fr", "es"] as const) {
-    it(`${lang}: 8 units of 10 six-question lessons and a 60-question checkpoint pool`, () => {
-      expect(COURSES[lang]).toHaveLength(8);
+    it(`${lang}: levels run A0, A1, A2 in order and unit numbers are 1..n`, () => {
+      const units = COURSES[lang];
+      expect(units.map((u) => u.unit)).toEqual(units.map((_, i) => i + 1));
+      expect(units.slice(0, 3).every((u) => u.level === "A0")).toBe(true);
+      expect(units.slice(3, 8).every((u) => u.level === "A1")).toBe(true);
+      expect(units.slice(8).every((u) => u.level === "A2")).toBe(true);
+    });
+    it(`${lang}: ids of the first 8 units never change (learner progress is stored under them)`, () => {
+      expect(COURSES[lang][0].lessons[0].id).toBe(`${lang}-a1-u1-l1`);
+      expect(COURSES[lang][7].checkpoint.id).toBe(`${lang}-a1-u8-cp`);
+    });
+    it(`${lang}: every unit has 10 six-question lessons and a 60-question checkpoint pool`, () => {
+      expect(COURSES[lang].length).toBeGreaterThanOrEqual(8);
       for (const u of COURSES[lang]) {
         expect(u.lessons).toHaveLength(10);
         for (const l of u.lessons) { expect(l.exercises).toHaveLength(6); expect(l.intro).toHaveLength(4); }
         expect(u.checkpoint.pool.length).toBeGreaterThanOrEqual(40);
+      }
+    });
+    it(`${lang}: A2 units teach grammar through tips`, () => {
+      for (const u of COURSES[lang].filter((x) => x.level === "A2")) {
+        const tips = u.lessons.filter((l) => l.tip);
+        expect(tips.length, `unit ${u.unit}`).toBeGreaterThanOrEqual(3);
+        for (const l of tips) { expect(Number(l.id.split("-l")[1]) % 2, `${l.id} tips sit on part 1`).toBe(1); expect(l.tip!.body.length).toBeLessThanOrEqual(280); }
       }
     });
     it(`${lang}: every id is unique and every multiple-choice answer is one of its options`, () => {

@@ -59,7 +59,7 @@ export default function Profile() {
           {/* Progress */}
           <Card>
             <div className="p-6">
-              <CardHeader title={`${lang.english} progress`} description={t ? `${t.level} course · ${t.units.length} units` : undefined}
+              <CardHeader title={`${lang.english} progress`} description={t ? `A0 to A2 course · ${t.units.length} units` : undefined}
                 action={t && <ProgressRing value={total ? done / total : 0} size={56} stroke={5} label={`${Math.round((total ? done / total : 0) * 100)}% of the course complete`}><span className="tabular text-xs font-semibold text-ink">{Math.round((total ? done / total : 0) * 100)}%</span></ProgressRing>} />
             </div>
             {t ? (
