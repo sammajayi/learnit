@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
 import { erc20Abi, formatUnits, parseUnits } from "viem";
@@ -51,6 +51,8 @@ export default function Stake() {
   const [step, setStep] = useState<Step>(null);
   const [paying, setPaying] = useState<number | null>(null); // which payout is being withdrawn, so only that row shows progress
   const [err, setErr] = useState<string | null>(null);
+  // The lesson result screen links here with the minimum filled in.
+  useEffect(() => { const a = new URLSearchParams(window.location.search).get("amount"); if (a && /^\d*\.?\d*$/.test(a)) setAmount(a); }, []);
   const live = Boolean(ADDR.streakVault);
   const busy = step !== null;
 
@@ -194,7 +196,7 @@ export default function Stake() {
 
   return (
     <AppShell>
-      <PageHeader eyebrow="Staking & Rewards" title="Stay committed" description={`Finish ${days} days, get your stake back.`} action={<RewardsTabs />} />
+      <PageHeader eyebrow="Rewards and staking" title="Streak challenge" description={`Finish ${days} days, get your stake back.`} action={<RewardsTabs />} />
 
       {isPaused && <Notice tone="paused" className="mt-6" title="Staking is paused">Your stake is safe. It will resume soon.</Notice>}
 
@@ -204,7 +206,7 @@ export default function Stake() {
 
           {owedOlder.length > 0 && (
             <section aria-labelledby="owed-title" className="rounded-card bg-sage-50 p-5 ring-1 ring-inset ring-sage-100 sm:p-6">
-              <h2 id="owed-title" className="text-[15px] font-semibold text-ink">Money waiting for you</h2>
+              <h2 id="owed-title" className="text-[15px] font-semibold text-ink">G$ waiting for you</h2>
               <ul className="mt-2 divide-y divide-sage-100">
                 {owedOlder.map((o) => {
                   const len = Math.round((o.end - o.start) / 86400);
