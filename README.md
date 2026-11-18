@@ -153,9 +153,12 @@ Ground rules:
 - **Design:** use the tokens in `frontend/app/globals.css` (navy, warm off-white, sage, coral) and the pieces in `frontend/components/ui`. White text only on `coral-600` or darker. One icon set (Lucide). Respect `prefers-reduced-motion`.
 - **Copy:** plain and short. No em dashes.
 - **Lesson content:** follow the typed schema in `backend/src/content/schema.ts`. Spanish is Latin American Spanish. Native-speaker review is required before merge.
+- **Pronunciation audio:** every spoken phrase has a recording in `frontend/public/audio`, so it sounds the same on every device. After changing lesson content, run `uv run --with piper-tts --with lameenc backend/scripts/build-audio.py` from the repo root and commit the new files. It records only the phrases that have no file yet and removes the ones no longer used. A phrase without a recording falls back to the browser voice, which many devices do not have.
 
 Found a security issue in the contracts or voucher flow? Please do not open a public issue. Email the maintainer instead.
 
 ## License
 
 [MIT](LICENSE)
+
+Pronunciation recordings are made with [Piper](https://github.com/rhasspy/piper). Spanish voice: `es_MX-claude-high` (Apache-2.0). French voice: `fr_FR-siwis-medium`, trained on the SIWIS French Speech Synthesis Database (CC BY 4.0).

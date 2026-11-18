@@ -12,3 +12,4 @@ contracts/broadcast
 dist
 .astro
 .neon
+__pycache__/
