@@ -1,0 +1,2367 @@
+{
+  "lang": "fr",
+  "unit": 9,
+  "level": "A2",
+  "title": "Yesterday",
+  "blurb": "Talk about what you did and when you did it.",
+  "speechLang": "fr-FR",
+  "lessons": [
+    {
+      "id": "fr-a2-u9-l1",
+      "title": "When it happened, part 1",
+      "theme": "when it happened",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w1-te",
+          "type": "mc",
+          "prompt": "What does \"hier\" mean?",
+          "speak": "hier",
+          "options": [
+            "yesterday afternoon",
+            "the day before yesterday",
+            "yesterday",
+            "this morning"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u9-w1"
+        },
+        {
+          "id": "fr-a2u9-w2-et",
+          "type": "mc",
+          "prompt": "How do you say \"last night\"?",
+          "options": [
+            "hier après-midi",
+            "avant-hier",
+            "hier soir",
+            "ce matin"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u9-w2"
+        },
+        {
+          "id": "fr-a2-u9-l1-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w1",
+              "target": "hier",
+              "english": "yesterday"
+            },
+            {
+              "wordId": "fr-a2u9-w2",
+              "target": "hier soir",
+              "english": "last night"
+            },
+            {
+              "wordId": "fr-a2u9-w3",
+              "target": "hier après-midi",
+              "english": "yesterday afternoon"
+            },
+            {
+              "wordId": "fr-a2u9-w4",
+              "target": "avant-hier",
+              "english": "the day before yesterday"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w3-te",
+          "type": "mc",
+          "prompt": "What does \"hier après-midi\" mean?",
+          "speak": "hier après-midi",
+          "options": [
+            "2 days ago",
+            "the day before yesterday",
+            "yesterday afternoon",
+            "last weekend"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u9-w3"
+        },
+        {
+          "id": "fr-a2u9-w4-et",
+          "type": "mc",
+          "prompt": "How do you say \"the day before yesterday\"?",
+          "options": [
+            "hier",
+            "avant-hier",
+            "hier soir",
+            "hier après-midi"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w4"
+        },
+        {
+          "id": "fr-a2-u9-l1-s",
+          "type": "translate",
+          "prompt": "Last night I ate fish",
+          "answer": [
+            "Hier",
+            "soir",
+            "j'ai",
+            "mangé",
+            "du",
+            "poisson"
+          ],
+          "bank": [
+            "j'ai",
+            "mange",
+            "soir",
+            "Hier",
+            "demain",
+            "mangé",
+            "poisson",
+            "du"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "hier",
+          "english": "yesterday"
+        },
+        {
+          "target": "hier soir",
+          "english": "last night"
+        },
+        {
+          "target": "hier après-midi",
+          "english": "yesterday afternoon"
+        },
+        {
+          "target": "avant-hier",
+          "english": "the day before yesterday"
+        }
+      ],
+      "tip": {
+        "title": "Time words",
+        "body": "Put the time word first or last. Hier soir, j'ai mangé. J'ai mangé hier soir. Il y a deux jours means 2 days ago."
+      }
+    },
+    {
+      "id": "fr-a2-u9-l2",
+      "title": "When it happened, part 2",
+      "theme": "when it happened",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w5-te",
+          "type": "mc",
+          "prompt": "What does \"ce matin\" mean?",
+          "speak": "ce matin",
+          "options": [
+            "this morning",
+            "last night",
+            "the day before yesterday",
+            "last week"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w5"
+        },
+        {
+          "id": "fr-a2u9-w6-et",
+          "type": "mc",
+          "prompt": "How do you say \"last week\"?",
+          "options": [
+            "ce matin",
+            "hier soir",
+            "la semaine dernière",
+            "le week-end dernier"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u9-w6"
+        },
+        {
+          "id": "fr-a2-u9-l2-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w5",
+              "target": "ce matin",
+              "english": "this morning"
+            },
+            {
+              "wordId": "fr-a2u9-w6",
+              "target": "la semaine dernière",
+              "english": "last week"
+            },
+            {
+              "wordId": "fr-a2u9-w7",
+              "target": "le week-end dernier",
+              "english": "last weekend"
+            },
+            {
+              "wordId": "fr-a2u9-w8",
+              "target": "il y a deux jours",
+              "english": "2 days ago"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w7-te",
+          "type": "mc",
+          "prompt": "What does \"le week-end dernier\" mean?",
+          "speak": "le week-end dernier",
+          "options": [
+            "last night",
+            "last weekend",
+            "yesterday afternoon",
+            "last week"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w7"
+        },
+        {
+          "id": "fr-a2u9-w8-et",
+          "type": "mc",
+          "prompt": "How do you say \"2 days ago\"?",
+          "options": [
+            "hier après-midi",
+            "il y a deux jours",
+            "ce matin",
+            "hier"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w8"
+        },
+        {
+          "id": "fr-a2-u9-l2-s",
+          "type": "translate",
+          "prompt": "Last week I saw my sister",
+          "answer": [
+            "La",
+            "semaine",
+            "dernière",
+            "j'ai",
+            "vu",
+            "ma",
+            "sœur"
+          ],
+          "bank": [
+            "j'ai",
+            "prochaine",
+            "La",
+            "dernière",
+            "vu",
+            "semaine",
+            "ma",
+            "sœur",
+            "frère"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "ce matin",
+          "english": "this morning"
+        },
+        {
+          "target": "la semaine dernière",
+          "english": "last week"
+        },
+        {
+          "target": "le week-end dernier",
+          "english": "last weekend"
+        },
+        {
+          "target": "il y a deux jours",
+          "english": "2 days ago"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u9-l3",
+      "title": "I did it, part 1",
+      "theme": "i did it",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w9-te",
+          "type": "mc",
+          "prompt": "What does \"j'ai mangé\" mean?",
+          "speak": "j'ai mangé",
+          "options": [
+            "I spoke",
+            "I ate",
+            "I drank",
+            "I bought"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w9"
+        },
+        {
+          "id": "fr-a2u9-w10-et",
+          "type": "mc",
+          "prompt": "How do you say \"I drank\"?",
+          "options": [
+            "j'ai mangé",
+            "j'ai bu",
+            "j'ai vu",
+            "j'ai pris"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w10"
+        },
+        {
+          "id": "fr-a2-u9-l3-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w9",
+              "target": "j'ai mangé",
+              "english": "I ate"
+            },
+            {
+              "wordId": "fr-a2u9-w10",
+              "target": "j'ai bu",
+              "english": "I drank"
+            },
+            {
+              "wordId": "fr-a2u9-w11",
+              "target": "j'ai vu",
+              "english": "I saw"
+            },
+            {
+              "wordId": "fr-a2u9-w12",
+              "target": "j'ai fait",
+              "english": "I did"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w11-te",
+          "type": "mc",
+          "prompt": "What does \"j'ai vu\" mean?",
+          "speak": "j'ai vu",
+          "options": [
+            "I spoke",
+            "I saw",
+            "I drank",
+            "I bought"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w11"
+        },
+        {
+          "id": "fr-a2u9-w12-et",
+          "type": "mc",
+          "prompt": "How do you say \"I did\"?",
+          "options": [
+            "j'ai fait",
+            "j'ai parlé",
+            "j'ai mangé",
+            "j'ai pris"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w12"
+        },
+        {
+          "id": "fr-a2-u9-l3-s",
+          "type": "translate",
+          "prompt": "Yesterday I took the bus",
+          "answer": [
+            "Hier",
+            "j'ai",
+            "pris",
+            "le",
+            "bus"
+          ],
+          "bank": [
+            "Hier",
+            "prends",
+            "pris",
+            "j'ai",
+            "bus",
+            "le",
+            "train"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "j'ai mangé",
+          "english": "I ate"
+        },
+        {
+          "target": "j'ai bu",
+          "english": "I drank"
+        },
+        {
+          "target": "j'ai vu",
+          "english": "I saw"
+        },
+        {
+          "target": "j'ai fait",
+          "english": "I did"
+        }
+      ],
+      "tip": {
+        "title": "Past with avoir",
+        "body": "Most past verbs use j'ai plus a past form. J'ai mangé means I ate. Tu as vu means you saw."
+      }
+    },
+    {
+      "id": "fr-a2-u9-l4",
+      "title": "I did it, part 2",
+      "theme": "i did it",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w13-te",
+          "type": "mc",
+          "prompt": "What does \"j'ai eu\" mean?",
+          "speak": "j'ai eu",
+          "options": [
+            "I had",
+            "I bought",
+            "I did",
+            "I took"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w13"
+        },
+        {
+          "id": "fr-a2u9-w14-et",
+          "type": "mc",
+          "prompt": "How do you say \"I bought\"?",
+          "options": [
+            "j'ai eu",
+            "j'ai acheté",
+            "j'ai fait",
+            "j'ai bu"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w14"
+        },
+        {
+          "id": "fr-a2-u9-l4-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w13",
+              "target": "j'ai eu",
+              "english": "I had"
+            },
+            {
+              "wordId": "fr-a2u9-w14",
+              "target": "j'ai acheté",
+              "english": "I bought"
+            },
+            {
+              "wordId": "fr-a2u9-w15",
+              "target": "j'ai pris",
+              "english": "I took"
+            },
+            {
+              "wordId": "fr-a2u9-w16",
+              "target": "j'ai parlé",
+              "english": "I spoke"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w15-te",
+          "type": "mc",
+          "prompt": "What does \"j'ai pris\" mean?",
+          "speak": "j'ai pris",
+          "options": [
+            "I drank",
+            "I took",
+            "I did",
+            "I had"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w15"
+        },
+        {
+          "id": "fr-a2u9-w16-et",
+          "type": "mc",
+          "prompt": "How do you say \"I spoke\"?",
+          "options": [
+            "j'ai pris",
+            "j'ai parlé",
+            "j'ai mangé",
+            "j'ai bu"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w16"
+        },
+        {
+          "id": "fr-a2-u9-l4-s",
+          "type": "translate",
+          "prompt": "I bought bread yesterday",
+          "answer": [
+            "J'ai",
+            "acheté",
+            "du",
+            "pain",
+            "hier"
+          ],
+          "bank": [
+            "du",
+            "J'ai",
+            "achète",
+            "hier",
+            "acheté",
+            "demain",
+            "pain"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "j'ai eu",
+          "english": "I had"
+        },
+        {
+          "target": "j'ai acheté",
+          "english": "I bought"
+        },
+        {
+          "target": "j'ai pris",
+          "english": "I took"
+        },
+        {
+          "target": "j'ai parlé",
+          "english": "I spoke"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u9-l5",
+      "title": "I went, part 1",
+      "theme": "i went",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w17-te",
+          "type": "mc",
+          "prompt": "What does \"je suis allé\" mean?",
+          "speak": "je suis allé",
+          "options": [
+            "I came",
+            "I went",
+            "I arrived",
+            "I stayed"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w17"
+        },
+        {
+          "id": "fr-a2u9-w18-et",
+          "type": "mc",
+          "prompt": "How do you say \"I arrived\"?",
+          "options": [
+            "je suis venu",
+            "je suis resté",
+            "je suis arrivé",
+            "je suis sorti"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u9-w18"
+        },
+        {
+          "id": "fr-a2-u9-l5-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w17",
+              "target": "je suis allé",
+              "english": "I went"
+            },
+            {
+              "wordId": "fr-a2u9-w18",
+              "target": "je suis arrivé",
+              "english": "I arrived"
+            },
+            {
+              "wordId": "fr-a2u9-w19",
+              "target": "je suis resté",
+              "english": "I stayed"
+            },
+            {
+              "wordId": "fr-a2u9-w20",
+              "target": "je suis parti",
+              "english": "I left"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w19-te",
+          "type": "mc",
+          "prompt": "What does \"je suis resté\" mean?",
+          "speak": "je suis resté",
+          "options": [
+            "I left",
+            "I stayed",
+            "I arrived",
+            "I came"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w19"
+        },
+        {
+          "id": "fr-a2u9-w20-et",
+          "type": "mc",
+          "prompt": "How do you say \"I left\"?",
+          "options": [
+            "je suis allé",
+            "je suis resté",
+            "je suis arrivé",
+            "je suis parti"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w20"
+        },
+        {
+          "id": "fr-a2-u9-l5-s",
+          "type": "translate",
+          "prompt": "I went to the market yesterday",
+          "answer": [
+            "Je",
+            "suis",
+            "allé",
+            "au",
+            "marché",
+            "hier"
+          ],
+          "bank": [
+            "hier",
+            "ai",
+            "allé",
+            "Je",
+            "à",
+            "marché",
+            "suis",
+            "au"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "je suis allé",
+          "english": "I went"
+        },
+        {
+          "target": "je suis arrivé",
+          "english": "I arrived"
+        },
+        {
+          "target": "je suis resté",
+          "english": "I stayed"
+        },
+        {
+          "target": "je suis parti",
+          "english": "I left"
+        }
+      ],
+      "tip": {
+        "title": "Past with être",
+        "body": "Verbs of movement use je suis, not j'ai. Je suis allé au parc. A woman adds an e in writing: je suis allée."
+      }
+    },
+    {
+      "id": "fr-a2-u9-l6",
+      "title": "I went, part 2",
+      "theme": "i went",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w21-te",
+          "type": "mc",
+          "prompt": "What does \"je suis venu\" mean?",
+          "speak": "je suis venu",
+          "options": [
+            "I stayed",
+            "I went out",
+            "I went home",
+            "I came"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w21"
+        },
+        {
+          "id": "fr-a2u9-w22-et",
+          "type": "mc",
+          "prompt": "How do you say \"I went home\"?",
+          "options": [
+            "je suis venu",
+            "je suis arrivé",
+            "je suis parti",
+            "je suis rentré"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w22"
+        },
+        {
+          "id": "fr-a2-u9-l6-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w21",
+              "target": "je suis venu",
+              "english": "I came"
+            },
+            {
+              "wordId": "fr-a2u9-w22",
+              "target": "je suis rentré",
+              "english": "I went home"
+            },
+            {
+              "wordId": "fr-a2u9-w23",
+              "target": "je suis sorti",
+              "english": "I went out"
+            },
+            {
+              "wordId": "fr-a2u9-w24",
+              "target": "je suis tombé",
+              "english": "I fell"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w23-te",
+          "type": "mc",
+          "prompt": "What does \"je suis sorti\" mean?",
+          "speak": "je suis sorti",
+          "options": [
+            "I went home",
+            "I fell",
+            "I stayed",
+            "I went out"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w23"
+        },
+        {
+          "id": "fr-a2u9-w24-et",
+          "type": "mc",
+          "prompt": "How do you say \"I fell\"?",
+          "options": [
+            "je suis tombé",
+            "je suis rentré",
+            "je suis sorti",
+            "je suis resté"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w24"
+        },
+        {
+          "id": "fr-a2-u9-l6-s",
+          "type": "translate",
+          "prompt": "I went home",
+          "answer": [
+            "Je",
+            "suis",
+            "rentré",
+            "à",
+            "la",
+            "maison"
+          ],
+          "bank": [
+            "suis",
+            "maison",
+            "parti",
+            "la",
+            "Je",
+            "rentré",
+            "à",
+            "resté"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "je suis venu",
+          "english": "I came"
+        },
+        {
+          "target": "je suis rentré",
+          "english": "I went home"
+        },
+        {
+          "target": "je suis sorti",
+          "english": "I went out"
+        },
+        {
+          "target": "je suis tombé",
+          "english": "I fell"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u9-l7",
+      "title": "Weekend stories, part 1",
+      "theme": "weekend stories",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w25-te",
+          "type": "mc",
+          "prompt": "What does \"il faisait beau\" mean?",
+          "speak": "il faisait beau",
+          "options": [
+            "the weather was nice",
+            "I met",
+            "I danced",
+            "I visited"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w25"
+        },
+        {
+          "id": "fr-a2u9-w26-et",
+          "type": "mc",
+          "prompt": "How do you say \"it was raining\"?",
+          "options": [
+            "j'ai visité",
+            "il pleuvait",
+            "c'était super",
+            "j'ai dormi"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w26"
+        },
+        {
+          "id": "fr-a2-u9-l7-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w25",
+              "target": "il faisait beau",
+              "english": "the weather was nice"
+            },
+            {
+              "wordId": "fr-a2u9-w26",
+              "target": "il pleuvait",
+              "english": "it was raining"
+            },
+            {
+              "wordId": "fr-a2u9-w27",
+              "target": "c'était super",
+              "english": "it was great"
+            },
+            {
+              "wordId": "fr-a2u9-w28",
+              "target": "j'ai rencontré",
+              "english": "I met"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w27-te",
+          "type": "mc",
+          "prompt": "What does \"c'était super\" mean?",
+          "speak": "c'était super",
+          "options": [
+            "it was great",
+            "the weather was nice",
+            "we watched a film",
+            "I danced"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w27"
+        },
+        {
+          "id": "fr-a2u9-w28-et",
+          "type": "mc",
+          "prompt": "How do you say \"I met\"?",
+          "options": [
+            "j'ai visité",
+            "j'ai dormi",
+            "j'ai rencontré",
+            "c'était super"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u9-w28"
+        },
+        {
+          "id": "fr-a2-u9-l7-s",
+          "type": "translate",
+          "prompt": "On Saturday the weather was nice",
+          "answer": [
+            "Samedi",
+            "il",
+            "faisait",
+            "beau"
+          ],
+          "bank": [
+            "Samedi",
+            "pleuvait",
+            "faisait",
+            "il",
+            "fait",
+            "beau"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "il faisait beau",
+          "english": "the weather was nice"
+        },
+        {
+          "target": "il pleuvait",
+          "english": "it was raining"
+        },
+        {
+          "target": "c'était super",
+          "english": "it was great"
+        },
+        {
+          "target": "j'ai rencontré",
+          "english": "I met"
+        }
+      ],
+      "tip": {
+        "title": "How it was",
+        "body": "Use c'était and il faisait to say how things were. Learn them as set phrases for now. C'était super. Il faisait beau."
+      }
+    },
+    {
+      "id": "fr-a2-u9-l8",
+      "title": "Weekend stories, part 2",
+      "theme": "weekend stories",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w29-te",
+          "type": "mc",
+          "prompt": "What does \"j'ai visité\" mean?",
+          "speak": "j'ai visité",
+          "options": [
+            "it was raining",
+            "we watched a film",
+            "I met",
+            "I visited"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w29"
+        },
+        {
+          "id": "fr-a2u9-w30-et",
+          "type": "mc",
+          "prompt": "How do you say \"I danced\"?",
+          "options": [
+            "j'ai rencontré",
+            "j'ai dansé",
+            "c'était super",
+            "j'ai dormi"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w30"
+        },
+        {
+          "id": "fr-a2-u9-l8-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w29",
+              "target": "j'ai visité",
+              "english": "I visited"
+            },
+            {
+              "wordId": "fr-a2u9-w30",
+              "target": "j'ai dansé",
+              "english": "I danced"
+            },
+            {
+              "wordId": "fr-a2u9-w31",
+              "target": "j'ai dormi",
+              "english": "I slept"
+            },
+            {
+              "wordId": "fr-a2u9-w32",
+              "target": "on a regardé un film",
+              "english": "we watched a film"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w31-te",
+          "type": "mc",
+          "prompt": "What does \"j'ai dormi\" mean?",
+          "speak": "j'ai dormi",
+          "options": [
+            "I met",
+            "I danced",
+            "I slept",
+            "it was great"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u9-w31"
+        },
+        {
+          "id": "fr-a2u9-w32-et",
+          "type": "mc",
+          "prompt": "How do you say \"we watched a film\"?",
+          "options": [
+            "on a regardé un film",
+            "j'ai visité",
+            "j'ai rencontré",
+            "c'était super"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w32"
+        },
+        {
+          "id": "fr-a2-u9-l8-s",
+          "type": "translate",
+          "prompt": "On Sunday I visited a park",
+          "answer": [
+            "Dimanche",
+            "j'ai",
+            "visité",
+            "un",
+            "parc"
+          ],
+          "bank": [
+            "j'ai",
+            "Dimanche",
+            "école",
+            "un",
+            "parc",
+            "visite",
+            "visité"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "j'ai visité",
+          "english": "I visited"
+        },
+        {
+          "target": "j'ai dansé",
+          "english": "I danced"
+        },
+        {
+          "target": "j'ai dormi",
+          "english": "I slept"
+        },
+        {
+          "target": "on a regardé un film",
+          "english": "we watched a film"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u9-l9",
+      "title": "Asking about your day, part 1",
+      "theme": "asking about your day",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w33-te",
+          "type": "mc",
+          "prompt": "What does \"qu'est-ce que tu as fait\" mean?",
+          "speak": "qu'est-ce que tu as fait",
+          "options": [
+            "did you like it",
+            "when",
+            "what did you do (polite)",
+            "what did you do"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w33"
+        },
+        {
+          "id": "fr-a2u9-w34-et",
+          "type": "mc",
+          "prompt": "How do you say \"what did you do (polite)\"?",
+          "options": [
+            "avec qui",
+            "tu as bien dormi",
+            "tu as aimé",
+            "qu'est-ce que vous avez fait"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w34"
+        },
+        {
+          "id": "fr-a2-u9-l9-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w33",
+              "target": "qu'est-ce que tu as fait",
+              "english": "what did you do"
+            },
+            {
+              "wordId": "fr-a2u9-w34",
+              "target": "qu'est-ce que vous avez fait",
+              "english": "what did you do (polite)"
+            },
+            {
+              "wordId": "fr-a2u9-w35",
+              "target": "où es-tu allé",
+              "english": "where did you go"
+            },
+            {
+              "wordId": "fr-a2u9-w36",
+              "target": "avec qui",
+              "english": "who with"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w35-te",
+          "type": "mc",
+          "prompt": "What does \"où es-tu allé\" mean?",
+          "speak": "où es-tu allé",
+          "options": [
+            "where did you go",
+            "what did you do (polite)",
+            "when",
+            "did you like it"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w35"
+        },
+        {
+          "id": "fr-a2u9-w36-et",
+          "type": "mc",
+          "prompt": "How do you say \"who with\"?",
+          "options": [
+            "qu'est-ce que vous avez fait",
+            "tu as aimé",
+            "où es-tu allé",
+            "avec qui"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u9-w36"
+        },
+        {
+          "id": "fr-a2-u9-l9-s",
+          "type": "translate",
+          "prompt": "What did you do yesterday",
+          "answer": [
+            "Qu'est-ce",
+            "que",
+            "tu",
+            "as",
+            "fait",
+            "hier"
+          ],
+          "bank": [
+            "as",
+            "que",
+            "hier",
+            "Qu'est-ce",
+            "fais",
+            "tu",
+            "fait",
+            "vous"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "qu'est-ce que tu as fait",
+          "english": "what did you do"
+        },
+        {
+          "target": "qu'est-ce que vous avez fait",
+          "english": "what did you do (polite)"
+        },
+        {
+          "target": "où es-tu allé",
+          "english": "where did you go"
+        },
+        {
+          "target": "avec qui",
+          "english": "who with"
+        }
+      ],
+      "tip": {
+        "title": "Asking about the past",
+        "body": "Use tu with friends and vous with people you don't know. Qu'est-ce que tu as fait ? Qu'est-ce que vous avez fait ?"
+      }
+    },
+    {
+      "id": "fr-a2-u9-l10",
+      "title": "Asking about your day, part 2",
+      "theme": "asking about your day",
+      "exercises": [
+        {
+          "id": "fr-a2u9-w37-te",
+          "type": "mc",
+          "prompt": "What does \"tu as bien dormi\" mean?",
+          "speak": "tu as bien dormi",
+          "options": [
+            "when",
+            "did you sleep well",
+            "did you like it",
+            "what did you do"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u9-w37"
+        },
+        {
+          "id": "fr-a2u9-w38-et",
+          "type": "mc",
+          "prompt": "How do you say \"how was it\"?",
+          "options": [
+            "c'était comment",
+            "qu'est-ce que tu as fait",
+            "où es-tu allé",
+            "quand"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w38"
+        },
+        {
+          "id": "fr-a2-u9-l10-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u9-w37",
+              "target": "tu as bien dormi",
+              "english": "did you sleep well"
+            },
+            {
+              "wordId": "fr-a2u9-w38",
+              "target": "c'était comment",
+              "english": "how was it"
+            },
+            {
+              "wordId": "fr-a2u9-w39",
+              "target": "quand",
+              "english": "when"
+            },
+            {
+              "wordId": "fr-a2u9-w40",
+              "target": "tu as aimé",
+              "english": "did you like it"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u9-w39-te",
+          "type": "mc",
+          "prompt": "What does \"quand\" mean?",
+          "speak": "quand",
+          "options": [
+            "when",
+            "where did you go",
+            "how was it",
+            "what did you do"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w39"
+        },
+        {
+          "id": "fr-a2u9-w40-et",
+          "type": "mc",
+          "prompt": "How do you say \"did you like it\"?",
+          "options": [
+            "tu as aimé",
+            "tu as bien dormi",
+            "qu'est-ce que tu as fait",
+            "où es-tu allé"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u9-w40"
+        },
+        {
+          "id": "fr-a2-u9-l10-s",
+          "type": "translate",
+          "prompt": "Where did you go this morning",
+          "answer": [
+            "Où",
+            "es-tu",
+            "allé",
+            "ce",
+            "matin"
+          ],
+          "bank": [
+            "à",
+            "suis",
+            "es-tu",
+            "matin",
+            "allé",
+            "ce",
+            "Où"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "tu as bien dormi",
+          "english": "did you sleep well"
+        },
+        {
+          "target": "c'était comment",
+          "english": "how was it"
+        },
+        {
+          "target": "quand",
+          "english": "when"
+        },
+        {
+          "target": "tu as aimé",
+          "english": "did you like it"
+        }
+      ]
+    }
+  ],
+  "checkpoint": {
+    "id": "fr-a2-u9-cp",
+    "title": "Unit 9 checkpoint",
+    "pool": [
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w1",
+        "type": "mc",
+        "prompt": "What does \"hier\" mean?",
+        "speak": "hier",
+        "options": [
+          "I danced",
+          "this morning",
+          "I bought",
+          "yesterday"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w1"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w2",
+        "type": "mc",
+        "prompt": "How do you say \"last night\"?",
+        "options": [
+          "j'ai dansé",
+          "la semaine dernière",
+          "hier soir",
+          "tu as aimé"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w2"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w3",
+        "type": "mc",
+        "prompt": "What does \"hier après-midi\" mean?",
+        "speak": "hier après-midi",
+        "options": [
+          "yesterday afternoon",
+          "I had",
+          "I spoke",
+          "did you like it"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w3"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w4",
+        "type": "mc",
+        "prompt": "How do you say \"the day before yesterday\"?",
+        "options": [
+          "avec qui",
+          "j'ai vu",
+          "avant-hier",
+          "c'était comment"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w4"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w5",
+        "type": "mc",
+        "prompt": "What does \"ce matin\" mean?",
+        "speak": "ce matin",
+        "options": [
+          "I fell",
+          "I saw",
+          "this morning",
+          "we watched a film"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w5"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w6",
+        "type": "mc",
+        "prompt": "How do you say \"last week\"?",
+        "options": [
+          "je suis rentré",
+          "où es-tu allé",
+          "j'ai acheté",
+          "la semaine dernière"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w6"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w7",
+        "type": "mc",
+        "prompt": "What does \"le week-end dernier\" mean?",
+        "speak": "le week-end dernier",
+        "options": [
+          "last weekend",
+          "yesterday",
+          "I stayed",
+          "I had"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w7"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w8",
+        "type": "mc",
+        "prompt": "How do you say \"2 days ago\"?",
+        "options": [
+          "tu as aimé",
+          "il y a deux jours",
+          "avec qui",
+          "je suis allé"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w8"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w9",
+        "type": "mc",
+        "prompt": "What does \"j'ai mangé\" mean?",
+        "speak": "j'ai mangé",
+        "options": [
+          "I arrived",
+          "I ate",
+          "I had",
+          "last night"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w9"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w10",
+        "type": "mc",
+        "prompt": "How do you say \"I drank\"?",
+        "options": [
+          "j'ai bu",
+          "il faisait beau",
+          "le week-end dernier",
+          "j'ai pris"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w10"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w11",
+        "type": "mc",
+        "prompt": "What does \"j'ai vu\" mean?",
+        "speak": "j'ai vu",
+        "options": [
+          "what did you do (polite)",
+          "I drank",
+          "yesterday",
+          "I saw"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w11"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w12",
+        "type": "mc",
+        "prompt": "How do you say \"I did\"?",
+        "options": [
+          "tu as aimé",
+          "j'ai fait",
+          "avant-hier",
+          "il pleuvait"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w12"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w13",
+        "type": "mc",
+        "prompt": "What does \"j'ai eu\" mean?",
+        "speak": "j'ai eu",
+        "options": [
+          "I came",
+          "I had",
+          "I ate",
+          "2 days ago"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w13"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w14",
+        "type": "mc",
+        "prompt": "How do you say \"I bought\"?",
+        "options": [
+          "j'ai dormi",
+          "j'ai acheté",
+          "le week-end dernier",
+          "j'ai dansé"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w14"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w15",
+        "type": "mc",
+        "prompt": "What does \"j'ai pris\" mean?",
+        "speak": "j'ai pris",
+        "options": [
+          "I took",
+          "last weekend",
+          "I bought",
+          "I had"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w15"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w16",
+        "type": "mc",
+        "prompt": "How do you say \"I spoke\"?",
+        "options": [
+          "j'ai parlé",
+          "où es-tu allé",
+          "je suis rentré",
+          "qu'est-ce que tu as fait"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w16"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w17",
+        "type": "mc",
+        "prompt": "What does \"je suis allé\" mean?",
+        "speak": "je suis allé",
+        "options": [
+          "I went",
+          "it was raining",
+          "where did you go",
+          "yesterday"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w17"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w18",
+        "type": "mc",
+        "prompt": "How do you say \"I arrived\"?",
+        "options": [
+          "je suis resté",
+          "ce matin",
+          "il y a deux jours",
+          "je suis arrivé"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w18"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w19",
+        "type": "mc",
+        "prompt": "What does \"je suis resté\" mean?",
+        "speak": "je suis resté",
+        "options": [
+          "where did you go",
+          "what did you do",
+          "I stayed",
+          "yesterday"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w19"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w20",
+        "type": "mc",
+        "prompt": "How do you say \"I left\"?",
+        "options": [
+          "j'ai parlé",
+          "j'ai vu",
+          "je suis parti",
+          "j'ai bu"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w20"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w21",
+        "type": "mc",
+        "prompt": "What does \"je suis venu\" mean?",
+        "speak": "je suis venu",
+        "options": [
+          "it was great",
+          "what did you do (polite)",
+          "I took",
+          "I came"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w21"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w22",
+        "type": "mc",
+        "prompt": "How do you say \"I went home\"?",
+        "options": [
+          "j'ai mangé",
+          "je suis rentré",
+          "j'ai bu",
+          "je suis tombé"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w22"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w23",
+        "type": "mc",
+        "prompt": "What does \"je suis sorti\" mean?",
+        "speak": "je suis sorti",
+        "options": [
+          "it was raining",
+          "I went home",
+          "the weather was nice",
+          "I went out"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w23"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w24",
+        "type": "mc",
+        "prompt": "How do you say \"I fell\"?",
+        "options": [
+          "j'ai vu",
+          "on a regardé un film",
+          "je suis tombé",
+          "je suis parti"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w24"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w25",
+        "type": "mc",
+        "prompt": "What does \"il faisait beau\" mean?",
+        "speak": "il faisait beau",
+        "options": [
+          "the weather was nice",
+          "I ate",
+          "2 days ago",
+          "where did you go"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w25"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w26",
+        "type": "mc",
+        "prompt": "How do you say \"it was raining\"?",
+        "options": [
+          "il pleuvait",
+          "je suis rentré",
+          "hier après-midi",
+          "j'ai rencontré"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w26"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w27",
+        "type": "mc",
+        "prompt": "What does \"c'était super\" mean?",
+        "speak": "c'était super",
+        "options": [
+          "I came",
+          "last night",
+          "it was great",
+          "what did you do"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w27"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w28",
+        "type": "mc",
+        "prompt": "How do you say \"I met\"?",
+        "options": [
+          "j'ai bu",
+          "j'ai rencontré",
+          "je suis parti",
+          "il y a deux jours"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w28"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w29",
+        "type": "mc",
+        "prompt": "What does \"j'ai visité\" mean?",
+        "speak": "j'ai visité",
+        "options": [
+          "the weather was nice",
+          "I drank",
+          "I visited",
+          "I danced"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w29"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w30",
+        "type": "mc",
+        "prompt": "How do you say \"I danced\"?",
+        "options": [
+          "la semaine dernière",
+          "j'ai dansé",
+          "c'était comment",
+          "c'était super"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w30"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w31",
+        "type": "mc",
+        "prompt": "What does \"j'ai dormi\" mean?",
+        "speak": "j'ai dormi",
+        "options": [
+          "I fell",
+          "the weather was nice",
+          "I slept",
+          "I arrived"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w31"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w32",
+        "type": "mc",
+        "prompt": "How do you say \"we watched a film\"?",
+        "options": [
+          "je suis arrivé",
+          "on a regardé un film",
+          "j'ai parlé",
+          "ce matin"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w32"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w33",
+        "type": "mc",
+        "prompt": "What does \"qu'est-ce que tu as fait\" mean?",
+        "speak": "qu'est-ce que tu as fait",
+        "options": [
+          "I met",
+          "yesterday afternoon",
+          "2 days ago",
+          "what did you do"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w33"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w34",
+        "type": "mc",
+        "prompt": "How do you say \"what did you do (polite)\"?",
+        "options": [
+          "quand",
+          "hier après-midi",
+          "le week-end dernier",
+          "qu'est-ce que vous avez fait"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w34"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w35",
+        "type": "mc",
+        "prompt": "What does \"où es-tu allé\" mean?",
+        "speak": "où es-tu allé",
+        "options": [
+          "did you like it",
+          "it was great",
+          "where did you go",
+          "I ate"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w35"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w36",
+        "type": "mc",
+        "prompt": "How do you say \"who with\"?",
+        "options": [
+          "qu'est-ce que tu as fait",
+          "il faisait beau",
+          "j'ai eu",
+          "avec qui"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u9-w36"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w37",
+        "type": "mc",
+        "prompt": "What does \"tu as bien dormi\" mean?",
+        "speak": "tu as bien dormi",
+        "options": [
+          "I ate",
+          "last week",
+          "did you sleep well",
+          "I went out"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w37"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w38",
+        "type": "mc",
+        "prompt": "How do you say \"how was it\"?",
+        "options": [
+          "j'ai rencontré",
+          "c'était comment",
+          "j'ai vu",
+          "j'ai fait"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u9-w38"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w39",
+        "type": "mc",
+        "prompt": "What does \"quand\" mean?",
+        "speak": "quand",
+        "options": [
+          "last weekend",
+          "I stayed",
+          "when",
+          "last week"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u9-w39"
+      },
+      {
+        "id": "fr-a2-u9-cp-fr-a2u9-w40",
+        "type": "mc",
+        "prompt": "How do you say \"did you like it\"?",
+        "options": [
+          "tu as aimé",
+          "il y a deux jours",
+          "je suis rentré",
+          "qu'est-ce que vous avez fait"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u9-w40"
+      },
+      {
+        "id": "fr-a2-u9-cp-l1-s1",
+        "type": "translate",
+        "prompt": "Last night I ate fish",
+        "answer": [
+          "Hier",
+          "soir",
+          "j'ai",
+          "mangé",
+          "du",
+          "poisson"
+        ],
+        "bank": [
+          "soir",
+          "demain",
+          "j'ai",
+          "Hier",
+          "mange",
+          "du",
+          "mangé",
+          "poisson"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l1-s2",
+        "type": "translate",
+        "prompt": "Last week I saw my sister",
+        "answer": [
+          "La",
+          "semaine",
+          "dernière",
+          "j'ai",
+          "vu",
+          "ma",
+          "sœur"
+        ],
+        "bank": [
+          "j'ai",
+          "sœur",
+          "prochaine",
+          "ma",
+          "dernière",
+          "semaine",
+          "La",
+          "frère",
+          "vu"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l1-s3",
+        "type": "translate",
+        "prompt": "This morning I had coffee",
+        "answer": [
+          "Ce",
+          "matin",
+          "j'ai",
+          "bu",
+          "du",
+          "café"
+        ],
+        "bank": [
+          "hier",
+          "j'ai",
+          "bu",
+          "Ce",
+          "bois",
+          "matin",
+          "café",
+          "du"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l2-s1",
+        "type": "translate",
+        "prompt": "I bought bread yesterday",
+        "answer": [
+          "J'ai",
+          "acheté",
+          "du",
+          "pain",
+          "hier"
+        ],
+        "bank": [
+          "achète",
+          "demain",
+          "acheté",
+          "J'ai",
+          "pain",
+          "du",
+          "hier"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l2-s2",
+        "type": "translate",
+        "prompt": "Yesterday I took the bus",
+        "answer": [
+          "Hier",
+          "j'ai",
+          "pris",
+          "le",
+          "bus"
+        ],
+        "bank": [
+          "le",
+          "bus",
+          "pris",
+          "j'ai",
+          "train",
+          "prends",
+          "Hier"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l2-s3",
+        "type": "translate",
+        "prompt": "You saw my brother",
+        "answer": [
+          "Tu",
+          "as",
+          "vu",
+          "mon",
+          "frère"
+        ],
+        "bank": [
+          "vu",
+          "ai",
+          "as",
+          "ma",
+          "frère",
+          "mon",
+          "Tu"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l3-s1",
+        "type": "translate",
+        "prompt": "I went to the market yesterday",
+        "answer": [
+          "Je",
+          "suis",
+          "allé",
+          "au",
+          "marché",
+          "hier"
+        ],
+        "bank": [
+          "au",
+          "à",
+          "ai",
+          "hier",
+          "suis",
+          "marché",
+          "allé",
+          "Je"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l3-s2",
+        "type": "translate",
+        "prompt": "I went home",
+        "answer": [
+          "Je",
+          "suis",
+          "rentré",
+          "à",
+          "la",
+          "maison"
+        ],
+        "bank": [
+          "Je",
+          "maison",
+          "à",
+          "rentré",
+          "suis",
+          "parti",
+          "resté",
+          "la"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l3-s3",
+        "type": "translate",
+        "prompt": "She left last night",
+        "answer": [
+          "Elle",
+          "est",
+          "partie",
+          "hier",
+          "soir"
+        ],
+        "bank": [
+          "est",
+          "hier",
+          "a",
+          "soir",
+          "suis",
+          "Elle",
+          "partie"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l4-s1",
+        "type": "translate",
+        "prompt": "On Saturday the weather was nice",
+        "answer": [
+          "Samedi",
+          "il",
+          "faisait",
+          "beau"
+        ],
+        "bank": [
+          "pleuvait",
+          "beau",
+          "il",
+          "faisait",
+          "Samedi",
+          "fait"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l4-s2",
+        "type": "translate",
+        "prompt": "On Sunday I visited a park",
+        "answer": [
+          "Dimanche",
+          "j'ai",
+          "visité",
+          "un",
+          "parc"
+        ],
+        "bank": [
+          "visite",
+          "j'ai",
+          "un",
+          "Dimanche",
+          "parc",
+          "visité",
+          "école"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l4-s3",
+        "type": "translate",
+        "prompt": "It was great last night",
+        "answer": [
+          "C'était",
+          "super",
+          "hier",
+          "soir"
+        ],
+        "bank": [
+          "C'était",
+          "beau",
+          "super",
+          "hier",
+          "faisait",
+          "soir"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l5-s1",
+        "type": "translate",
+        "prompt": "What did you do yesterday",
+        "answer": [
+          "Qu'est-ce",
+          "que",
+          "tu",
+          "as",
+          "fait",
+          "hier"
+        ],
+        "bank": [
+          "fait",
+          "que",
+          "vous",
+          "fais",
+          "hier",
+          "tu",
+          "as",
+          "Qu'est-ce"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l5-s2",
+        "type": "translate",
+        "prompt": "Where did you go this morning",
+        "answer": [
+          "Où",
+          "es-tu",
+          "allé",
+          "ce",
+          "matin"
+        ],
+        "bank": [
+          "à",
+          "es-tu",
+          "allé",
+          "Où",
+          "suis",
+          "ce",
+          "matin"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-l5-s3",
+        "type": "translate",
+        "prompt": "Did you like the film",
+        "answer": [
+          "Tu",
+          "as",
+          "aimé",
+          "le",
+          "film"
+        ],
+        "bank": [
+          "as",
+          "film",
+          "aimé",
+          "aime",
+          "Tu",
+          "le",
+          "un"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u9-cp-m1",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u9-w7",
+            "target": "le week-end dernier",
+            "english": "last weekend"
+          },
+          {
+            "wordId": "fr-a2u9-w4",
+            "target": "avant-hier",
+            "english": "the day before yesterday"
+          },
+          {
+            "wordId": "fr-a2u9-w6",
+            "target": "la semaine dernière",
+            "english": "last week"
+          },
+          {
+            "wordId": "fr-a2u9-w1",
+            "target": "hier",
+            "english": "yesterday"
+          },
+          {
+            "wordId": "fr-a2u9-w3",
+            "target": "hier après-midi",
+            "english": "yesterday afternoon"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u9-cp-m2",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u9-w12",
+            "target": "j'ai fait",
+            "english": "I did"
+          },
+          {
+            "wordId": "fr-a2u9-w9",
+            "target": "j'ai mangé",
+            "english": "I ate"
+          },
+          {
+            "wordId": "fr-a2u9-w13",
+            "target": "j'ai eu",
+            "english": "I had"
+          },
+          {
+            "wordId": "fr-a2u9-w10",
+            "target": "j'ai bu",
+            "english": "I drank"
+          },
+          {
+            "wordId": "fr-a2u9-w14",
+            "target": "j'ai acheté",
+            "english": "I bought"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u9-cp-m3",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u9-w21",
+            "target": "je suis venu",
+            "english": "I came"
+          },
+          {
+            "wordId": "fr-a2u9-w24",
+            "target": "je suis tombé",
+            "english": "I fell"
+          },
+          {
+            "wordId": "fr-a2u9-w23",
+            "target": "je suis sorti",
+            "english": "I went out"
+          },
+          {
+            "wordId": "fr-a2u9-w20",
+            "target": "je suis parti",
+            "english": "I left"
+          },
+          {
+            "wordId": "fr-a2u9-w19",
+            "target": "je suis resté",
+            "english": "I stayed"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u9-cp-m4",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u9-w29",
+            "target": "j'ai visité",
+            "english": "I visited"
+          },
+          {
+            "wordId": "fr-a2u9-w32",
+            "target": "on a regardé un film",
+            "english": "we watched a film"
+          },
+          {
+            "wordId": "fr-a2u9-w25",
+            "target": "il faisait beau",
+            "english": "the weather was nice"
+          },
+          {
+            "wordId": "fr-a2u9-w31",
+            "target": "j'ai dormi",
+            "english": "I slept"
+          },
+          {
+            "wordId": "fr-a2u9-w26",
+            "target": "il pleuvait",
+            "english": "it was raining"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u9-cp-m5",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u9-w36",
+            "target": "avec qui",
+            "english": "who with"
+          },
+          {
+            "wordId": "fr-a2u9-w34",
+            "target": "qu'est-ce que vous avez fait",
+            "english": "what did you do (polite)"
+          },
+          {
+            "wordId": "fr-a2u9-w39",
+            "target": "quand",
+            "english": "when"
+          },
+          {
+            "wordId": "fr-a2u9-w38",
+            "target": "c'était comment",
+            "english": "how was it"
+          },
+          {
+            "wordId": "fr-a2u9-w35",
+            "target": "où es-tu allé",
+            "english": "where did you go"
+          }
+        ]
+      }
+    ],
+    "draw": 20
+  }
+}

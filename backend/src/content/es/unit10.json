@@ -1,0 +1,2359 @@
+{
+  "lang": "es",
+  "unit": 10,
+  "level": "A2",
+  "title": "Plans",
+  "blurb": "Say what you are going to do, invite friends and set a time.",
+  "speechLang": "es-ES",
+  "lessons": [
+    {
+      "id": "es-a2-u10-l1",
+      "title": "Going to, part 1",
+      "theme": "going to",
+      "exercises": [
+        {
+          "id": "es-a2u10-w1-te",
+          "type": "mc",
+          "prompt": "What does \"voy a\" mean?",
+          "speak": "voy a",
+          "options": [
+            "I am going to travel",
+            "we are going to",
+            "we are going to have dinner",
+            "I am going to"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w1"
+        },
+        {
+          "id": "es-a2u10-w2-et",
+          "type": "mc",
+          "prompt": "How do you say \"you are going to\"?",
+          "options": [
+            "vamos a",
+            "vas a",
+            "voy a viajar",
+            "no voy a trabajar"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w2"
+        },
+        {
+          "id": "es-a2-u10-l1-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w1",
+              "target": "voy a",
+              "english": "I am going to"
+            },
+            {
+              "wordId": "es-a2u10-w2",
+              "target": "vas a",
+              "english": "you are going to"
+            },
+            {
+              "wordId": "es-a2u10-w3",
+              "target": "va a",
+              "english": "he or she is going to"
+            },
+            {
+              "wordId": "es-a2u10-w4",
+              "target": "vamos a",
+              "english": "we are going to"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w3-te",
+          "type": "mc",
+          "prompt": "What does \"va a\" mean?",
+          "speak": "va a",
+          "options": [
+            "he or she is going to",
+            "I am going to",
+            "we are going to",
+            "you are going to"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w3"
+        },
+        {
+          "id": "es-a2u10-w4-et",
+          "type": "mc",
+          "prompt": "How do you say \"we are going to\"?",
+          "options": [
+            "voy a",
+            "no voy a trabajar",
+            "vamos a",
+            "qué vas a hacer"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w4"
+        },
+        {
+          "id": "es-a2-u10-l1-s",
+          "type": "translate",
+          "prompt": "Tomorrow I am going to work",
+          "answer": [
+            "Mañana",
+            "voy",
+            "a",
+            "trabajar"
+          ],
+          "bank": [
+            "trabajar",
+            "a",
+            "vas",
+            "fui",
+            "Mañana",
+            "voy"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "voy a",
+          "english": "I am going to"
+        },
+        {
+          "target": "vas a",
+          "english": "you are going to"
+        },
+        {
+          "target": "va a",
+          "english": "he or she is going to"
+        },
+        {
+          "target": "vamos a",
+          "english": "we are going to"
+        }
+      ],
+      "tip": {
+        "title": "Plans with ir a",
+        "body": "Use ir a and a verb for plans. Voy a comer means I am going to eat. Vamos a salir means we are going to go out."
+      }
+    },
+    {
+      "id": "es-a2-u10-l2",
+      "title": "Going to, part 2",
+      "theme": "going to",
+      "exercises": [
+        {
+          "id": "es-a2u10-w5-te",
+          "type": "mc",
+          "prompt": "What does \"voy a viajar\" mean?",
+          "speak": "voy a viajar",
+          "options": [
+            "I am not going to work",
+            "he or she is going to",
+            "we are going to have dinner",
+            "I am going to travel"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w5"
+        },
+        {
+          "id": "es-a2u10-w6-et",
+          "type": "mc",
+          "prompt": "How do you say \"we are going to have dinner\"?",
+          "options": [
+            "voy a",
+            "no voy a trabajar",
+            "vamos a cenar",
+            "va a"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w6"
+        },
+        {
+          "id": "es-a2-u10-l2-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w5",
+              "target": "voy a viajar",
+              "english": "I am going to travel"
+            },
+            {
+              "wordId": "es-a2u10-w6",
+              "target": "vamos a cenar",
+              "english": "we are going to have dinner"
+            },
+            {
+              "wordId": "es-a2u10-w7",
+              "target": "no voy a trabajar",
+              "english": "I am not going to work"
+            },
+            {
+              "wordId": "es-a2u10-w8",
+              "target": "qué vas a hacer",
+              "english": "what are you going to do"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w7-te",
+          "type": "mc",
+          "prompt": "What does \"no voy a trabajar\" mean?",
+          "speak": "no voy a trabajar",
+          "options": [
+            "we are going to",
+            "I am going to travel",
+            "I am going to",
+            "I am not going to work"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w7"
+        },
+        {
+          "id": "es-a2u10-w8-et",
+          "type": "mc",
+          "prompt": "How do you say \"what are you going to do\"?",
+          "options": [
+            "va a",
+            "voy a viajar",
+            "qué vas a hacer",
+            "no voy a trabajar"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w8"
+        },
+        {
+          "id": "es-a2-u10-l2-s",
+          "type": "translate",
+          "prompt": "What are you going to do tomorrow",
+          "answer": [
+            "Qué",
+            "vas",
+            "a",
+            "hacer",
+            "mañana"
+          ],
+          "bank": [
+            "hacer",
+            "hiciste",
+            "a",
+            "mañana",
+            "voy",
+            "Qué",
+            "vas"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "voy a viajar",
+          "english": "I am going to travel"
+        },
+        {
+          "target": "vamos a cenar",
+          "english": "we are going to have dinner"
+        },
+        {
+          "target": "no voy a trabajar",
+          "english": "I am not going to work"
+        },
+        {
+          "target": "qué vas a hacer",
+          "english": "what are you going to do"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u10-l3",
+      "title": "When, part 1",
+      "theme": "when",
+      "exercises": [
+        {
+          "id": "es-a2u10-w9-te",
+          "type": "mc",
+          "prompt": "What does \"mañana\" mean?",
+          "speak": "mañana",
+          "options": [
+            "tomorrow",
+            "in two days",
+            "next Saturday",
+            "next week"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w9"
+        },
+        {
+          "id": "es-a2u10-w10-et",
+          "type": "mc",
+          "prompt": "How do you say \"the day after tomorrow\"?",
+          "options": [
+            "pasado mañana",
+            "pronto",
+            "dentro de dos días",
+            "el sábado que viene"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w10"
+        },
+        {
+          "id": "es-a2-u10-l3-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w9",
+              "target": "mañana",
+              "english": "tomorrow"
+            },
+            {
+              "wordId": "es-a2u10-w10",
+              "target": "pasado mañana",
+              "english": "the day after tomorrow"
+            },
+            {
+              "wordId": "es-a2u10-w11",
+              "target": "la semana que viene",
+              "english": "next week"
+            },
+            {
+              "wordId": "es-a2u10-w12",
+              "target": "esta noche",
+              "english": "tonight"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w11-te",
+          "type": "mc",
+          "prompt": "What does \"la semana que viene\" mean?",
+          "speak": "la semana que viene",
+          "options": [
+            "tonight",
+            "next month",
+            "tomorrow",
+            "next week"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w11"
+        },
+        {
+          "id": "es-a2u10-w12-et",
+          "type": "mc",
+          "prompt": "How do you say \"tonight\"?",
+          "options": [
+            "la semana que viene",
+            "esta noche",
+            "pasado mañana",
+            "dentro de dos días"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w12"
+        },
+        {
+          "id": "es-a2-u10-l3-s",
+          "type": "translate",
+          "prompt": "The day after tomorrow I am going to travel",
+          "answer": [
+            "Pasado",
+            "mañana",
+            "voy",
+            "a",
+            "viajar"
+          ],
+          "bank": [
+            "viajar",
+            "Pasado",
+            "mañana",
+            "a",
+            "fui",
+            "ayer",
+            "voy"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "mañana",
+          "english": "tomorrow"
+        },
+        {
+          "target": "pasado mañana",
+          "english": "the day after tomorrow"
+        },
+        {
+          "target": "la semana que viene",
+          "english": "next week"
+        },
+        {
+          "target": "esta noche",
+          "english": "tonight"
+        }
+      ],
+      "tip": {
+        "title": "Looking ahead",
+        "body": "Que viene means next: la semana que viene. Dentro de means in, for time ahead: dentro de dos días. Pasado mañana is the day after tomorrow."
+      }
+    },
+    {
+      "id": "es-a2-u10-l4",
+      "title": "When, part 2",
+      "theme": "when",
+      "exercises": [
+        {
+          "id": "es-a2u10-w13-te",
+          "type": "mc",
+          "prompt": "What does \"pronto\" mean?",
+          "speak": "pronto",
+          "options": [
+            "in two days",
+            "tonight",
+            "soon",
+            "next Saturday"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w13"
+        },
+        {
+          "id": "es-a2u10-w14-et",
+          "type": "mc",
+          "prompt": "How do you say \"in two days\"?",
+          "options": [
+            "pasado mañana",
+            "dentro de dos días",
+            "mañana",
+            "el sábado que viene"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w14"
+        },
+        {
+          "id": "es-a2-u10-l4-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w13",
+              "target": "pronto",
+              "english": "soon"
+            },
+            {
+              "wordId": "es-a2u10-w14",
+              "target": "dentro de dos días",
+              "english": "in two days"
+            },
+            {
+              "wordId": "es-a2u10-w15",
+              "target": "el mes que viene",
+              "english": "next month"
+            },
+            {
+              "wordId": "es-a2u10-w16",
+              "target": "el sábado que viene",
+              "english": "next Saturday"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w15-te",
+          "type": "mc",
+          "prompt": "What does \"el mes que viene\" mean?",
+          "speak": "el mes que viene",
+          "options": [
+            "next week",
+            "tonight",
+            "next month",
+            "in two days"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w15"
+        },
+        {
+          "id": "es-a2u10-w16-et",
+          "type": "mc",
+          "prompt": "How do you say \"next Saturday\"?",
+          "options": [
+            "el sábado que viene",
+            "pasado mañana",
+            "el mes que viene",
+            "mañana"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w16"
+        },
+        {
+          "id": "es-a2-u10-l4-s",
+          "type": "translate",
+          "prompt": "Next week I am free",
+          "answer": [
+            "La",
+            "semana",
+            "que",
+            "viene",
+            "estoy",
+            "libre"
+          ],
+          "bank": [
+            "viene",
+            "que",
+            "pasada",
+            "estoy",
+            "libre",
+            "La",
+            "ocupado",
+            "semana"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "pronto",
+          "english": "soon"
+        },
+        {
+          "target": "dentro de dos días",
+          "english": "in two days"
+        },
+        {
+          "target": "el mes que viene",
+          "english": "next month"
+        },
+        {
+          "target": "el sábado que viene",
+          "english": "next Saturday"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u10-l5",
+      "title": "Invitations, part 1",
+      "theme": "invitations",
+      "exercises": [
+        {
+          "id": "es-a2u10-w17-te",
+          "type": "mc",
+          "prompt": "What does \"quieres venir\" mean?",
+          "speak": "quieres venir",
+          "options": [
+            "gladly",
+            "do you want to come",
+            "let's go",
+            "can you come"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w17"
+        },
+        {
+          "id": "es-a2u10-w18-et",
+          "type": "mc",
+          "prompt": "How do you say \"can you come\"?",
+          "options": [
+            "quieres venir",
+            "quizás otro día",
+            "puedes venir",
+            "con mucho gusto"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w18"
+        },
+        {
+          "id": "es-a2-u10-l5-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w17",
+              "target": "quieres venir",
+              "english": "do you want to come"
+            },
+            {
+              "wordId": "es-a2u10-w18",
+              "target": "puedes venir",
+              "english": "can you come"
+            },
+            {
+              "wordId": "es-a2u10-w19",
+              "target": "te invito",
+              "english": "my treat"
+            },
+            {
+              "wordId": "es-a2u10-w20",
+              "target": "vamos",
+              "english": "let's go"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w19-te",
+          "type": "mc",
+          "prompt": "What does \"te invito\" mean?",
+          "speak": "te invito",
+          "options": [
+            "I am sorry",
+            "maybe another day",
+            "gladly",
+            "my treat"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w19"
+        },
+        {
+          "id": "es-a2u10-w20-et",
+          "type": "mc",
+          "prompt": "How do you say \"let's go\"?",
+          "options": [
+            "me encantaría",
+            "quieres venir",
+            "vamos",
+            "puedes venir"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w20"
+        },
+        {
+          "id": "es-a2-u10-l5-s",
+          "type": "translate",
+          "prompt": "Do you want to come to the park",
+          "answer": [
+            "Quieres",
+            "venir",
+            "al",
+            "parque"
+          ],
+          "bank": [
+            "al",
+            "vamos",
+            "parque",
+            "quiero",
+            "Quieres",
+            "venir"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "quieres venir",
+          "english": "do you want to come"
+        },
+        {
+          "target": "puedes venir",
+          "english": "can you come"
+        },
+        {
+          "target": "te invito",
+          "english": "my treat"
+        },
+        {
+          "target": "vamos",
+          "english": "let's go"
+        }
+      ],
+      "tip": {
+        "title": "Yes and no, politely",
+        "body": "After querer and poder, use the infinitive: ¿Quieres venir? To say no, say sorry first and give a reason: Lo siento, no puedo."
+      }
+    },
+    {
+      "id": "es-a2-u10-l6",
+      "title": "Invitations, part 2",
+      "theme": "invitations",
+      "exercises": [
+        {
+          "id": "es-a2u10-w21-te",
+          "type": "mc",
+          "prompt": "What does \"me encantaría\" mean?",
+          "speak": "me encantaría",
+          "options": [
+            "can you come",
+            "my treat",
+            "I would love to",
+            "maybe another day"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w21"
+        },
+        {
+          "id": "es-a2u10-w22-et",
+          "type": "mc",
+          "prompt": "How do you say \"gladly\"?",
+          "options": [
+            "con mucho gusto",
+            "quizás otro día",
+            "puedes venir",
+            "vamos"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w22"
+        },
+        {
+          "id": "es-a2-u10-l6-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w21",
+              "target": "me encantaría",
+              "english": "I would love to"
+            },
+            {
+              "wordId": "es-a2u10-w22",
+              "target": "con mucho gusto",
+              "english": "gladly"
+            },
+            {
+              "wordId": "es-a2u10-w23",
+              "target": "lo siento",
+              "english": "I am sorry"
+            },
+            {
+              "wordId": "es-a2u10-w24",
+              "target": "quizás otro día",
+              "english": "maybe another day"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w23-te",
+          "type": "mc",
+          "prompt": "What does \"lo siento\" mean?",
+          "speak": "lo siento",
+          "options": [
+            "let's go",
+            "I am sorry",
+            "do you want to come",
+            "can you come"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w23"
+        },
+        {
+          "id": "es-a2u10-w24-et",
+          "type": "mc",
+          "prompt": "How do you say \"maybe another day\"?",
+          "options": [
+            "con mucho gusto",
+            "vamos",
+            "te invito",
+            "quizás otro día"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w24"
+        },
+        {
+          "id": "es-a2-u10-l6-s",
+          "type": "translate",
+          "prompt": "I would love to but I am busy",
+          "answer": [
+            "Me",
+            "encantaría",
+            "pero",
+            "estoy",
+            "ocupado"
+          ],
+          "bank": [
+            "pero",
+            "encantaría",
+            "Me",
+            "estoy",
+            "gusto",
+            "ocupado",
+            "siento"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "me encantaría",
+          "english": "I would love to"
+        },
+        {
+          "target": "con mucho gusto",
+          "english": "gladly"
+        },
+        {
+          "target": "lo siento",
+          "english": "I am sorry"
+        },
+        {
+          "target": "quizás otro día",
+          "english": "maybe another day"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u10-l7",
+      "title": "Appointments, part 1",
+      "theme": "appointments",
+      "exercises": [
+        {
+          "id": "es-a2u10-w25-te",
+          "type": "mc",
+          "prompt": "What does \"la cita\" mean?",
+          "speak": "la cita",
+          "options": [
+            "at one",
+            "at what time",
+            "the appointment",
+            "on the dot"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w25"
+        },
+        {
+          "id": "es-a2u10-w26-et",
+          "type": "mc",
+          "prompt": "How do you say \"the meeting\"?",
+          "options": [
+            "a la una",
+            "a las tres",
+            "la reunión",
+            "en punto"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w26"
+        },
+        {
+          "id": "es-a2-u10-l7-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w25",
+              "target": "la cita",
+              "english": "the appointment"
+            },
+            {
+              "wordId": "es-a2u10-w26",
+              "target": "la reunión",
+              "english": "the meeting"
+            },
+            {
+              "wordId": "es-a2u10-w27",
+              "target": "a qué hora",
+              "english": "at what time"
+            },
+            {
+              "wordId": "es-a2u10-w28",
+              "target": "a las tres",
+              "english": "at three"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w27-te",
+          "type": "mc",
+          "prompt": "What does \"a qué hora\" mean?",
+          "speak": "a qué hora",
+          "options": [
+            "at what time",
+            "to arrive early",
+            "at three",
+            "the meeting"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w27"
+        },
+        {
+          "id": "es-a2u10-w28-et",
+          "type": "mc",
+          "prompt": "How do you say \"at three\"?",
+          "options": [
+            "a las tres",
+            "a la una",
+            "llegar temprano",
+            "la cita"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w28"
+        },
+        {
+          "id": "es-a2-u10-l7-s",
+          "type": "translate",
+          "prompt": "The appointment is at three",
+          "answer": [
+            "La",
+            "cita",
+            "es",
+            "a",
+            "las",
+            "tres"
+          ],
+          "bank": [
+            "una",
+            "las",
+            "es",
+            "a",
+            "reunión",
+            "La",
+            "cita",
+            "tres"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "la cita",
+          "english": "the appointment"
+        },
+        {
+          "target": "la reunión",
+          "english": "the meeting"
+        },
+        {
+          "target": "a qué hora",
+          "english": "at what time"
+        },
+        {
+          "target": "a las tres",
+          "english": "at three"
+        }
+      ],
+      "tip": {
+        "title": "Telling the time",
+        "body": "Use a las plus the hour: a las tres. For one o'clock, say a la una. Hacia means around: hacia el mediodía."
+      }
+    },
+    {
+      "id": "es-a2-u10-l8",
+      "title": "Appointments, part 2",
+      "theme": "appointments",
+      "exercises": [
+        {
+          "id": "es-a2u10-w29-te",
+          "type": "mc",
+          "prompt": "What does \"a la una\" mean?",
+          "speak": "a la una",
+          "options": [
+            "on the dot",
+            "at one",
+            "at what time",
+            "the meeting"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w29"
+        },
+        {
+          "id": "es-a2u10-w30-et",
+          "type": "mc",
+          "prompt": "How do you say \"around midday\"?",
+          "options": [
+            "hacia el mediodía",
+            "llegar temprano",
+            "la reunión",
+            "en punto"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w30"
+        },
+        {
+          "id": "es-a2-u10-l8-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w29",
+              "target": "a la una",
+              "english": "at one"
+            },
+            {
+              "wordId": "es-a2u10-w30",
+              "target": "hacia el mediodía",
+              "english": "around midday"
+            },
+            {
+              "wordId": "es-a2u10-w31",
+              "target": "en punto",
+              "english": "on the dot"
+            },
+            {
+              "wordId": "es-a2u10-w32",
+              "target": "llegar temprano",
+              "english": "to arrive early"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w31-te",
+          "type": "mc",
+          "prompt": "What does \"en punto\" mean?",
+          "speak": "en punto",
+          "options": [
+            "to arrive early",
+            "at what time",
+            "at three",
+            "on the dot"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w31"
+        },
+        {
+          "id": "es-a2u10-w32-et",
+          "type": "mc",
+          "prompt": "How do you say \"to arrive early\"?",
+          "options": [
+            "a la una",
+            "llegar temprano",
+            "a las tres",
+            "a qué hora"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w32"
+        },
+        {
+          "id": "es-a2-u10-l8-s",
+          "type": "translate",
+          "prompt": "What time is the meeting",
+          "answer": [
+            "A",
+            "qué",
+            "hora",
+            "es",
+            "la",
+            "reunión"
+          ],
+          "bank": [
+            "hora",
+            "reunión",
+            "A",
+            "cuándo",
+            "cita",
+            "es",
+            "qué",
+            "la"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "a la una",
+          "english": "at one"
+        },
+        {
+          "target": "hacia el mediodía",
+          "english": "around midday"
+        },
+        {
+          "target": "en punto",
+          "english": "on the dot"
+        },
+        {
+          "target": "llegar temprano",
+          "english": "to arrive early"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u10-l9",
+      "title": "Weather forecast, part 1",
+      "theme": "weather forecast",
+      "exercises": [
+        {
+          "id": "es-a2u10-w33-te",
+          "type": "mc",
+          "prompt": "What does \"el pronóstico\" mean?",
+          "speak": "el pronóstico",
+          "options": [
+            "it is going to snow",
+            "it is going to be sunny",
+            "the forecast",
+            "the umbrella"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w33"
+        },
+        {
+          "id": "es-a2u10-w34-et",
+          "type": "mc",
+          "prompt": "How do you say \"it is going to rain\"?",
+          "options": [
+            "va a llover",
+            "el pronóstico",
+            "va a nevar",
+            "el cielo"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w34"
+        },
+        {
+          "id": "es-a2-u10-l9-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w33",
+              "target": "el pronóstico",
+              "english": "the forecast"
+            },
+            {
+              "wordId": "es-a2u10-w34",
+              "target": "va a llover",
+              "english": "it is going to rain"
+            },
+            {
+              "wordId": "es-a2u10-w35",
+              "target": "va a nevar",
+              "english": "it is going to snow"
+            },
+            {
+              "wordId": "es-a2u10-w36",
+              "target": "va a hacer calor",
+              "english": "it is going to be hot"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w35-te",
+          "type": "mc",
+          "prompt": "What does \"va a nevar\" mean?",
+          "speak": "va a nevar",
+          "options": [
+            "it is going to be cold",
+            "the forecast",
+            "the umbrella",
+            "it is going to snow"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u10-w35"
+        },
+        {
+          "id": "es-a2u10-w36-et",
+          "type": "mc",
+          "prompt": "How do you say \"it is going to be hot\"?",
+          "options": [
+            "va a hacer calor",
+            "va a llover",
+            "va a nevar",
+            "el pronóstico"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w36"
+        },
+        {
+          "id": "es-a2-u10-l9-s",
+          "type": "translate",
+          "prompt": "Tomorrow it is going to rain",
+          "answer": [
+            "Mañana",
+            "va",
+            "a",
+            "llover"
+          ],
+          "bank": [
+            "nevar",
+            "llover",
+            "va",
+            "Mañana",
+            "a",
+            "paraguas"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "el pronóstico",
+          "english": "the forecast"
+        },
+        {
+          "target": "va a llover",
+          "english": "it is going to rain"
+        },
+        {
+          "target": "va a nevar",
+          "english": "it is going to snow"
+        },
+        {
+          "target": "va a hacer calor",
+          "english": "it is going to be hot"
+        }
+      ],
+      "tip": {
+        "title": "Weather plans",
+        "body": "For weather, use va a hacer plus calor, frío or sol. Rain and snow have their own verbs: va a llover, va a nevar."
+      }
+    },
+    {
+      "id": "es-a2-u10-l10",
+      "title": "Weather forecast, part 2",
+      "theme": "weather forecast",
+      "exercises": [
+        {
+          "id": "es-a2u10-w37-te",
+          "type": "mc",
+          "prompt": "What does \"va a hacer frío\" mean?",
+          "speak": "va a hacer frío",
+          "options": [
+            "it is going to snow",
+            "it is going to be hot",
+            "it is going to be cold",
+            "the sky"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w37"
+        },
+        {
+          "id": "es-a2u10-w38-et",
+          "type": "mc",
+          "prompt": "How do you say \"it is going to be sunny\"?",
+          "options": [
+            "el cielo",
+            "va a hacer sol",
+            "va a hacer frío",
+            "va a llover"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u10-w38"
+        },
+        {
+          "id": "es-a2-u10-l10-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "es-a2u10-w37",
+              "target": "va a hacer frío",
+              "english": "it is going to be cold"
+            },
+            {
+              "wordId": "es-a2u10-w38",
+              "target": "va a hacer sol",
+              "english": "it is going to be sunny"
+            },
+            {
+              "wordId": "es-a2u10-w39",
+              "target": "el paraguas",
+              "english": "the umbrella"
+            },
+            {
+              "wordId": "es-a2u10-w40",
+              "target": "el cielo",
+              "english": "the sky"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u10-w39-te",
+          "type": "mc",
+          "prompt": "What does \"el paraguas\" mean?",
+          "speak": "el paraguas",
+          "options": [
+            "it is going to be sunny",
+            "the sky",
+            "the umbrella",
+            "it is going to be hot"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u10-w39"
+        },
+        {
+          "id": "es-a2u10-w40-et",
+          "type": "mc",
+          "prompt": "How do you say \"the sky\"?",
+          "options": [
+            "el cielo",
+            "va a hacer calor",
+            "va a nevar",
+            "el paraguas"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u10-w40"
+        },
+        {
+          "id": "es-a2-u10-l10-s",
+          "type": "translate",
+          "prompt": "Tonight it is going to be cold",
+          "answer": [
+            "Esta",
+            "noche",
+            "va",
+            "a",
+            "hacer",
+            "frío"
+          ],
+          "bank": [
+            "a",
+            "noche",
+            "Esta",
+            "calor",
+            "va",
+            "frío",
+            "hacer",
+            "sol"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "va a hacer frío",
+          "english": "it is going to be cold"
+        },
+        {
+          "target": "va a hacer sol",
+          "english": "it is going to be sunny"
+        },
+        {
+          "target": "el paraguas",
+          "english": "the umbrella"
+        },
+        {
+          "target": "el cielo",
+          "english": "the sky"
+        }
+      ]
+    }
+  ],
+  "checkpoint": {
+    "id": "es-a2-u10-cp",
+    "title": "Unit 10 checkpoint",
+    "pool": [
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w1",
+        "type": "mc",
+        "prompt": "What does \"voy a\" mean?",
+        "speak": "voy a",
+        "options": [
+          "the meeting",
+          "I am going to",
+          "the umbrella",
+          "it is going to be hot"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w1"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w2",
+        "type": "mc",
+        "prompt": "How do you say \"you are going to\"?",
+        "options": [
+          "vas a",
+          "va a hacer calor",
+          "esta noche",
+          "a la una"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w2"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w3",
+        "type": "mc",
+        "prompt": "What does \"va a\" mean?",
+        "speak": "va a",
+        "options": [
+          "I would love to",
+          "he or she is going to",
+          "my treat",
+          "let's go"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w3"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w4",
+        "type": "mc",
+        "prompt": "How do you say \"we are going to\"?",
+        "options": [
+          "vamos a",
+          "va a llover",
+          "lo siento",
+          "pronto"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w4"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w5",
+        "type": "mc",
+        "prompt": "What does \"voy a viajar\" mean?",
+        "speak": "voy a viajar",
+        "options": [
+          "my treat",
+          "gladly",
+          "I am going to travel",
+          "do you want to come"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w5"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w6",
+        "type": "mc",
+        "prompt": "How do you say \"we are going to have dinner\"?",
+        "options": [
+          "a las tres",
+          "hacia el mediodía",
+          "lo siento",
+          "vamos a cenar"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w6"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w7",
+        "type": "mc",
+        "prompt": "What does \"no voy a trabajar\" mean?",
+        "speak": "no voy a trabajar",
+        "options": [
+          "next month",
+          "on the dot",
+          "tomorrow",
+          "I am not going to work"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w7"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w8",
+        "type": "mc",
+        "prompt": "How do you say \"what are you going to do\"?",
+        "options": [
+          "quizás otro día",
+          "la semana que viene",
+          "qué vas a hacer",
+          "lo siento"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w8"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w9",
+        "type": "mc",
+        "prompt": "What does \"mañana\" mean?",
+        "speak": "mañana",
+        "options": [
+          "the appointment",
+          "the day after tomorrow",
+          "I would love to",
+          "tomorrow"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w9"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w10",
+        "type": "mc",
+        "prompt": "How do you say \"the day after tomorrow\"?",
+        "options": [
+          "pasado mañana",
+          "el sábado que viene",
+          "me encantaría",
+          "el paraguas"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w10"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w11",
+        "type": "mc",
+        "prompt": "What does \"la semana que viene\" mean?",
+        "speak": "la semana que viene",
+        "options": [
+          "do you want to come",
+          "it is going to be hot",
+          "next week",
+          "at what time"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w11"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w12",
+        "type": "mc",
+        "prompt": "How do you say \"tonight\"?",
+        "options": [
+          "esta noche",
+          "va a hacer frío",
+          "a la una",
+          "va a"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w12"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w13",
+        "type": "mc",
+        "prompt": "What does \"pronto\" mean?",
+        "speak": "pronto",
+        "options": [
+          "the day after tomorrow",
+          "it is going to be sunny",
+          "soon",
+          "it is going to be hot"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w13"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w14",
+        "type": "mc",
+        "prompt": "How do you say \"in two days\"?",
+        "options": [
+          "lo siento",
+          "a las tres",
+          "la semana que viene",
+          "dentro de dos días"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w14"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w15",
+        "type": "mc",
+        "prompt": "What does \"el mes que viene\" mean?",
+        "speak": "el mes que viene",
+        "options": [
+          "it is going to rain",
+          "I would love to",
+          "next month",
+          "around midday"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w15"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w16",
+        "type": "mc",
+        "prompt": "How do you say \"next Saturday\"?",
+        "options": [
+          "el paraguas",
+          "el sábado que viene",
+          "a qué hora",
+          "a la una"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w16"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w17",
+        "type": "mc",
+        "prompt": "What does \"quieres venir\" mean?",
+        "speak": "quieres venir",
+        "options": [
+          "the appointment",
+          "it is going to rain",
+          "do you want to come",
+          "the forecast"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w17"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w18",
+        "type": "mc",
+        "prompt": "How do you say \"can you come\"?",
+        "options": [
+          "va a",
+          "va a nevar",
+          "puedes venir",
+          "el paraguas"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w18"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w19",
+        "type": "mc",
+        "prompt": "What does \"te invito\" mean?",
+        "speak": "te invito",
+        "options": [
+          "the meeting",
+          "at what time",
+          "we are going to",
+          "my treat"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w19"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w20",
+        "type": "mc",
+        "prompt": "How do you say \"let's go\"?",
+        "options": [
+          "vamos",
+          "quizás otro día",
+          "va a hacer calor",
+          "voy a"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w20"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w21",
+        "type": "mc",
+        "prompt": "What does \"me encantaría\" mean?",
+        "speak": "me encantaría",
+        "options": [
+          "it is going to be sunny",
+          "I would love to",
+          "around midday",
+          "maybe another day"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w21"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w22",
+        "type": "mc",
+        "prompt": "How do you say \"gladly\"?",
+        "options": [
+          "a las tres",
+          "con mucho gusto",
+          "puedes venir",
+          "va a hacer sol"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w22"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w23",
+        "type": "mc",
+        "prompt": "What does \"lo siento\" mean?",
+        "speak": "lo siento",
+        "options": [
+          "I would love to",
+          "the appointment",
+          "I am sorry",
+          "on the dot"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w23"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w24",
+        "type": "mc",
+        "prompt": "How do you say \"maybe another day\"?",
+        "options": [
+          "quizás otro día",
+          "el mes que viene",
+          "vamos a cenar",
+          "lo siento"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w24"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w25",
+        "type": "mc",
+        "prompt": "What does \"la cita\" mean?",
+        "speak": "la cita",
+        "options": [
+          "it is going to be hot",
+          "the appointment",
+          "around midday",
+          "my treat"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w25"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w26",
+        "type": "mc",
+        "prompt": "How do you say \"the meeting\"?",
+        "options": [
+          "me encantaría",
+          "la reunión",
+          "en punto",
+          "dentro de dos días"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w26"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w27",
+        "type": "mc",
+        "prompt": "What does \"a qué hora\" mean?",
+        "speak": "a qué hora",
+        "options": [
+          "at what time",
+          "gladly",
+          "let's go",
+          "the sky"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w27"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w28",
+        "type": "mc",
+        "prompt": "How do you say \"at three\"?",
+        "options": [
+          "en punto",
+          "a las tres",
+          "vas a",
+          "esta noche"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w28"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w29",
+        "type": "mc",
+        "prompt": "What does \"a la una\" mean?",
+        "speak": "a la una",
+        "options": [
+          "can you come",
+          "the sky",
+          "soon",
+          "at one"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w29"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w30",
+        "type": "mc",
+        "prompt": "How do you say \"around midday\"?",
+        "options": [
+          "hacia el mediodía",
+          "va a nevar",
+          "vamos a",
+          "a la una"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w30"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w31",
+        "type": "mc",
+        "prompt": "What does \"en punto\" mean?",
+        "speak": "en punto",
+        "options": [
+          "on the dot",
+          "tomorrow",
+          "the sky",
+          "at one"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w31"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w32",
+        "type": "mc",
+        "prompt": "How do you say \"to arrive early\"?",
+        "options": [
+          "va a",
+          "llegar temprano",
+          "va a hacer sol",
+          "la semana que viene"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w32"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w33",
+        "type": "mc",
+        "prompt": "What does \"el pronóstico\" mean?",
+        "speak": "el pronóstico",
+        "options": [
+          "tomorrow",
+          "the forecast",
+          "I am not going to work",
+          "I am going to travel"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w33"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w34",
+        "type": "mc",
+        "prompt": "How do you say \"it is going to rain\"?",
+        "options": [
+          "el cielo",
+          "va a hacer frío",
+          "lo siento",
+          "va a llover"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w34"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w35",
+        "type": "mc",
+        "prompt": "What does \"va a nevar\" mean?",
+        "speak": "va a nevar",
+        "options": [
+          "tonight",
+          "it is going to snow",
+          "at one",
+          "I am not going to work"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w35"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w36",
+        "type": "mc",
+        "prompt": "How do you say \"it is going to be hot\"?",
+        "options": [
+          "en punto",
+          "puedes venir",
+          "a la una",
+          "va a hacer calor"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w36"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w37",
+        "type": "mc",
+        "prompt": "What does \"va a hacer frío\" mean?",
+        "speak": "va a hacer frío",
+        "options": [
+          "tonight",
+          "it is going to be cold",
+          "he or she is going to",
+          "I am not going to work"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u10-w37"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w38",
+        "type": "mc",
+        "prompt": "How do you say \"it is going to be sunny\"?",
+        "options": [
+          "va a hacer sol",
+          "va a hacer calor",
+          "con mucho gusto",
+          "voy a"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u10-w38"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w39",
+        "type": "mc",
+        "prompt": "What does \"el paraguas\" mean?",
+        "speak": "el paraguas",
+        "options": [
+          "let's go",
+          "soon",
+          "the umbrella",
+          "I would love to"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u10-w39"
+      },
+      {
+        "id": "es-a2-u10-cp-es-a2u10-w40",
+        "type": "mc",
+        "prompt": "How do you say \"the sky\"?",
+        "options": [
+          "vas a",
+          "voy a viajar",
+          "pasado mañana",
+          "el cielo"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u10-w40"
+      },
+      {
+        "id": "es-a2-u10-cp-l1-s1",
+        "type": "translate",
+        "prompt": "Tomorrow I am going to work",
+        "answer": [
+          "Mañana",
+          "voy",
+          "a",
+          "trabajar"
+        ],
+        "bank": [
+          "voy",
+          "a",
+          "trabajar",
+          "fui",
+          "vas",
+          "Mañana"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l1-s2",
+        "type": "translate",
+        "prompt": "What are you going to do tomorrow",
+        "answer": [
+          "Qué",
+          "vas",
+          "a",
+          "hacer",
+          "mañana"
+        ],
+        "bank": [
+          "voy",
+          "hiciste",
+          "vas",
+          "Qué",
+          "hacer",
+          "a",
+          "mañana"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l1-s3",
+        "type": "translate",
+        "prompt": "She is going to arrive at eight",
+        "answer": [
+          "Ella",
+          "va",
+          "a",
+          "llegar",
+          "a",
+          "las",
+          "ocho"
+        ],
+        "bank": [
+          "vamos",
+          "a",
+          "va",
+          "a",
+          "Ella",
+          "las",
+          "ocho",
+          "llegó",
+          "llegar"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l2-s1",
+        "type": "translate",
+        "prompt": "The day after tomorrow I am going to travel",
+        "answer": [
+          "Pasado",
+          "mañana",
+          "voy",
+          "a",
+          "viajar"
+        ],
+        "bank": [
+          "ayer",
+          "Pasado",
+          "viajar",
+          "voy",
+          "mañana",
+          "a",
+          "fui"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l2-s2",
+        "type": "translate",
+        "prompt": "Next week I am free",
+        "answer": [
+          "La",
+          "semana",
+          "que",
+          "viene",
+          "estoy",
+          "libre"
+        ],
+        "bank": [
+          "libre",
+          "viene",
+          "que",
+          "pasada",
+          "La",
+          "estoy",
+          "semana",
+          "ocupado"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l2-s3",
+        "type": "translate",
+        "prompt": "In two days we are going to go out",
+        "answer": [
+          "Dentro",
+          "de",
+          "dos",
+          "días",
+          "vamos",
+          "a",
+          "salir"
+        ],
+        "bank": [
+          "Dentro",
+          "dos",
+          "días",
+          "de",
+          "hace",
+          "salir",
+          "vamos",
+          "a",
+          "ayer"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l3-s1",
+        "type": "translate",
+        "prompt": "Do you want to come to the park",
+        "answer": [
+          "Quieres",
+          "venir",
+          "al",
+          "parque"
+        ],
+        "bank": [
+          "quiero",
+          "Quieres",
+          "venir",
+          "al",
+          "parque",
+          "vamos"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l3-s2",
+        "type": "translate",
+        "prompt": "I would love to but I am busy",
+        "answer": [
+          "Me",
+          "encantaría",
+          "pero",
+          "estoy",
+          "ocupado"
+        ],
+        "bank": [
+          "encantaría",
+          "ocupado",
+          "Me",
+          "estoy",
+          "gusto",
+          "siento",
+          "pero"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l3-s3",
+        "type": "translate",
+        "prompt": "I am sorry I can't today",
+        "answer": [
+          "Lo",
+          "siento",
+          "no",
+          "puedo",
+          "hoy"
+        ],
+        "bank": [
+          "hoy",
+          "Lo",
+          "puedo",
+          "encantaría",
+          "no",
+          "quieres",
+          "siento"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l4-s1",
+        "type": "translate",
+        "prompt": "The appointment is at three",
+        "answer": [
+          "La",
+          "cita",
+          "es",
+          "a",
+          "las",
+          "tres"
+        ],
+        "bank": [
+          "cita",
+          "una",
+          "es",
+          "las",
+          "reunión",
+          "La",
+          "a",
+          "tres"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l4-s2",
+        "type": "translate",
+        "prompt": "What time is the meeting",
+        "answer": [
+          "A",
+          "qué",
+          "hora",
+          "es",
+          "la",
+          "reunión"
+        ],
+        "bank": [
+          "cita",
+          "hora",
+          "A",
+          "reunión",
+          "la",
+          "qué",
+          "cuándo",
+          "es"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l4-s3",
+        "type": "translate",
+        "prompt": "I will arrive around midday",
+        "answer": [
+          "Llego",
+          "hacia",
+          "el",
+          "mediodía"
+        ],
+        "bank": [
+          "llegó",
+          "mediodía",
+          "tres",
+          "el",
+          "hacia",
+          "Llego"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l5-s1",
+        "type": "translate",
+        "prompt": "Tomorrow it is going to rain",
+        "answer": [
+          "Mañana",
+          "va",
+          "a",
+          "llover"
+        ],
+        "bank": [
+          "Mañana",
+          "a",
+          "llover",
+          "nevar",
+          "va",
+          "paraguas"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l5-s2",
+        "type": "translate",
+        "prompt": "Tonight it is going to be cold",
+        "answer": [
+          "Esta",
+          "noche",
+          "va",
+          "a",
+          "hacer",
+          "frío"
+        ],
+        "bank": [
+          "calor",
+          "a",
+          "Esta",
+          "noche",
+          "sol",
+          "hacer",
+          "frío",
+          "va"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-l5-s3",
+        "type": "translate",
+        "prompt": "The day after tomorrow it is going to be sunny",
+        "answer": [
+          "Pasado",
+          "mañana",
+          "va",
+          "a",
+          "hacer",
+          "sol"
+        ],
+        "bank": [
+          "cielo",
+          "llover",
+          "sol",
+          "a",
+          "Pasado",
+          "va",
+          "hacer",
+          "mañana"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u10-cp-m1",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "es-a2u10-w7",
+            "target": "no voy a trabajar",
+            "english": "I am not going to work"
+          },
+          {
+            "wordId": "es-a2u10-w1",
+            "target": "voy a",
+            "english": "I am going to"
+          },
+          {
+            "wordId": "es-a2u10-w3",
+            "target": "va a",
+            "english": "he or she is going to"
+          },
+          {
+            "wordId": "es-a2u10-w6",
+            "target": "vamos a cenar",
+            "english": "we are going to have dinner"
+          },
+          {
+            "wordId": "es-a2u10-w4",
+            "target": "vamos a",
+            "english": "we are going to"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u10-cp-m2",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "es-a2u10-w13",
+            "target": "pronto",
+            "english": "soon"
+          },
+          {
+            "wordId": "es-a2u10-w12",
+            "target": "esta noche",
+            "english": "tonight"
+          },
+          {
+            "wordId": "es-a2u10-w15",
+            "target": "el mes que viene",
+            "english": "next month"
+          },
+          {
+            "wordId": "es-a2u10-w10",
+            "target": "pasado mañana",
+            "english": "the day after tomorrow"
+          },
+          {
+            "wordId": "es-a2u10-w14",
+            "target": "dentro de dos días",
+            "english": "in two days"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u10-cp-m3",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "es-a2u10-w20",
+            "target": "vamos",
+            "english": "let's go"
+          },
+          {
+            "wordId": "es-a2u10-w23",
+            "target": "lo siento",
+            "english": "I am sorry"
+          },
+          {
+            "wordId": "es-a2u10-w19",
+            "target": "te invito",
+            "english": "my treat"
+          },
+          {
+            "wordId": "es-a2u10-w21",
+            "target": "me encantaría",
+            "english": "I would love to"
+          },
+          {
+            "wordId": "es-a2u10-w24",
+            "target": "quizás otro día",
+            "english": "maybe another day"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u10-cp-m4",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "es-a2u10-w25",
+            "target": "la cita",
+            "english": "the appointment"
+          },
+          {
+            "wordId": "es-a2u10-w31",
+            "target": "en punto",
+            "english": "on the dot"
+          },
+          {
+            "wordId": "es-a2u10-w26",
+            "target": "la reunión",
+            "english": "the meeting"
+          },
+          {
+            "wordId": "es-a2u10-w29",
+            "target": "a la una",
+            "english": "at one"
+          },
+          {
+            "wordId": "es-a2u10-w32",
+            "target": "llegar temprano",
+            "english": "to arrive early"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u10-cp-m5",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "es-a2u10-w40",
+            "target": "el cielo",
+            "english": "the sky"
+          },
+          {
+            "wordId": "es-a2u10-w37",
+            "target": "va a hacer frío",
+            "english": "it is going to be cold"
+          },
+          {
+            "wordId": "es-a2u10-w39",
+            "target": "el paraguas",
+            "english": "the umbrella"
+          },
+          {
+            "wordId": "es-a2u10-w36",
+            "target": "va a hacer calor",
+            "english": "it is going to be hot"
+          },
+          {
+            "wordId": "es-a2u10-w35",
+            "target": "va a nevar",
+            "english": "it is going to snow"
+          }
+        ]
+      }
+    ],
+    "draw": 20
+  }
+}

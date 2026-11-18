@@ -1,0 +1,2377 @@
+{
+  "lang": "fr",
+  "unit": 10,
+  "level": "A2",
+  "title": "Plans",
+  "blurb": "Say what you are going to do and make plans with friends.",
+  "speechLang": "fr-FR",
+  "lessons": [
+    {
+      "id": "fr-a2-u10-l1",
+      "title": "Going to, part 1",
+      "theme": "going to",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w1-te",
+          "type": "mc",
+          "prompt": "What does \"je vais\" mean?",
+          "speak": "je vais",
+          "options": [
+            "you are going to (polite or plural)",
+            "I am going to leave",
+            "they are going to",
+            "I am going to"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u10-w1"
+        },
+        {
+          "id": "fr-a2u10-w2-et",
+          "type": "mc",
+          "prompt": "How do you say \"you are going to\"?",
+          "options": [
+            "tu vas",
+            "il va",
+            "ils vont",
+            "nous allons"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w2"
+        },
+        {
+          "id": "fr-a2-u10-l1-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w1",
+              "target": "je vais",
+              "english": "I am going to"
+            },
+            {
+              "wordId": "fr-a2u10-w2",
+              "target": "tu vas",
+              "english": "you are going to"
+            },
+            {
+              "wordId": "fr-a2u10-w3",
+              "target": "il va",
+              "english": "he is going to"
+            },
+            {
+              "wordId": "fr-a2u10-w4",
+              "target": "nous allons",
+              "english": "we are going to"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w3-te",
+          "type": "mc",
+          "prompt": "What does \"il va\" mean?",
+          "speak": "il va",
+          "options": [
+            "he is going to",
+            "they are going to",
+            "you are going to (polite or plural)",
+            "you are going to"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w3"
+        },
+        {
+          "id": "fr-a2u10-w4-et",
+          "type": "mc",
+          "prompt": "How do you say \"we are going to\"?",
+          "options": [
+            "je vais",
+            "nous allons",
+            "je vais partir",
+            "tu vas"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w4"
+        },
+        {
+          "id": "fr-a2-u10-l1-s",
+          "type": "translate",
+          "prompt": "I am going to eat at the restaurant",
+          "answer": [
+            "Je",
+            "vais",
+            "manger",
+            "au",
+            "restaurant"
+          ],
+          "bank": [
+            "ai",
+            "au",
+            "restaurant",
+            "manger",
+            "Je",
+            "vais",
+            "vas"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "je vais",
+          "english": "I am going to"
+        },
+        {
+          "target": "tu vas",
+          "english": "you are going to"
+        },
+        {
+          "target": "il va",
+          "english": "he is going to"
+        },
+        {
+          "target": "nous allons",
+          "english": "we are going to"
+        }
+      ],
+      "tip": {
+        "title": "Near future",
+        "body": "To say what you are going to do, use aller plus a verb. Je vais manger. Nous allons partir."
+      }
+    },
+    {
+      "id": "fr-a2-u10-l2",
+      "title": "Going to, part 2",
+      "theme": "going to",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w5-te",
+          "type": "mc",
+          "prompt": "What does \"vous allez\" mean?",
+          "speak": "vous allez",
+          "options": [
+            "I am going to eat",
+            "he is going to",
+            "we are going to",
+            "you are going to (polite or plural)"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u10-w5"
+        },
+        {
+          "id": "fr-a2u10-w6-et",
+          "type": "mc",
+          "prompt": "How do you say \"they are going to\"?",
+          "options": [
+            "je vais",
+            "ils vont",
+            "vous allez",
+            "je vais partir"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w6"
+        },
+        {
+          "id": "fr-a2-u10-l2-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w5",
+              "target": "vous allez",
+              "english": "you are going to (polite or plural)"
+            },
+            {
+              "wordId": "fr-a2u10-w6",
+              "target": "ils vont",
+              "english": "they are going to"
+            },
+            {
+              "wordId": "fr-a2u10-w7",
+              "target": "je vais manger",
+              "english": "I am going to eat"
+            },
+            {
+              "wordId": "fr-a2u10-w8",
+              "target": "je vais partir",
+              "english": "I am going to leave"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w7-te",
+          "type": "mc",
+          "prompt": "What does \"je vais manger\" mean?",
+          "speak": "je vais manger",
+          "options": [
+            "they are going to",
+            "I am going to",
+            "I am going to eat",
+            "you are going to (polite or plural)"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w7"
+        },
+        {
+          "id": "fr-a2u10-w8-et",
+          "type": "mc",
+          "prompt": "How do you say \"I am going to leave\"?",
+          "options": [
+            "je vais partir",
+            "tu vas",
+            "nous allons",
+            "vous allez"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w8"
+        },
+        {
+          "id": "fr-a2-u10-l2-s",
+          "type": "translate",
+          "prompt": "We are going to take the train",
+          "answer": [
+            "Nous",
+            "allons",
+            "prendre",
+            "le",
+            "train"
+          ],
+          "bank": [
+            "vont",
+            "train",
+            "partir",
+            "allons",
+            "le",
+            "prendre",
+            "Nous"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "vous allez",
+          "english": "you are going to (polite or plural)"
+        },
+        {
+          "target": "ils vont",
+          "english": "they are going to"
+        },
+        {
+          "target": "je vais manger",
+          "english": "I am going to eat"
+        },
+        {
+          "target": "je vais partir",
+          "english": "I am going to leave"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u10-l3",
+      "title": "When, part 1",
+      "theme": "when",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w9-te",
+          "type": "mc",
+          "prompt": "What does \"demain\" mean?",
+          "speak": "demain",
+          "options": [
+            "next week",
+            "tomorrow",
+            "tonight",
+            "in 2 days"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w9"
+        },
+        {
+          "id": "fr-a2u10-w10-et",
+          "type": "mc",
+          "prompt": "How do you say \"the day after tomorrow\"?",
+          "options": [
+            "après-demain",
+            "dans deux jours",
+            "demain",
+            "ce week-end"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w10"
+        },
+        {
+          "id": "fr-a2-u10-l3-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w9",
+              "target": "demain",
+              "english": "tomorrow"
+            },
+            {
+              "wordId": "fr-a2u10-w10",
+              "target": "après-demain",
+              "english": "the day after tomorrow"
+            },
+            {
+              "wordId": "fr-a2u10-w11",
+              "target": "ce soir",
+              "english": "tonight"
+            },
+            {
+              "wordId": "fr-a2u10-w12",
+              "target": "ce week-end",
+              "english": "this weekend"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w11-te",
+          "type": "mc",
+          "prompt": "What does \"ce soir\" mean?",
+          "speak": "ce soir",
+          "options": [
+            "soon",
+            "next month",
+            "tonight",
+            "in 2 days"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w11"
+        },
+        {
+          "id": "fr-a2u10-w12-et",
+          "type": "mc",
+          "prompt": "How do you say \"this weekend\"?",
+          "options": [
+            "le mois prochain",
+            "ce week-end",
+            "après-demain",
+            "la semaine prochaine"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w12"
+        },
+        {
+          "id": "fr-a2-u10-l3-s",
+          "type": "translate",
+          "prompt": "Tomorrow I am going to see my mother",
+          "answer": [
+            "Demain",
+            "je",
+            "vais",
+            "voir",
+            "ma",
+            "mère"
+          ],
+          "bank": [
+            "je",
+            "mère",
+            "voir",
+            "vu",
+            "ma",
+            "Demain",
+            "vais",
+            "hier"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "demain",
+          "english": "tomorrow"
+        },
+        {
+          "target": "après-demain",
+          "english": "the day after tomorrow"
+        },
+        {
+          "target": "ce soir",
+          "english": "tonight"
+        },
+        {
+          "target": "ce week-end",
+          "english": "this weekend"
+        }
+      ],
+      "tip": {
+        "title": "In and ago",
+        "body": "Dans plus a time means in. Dans deux jours is in 2 days. Il y a deux jours is 2 days ago."
+      }
+    },
+    {
+      "id": "fr-a2-u10-l4",
+      "title": "When, part 2",
+      "theme": "when",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w13-te",
+          "type": "mc",
+          "prompt": "What does \"la semaine prochaine\" mean?",
+          "speak": "la semaine prochaine",
+          "options": [
+            "soon",
+            "tomorrow",
+            "next week",
+            "the day after tomorrow"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w13"
+        },
+        {
+          "id": "fr-a2u10-w14-et",
+          "type": "mc",
+          "prompt": "How do you say \"next month\"?",
+          "options": [
+            "ce soir",
+            "bientôt",
+            "après-demain",
+            "le mois prochain"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u10-w14"
+        },
+        {
+          "id": "fr-a2-u10-l4-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w13",
+              "target": "la semaine prochaine",
+              "english": "next week"
+            },
+            {
+              "wordId": "fr-a2u10-w14",
+              "target": "le mois prochain",
+              "english": "next month"
+            },
+            {
+              "wordId": "fr-a2u10-w15",
+              "target": "bientôt",
+              "english": "soon"
+            },
+            {
+              "wordId": "fr-a2u10-w16",
+              "target": "dans deux jours",
+              "english": "in 2 days"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w15-te",
+          "type": "mc",
+          "prompt": "What does \"bientôt\" mean?",
+          "speak": "bientôt",
+          "options": [
+            "the day after tomorrow",
+            "soon",
+            "next month",
+            "this weekend"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w15"
+        },
+        {
+          "id": "fr-a2u10-w16-et",
+          "type": "mc",
+          "prompt": "How do you say \"in 2 days\"?",
+          "options": [
+            "demain",
+            "dans deux jours",
+            "ce soir",
+            "la semaine prochaine"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w16"
+        },
+        {
+          "id": "fr-a2-u10-l4-s",
+          "type": "translate",
+          "prompt": "The train arrives in 2 days",
+          "answer": [
+            "Le",
+            "train",
+            "arrive",
+            "dans",
+            "deux",
+            "jours"
+          ],
+          "bank": [
+            "arrive",
+            "train",
+            "Le",
+            "hier",
+            "bientôt",
+            "jours",
+            "dans",
+            "deux"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "la semaine prochaine",
+          "english": "next week"
+        },
+        {
+          "target": "le mois prochain",
+          "english": "next month"
+        },
+        {
+          "target": "bientôt",
+          "english": "soon"
+        },
+        {
+          "target": "dans deux jours",
+          "english": "in 2 days"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u10-l5",
+      "title": "Invitations and replies, part 1",
+      "theme": "invitations and replies",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w17-te",
+          "type": "mc",
+          "prompt": "What does \"tu veux venir\" mean?",
+          "speak": "tu veux venir",
+          "options": [
+            "good idea",
+            "another time",
+            "do you want to come",
+            "do you want (polite)"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w17"
+        },
+        {
+          "id": "fr-a2u10-w18-et",
+          "type": "mc",
+          "prompt": "How do you say \"can you come\"?",
+          "options": [
+            "tu veux venir",
+            "je ne peux pas",
+            "tu peux venir",
+            "bonne idée"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w18"
+        },
+        {
+          "id": "fr-a2-u10-l5-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w17",
+              "target": "tu veux venir",
+              "english": "do you want to come"
+            },
+            {
+              "wordId": "fr-a2u10-w18",
+              "target": "tu peux venir",
+              "english": "can you come"
+            },
+            {
+              "wordId": "fr-a2u10-w19",
+              "target": "vous voulez",
+              "english": "do you want (polite)"
+            },
+            {
+              "wordId": "fr-a2u10-w20",
+              "target": "volontiers",
+              "english": "gladly"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w19-te",
+          "type": "mc",
+          "prompt": "What does \"vous voulez\" mean?",
+          "speak": "vous voulez",
+          "options": [
+            "I can't",
+            "good idea",
+            "do you want to come",
+            "do you want (polite)"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u10-w19"
+        },
+        {
+          "id": "fr-a2u10-w20-et",
+          "type": "mc",
+          "prompt": "How do you say \"gladly\"?",
+          "options": [
+            "volontiers",
+            "désolé",
+            "une autre fois",
+            "je ne peux pas"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w20"
+        },
+        {
+          "id": "fr-a2-u10-l5-s",
+          "type": "translate",
+          "prompt": "Do you want to come to the park",
+          "answer": [
+            "Tu",
+            "veux",
+            "venir",
+            "au",
+            "parc"
+          ],
+          "bank": [
+            "viens",
+            "peux",
+            "venir",
+            "Tu",
+            "veux",
+            "au",
+            "parc"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "tu veux venir",
+          "english": "do you want to come"
+        },
+        {
+          "target": "tu peux venir",
+          "english": "can you come"
+        },
+        {
+          "target": "vous voulez",
+          "english": "do you want (polite)"
+        },
+        {
+          "target": "volontiers",
+          "english": "gladly"
+        }
+      ],
+      "tip": {
+        "title": "Want and can",
+        "body": "Vouloir and pouvoir are followed by a verb. Tu veux venir ? Tu peux venir ? To decline kindly, say désolé and offer une autre fois."
+      }
+    },
+    {
+      "id": "fr-a2-u10-l6",
+      "title": "Invitations and replies, part 2",
+      "theme": "invitations and replies",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w21-te",
+          "type": "mc",
+          "prompt": "What does \"bonne idée\" mean?",
+          "speak": "bonne idée",
+          "options": [
+            "good idea",
+            "do you want (polite)",
+            "sorry",
+            "can you come"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w21"
+        },
+        {
+          "id": "fr-a2u10-w22-et",
+          "type": "mc",
+          "prompt": "How do you say \"sorry\"?",
+          "options": [
+            "je ne peux pas",
+            "désolé",
+            "tu peux venir",
+            "tu veux venir"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w22"
+        },
+        {
+          "id": "fr-a2-u10-l6-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w21",
+              "target": "bonne idée",
+              "english": "good idea"
+            },
+            {
+              "wordId": "fr-a2u10-w22",
+              "target": "désolé",
+              "english": "sorry"
+            },
+            {
+              "wordId": "fr-a2u10-w23",
+              "target": "je ne peux pas",
+              "english": "I can't"
+            },
+            {
+              "wordId": "fr-a2u10-w24",
+              "target": "une autre fois",
+              "english": "another time"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w23-te",
+          "type": "mc",
+          "prompt": "What does \"je ne peux pas\" mean?",
+          "speak": "je ne peux pas",
+          "options": [
+            "do you want (polite)",
+            "another time",
+            "good idea",
+            "I can't"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u10-w23"
+        },
+        {
+          "id": "fr-a2u10-w24-et",
+          "type": "mc",
+          "prompt": "How do you say \"another time\"?",
+          "options": [
+            "une autre fois",
+            "tu peux venir",
+            "désolé",
+            "volontiers"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w24"
+        },
+        {
+          "id": "fr-a2-u10-l6-s",
+          "type": "translate",
+          "prompt": "Good idea, I am free tonight",
+          "answer": [
+            "Bonne",
+            "idée",
+            "je",
+            "suis",
+            "libre",
+            "ce",
+            "soir"
+          ],
+          "bank": [
+            "occupé",
+            "libre",
+            "soir",
+            "ce",
+            "je",
+            "suis",
+            "idée",
+            "Bonne",
+            "demain"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "bonne idée",
+          "english": "good idea"
+        },
+        {
+          "target": "désolé",
+          "english": "sorry"
+        },
+        {
+          "target": "je ne peux pas",
+          "english": "I can't"
+        },
+        {
+          "target": "une autre fois",
+          "english": "another time"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u10-l7",
+      "title": "Appointments, part 1",
+      "theme": "appointments",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w25-te",
+          "type": "mc",
+          "prompt": "What does \"le rendez-vous\" mean?",
+          "speak": "le rendez-vous",
+          "options": [
+            "around noon",
+            "at what time",
+            "appointment",
+            "at noon"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w25"
+        },
+        {
+          "id": "fr-a2u10-w26-et",
+          "type": "mc",
+          "prompt": "How do you say \"at what time\"?",
+          "options": [
+            "à quelle heure",
+            "vers midi",
+            "je suis en retard",
+            "à huit heures et demie"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w26"
+        },
+        {
+          "id": "fr-a2-u10-l7-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w25",
+              "target": "le rendez-vous",
+              "english": "appointment"
+            },
+            {
+              "wordId": "fr-a2u10-w26",
+              "target": "à quelle heure",
+              "english": "at what time"
+            },
+            {
+              "wordId": "fr-a2u10-w27",
+              "target": "vers midi",
+              "english": "around noon"
+            },
+            {
+              "wordId": "fr-a2u10-w28",
+              "target": "à midi",
+              "english": "at noon"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w27-te",
+          "type": "mc",
+          "prompt": "What does \"vers midi\" mean?",
+          "speak": "vers midi",
+          "options": [
+            "around noon",
+            "at noon",
+            "at what time",
+            "appointment"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w27"
+        },
+        {
+          "id": "fr-a2u10-w28-et",
+          "type": "mc",
+          "prompt": "How do you say \"at noon\"?",
+          "options": [
+            "à quelle heure",
+            "je suis en retard",
+            "on se retrouve",
+            "à midi"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u10-w28"
+        },
+        {
+          "id": "fr-a2-u10-l7-s",
+          "type": "translate",
+          "prompt": "I have an appointment at 2 o'clock",
+          "answer": [
+            "J'ai",
+            "un",
+            "rendez-vous",
+            "à",
+            "deux",
+            "heures"
+          ],
+          "bank": [
+            "à",
+            "J'ai",
+            "midi",
+            "un",
+            "vers",
+            "rendez-vous",
+            "deux",
+            "heures"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "le rendez-vous",
+          "english": "appointment"
+        },
+        {
+          "target": "à quelle heure",
+          "english": "at what time"
+        },
+        {
+          "target": "vers midi",
+          "english": "around noon"
+        },
+        {
+          "target": "à midi",
+          "english": "at noon"
+        }
+      ],
+      "tip": {
+        "title": "Telling the time",
+        "body": "À quelle heure asks what time. À midi is exactly noon. Vers midi is around noon."
+      }
+    },
+    {
+      "id": "fr-a2-u10-l8",
+      "title": "Appointments, part 2",
+      "theme": "appointments",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w29-te",
+          "type": "mc",
+          "prompt": "What does \"à deux heures\" mean?",
+          "speak": "à deux heures",
+          "options": [
+            "around noon",
+            "at half past 8",
+            "at 2 o'clock",
+            "at noon"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w29"
+        },
+        {
+          "id": "fr-a2u10-w30-et",
+          "type": "mc",
+          "prompt": "How do you say \"at half past 8\"?",
+          "options": [
+            "à huit heures et demie",
+            "je suis en retard",
+            "le rendez-vous",
+            "à quelle heure"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w30"
+        },
+        {
+          "id": "fr-a2-u10-l8-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w29",
+              "target": "à deux heures",
+              "english": "at 2 o'clock"
+            },
+            {
+              "wordId": "fr-a2u10-w30",
+              "target": "à huit heures et demie",
+              "english": "at half past 8"
+            },
+            {
+              "wordId": "fr-a2u10-w31",
+              "target": "je suis en retard",
+              "english": "I am late"
+            },
+            {
+              "wordId": "fr-a2u10-w32",
+              "target": "on se retrouve",
+              "english": "let's meet"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w31-te",
+          "type": "mc",
+          "prompt": "What does \"je suis en retard\" mean?",
+          "speak": "je suis en retard",
+          "options": [
+            "at half past 8",
+            "let's meet",
+            "at 2 o'clock",
+            "I am late"
+          ],
+          "answer": 3,
+          "wordId": "fr-a2u10-w31"
+        },
+        {
+          "id": "fr-a2u10-w32-et",
+          "type": "mc",
+          "prompt": "How do you say \"let's meet\"?",
+          "options": [
+            "on se retrouve",
+            "à deux heures",
+            "vers midi",
+            "à huit heures et demie"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w32"
+        },
+        {
+          "id": "fr-a2-u10-l8-s",
+          "type": "translate",
+          "prompt": "What time shall we meet",
+          "answer": [
+            "À",
+            "quelle",
+            "heure",
+            "on",
+            "se",
+            "retrouve"
+          ],
+          "bank": [
+            "midi",
+            "demain",
+            "se",
+            "À",
+            "retrouve",
+            "quelle",
+            "on",
+            "heure"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "à deux heures",
+          "english": "at 2 o'clock"
+        },
+        {
+          "target": "à huit heures et demie",
+          "english": "at half past 8"
+        },
+        {
+          "target": "je suis en retard",
+          "english": "I am late"
+        },
+        {
+          "target": "on se retrouve",
+          "english": "let's meet"
+        }
+      ]
+    },
+    {
+      "id": "fr-a2-u10-l9",
+      "title": "Weather forecast, part 1",
+      "theme": "weather forecast",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w33-te",
+          "type": "mc",
+          "prompt": "What does \"la météo\" mean?",
+          "speak": "la météo",
+          "options": [
+            "it will be windy",
+            "the weather forecast",
+            "it will be cold",
+            "it is going to snow"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w33"
+        },
+        {
+          "id": "fr-a2u10-w34-et",
+          "type": "mc",
+          "prompt": "How do you say \"it is going to rain\"?",
+          "options": [
+            "il va pleuvoir",
+            "il y aura du vent",
+            "il va faire beau",
+            "il va neiger"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w34"
+        },
+        {
+          "id": "fr-a2-u10-l9-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w33",
+              "target": "la météo",
+              "english": "the weather forecast"
+            },
+            {
+              "wordId": "fr-a2u10-w34",
+              "target": "il va pleuvoir",
+              "english": "it is going to rain"
+            },
+            {
+              "wordId": "fr-a2u10-w35",
+              "target": "il va neiger",
+              "english": "it is going to snow"
+            },
+            {
+              "wordId": "fr-a2u10-w36",
+              "target": "il va faire beau",
+              "english": "the weather will be nice"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w35-te",
+          "type": "mc",
+          "prompt": "What does \"il va neiger\" mean?",
+          "speak": "il va neiger",
+          "options": [
+            "it will be cold",
+            "it is going to snow",
+            "the weather forecast",
+            "it will be hot"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w35"
+        },
+        {
+          "id": "fr-a2u10-w36-et",
+          "type": "mc",
+          "prompt": "How do you say \"the weather will be nice\"?",
+          "options": [
+            "il va faire beau",
+            "il va pleuvoir",
+            "il va faire froid",
+            "il va faire chaud"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w36"
+        },
+        {
+          "id": "fr-a2-u10-l9-s",
+          "type": "translate",
+          "prompt": "Tomorrow it is going to rain",
+          "answer": [
+            "Demain",
+            "il",
+            "va",
+            "pleuvoir"
+          ],
+          "bank": [
+            "Demain",
+            "neiger",
+            "il",
+            "pleuvoir",
+            "va",
+            "hier"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "la météo",
+          "english": "the weather forecast"
+        },
+        {
+          "target": "il va pleuvoir",
+          "english": "it is going to rain"
+        },
+        {
+          "target": "il va neiger",
+          "english": "it is going to snow"
+        },
+        {
+          "target": "il va faire beau",
+          "english": "the weather will be nice"
+        }
+      ],
+      "tip": {
+        "title": "Forecasts",
+        "body": "Il va plus a weather verb says what is coming. Il va pleuvoir. Il va faire beau."
+      }
+    },
+    {
+      "id": "fr-a2-u10-l10",
+      "title": "Weather forecast, part 2",
+      "theme": "weather forecast",
+      "exercises": [
+        {
+          "id": "fr-a2u10-w37-te",
+          "type": "mc",
+          "prompt": "What does \"il va faire froid\" mean?",
+          "speak": "il va faire froid",
+          "options": [
+            "it will be windy",
+            "it will be cold",
+            "it is going to snow",
+            "it will be sunny"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w37"
+        },
+        {
+          "id": "fr-a2u10-w38-et",
+          "type": "mc",
+          "prompt": "How do you say \"it will be hot\"?",
+          "options": [
+            "il va faire beau",
+            "il va faire chaud",
+            "la météo",
+            "il y aura du soleil"
+          ],
+          "answer": 1,
+          "wordId": "fr-a2u10-w38"
+        },
+        {
+          "id": "fr-a2-u10-l10-m",
+          "type": "match",
+          "prompt": "Match each pair",
+          "pairs": [
+            {
+              "wordId": "fr-a2u10-w37",
+              "target": "il va faire froid",
+              "english": "it will be cold"
+            },
+            {
+              "wordId": "fr-a2u10-w38",
+              "target": "il va faire chaud",
+              "english": "it will be hot"
+            },
+            {
+              "wordId": "fr-a2u10-w39",
+              "target": "il y aura du soleil",
+              "english": "it will be sunny"
+            },
+            {
+              "wordId": "fr-a2u10-w40",
+              "target": "il y aura du vent",
+              "english": "it will be windy"
+            }
+          ]
+        },
+        {
+          "id": "fr-a2u10-w39-te",
+          "type": "mc",
+          "prompt": "What does \"il y aura du soleil\" mean?",
+          "speak": "il y aura du soleil",
+          "options": [
+            "it will be sunny",
+            "it will be cold",
+            "it is going to rain",
+            "it will be hot"
+          ],
+          "answer": 0,
+          "wordId": "fr-a2u10-w39"
+        },
+        {
+          "id": "fr-a2u10-w40-et",
+          "type": "mc",
+          "prompt": "How do you say \"it will be windy\"?",
+          "options": [
+            "il va faire froid",
+            "il va faire beau",
+            "il y aura du vent",
+            "il va pleuvoir"
+          ],
+          "answer": 2,
+          "wordId": "fr-a2u10-w40"
+        },
+        {
+          "id": "fr-a2-u10-l10-s",
+          "type": "translate",
+          "prompt": "It will be nice this weekend",
+          "answer": [
+            "Ce",
+            "week-end",
+            "il",
+            "va",
+            "faire",
+            "beau"
+          ],
+          "bank": [
+            "froid",
+            "va",
+            "chaud",
+            "Ce",
+            "il",
+            "faire",
+            "beau",
+            "week-end"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "il va faire froid",
+          "english": "it will be cold"
+        },
+        {
+          "target": "il va faire chaud",
+          "english": "it will be hot"
+        },
+        {
+          "target": "il y aura du soleil",
+          "english": "it will be sunny"
+        },
+        {
+          "target": "il y aura du vent",
+          "english": "it will be windy"
+        }
+      ]
+    }
+  ],
+  "checkpoint": {
+    "id": "fr-a2-u10-cp",
+    "title": "Unit 10 checkpoint",
+    "pool": [
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w1",
+        "type": "mc",
+        "prompt": "What does \"je vais\" mean?",
+        "speak": "je vais",
+        "options": [
+          "I am going to",
+          "can you come",
+          "I am going to eat",
+          "the day after tomorrow"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w1"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w2",
+        "type": "mc",
+        "prompt": "How do you say \"you are going to\"?",
+        "options": [
+          "je vais partir",
+          "vous voulez",
+          "tu vas",
+          "le rendez-vous"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w2"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w3",
+        "type": "mc",
+        "prompt": "What does \"il va\" mean?",
+        "speak": "il va",
+        "options": [
+          "they are going to",
+          "the weather forecast",
+          "he is going to",
+          "appointment"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w3"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w4",
+        "type": "mc",
+        "prompt": "How do you say \"we are going to\"?",
+        "options": [
+          "on se retrouve",
+          "volontiers",
+          "nous allons",
+          "je vais partir"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w4"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w5",
+        "type": "mc",
+        "prompt": "What does \"vous allez\" mean?",
+        "speak": "vous allez",
+        "options": [
+          "you are going to (polite or plural)",
+          "next week",
+          "they are going to",
+          "at half past 8"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w5"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w6",
+        "type": "mc",
+        "prompt": "How do you say \"they are going to\"?",
+        "options": [
+          "tu vas",
+          "vous allez",
+          "ils vont",
+          "nous allons"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w6"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w7",
+        "type": "mc",
+        "prompt": "What does \"je vais manger\" mean?",
+        "speak": "je vais manger",
+        "options": [
+          "I am going to eat",
+          "it will be sunny",
+          "the weather will be nice",
+          "I am going to"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w7"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w8",
+        "type": "mc",
+        "prompt": "How do you say \"I am going to leave\"?",
+        "options": [
+          "tu peux venir",
+          "je vais partir",
+          "à deux heures",
+          "il va"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w8"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w9",
+        "type": "mc",
+        "prompt": "What does \"demain\" mean?",
+        "speak": "demain",
+        "options": [
+          "appointment",
+          "the weather forecast",
+          "tomorrow",
+          "the day after tomorrow"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w9"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w10",
+        "type": "mc",
+        "prompt": "How do you say \"the day after tomorrow\"?",
+        "options": [
+          "il va faire froid",
+          "après-demain",
+          "volontiers",
+          "il va faire beau"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w10"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w11",
+        "type": "mc",
+        "prompt": "What does \"ce soir\" mean?",
+        "speak": "ce soir",
+        "options": [
+          "you are going to (polite or plural)",
+          "the day after tomorrow",
+          "it will be sunny",
+          "tonight"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u10-w11"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w12",
+        "type": "mc",
+        "prompt": "How do you say \"this weekend\"?",
+        "options": [
+          "ce soir",
+          "il y aura du vent",
+          "ce week-end",
+          "il va neiger"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w12"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w13",
+        "type": "mc",
+        "prompt": "What does \"la semaine prochaine\" mean?",
+        "speak": "la semaine prochaine",
+        "options": [
+          "soon",
+          "next week",
+          "sorry",
+          "I am going to eat"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w13"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w14",
+        "type": "mc",
+        "prompt": "How do you say \"next month\"?",
+        "options": [
+          "le mois prochain",
+          "il va",
+          "ils vont",
+          "à midi"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w14"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w15",
+        "type": "mc",
+        "prompt": "What does \"bientôt\" mean?",
+        "speak": "bientôt",
+        "options": [
+          "soon",
+          "around noon",
+          "you are going to",
+          "in 2 days"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w15"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w16",
+        "type": "mc",
+        "prompt": "How do you say \"in 2 days\"?",
+        "options": [
+          "dans deux jours",
+          "la météo",
+          "ce week-end",
+          "la semaine prochaine"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w16"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w17",
+        "type": "mc",
+        "prompt": "What does \"tu veux venir\" mean?",
+        "speak": "tu veux venir",
+        "options": [
+          "the day after tomorrow",
+          "sorry",
+          "I am going to leave",
+          "do you want to come"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u10-w17"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w18",
+        "type": "mc",
+        "prompt": "How do you say \"can you come\"?",
+        "options": [
+          "nous allons",
+          "une autre fois",
+          "tu peux venir",
+          "il va pleuvoir"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w18"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w19",
+        "type": "mc",
+        "prompt": "What does \"vous voulez\" mean?",
+        "speak": "vous voulez",
+        "options": [
+          "next week",
+          "do you want (polite)",
+          "you are going to",
+          "another time"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w19"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w20",
+        "type": "mc",
+        "prompt": "How do you say \"gladly\"?",
+        "options": [
+          "je ne peux pas",
+          "volontiers",
+          "je vais partir",
+          "vous voulez"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w20"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w21",
+        "type": "mc",
+        "prompt": "What does \"bonne idée\" mean?",
+        "speak": "bonne idée",
+        "options": [
+          "I am going to leave",
+          "he is going to",
+          "good idea",
+          "tonight"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w21"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w22",
+        "type": "mc",
+        "prompt": "How do you say \"sorry\"?",
+        "options": [
+          "il y aura du vent",
+          "désolé",
+          "tu veux venir",
+          "bientôt"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w22"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w23",
+        "type": "mc",
+        "prompt": "What does \"je ne peux pas\" mean?",
+        "speak": "je ne peux pas",
+        "options": [
+          "it will be cold",
+          "appointment",
+          "I can't",
+          "another time"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w23"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w24",
+        "type": "mc",
+        "prompt": "How do you say \"another time\"?",
+        "options": [
+          "volontiers",
+          "une autre fois",
+          "le mois prochain",
+          "je vais manger"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w24"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w25",
+        "type": "mc",
+        "prompt": "What does \"le rendez-vous\" mean?",
+        "speak": "le rendez-vous",
+        "options": [
+          "you are going to",
+          "appointment",
+          "around noon",
+          "next week"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w25"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w26",
+        "type": "mc",
+        "prompt": "How do you say \"at what time\"?",
+        "options": [
+          "à quelle heure",
+          "tu vas",
+          "il va pleuvoir",
+          "la météo"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w26"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w27",
+        "type": "mc",
+        "prompt": "What does \"vers midi\" mean?",
+        "speak": "vers midi",
+        "options": [
+          "do you want to come",
+          "sorry",
+          "they are going to",
+          "around noon"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u10-w27"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w28",
+        "type": "mc",
+        "prompt": "How do you say \"at noon\"?",
+        "options": [
+          "je suis en retard",
+          "à midi",
+          "il va neiger",
+          "une autre fois"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w28"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w29",
+        "type": "mc",
+        "prompt": "What does \"à deux heures\" mean?",
+        "speak": "à deux heures",
+        "options": [
+          "we are going to",
+          "tonight",
+          "I am going to",
+          "at 2 o'clock"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u10-w29"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w30",
+        "type": "mc",
+        "prompt": "How do you say \"at half past 8\"?",
+        "options": [
+          "le rendez-vous",
+          "après-demain",
+          "à huit heures et demie",
+          "il va pleuvoir"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w30"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w31",
+        "type": "mc",
+        "prompt": "What does \"je suis en retard\" mean?",
+        "speak": "je suis en retard",
+        "options": [
+          "I am late",
+          "I am going to leave",
+          "next week",
+          "this weekend"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w31"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w32",
+        "type": "mc",
+        "prompt": "How do you say \"let's meet\"?",
+        "options": [
+          "on se retrouve",
+          "il y aura du vent",
+          "il va",
+          "il va faire beau"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w32"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w33",
+        "type": "mc",
+        "prompt": "What does \"la météo\" mean?",
+        "speak": "la météo",
+        "options": [
+          "this weekend",
+          "the weather forecast",
+          "they are going to",
+          "I am going to leave"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w33"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w34",
+        "type": "mc",
+        "prompt": "How do you say \"it is going to rain\"?",
+        "options": [
+          "à quelle heure",
+          "volontiers",
+          "dans deux jours",
+          "il va pleuvoir"
+        ],
+        "answer": 3,
+        "wordId": "fr-a2u10-w34"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w35",
+        "type": "mc",
+        "prompt": "What does \"il va neiger\" mean?",
+        "speak": "il va neiger",
+        "options": [
+          "it is going to snow",
+          "tonight",
+          "let's meet",
+          "I am going to eat"
+        ],
+        "answer": 0,
+        "wordId": "fr-a2u10-w35"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w36",
+        "type": "mc",
+        "prompt": "How do you say \"the weather will be nice\"?",
+        "options": [
+          "le rendez-vous",
+          "ce week-end",
+          "il va faire beau",
+          "tu peux venir"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w36"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w37",
+        "type": "mc",
+        "prompt": "What does \"il va faire froid\" mean?",
+        "speak": "il va faire froid",
+        "options": [
+          "appointment",
+          "it will be cold",
+          "at half past 8",
+          "it is going to snow"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w37"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w38",
+        "type": "mc",
+        "prompt": "How do you say \"it will be hot\"?",
+        "options": [
+          "ce soir",
+          "il va faire chaud",
+          "le mois prochain",
+          "à quelle heure"
+        ],
+        "answer": 1,
+        "wordId": "fr-a2u10-w38"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w39",
+        "type": "mc",
+        "prompt": "What does \"il y aura du soleil\" mean?",
+        "speak": "il y aura du soleil",
+        "options": [
+          "they are going to",
+          "it will be windy",
+          "it will be sunny",
+          "the weather will be nice"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w39"
+      },
+      {
+        "id": "fr-a2-u10-cp-fr-a2u10-w40",
+        "type": "mc",
+        "prompt": "How do you say \"it will be windy\"?",
+        "options": [
+          "il va faire beau",
+          "tu veux venir",
+          "il y aura du vent",
+          "dans deux jours"
+        ],
+        "answer": 2,
+        "wordId": "fr-a2u10-w40"
+      },
+      {
+        "id": "fr-a2-u10-cp-l1-s1",
+        "type": "translate",
+        "prompt": "I am going to eat at the restaurant",
+        "answer": [
+          "Je",
+          "vais",
+          "manger",
+          "au",
+          "restaurant"
+        ],
+        "bank": [
+          "ai",
+          "manger",
+          "au",
+          "vas",
+          "restaurant",
+          "Je",
+          "vais"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l1-s2",
+        "type": "translate",
+        "prompt": "We are going to take the train",
+        "answer": [
+          "Nous",
+          "allons",
+          "prendre",
+          "le",
+          "train"
+        ],
+        "bank": [
+          "partir",
+          "vont",
+          "prendre",
+          "Nous",
+          "allons",
+          "le",
+          "train"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l1-s3",
+        "type": "translate",
+        "prompt": "You are going to buy bread",
+        "answer": [
+          "Tu",
+          "vas",
+          "acheter",
+          "du",
+          "pain"
+        ],
+        "bank": [
+          "pain",
+          "acheter",
+          "Tu",
+          "ai",
+          "vas",
+          "vais",
+          "du"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l2-s1",
+        "type": "translate",
+        "prompt": "I am leaving next week",
+        "answer": [
+          "Je",
+          "pars",
+          "la",
+          "semaine",
+          "prochaine"
+        ],
+        "bank": [
+          "prochaine",
+          "la",
+          "pars",
+          "Je",
+          "semaine",
+          "dernière",
+          "hier"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l2-s2",
+        "type": "translate",
+        "prompt": "Tomorrow I am going to see my mother",
+        "answer": [
+          "Demain",
+          "je",
+          "vais",
+          "voir",
+          "ma",
+          "mère"
+        ],
+        "bank": [
+          "je",
+          "hier",
+          "ma",
+          "Demain",
+          "vais",
+          "vu",
+          "mère",
+          "voir"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l2-s3",
+        "type": "translate",
+        "prompt": "The train arrives in 2 days",
+        "answer": [
+          "Le",
+          "train",
+          "arrive",
+          "dans",
+          "deux",
+          "jours"
+        ],
+        "bank": [
+          "dans",
+          "deux",
+          "bientôt",
+          "Le",
+          "train",
+          "jours",
+          "arrive",
+          "hier"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l3-s1",
+        "type": "translate",
+        "prompt": "Do you want to come to the park",
+        "answer": [
+          "Tu",
+          "veux",
+          "venir",
+          "au",
+          "parc"
+        ],
+        "bank": [
+          "parc",
+          "venir",
+          "au",
+          "viens",
+          "veux",
+          "peux",
+          "Tu"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l3-s2",
+        "type": "translate",
+        "prompt": "Good idea, I am free tonight",
+        "answer": [
+          "Bonne",
+          "idée",
+          "je",
+          "suis",
+          "libre",
+          "ce",
+          "soir"
+        ],
+        "bank": [
+          "Bonne",
+          "occupé",
+          "idée",
+          "libre",
+          "demain",
+          "suis",
+          "soir",
+          "ce",
+          "je"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l3-s3",
+        "type": "translate",
+        "prompt": "Sorry, I can't tonight",
+        "answer": [
+          "Désolé",
+          "je",
+          "ne",
+          "peux",
+          "pas",
+          "ce",
+          "soir"
+        ],
+        "bank": [
+          "demain",
+          "peux",
+          "veux",
+          "ne",
+          "Désolé",
+          "pas",
+          "je",
+          "ce",
+          "soir"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l4-s1",
+        "type": "translate",
+        "prompt": "I have an appointment at 2 o'clock",
+        "answer": [
+          "J'ai",
+          "un",
+          "rendez-vous",
+          "à",
+          "deux",
+          "heures"
+        ],
+        "bank": [
+          "J'ai",
+          "midi",
+          "vers",
+          "un",
+          "rendez-vous",
+          "à",
+          "heures",
+          "deux"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l4-s2",
+        "type": "translate",
+        "prompt": "What time shall we meet",
+        "answer": [
+          "À",
+          "quelle",
+          "heure",
+          "on",
+          "se",
+          "retrouve"
+        ],
+        "bank": [
+          "heure",
+          "À",
+          "retrouve",
+          "quelle",
+          "se",
+          "midi",
+          "demain",
+          "on"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l4-s3",
+        "type": "translate",
+        "prompt": "I am late, sorry",
+        "answer": [
+          "Je",
+          "suis",
+          "en",
+          "retard",
+          "désolé"
+        ],
+        "bank": [
+          "retard",
+          "tôt",
+          "suis",
+          "ai",
+          "Je",
+          "désolé",
+          "en"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l5-s1",
+        "type": "translate",
+        "prompt": "Tomorrow it is going to rain",
+        "answer": [
+          "Demain",
+          "il",
+          "va",
+          "pleuvoir"
+        ],
+        "bank": [
+          "pleuvoir",
+          "il",
+          "neiger",
+          "Demain",
+          "hier",
+          "va"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l5-s2",
+        "type": "translate",
+        "prompt": "It will be nice this weekend",
+        "answer": [
+          "Ce",
+          "week-end",
+          "il",
+          "va",
+          "faire",
+          "beau"
+        ],
+        "bank": [
+          "chaud",
+          "faire",
+          "Ce",
+          "beau",
+          "va",
+          "froid",
+          "il",
+          "week-end"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-l5-s3",
+        "type": "translate",
+        "prompt": "It is going to snow next week",
+        "answer": [
+          "Il",
+          "va",
+          "neiger",
+          "la",
+          "semaine",
+          "prochaine"
+        ],
+        "bank": [
+          "va",
+          "pleuvoir",
+          "neiger",
+          "la",
+          "hier",
+          "semaine",
+          "prochaine",
+          "Il"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "fr-a2-u10-cp-m1",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u10-w8",
+            "target": "je vais partir",
+            "english": "I am going to leave"
+          },
+          {
+            "wordId": "fr-a2u10-w1",
+            "target": "je vais",
+            "english": "I am going to"
+          },
+          {
+            "wordId": "fr-a2u10-w5",
+            "target": "vous allez",
+            "english": "you are going to (polite or plural)"
+          },
+          {
+            "wordId": "fr-a2u10-w2",
+            "target": "tu vas",
+            "english": "you are going to"
+          },
+          {
+            "wordId": "fr-a2u10-w6",
+            "target": "ils vont",
+            "english": "they are going to"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u10-cp-m2",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u10-w16",
+            "target": "dans deux jours",
+            "english": "in 2 days"
+          },
+          {
+            "wordId": "fr-a2u10-w10",
+            "target": "après-demain",
+            "english": "the day after tomorrow"
+          },
+          {
+            "wordId": "fr-a2u10-w14",
+            "target": "le mois prochain",
+            "english": "next month"
+          },
+          {
+            "wordId": "fr-a2u10-w12",
+            "target": "ce week-end",
+            "english": "this weekend"
+          },
+          {
+            "wordId": "fr-a2u10-w15",
+            "target": "bientôt",
+            "english": "soon"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u10-cp-m3",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u10-w21",
+            "target": "bonne idée",
+            "english": "good idea"
+          },
+          {
+            "wordId": "fr-a2u10-w17",
+            "target": "tu veux venir",
+            "english": "do you want to come"
+          },
+          {
+            "wordId": "fr-a2u10-w22",
+            "target": "désolé",
+            "english": "sorry"
+          },
+          {
+            "wordId": "fr-a2u10-w23",
+            "target": "je ne peux pas",
+            "english": "I can't"
+          },
+          {
+            "wordId": "fr-a2u10-w20",
+            "target": "volontiers",
+            "english": "gladly"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u10-cp-m4",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u10-w27",
+            "target": "vers midi",
+            "english": "around noon"
+          },
+          {
+            "wordId": "fr-a2u10-w29",
+            "target": "à deux heures",
+            "english": "at 2 o'clock"
+          },
+          {
+            "wordId": "fr-a2u10-w32",
+            "target": "on se retrouve",
+            "english": "let's meet"
+          },
+          {
+            "wordId": "fr-a2u10-w26",
+            "target": "à quelle heure",
+            "english": "at what time"
+          },
+          {
+            "wordId": "fr-a2u10-w31",
+            "target": "je suis en retard",
+            "english": "I am late"
+          }
+        ]
+      },
+      {
+        "id": "fr-a2-u10-cp-m5",
+        "type": "match",
+        "prompt": "Match each pair",
+        "pairs": [
+          {
+            "wordId": "fr-a2u10-w33",
+            "target": "la météo",
+            "english": "the weather forecast"
+          },
+          {
+            "wordId": "fr-a2u10-w35",
+            "target": "il va neiger",
+            "english": "it is going to snow"
+          },
+          {
+            "wordId": "fr-a2u10-w34",
+            "target": "il va pleuvoir",
+            "english": "it is going to rain"
+          },
+          {
+            "wordId": "fr-a2u10-w38",
+            "target": "il va faire chaud",
+            "english": "it will be hot"
+          },
+          {
+            "wordId": "fr-a2u10-w36",
+            "target": "il va faire beau",
+            "english": "the weather will be nice"
+          }
+        ]
+      }
+    ],
+    "draw": 20
+  }
+}

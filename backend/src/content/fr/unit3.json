@@ -1,15 +1,15 @@
 {
   "lang": "fr",
   "unit": 3,
-  "level": "A1",
+  "level": "A0",
   "title": "About me",
   "blurb": "Talk about yourself, your family and where you are from.",
   "speechLang": "fr-FR",
   "lessons": [
     {
       "id": "fr-a1-u3-l1",
-      "title": "I, you, he, she, part 1",
-      "theme": "i, you, he, she",
+      "title": "Pronouns, part 1",
+      "theme": "pronouns",
       "exercises": [
         {
           "id": "fr-a1u3-w1-te",
@@ -28,7 +28,7 @@
         {
           "id": "fr-a1u3-w2-et",
           "type": "mc",
-          "prompt": "How do you say \"you (one friend)\"?",
+          "prompt": "How do you say \"you (informal)\"?",
           "options": [
             "vous",
             "tu",
@@ -41,7 +41,7 @@
         {
           "id": "fr-a1-u3-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w1",
@@ -51,7 +51,7 @@
             {
               "wordId": "fr-a1u3-w2",
               "target": "tu",
-              "english": "you (one friend)"
+              "english": "you (informal)"
             },
             {
               "wordId": "fr-a1u3-w3",
@@ -118,7 +118,7 @@
         },
         {
           "target": "tu",
-          "english": "you (one friend)"
+          "english": "you (informal)"
         },
         {
           "target": "il",
@@ -132,8 +132,8 @@
     },
     {
       "id": "fr-a1-u3-l2",
-      "title": "I, you, he, she, part 2",
-      "theme": "i, you, he, she",
+      "title": "Pronouns, part 2",
+      "theme": "pronouns",
       "exercises": [
         {
           "id": "fr-a1u3-w5-te",
@@ -143,7 +143,7 @@
           "options": [
             "I",
             "they (men or mixed)",
-            "you (one friend)",
+            "you (informal)",
             "we"
           ],
           "answer": 3,
@@ -152,7 +152,7 @@
         {
           "id": "fr-a1u3-w6-et",
           "type": "mc",
-          "prompt": "How do you say \"you (more than one, or polite)\"?",
+          "prompt": "How do you say \"you (polite or plural)\"?",
           "options": [
             "vous",
             "elle",
@@ -165,7 +165,7 @@
         {
           "id": "fr-a1-u3-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w5",
@@ -175,7 +175,7 @@
             {
               "wordId": "fr-a1u3-w6",
               "target": "vous",
-              "english": "you (more than one, or polite)"
+              "english": "you (polite or plural)"
             },
             {
               "wordId": "fr-a1u3-w7",
@@ -195,7 +195,7 @@
           "prompt": "What does \"ils\" mean?",
           "speak": "ils",
           "options": [
-            "you (more than one, or polite)",
+            "you (polite or plural)",
             "they (women)",
             "they (men or mixed)",
             "we"
@@ -242,7 +242,7 @@
         },
         {
           "target": "vous",
-          "english": "you (more than one, or polite)"
+          "english": "you (polite or plural)"
         },
         {
           "target": "ils",
@@ -289,7 +289,7 @@
         {
           "id": "fr-a1-u3-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w9",
@@ -413,7 +413,7 @@
         {
           "id": "fr-a1-u3-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w13",
@@ -537,7 +537,7 @@
         {
           "id": "fr-a1-u3-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w17",
@@ -663,7 +663,7 @@
         {
           "id": "fr-a1-u3-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w21",
@@ -789,7 +789,7 @@
         {
           "id": "fr-a1-u3-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w25",
@@ -913,7 +913,7 @@
         {
           "id": "fr-a1-u3-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w29",
@@ -1004,8 +1004,8 @@
     },
     {
       "id": "fr-a1-u3-l9",
-      "title": "About me, part 1",
-      "theme": "about me",
+      "title": "Saying who you are, part 1",
+      "theme": "saying who you are",
       "exercises": [
         {
           "id": "fr-a1u3-w33-te",
@@ -1037,7 +1037,7 @@
         {
           "id": "fr-a1-u3-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w33",
@@ -1128,8 +1128,8 @@
     },
     {
       "id": "fr-a1-u3-l10",
-      "title": "About me, part 2",
-      "theme": "about me",
+      "title": "Saying who you are, part 2",
+      "theme": "saying who you are",
       "exercises": [
         {
           "id": "fr-a1u3-w37-te",
@@ -1161,7 +1161,7 @@
         {
           "id": "fr-a1-u3-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u3-w37",
@@ -1263,7 +1263,7 @@
         "prompt": "What does \"je\" mean?",
         "speak": "je",
         "options": [
-          "you (more than one, or polite)",
+          "you (polite or plural)",
           "I speak",
           "France",
           "I"
@@ -1274,7 +1274,7 @@
       {
         "id": "fr-a1-u3-cp-fr-a1u3-w2",
         "type": "mc",
-        "prompt": "How do you say \"you (one friend)\"?",
+        "prompt": "How do you say \"you (informal)\"?",
         "options": [
           "la femme",
           "la famille",
@@ -1320,7 +1320,7 @@
           "people",
           "we",
           "I work",
-          "you (one friend)"
+          "you (informal)"
         ],
         "answer": 1,
         "wordId": "fr-a1u3-w5"
@@ -1328,7 +1328,7 @@
       {
         "id": "fr-a1-u3-cp-fr-a1u3-w6",
         "type": "mc",
-        "prompt": "How do you say \"you (more than one, or polite)\"?",
+        "prompt": "How do you say \"you (polite or plural)\"?",
         "options": [
           "l'ami",
           "la mère",
@@ -1668,7 +1668,7 @@
         "prompt": "What does \"l'espagnol\" mean?",
         "speak": "l'espagnol",
         "options": [
-          "you (one friend)",
+          "you (informal)",
           "friend (male)",
           "Spanish",
           "I live"
@@ -1777,7 +1777,7 @@
         "speak": "je suis étudiant",
         "options": [
           "people",
-          "you (one friend)",
+          "you (informal)",
           "Nigeria",
           "I am a student"
         ],
@@ -2078,7 +2078,7 @@
       {
         "id": "fr-a1-u3-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u3-w4",
@@ -2088,7 +2088,7 @@
           {
             "wordId": "fr-a1u3-w6",
             "target": "vous",
-            "english": "you (more than one, or polite)"
+            "english": "you (polite or plural)"
           },
           {
             "wordId": "fr-a1u3-w3",
@@ -2098,7 +2098,7 @@
           {
             "wordId": "fr-a1u3-w2",
             "target": "tu",
-            "english": "you (one friend)"
+            "english": "you (informal)"
           },
           {
             "wordId": "fr-a1u3-w7",
@@ -2110,7 +2110,7 @@
       {
         "id": "fr-a1-u3-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u3-w15",
@@ -2142,7 +2142,7 @@
       {
         "id": "fr-a1-u3-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u3-w17",
@@ -2174,7 +2174,7 @@
       {
         "id": "fr-a1-u3-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u3-w25",
@@ -2206,7 +2206,7 @@
       {
         "id": "fr-a1-u3-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u3-w33",
