@@ -1,9 +1,10 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { usePrivy } from "@privy-io/react-auth";
-import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet, X } from "lucide-react";
 import { LANGS } from "@/lib/languages";
 import { Badge, Button, Card } from "./ui";
 import { Logo } from "./Logo";
@@ -14,18 +15,29 @@ const Globe = dynamic(() => import("./Globe"), { ssr: false, loading: () => <div
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-/** The public landing page. Every call to action opens Privy sign-in. */
+/** The public landing page. The hero and the closing section offer email and wallet side by side; every other call to action opens a short chooser. */
 export function LoginScreen() {
   const { login } = usePrivy();
-  const email = () => login({ loginMethods: ["email"] });
-  const wallet = () => login({ loginMethods: ["wallet"] });
+  // Sessions are per-origin, so on the public site (apex) sign-in hands off to the app subdomain.
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const handOff = () => {
+    if (!appUrl || window.location.origin === new URL(appUrl).origin) return false;
+    if (window.location.hostname.startsWith("localhost") || window.location.hostname.endsWith(".vercel.app")) return false;
+    window.location.href = appUrl;
+    return true;
+  };
+  const email = () => { if (!handOff()) login({ loginMethods: ["email"] }); };
+  const wallet = () => { if (!handOff()) login({ loginMethods: ["wallet"] }); };
+  const [choosing, setChoosing] = useState(false);
+  const choose = () => setChoosing(true);
 
   return (
     <div className="min-h-[100dvh] bg-canvas">
-      <SiteNav onSignIn={email} />
+      <ChooseSignIn open={choosing} onClose={() => setChoosing(false)} onEmail={() => { setChoosing(false); email(); }} onWallet={() => { setChoosing(false); wallet(); }} />
+      <SiteNav onSignIn={choose} />
       <Hero onEmail={email} onWallet={wallet} />
       <HowItWorks />
-      <Languages onStart={email} />
+      <Languages onStart={choose} />
       <Rewards />
       <Faq />
       <FinalCta onEmail={email} onWallet={wallet} />
@@ -36,6 +48,36 @@ export function LoginScreen() {
         </div>
       </footer>
     </div>
+  );
+}
+
+/** Asks how to sign in before any form opens: email, or a wallet they already have. */
+function ChooseSignIn({ open, onClose, onEmail, onWallet }: { open: boolean; onClose: () => void; onEmail: () => void; onWallet: () => void }) {
+  const ref = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const d = ref.current;
+    if (!d) return;
+    if (open && !d.open) d.showModal();
+    if (!open && d.open) d.close();
+  }, [open]);
+  return (
+    <dialog ref={ref} onClose={onClose} onClick={(e) => { if (e.target === ref.current) onClose(); }} aria-labelledby="choose-title"
+      className="m-auto w-[calc(100%-2.5rem)] max-w-sm rounded-card border border-line bg-surface p-6 text-ink shadow-float backdrop:bg-ink/40">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 id="choose-title" className="font-display text-2xl font-semibold tracking-[-0.02em]">Get started</h2>
+          <p className="mt-1 text-sm text-muted">Choose how to sign in.</p>
+        </div>
+        <button type="button" onClick={onClose} aria-label="Close" className="-mr-2 -mt-2 grid h-10 w-10 shrink-0 place-items-center rounded-full text-muted transition hover:bg-sunken hover:text-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15">
+          <X size={18} aria-hidden />
+        </button>
+      </div>
+      <div className="mt-5 grid gap-3">
+        <Button size="lg" icon={Mail} block onClick={onEmail}>Continue with email</Button>
+        <Button size="lg" variant="outline" icon={Wallet} block onClick={onWallet}>Connect a wallet</Button>
+      </div>
+      <p className="mt-4 text-center text-xs text-muted">No wallet? Email creates one for you.</p>
+    </dialog>
   );
 }
 
@@ -50,10 +92,7 @@ function SiteNav({ onSignIn }: { onSignIn: () => void }) {
           <a href="#rewards" className="transition hover:text-ink">Rewards</a>
           <a href="#faq" className="transition hover:text-ink">FAQ</a>
         </nav>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" onClick={onSignIn} className="max-sm:hidden">Sign in</Button>
-          <Button size="sm" onClick={onSignIn}>Get started</Button>
-        </div>
+        <Button size="sm" onClick={onSignIn}>Get started</Button>
       </div>
     </header>
   );
@@ -76,7 +115,7 @@ function Hero({ onEmail, onWallet }: { onEmail: () => void; onWallet: () => void
               French and Spanish, from zero
             </Badge>
           </motion.div>
-          <motion.h1 {...rise(0.05)} className="mt-6 max-w-[14ch] text-balance text-display-xl text-ink">
+          <motion.h1 {...rise(0.05)} className="mt-6 max-w-[14ch] text-balance font-display text-display-xl text-ink">
             Learn a language. <span className="text-sage-700">Earn as you go.</span>
           </motion.h1>
           <motion.p {...rise(0.12)} className="mt-6 max-w-[46ch] text-pretty text-lg leading-relaxed text-ink-2">
@@ -229,7 +268,7 @@ function Rewards() {
               <div className="mt-10 rounded-card bg-white/[0.06] p-6 ring-1 ring-inset ring-white/10">
                 <p className="text-eyebrow uppercase text-white/60">Every day in LearnIt</p>
                 <ul className="mt-4 grid gap-3 text-[15px] text-white/85">
-                  {["Pass a lesson to earn a G$ reward", "Claim your daily GoodDollar UBI", "Clear a unit checkpoint for a bigger one", "Top 3 in your weekly league share a bonus"].map((t) => (
+                  {["Pass a lesson to earn a G$ reward", "Claim your daily GoodDollar UBI", "Clear a unit checkpoint for a bigger one", "Top 3 on the weekly leaderboard share a bonus"].map((t) => (
                     <li key={t} className="flex gap-3"><Sparkles size={17} className="mt-0.5 shrink-0 text-coral-300" aria-hidden />{t}</li>
                   ))}
                 </ul>
