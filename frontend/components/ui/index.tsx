@@ -17,7 +17,7 @@ type Size = "sm" | "md" | "lg";
 const VARIANT: Record<Variant, string> = {
   primary: "bg-coral-600 text-white shadow-[0_1px_0_rgb(255_255_255/0.15)_inset,0_1px_2px_rgb(15_23_42/0.12)] hover:bg-coral-700 disabled:bg-line-strong disabled:text-ink-2/70 disabled:opacity-100 disabled:shadow-none",
   secondary: "bg-ink text-white hover:bg-[#1e293b] disabled:bg-line-strong disabled:text-ink-2/70 disabled:opacity-100",
-  outline: "border border-line-strong bg-surface text-ink hover:border-ink/40 hover:bg-canvas",
+  outline: "border border-control bg-surface text-ink hover:border-ink/40 hover:bg-canvas",
   ghost: "text-ink-2 hover:bg-sunken hover:text-ink",
   subtle: "bg-sage-50 text-sage-700 hover:bg-sage-100",
   inverse: "bg-white text-ink hover:bg-white/90",
@@ -173,7 +173,7 @@ export function Notice({ tone = "info", title, children, className, action }: { 
 /* ---------- Form ---------- */
 
 export const fieldClass =
-  "w-full rounded-input border border-line-strong bg-surface px-4 py-3 text-[15px] text-ink placeholder:text-muted/70 transition duration-150 " +
+  "w-full rounded-input border border-control bg-surface px-4 py-3 text-[15px] text-ink placeholder:text-muted/70 transition duration-150 " +
   "hover:border-ink/30 focus:border-ink focus:outline-none focus:ring-4 focus:ring-ink/15 disabled:cursor-not-allowed disabled:bg-sunken disabled:opacity-70 " +
   "aria-[invalid=true]:border-danger aria-[invalid=true]:focus:ring-danger/10";
 
@@ -189,7 +189,7 @@ export function PageHeader({ eyebrow, title, description, action, className }: {
     <header className={cn("flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="min-w-0">
         {eyebrow && <p className="mb-2 text-eyebrow uppercase text-muted">{eyebrow}</p>}
-        <h1 className="text-display-md text-ink sm:text-[2rem]">{title}</h1>
+        <h1 className="font-display text-display-md text-ink sm:text-[2rem]">{title}</h1>
         {description && <p className="mt-2 max-w-[60ch] text-pretty text-[15px] leading-relaxed text-muted">{description}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}

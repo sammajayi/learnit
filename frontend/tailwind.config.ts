@@ -13,12 +13,14 @@ export default {
         ink: { DEFAULT: v("ink"), 2: v("ink-2") },
         muted: v("muted"),
         line: { DEFAULT: v("line"), strong: v("line-strong") },
+        control: v("control"),
         sage: { 50: v("sage-50"), 100: v("sage-100"), 300: v("sage-300"), 500: v("sage-500"), 600: v("sage-600"), 700: v("sage-700") },
         coral: { 50: v("coral-50"), 100: v("coral-100"), 300: v("coral-300"), 500: v("coral-500"), 600: v("coral-600"), 700: v("coral-700") },
         danger: v("danger"),
       },
       fontFamily: {
         sans: ['"Inter Variable"', "Inter", "system-ui", "sans-serif"],
+        display: ["Fraunces", "Georgia", "serif"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
       },
       fontSize: {

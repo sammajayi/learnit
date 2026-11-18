@@ -91,6 +91,25 @@ export default function Overview() {
         ) : <p className="text-sm text-muted sm:col-span-2 lg:col-span-4">Numbers are unavailable right now.</p>}
       </Card>
 
+      {s?.gUsed && (
+        <Card className="p-6">
+          <CardHeader title="G$ used" description="UBI claimed, rewards paid out and G$ staked through LearnIt, all time." />
+          <dl className="mt-5 grid gap-6 sm:grid-cols-[1.3fr_1fr_1fr_1fr] sm:items-end">
+            <div className="min-w-0">
+              <dt className="text-[13px] font-medium text-muted">Total</dt>
+              <dd className="font-mono tabular mt-1 truncate text-3xl font-semibold tracking-[-0.02em] text-ink">{s.gUsed.total !== null ? fmtGD(s.gUsed.total) : "n/a"}{s.gUsed.total !== null && <span className="ml-1 text-sm font-medium text-muted">G$</span>}</dd>
+            </div>
+            {([["UBI claimed", s.gUsed.ubi], ["Rewards paid out", s.gUsed.rewards], ["Staked", s.gUsed.staked]] as const).map(([k, v]) => (
+              <div key={k} className="min-w-0">
+                <dt className="text-[13px] font-medium text-muted">{k}</dt>
+                <dd className="font-mono tabular mt-1 truncate text-xl font-semibold tracking-[-0.02em] text-ink">{v !== null ? fmtGD(v) : "n/a"}{v !== null && <span className="ml-1 text-sm font-medium text-muted">G$</span>}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-4 text-xs text-muted">Rewards and stakes count from the current contracts. Earlier test contracts are not included.</p>
+        </Card>
+      )}
+
       <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
         <Card className="p-6">
           <CardHeader title="UBI claimed per day" description="G$ claimed through LearnIt, last 14 days (UTC)."

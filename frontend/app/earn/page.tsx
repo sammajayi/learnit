@@ -19,7 +19,7 @@ type V = { id: string; root: `0x${string}`; amount: string; nonce: string; expir
 type Data = { verified: boolean; vouchers: V[]; earnedToday: string; dailyCap: string; capRemaining: string };
 type Step = null | "checking" | "wallet" | "confirming";
 
-const REASON: Record<string, { label: string; Icon: typeof BookOpen }> = { lesson: { label: "Lesson passed", Icon: BookOpen }, checkpoint: { label: "Checkpoint passed", Icon: CheckCircle2 }, league: { label: "League bonus", Icon: Trophy } };
+const REASON: Record<string, { label: string; Icon: typeof BookOpen }> = { lesson: { label: "Lesson passed", Icon: BookOpen }, checkpoint: { label: "Checkpoint passed", Icon: CheckCircle2 }, league: { label: "Leaderboard bonus", Icon: Trophy } };
 
 function expiresIn(expiry: number) {
   const s = expiry - Math.floor(Date.now() / 1000);
@@ -108,7 +108,7 @@ export default function Earn() {
           <p className="text-sm font-semibold text-ink">{reason.label}</p>
           <p className={cn("mt-0.5 flex items-center gap-1 text-xs", soon ? "font-medium text-coral-700" : "text-muted")}><Clock size={12} aria-hidden />{st === "claimed" ? "Paid to your wallet" : st === "expired" ? "Not claimed in time" : expiresIn(v.expiry)}</p>
         </div>
-        <p className="tabular flex items-center gap-2 text-[15px] font-semibold text-ink"><GMark size={20} />{fmtGD(v.amount)}</p>
+        <p className="font-mono tabular flex items-center gap-2 text-[15px] font-semibold text-ink"><GMark size={20} />{fmtGD(v.amount)}</p>
         <div className="w-[96px] text-right">
           {st === "ready" && !isPaused && <Button size="sm" variant={ready.length > 1 ? "outline" : "primary"} disabled={busy || !live} onClick={() => claim([v])} aria-label={`Claim ${reason.label.toLowerCase()}, ${fmtGD(v.amount)} G$`}>Claim</Button>}
           {st === "ready" && isPaused && <Badge tone="outline">Paused</Badge>}
@@ -121,17 +121,17 @@ export default function Earn() {
 
   return (
     <AppShell>
-      <PageHeader eyebrow="Staking & Rewards" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly league. Claim to your wallet whenever you like, before each reward expires." action={<RewardsTabs />} />
+      <PageHeader eyebrow="Staking & Rewards" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly leaderboard. Claim to your wallet whenever you like, before each reward expires." action={<RewardsTabs />} />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Card className="grain relative overflow-hidden bg-ink p-6 text-white sm:col-span-1">
           <p className="text-sm font-medium text-white/70">Ready to claim</p>
-          <p className="tabular mt-3 text-[2.25rem] font-semibold leading-none tracking-[-0.03em]">{fmtGD(total)} <span className="text-base font-medium text-white/60">G$</span></p>
+          <p className="font-mono tabular mt-3 text-[2.25rem] font-semibold leading-none tracking-[-0.03em]">{fmtGD(total)} <span className="text-base font-medium text-white/60">G$</span></p>
           <p className="mt-2 text-sm text-white/60">{ready.length} reward{ready.length === 1 ? "" : "s"} waiting</p>
         </Card>
         <Card className="p-6 sm:col-span-2">
           <p className="text-sm font-medium text-muted">Today&apos;s limit</p>
-          <p className="tabular mt-3 text-[1.75rem] font-semibold leading-none tracking-[-0.025em] text-ink">{fmtGD(data.earnedToday)} <span className="text-sm font-medium text-muted">of {fmtGD(data.dailyCap)} G$ earned</span></p>
+          <p className="font-mono tabular mt-3 text-[1.75rem] font-semibold leading-none tracking-[-0.025em] text-ink">{fmtGD(data.earnedToday)} <span className="font-sans text-sm font-medium text-muted">of {fmtGD(data.dailyCap)} G$ earned</span></p>
           <Progress className="mt-4" value={cap > 0n ? Number((earned * 1000n) / cap) / 1000 : 0} label="Share of today's limit earned" />
           <p className="mt-3 text-xs text-muted"><span className="tabular">{fmtGD(data.capRemaining)}</span> G$ left. Resets at {resetAt}.</p>
         </Card>

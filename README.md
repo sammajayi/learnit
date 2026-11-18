@@ -14,7 +14,7 @@ Learn French or Spanish in short daily lessons and earn small G$ rewards for rea
 6. **Earn**: a pass returns a signed EIP-712 voucher you redeem on the `RewardsPool` contract (max 3 lessons a day, plus a first-time checkpoint pass). Suspicious patterns (boundary-timed perfect scores, inhuman pace) hold the reward for review instead of issuing it.
 7. **Stake** G$ on a 7-day streak challenge with `StreakVault`. Finishers get their stake back plus a share of forfeits.
 8. **Keep your streak**: miss a day and it resets, unless you've banked a freeze (earned automatically every 7-day milestone, capped at 2) to auto-cover one missed day.
-9. **League**: passing a lesson or checkpoint puts you in this week's ~30-person group. Points: 10 per distinct lesson passed, 30 per checkpoint. Top 3 in your group split a G$ bonus when the week ends.
+9. **Leaderboard**: passing a lesson or checkpoint puts you in this week's ~30-person group. Points: 10 per distinct lesson passed, 30 per checkpoint. Top 3 in your group split a G$ bonus when the week ends. An all-time board ranks everyone by the same points, with no prizes.
 
 Full product spec: [`docs/LearnIt-PRD-v0.2.docx`](docs/LearnIt-PRD-v0.2.docx).
 
@@ -90,7 +90,7 @@ If `db:push` fails with "Can't reach database server", the database is waking up
 | `SIGNER_PRIVATE_KEY` | Key that signs reward vouchers and marks finishers. Server only. Never commit it |
 | `LESSON_REWARD_G`, `CHECKPOINT_REWARD_G`, `DAILY_CAP_G` | Reward sizes in G$. Keep `DAILY_CAP_G` equal to the pool's `dailyCap` |
 | `VAULT_DEPLOY_BLOCK` | Block the `StreakVault` was deployed at (for reading Staked events) |
-| `LEAGUE_BONUS_1_G`, `LEAGUE_BONUS_2_G`, `LEAGUE_BONUS_3_G` | Weekly league bonus for rank 1, 2, 3 in a group (G$). Each is capped at `DAILY_CAP_G`, because a voucher cannot be split across days |
+| `LEAGUE_BONUS_1_G`, `LEAGUE_BONUS_2_G`, `LEAGUE_BONUS_3_G` | Weekly leaderboard bonus for rank 1, 2, 3 in a group (G$). Each is capped at `DAILY_CAP_G`, because a voucher cannot be split across days |
 | `NEXT_PUBLIC_NETWORK` | `mainnet` (default) or `testnet` (Celo Alfajores) |
 | `NEXT_PUBLIC_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Web push keys for daily reminders. Generate with `npx web-push generate-vapid-keys`. The subject is a URL you control, not a personal email |
 | `CRON_SECRET` | Random string. The reminder workflow sends it as a bearer token to `/api/cron/reminders` |

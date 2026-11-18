@@ -7,7 +7,7 @@ Last updated: 10 November 2026. The GoodBuilders season ends in about three mont
 LearnIt makes language learning more fun and keeps people accountable to their goals. It is built on GoodDollar and Celo.
 
 - **Fun first.** We are not trying to replace Duolingo and we do not model the product on it. New mechanics should feel like play, not like a copy of another app's formula.
-- **Accountability.** The product is about showing up. Streaks, weekly leagues and optional stake challenges help people keep a promise they made to themselves.
+- **Accountability.** The product is about showing up. Streaks, the weekly leaderboard and optional stake challenges help people keep a promise they made to themselves.
 - **GoodDollar at the centre.** Verification gates every reward and stake, so each person counts once. Claimers get a daily reason to come back after they claim.
 - **Honest by default.** The contracts are unaudited. Limits stay small and copy never promises more than the product does today.
 
@@ -17,7 +17,7 @@ Live in beta on Celo mainnet.
 
 - French and Spanish, eight beginner units each, graded on the server.
 - Daily UBI claim inside the app, then straight into a lesson.
-- Daily streak with banked freezes, weekly leagues, daily reminders (PWA).
+- Daily streak with banked freezes, weekly and all-time leaderboards, daily reminders (PWA).
 - Optional stake challenges of 7, 14 or 30 days on the upgradeable `StreakVault`. Our admin creates the challenges (start date, length and stake limits) and learners stake G$ on them.
 - A length-based bonus is built into the contract: the admin sets a rate per length (7, 14, 30 days, up to 50% of the finishers' stake), paid to finishers on top of the shared missed stakes from a separately funded reserve. It is not a price-based bonding curve. The rates are 0 and the reserve is empty, so no bonus is paid yet.
 - One Rewards menu with two tabs (Rewards and Stake), instead of two separate menu items.

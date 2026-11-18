@@ -1,6 +1,7 @@
 import { db } from "../db";
 import { publicClient } from "../identity";
 import { ADDR, identityAbi } from "../chain";
+import { rewardsPoolAbi, streakVaultAbi } from "../abis";
 
 type DayRow = { day: Date; claims: bigint; claimers: bigint; total: string | null };
 type TotalRow = { claims: bigint; claimers: bigint; total: string | null };
@@ -24,6 +25,38 @@ async function verifiedCount(wallets: string[]) {
 }
 
 /**
+ * G$ moved through LearnIt's own contracts since they were deployed: paid out as rewards, and staked in challenges.
+ * Read from the chain, because the database only learns a voucher was claimed when someone lists their vouchers.
+ * Each part is null when it cannot be read, so one failing read never hides the others.
+ */
+async function onChainUsed(): Promise<{ rewards: bigint | null; staked: bigint | null }> {
+  const rewards = async () => {
+    if (!ADDR.rewardsPool) return null;
+    const first = await db.voucher.findFirst({ orderBy: { createdAt: "asc" }, select: { createdAt: true } });
+    if (!first) return 0n;
+    const from = Math.floor(first.createdAt.getTime() / 86_400_000), to = Math.floor(Date.now() / 86_400_000);
+    const res = await publicClient.multicall({
+      allowFailure: true,
+      contracts: Array.from({ length: to - from + 1 }, (_, i) => ({ address: ADDR.rewardsPool, abi: rewardsPoolAbi, functionName: "spentOnDay" as const, args: [BigInt(from + i)] as const })),
+    });
+    return res.every((r) => r.status === "success") ? res.reduce((t, r) => t + (r.result as bigint), 0n) : null;
+  };
+  const staked = async () => {
+    if (!ADDR.streakVault) return null;
+    const next = await publicClient.readContract({ address: ADDR.streakVault, abi: streakVaultAbi, functionName: "nextCohortId" });
+    const ids = Array.from({ length: Math.max(0, Number(next) - 1) }, (_, i) => BigInt(i + 1));
+    if (!ids.length) return 0n;
+    const res = await publicClient.multicall({
+      allowFailure: true,
+      contracts: ids.map((id) => ({ address: ADDR.streakVault, abi: streakVaultAbi, functionName: "cohorts" as const, args: [id] as const })),
+    });
+    return res.every((r) => r.status === "success") ? res.reduce((t, r) => t + ((r.result as readonly unknown[])[4] as bigint), 0n) : null;
+  };
+  const [r, s] = await Promise.all([rewards().catch(() => null), staked().catch(() => null)]);
+  return { rewards: r, staked: s };
+}
+
+/**
  * Public, aggregate-only numbers for the dashboard (the GoodDollar team reads this). No names, wallets or per-person rows.
  * Cached for five minutes so a busy dashboard cannot hammer the database or the RPC.
  */
@@ -31,7 +64,7 @@ export async function GET() {
   try {
     if (cache && Date.now() - cache.at < TTL_MS) return json(cache.body);
 
-    const [wallets, signups7, days, all, learn, activity] = await Promise.all([
+    const [wallets, signups7, days, all, learn, activity, used] = await Promise.all([
       db.user.findMany({ select: { wallet: true } }),
       db.user.count({ where: { createdAt: { gte: new Date(Date.now() - 7 * 86_400_000) } } }),
       db.$queryRaw<DayRow[]>`
@@ -55,6 +88,7 @@ export async function GET() {
                COALESCE((SELECT COUNT(*) FROM lesson_attempts a WHERE a.passed AND date_trunc('day', a."createdAt" AT TIME ZONE 'UTC') = d.day), 0) AS passed
         FROM generate_series(date_trunc('day', NOW() AT TIME ZONE 'UTC') - ${DAYS - 1} * INTERVAL '1 day', date_trunc('day', NOW() AT TIME ZONE 'UTC'), INTERVAL '1 day') AS d(day)
         ORDER BY 1 DESC`,
+      onChainUsed(),
     ]);
     const verified = await verifiedCount(wallets.map((u) => u.wallet)).catch(() => null);
     const rows = days.map((d) => ({ day: d.day.toISOString().slice(0, 10), ...n(d) }));
@@ -65,6 +99,12 @@ export async function GET() {
       users: { total: wallets.length, newLast7d: signups7, active1d: Number(l.a1), active7d: Number(l.a7), active30d: Number(l.a30), verified },
       learning: { attempts: Number(l.attempts), passed: Number(l.passed), learnersWithPass: Number(l.learners) },
       activity: activity.map((a) => ({ day: a.day.toISOString().slice(0, 10), signups: Number(a.signups), active: Number(a.active), passed: Number(a.passed) })),
+      // Everything that has moved through LearnIt, all time: UBI claimed, rewards paid out and G$ staked (wei, as strings).
+      gUsed: (() => {
+        const ubi = BigInt(n(all[0]).total);
+        return { ubi: ubi.toString(), rewards: used.rewards?.toString() ?? null, staked: used.staked?.toString() ?? null,
+          total: used.rewards !== null && used.staked !== null ? (ubi + used.rewards + used.staked).toString() : null };
+      })(),
       ubi: { allTime: n(all[0]), today: rows.find((d) => d.day === todayKey) ?? { claims: 0, claimers: 0, total: "0" }, days: rows },
     };
     cache = { at: Date.now(), body };

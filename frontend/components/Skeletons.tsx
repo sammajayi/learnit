@@ -95,12 +95,12 @@ export function StakeSkeleton() {
   );
 }
 
-export function LeagueSkeleton() {
+export function LeaderboardSkeleton() {
   return (
     <AppShell width="narrow">
       <TitleSk />
       <div aria-hidden className="mt-8 grid grid-cols-2 gap-4"><Sk className="h-[92px] w-full rounded-card" /><Sk className="h-[92px] w-full rounded-card" /></div>
-      <Busy label="Loading the league" className={`${card} mt-6 divide-y divide-line`}>
+      <Busy label="Loading the leaderboard" className={`${card} mt-6 divide-y divide-line`}>
         {Array.from({ length: 7 }, (_, i) => (
           <div key={i} className="flex items-center gap-4 px-5 py-3.5">
             <Sk className="h-8 w-8 rounded-full" /><Sk className="h-9 w-9 rounded-full" /><Sk className={`h-4 rounded ${i % 2 ? "w-28" : "w-36"}`} /><Sk className="ml-auto h-4 w-14" />
