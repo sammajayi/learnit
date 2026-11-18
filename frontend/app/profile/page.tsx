@@ -39,7 +39,7 @@ export default function Profile() {
     <AppShell>
       <PageHeader eyebrow="Account" title="Profile and progress" />
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-8">
+      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-8">
         <div className="grid content-start gap-6">
           {/* Identity */}
           <Card className="overflow-hidden">

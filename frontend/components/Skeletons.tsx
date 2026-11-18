@@ -36,7 +36,7 @@ export function HomeSkeleton() {
   return (
     <AppShell>
       <Sk className="h-4 w-40" /><Sk className="mt-3 h-9 w-72 rounded-lg" />
-      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
+      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
         <div className="grid content-start gap-6"><Sk className="h-[320px] w-full rounded-card" /><Sk className="h-[104px] w-full rounded-card" /></div>
         <div className="grid content-start gap-6"><ClaimCardSkeleton /><Sk className="h-[168px] w-full rounded-card" /></div>
       </div>
@@ -83,7 +83,7 @@ export function StakeSkeleton() {
   return (
     <AppShell>
       <TitleSk withAction />
-      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-8">
+      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
         <Busy label="Loading the challenge" className={card}>
           <div className="flex items-center justify-between border-b border-line px-6 py-5"><div><Sk className="h-4 w-40" /><Sk className="mt-2 h-3.5 w-32" /></div><Sk className="h-6 w-24 rounded-full" /></div>
           <div className="grid grid-cols-2 border-b border-line sm:grid-cols-4">{[0, 1, 2, 3].map((i) => <div key={i} className="px-6 py-5"><Sk className="h-3.5 w-20" /><Sk className="mt-3 h-7 w-24 rounded-lg" /></div>)}</div>
@@ -153,7 +153,7 @@ export function ProfileSkeleton() {
   return (
     <AppShell>
       <Sk className="h-3 w-20" /><Sk className="mt-3 h-9 w-64 rounded-lg" />
-      <Busy label="Loading your profile" className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-8">
+      <Busy label="Loading your profile" className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-8">
         <div className="grid content-start gap-6"><Sk className="h-[260px] w-full rounded-card" /><Sk className="h-[420px] w-full rounded-card" /></div>
         <div className="grid content-start gap-6"><Sk className="h-[460px] w-full rounded-card" /><Sk className="h-[200px] w-full rounded-card" /></div>
       </Busy>

@@ -49,14 +49,14 @@ export function Home() {
       {error && <Notice tone="danger" className="mt-6" title="We couldn't load your account">Check your connection and refresh the page.</Notice>}
 
       {/* Two columns on desktop. On mobile the columns dissolve (\`contents\`) and \`order\` interleaves them: lesson, daily G$, stats, rewards. */}
-      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8">
-        <div className="grid content-start gap-6 max-lg:contents">
+      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
+        <div className="grid content-start gap-6 max-xl:contents">
           <div className="order-1">{t && me ? <ContinueCard t={t} course={me.course} /> : <ContinueSkeleton />}</div>
           <div className="order-3">{t ? <StatsRow t={t} /> : <Sk className="h-[104px] w-full rounded-card" />}</div>
           {me && <div className="order-5 empty:hidden"><InstallPrompt /></div>}
         </div>
 
-        <div className="grid content-start gap-6 max-lg:contents">
+        <div className="grid content-start gap-6 max-xl:contents">
           <div className="order-2 grid gap-6">
             {isLoading && <Sk className="h-[220px] w-full rounded-card" />}
             {me && (me.verified ? <ClaimCard /> : <VerifyCard />)}
@@ -99,7 +99,7 @@ function ContinueCard({ t, course }: { t: Today; course: string }) {
           <Progress value={unit.done / unit.total} label={`Unit ${unit.n} progress`} />
         </div>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           {allDone
             ? <ButtonLink href="/learn" size="lg" variant="secondary" iconRight={ArrowRight}>Review your path</ButtonLink>
             : <ButtonLink href={href} size="lg" iconRight={ArrowRight}>{unit.done === 0 && t.currentUnit === 1 ? "Start first lesson" : "Continue learning"}</ButtonLink>}
@@ -127,7 +127,7 @@ function StatsRow({ t }: { t: Today }) {
   const total = t.units.reduce((s, u) => s + u.total, 0);
   const unitsDone = t.units.filter((u) => u.checkpoint.state === "passed").length;
   return (
-    <Card className="grid grid-cols-2 divide-line max-sm:gap-y-6 sm:grid-cols-4 sm:divide-x">
+    <Card className="grid grid-cols-2 gap-y-6 divide-line sm:grid-cols-4 sm:gap-y-0 sm:divide-x xl:grid-cols-2 xl:gap-y-6 xl:divide-x-0 2xl:grid-cols-4 2xl:gap-y-0 2xl:divide-x">
       <Stat className="p-5 sm:px-6" icon={Flame} label="Streak" value={t.streak} unit={t.streak === 1 ? "day" : "days"} hint={t.todayDone ? "Safe for today" : "Learn today to extend"} />
       <Stat className="p-5 sm:px-6" icon={Snowflake} label="Freezes" value={t.freezesRemaining} hint="Covers a missed day" />
       <Stat className="p-5 sm:px-6" icon={BookOpen} label="Completed" value={done} unit={`/ ${total}`} hint={`${t.level} course`} />
