@@ -81,7 +81,7 @@ export default function Earn() {
       const hash = await writeContractAsync(request as never);
       setTx(hash); setStep("confirming");
       const receipt = await pc.waitForTransactionReceipt({ hash });
-      if (receipt.status !== "success") throw new Error("The transaction failed on the network.");
+      if (receipt.status !== "success") throw new Error("The transaction failed on the network. Your reward is still here; try again.");
       await qc.invalidateQueries({ queryKey: ["vouchers"] });
       setDone(`${fmtGD(batch.reduce((n, v) => n + BigInt(v.amount), 0n))} G$ is in your wallet.`);
     } catch (e) {
@@ -121,7 +121,7 @@ export default function Earn() {
 
   return (
     <AppShell>
-      <PageHeader eyebrow="Staking & Rewards" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly leaderboard. Claim to your wallet whenever you like, before each reward expires." action={<RewardsTabs />} />
+      <PageHeader eyebrow="Rewards and staking" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly leaderboard. Claim to your wallet whenever you like, before each reward expires." action={<RewardsTabs />} />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Card className="grain relative overflow-hidden bg-ink p-6 text-white sm:col-span-1">

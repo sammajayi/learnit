@@ -11,7 +11,7 @@ export type PathUnit = { n: number; title: string; blurb: string; level: string;
 // A gentle S-curve, in pixels from the centre line, so the path winds like a trail.
 const WIND = [0, 40, 64, 40, 0, -40, -64, -40];
 
-/** The whole A1 trail: a banner per unit, then a winding line of stops. */
+/** The whole A0 to A2 trail: a banner per unit, then a winding line of stops. */
 export function LearnPath({ units, currentUnit, nextLessonId }: { units: PathUnit[]; currentUnit: number; nextLessonId: string | null }) {
   const here = useRef<HTMLDivElement>(null);
   // Bring the learner's next stop into view once, so they never have to hunt for where they stopped.

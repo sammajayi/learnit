@@ -62,14 +62,14 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
       const blob = await toAvatarBlob(f);
       await api("/api/profile/avatar", { method: "POST", headers: { "content-type": "image/jpeg" }, body: blob });
       await qc.invalidateQueries({ queryKey: ["me"] });
-    } catch (e) { setErr(e instanceof Error ? e.message : "Could not upload the photo"); }
+    } catch (e) { setErr(e instanceof Error ? e.message : "We could not upload that photo. Try again, or pick a different one."); }
     finally { setPhotoBusy(false); if (file.current) file.current.value = ""; }
   }
 
   async function removePhoto() {
     setPhotoBusy(true); setErr(null);
     try { await api("/api/profile/avatar", { method: "DELETE" }); await qc.invalidateQueries({ queryKey: ["me"] }); }
-    catch (e) { setErr(e instanceof Error ? e.message : "Could not remove the photo"); }
+    catch (e) { setErr(e instanceof Error ? e.message : "We could not remove your photo. Try again in a moment."); }
     finally { setPhotoBusy(false); }
   }
 
@@ -81,7 +81,7 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
       await qc.invalidateQueries({ queryKey: ["me"] });
       setSaved(true);
       onDone?.();
-    } catch (e) { setErr(e instanceof Error ? e.message : "Could not save"); }
+    } catch (e) { setErr(e instanceof Error ? e.message : "We could not save your profile. Try again in a moment."); }
     finally { setSaving(false); }
   }
 
@@ -116,7 +116,7 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
             {check.state === "ok" && <Check size={16} strokeWidth={2.5} className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-600" aria-hidden />}
           </div>
           <p id="username-help" className="mt-1.5 min-h-5 text-[13px]" aria-live="polite">
-            {check.state === "checking" && <span className="text-muted">Checking availability...</span>}
+            {check.state === "checking" && <span className="text-muted">Checking availability…</span>}
             {check.state === "ok" && <span className="font-medium text-sage-700">Available</span>}
             {check.state === "bad" && <span className="font-medium text-danger">{check.reason}</span>}
             {check.state === "idle" && <span className="text-muted">3 to 20 letters, numbers or underscores.</span>}

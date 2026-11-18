@@ -46,7 +46,7 @@ export function ClaimCard() {
       await qc.invalidateQueries({ queryKey: ["ubi"] });
       router.push("/learn");
     } catch (e) {
-      setErr(e instanceof Error ? e.message : "Claim failed");
+      setErr(e instanceof Error ? e.message : "We could not complete your claim. Try again in a moment.");
     } finally { setBusy(false); }
   }
 
@@ -65,7 +65,7 @@ export function ClaimCard() {
             <p className="font-mono tabular mt-4 text-[2.5rem] font-semibold leading-none tracking-[-0.03em]">{fmtGD(data.claimable)} <span className="text-lg font-medium text-white/60">G$</span></p>
             <p className="mt-2 text-sm text-white/70">Ready to claim today</p>
             <Button onClick={claim} loading={busy} disabled={!sdk} size="lg" block className="mt-6">
-              {busy ? "Claiming..." : "Claim G$"}
+              {busy ? "Claiming…" : "Claim your daily G$"}
             </Button>
           </>
         ) : (
@@ -76,7 +76,7 @@ export function ClaimCard() {
           </>
         )}
         {tx && (
-          <a href={`https://celoscan.io/tx/${tx}`} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-white/60 underline-offset-2 hover:text-white hover:underline">
+          <a href={`https://celoscan.io/tx/${tx}`} target="_blank" rel="noreferrer" aria-label="View your claim on Celoscan" className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-white/60 underline-offset-2 hover:text-white hover:underline">
             {tx.slice(0, 10)}...{tx.slice(-6)} <ExternalLink size={12} aria-hidden />
           </a>
         )}

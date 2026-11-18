@@ -50,5 +50,5 @@ async function backfillEmail(userId: string, existing: Awaited<ReturnType<typeof
 export function authFail(e: unknown) {
   if (e instanceof AuthError) return Response.json({ error: e.message }, { status: 401 });
   console.error(e);
-  return Response.json({ error: "Server error" }, { status: 500 });
+  return Response.json({ error: "Something went wrong on our side. Try again in a moment." }, { status: 500 });
 }

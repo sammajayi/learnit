@@ -15,7 +15,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
   try {
     const b = Body.parse(await req.json());
     const start = readStart(b.token);
-    if (!start || start.targetId !== params.id || Date.now() - start.startedAt > 6 * 3600_000) return Response.json({ error: "Invalid token" }, { status: 400 });
+    if (!start || start.targetId !== params.id || Date.now() - start.startedAt > 6 * 3600_000) return Response.json({ error: "This lesson session has expired. Start the lesson again." }, { status: 400 });
     let pool: Exercise[] = [];
     const l = findLesson(params.id);
     if (l) pool = l.lesson.exercises;
@@ -25,8 +25,8 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     const r = gradeExercise(ex, b.answer as Answer);
     return Response.json({ correct: r.correct, answer: reveal(ex) });
   } catch (e) {
-    if (e instanceof z.ZodError) return Response.json({ error: "Bad request" }, { status: 400 });
+    if (e instanceof z.ZodError) return Response.json({ error: "We could not read that answer. Try again." }, { status: 400 });
     console.error(e);
-    return Response.json({ error: "Server error" }, { status: 500 });
+    return Response.json({ error: "Something went wrong on our side. Try again in a moment." }, { status: 500 });
   }
 }

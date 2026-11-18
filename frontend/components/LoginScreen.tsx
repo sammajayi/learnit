@@ -119,7 +119,7 @@ function Hero({ onEmail, onWallet }: { onEmail: () => void; onWallet: () => void
             Learn a language. <span className="text-sage-700">Earn as you go.</span>
           </motion.h1>
           <motion.p {...rise(0.12)} className="mt-6 max-w-[46ch] text-pretty text-lg leading-relaxed text-ink-2">
-            Ten calm minutes a day of French or Spanish. Pass a lesson, keep your streak, and receive GoodDollar (G$) rewards straight to your wallet.
+            Ten calm minutes a day of French or Spanish. Pass a lesson, keep your streak, and earn small GoodDollar (G$) rewards that you claim to your wallet.
           </motion.p>
           <motion.div {...rise(0.18)} className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button size="lg" icon={Mail} onClick={onEmail}>Start with email</Button>
@@ -191,7 +191,7 @@ function SectionIntro({ eyebrow, title, body, center = false, inverse = false }:
 const STEPS = [
   { Icon: BookOpen, title: "Learn for ten minutes", body: "Short lessons that start from zero. Meet new words, hear them spoken, then practise until they stick." },
   { Icon: Flame, title: "Show up each day", body: "Pass a lesson at 80% to keep your streak. Miss a day? A streak freeze can cover you." },
-  { Icon: Coins, title: "Earn G$ for progress", body: "Passed lessons and unit checkpoints earn GoodDollar. Claim it to your wallet whenever you like." },
+  { Icon: Coins, title: "Earn G$ for progress", body: "Passed lessons and unit checkpoints earn GoodDollar. Claim it to your wallet within 7 days." },
 ];
 
 function HowItWorks() {
@@ -223,19 +223,19 @@ function Languages({ onStart }: { onStart: () => void }) {
     <section id="languages" className="scroll-mt-20">
       <div className="mx-auto grid max-w-app items-center gap-14 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1.1fr] lg:py-28">
         <div>
-          <SectionIntro eyebrow="Courses" title="Two languages, spoken by hundreds of millions." body="Each course takes you through eight beginner units, from your first hello to everyday conversation, with a checkpoint at the end of every unit." />
+          <SectionIntro eyebrow="Courses" title="Two languages, spoken by hundreds of millions." body="Each course takes you through 10 units, from your first hello to everyday conversation, with a checkpoint at the end of every unit." />
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {LANGS.map((l) => (
               <Card key={l.code} interactive className="group p-6">
                 <div className="flex items-center justify-between">
                   <Flag code={l.code} size={40} />
-                  <Badge tone="sage">A1 · 8 units</Badge>
+                  <Badge tone="sage">A0 to A2 · 10 units</Badge>
                 </div>
                 <p lang={l.code} className="mt-6 text-2xl font-semibold tracking-[-0.02em] text-ink">{l.native}</p>
                 <p className="text-sm text-muted">{l.english}</p>
                 <p className="mt-4 text-pretty text-sm leading-relaxed text-ink-2">{l.blurb}</p>
                 <button onClick={onStart} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition group-hover:gap-2.5">
-                  Start {l.english} <ArrowRight size={15} aria-hidden />
+                  Start learning {l.english} <ArrowRight size={15} aria-hidden />
                 </button>
               </Card>
             ))}
@@ -254,7 +254,7 @@ const TRUST = [
   { Icon: ScanFace, title: "One person, one account", body: "Rewards need a quick GoodDollar face check, so they go to real learners and not bots. Lessons stay free either way." },
   { Icon: ShieldCheck, title: "Paid on-chain, on Celo", body: "Rewards are signed vouchers you claim from the LearnIt rewards pool contract. Every claim is a transaction anyone can look up." },
   { Icon: PiggyBank, title: "Stake to stay committed", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Pass a lesson every day to get your stake back. Miss a day and it is shared with the people who finished." },
-  { Icon: Lock, title: "Fair by design", body: "A daily cap on rewards, a minimum time per lesson and contracts that can be paused if anything looks wrong." },
+  { Icon: Lock, title: "Fair by design", body: "A daily limit on rewards, a minimum time per lesson and contracts that can be paused if anything looks wrong." },
 ];
 
 function Rewards() {
@@ -292,8 +292,8 @@ function Rewards() {
 
 const FAQ = [
   { q: "Do I need a crypto wallet?", a: "No. Sign in with email and LearnIt creates a wallet for you. If you already use GoodDollar, connect that wallet instead." },
-  { q: "Is it really free?", a: "Yes. Every lesson is free. Claiming rewards and staking need a one-time GoodDollar face check, and a little CELO for network fees, which you can get free in our Telegram group." },
-  { q: "How much can I earn?", a: "Each passed lesson and checkpoint earns a set G$ reward, up to a daily cap. The amounts are shown in the app before you claim, and the cap keeps things fair for everyone." },
+  { q: "Is it really free?", a: "Every lesson is free. Claiming rewards and staking need a one-time GoodDollar face check, and a little CELO for network fees, which you can get free in our Telegram group. Staking also uses your own G$." },
+  { q: "How much can I earn?", a: "Each passed lesson and checkpoint earns a set G$ reward. A daily limit applies, and the amounts are shown in the app before you claim." },
   { q: "What happens if I miss a day while staking?", a: "You lose that stake: it is shared with the people who finished. Staking is optional, and learning and rewards work without it." },
 ];
 

@@ -31,7 +31,7 @@ export async function submitAttempt(opts: {
   answers: Record<string, Answer>; exercises: (start: Start) => Exercise[];
 }) {
   const start = readStart(opts.token);
-  if (!start || start.userId !== opts.user.id || start.kind !== opts.kind || start.targetId !== opts.targetId) throw new SubmitError("Invalid start token");
+  if (!start || start.userId !== opts.user.id || start.kind !== opts.kind || start.targetId !== opts.targetId) throw new SubmitError("This lesson session has expired. Start the lesson again.");
   const now = Date.now();
   if (now - start.startedAt > 6 * 3600_000) throw new SubmitError("This attempt expired. Start again.");
   const durationS = Math.floor((now - start.startedAt) / 1000);

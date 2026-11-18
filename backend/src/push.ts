@@ -33,6 +33,6 @@ export type Reminder = { title: string; body: string; url: string; tag: string }
 /** Plain, short copy. A live streak gets the stronger nudge. */
 export function reminderFor(streak: number, language: "fr" | "es"): Reminder {
   const lang = language === "es" ? "Spanish" : "French";
-  if (streak > 0) return { title: `Keep your ${streak}-day streak`, body: `Today's ${lang} lesson takes about a minute.`, url: "/learn", tag: "daily-reminder" };
+  if (streak > 0) return { title: `Keep your ${streak}-day streak`, body: `Today's ${lang} lesson takes about ten minutes.`, url: "/learn", tag: "daily-reminder" };
   return { title: "Time for today's lesson", body: `A short ${lang} lesson, and your daily G$ is waiting.`, url: "/home", tag: "daily-reminder" };
 }
