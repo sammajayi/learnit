@@ -17,7 +17,7 @@ type Ans = number | string[] | Pair[];
 type Feedback = { correct: boolean; answer: unknown };
 type Result = { passed: boolean; accuracy: number; durationS: number; minSeconds: number; tooFast: boolean; missedWordIds: string[]; streak: number; attemptId: string; voucherPending: boolean; reviewPending: boolean };
 
-import { speak } from "@/lib/speech";
+import { preloadSpeech, speak } from "@/lib/speech";
 
 const isCheckpoint = (id: string) => id.endsWith("-cp");
 
@@ -42,7 +42,10 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   const base = isCheckpoint(id) ? `/api/checkpoints/${id}` : `/api/lessons/${id}`;
 
   useEffect(() => {
-    api<Loaded>(base).then((d) => { setData(d); setQueue(d.exercises.map((_, i) => i)); }).catch((e) => setErr(e.message));
+    api<Loaded>(base).then((d) => {
+      setData(d); setQueue(d.exercises.map((_, i) => i));
+      preloadSpeech([...(d.intro ?? []).map((w) => w.target), ...d.exercises.flatMap((e) => (e.type === "mc" && e.speak ? [e.speak] : []))], d.speechLang);
+    }).catch((e) => setErr(e.message));
   }, [api, base]);
 
   const ex = data && queue[pos] !== undefined ? data.exercises[queue[pos]] : null;

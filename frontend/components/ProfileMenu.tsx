@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAuth } from "@/lib/useAuth";
 import { BadgeCheck, Check, ChevronsUpDown, Copy, LogOut, UserRound } from "lucide-react";
 import { short } from "@learnit/backend/format";
 import { useMe } from "@/lib/useMe";
@@ -13,7 +13,7 @@ import { Sk } from "./Skeletons";
 /** Profile photo that opens a small menu: wallet, profile link and Sign out. */
 export function ProfileMenu({ placement = "down", showName = false }: { placement?: "down" | "up"; showName?: boolean }) {
   const { data: me } = useMe();
-  const { logout } = usePrivy();
+  const { logout } = useAuth();
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);

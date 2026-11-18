@@ -29,11 +29,22 @@ export async function requireUser(req: Request) {
   const hit = userCache.get(userId);
   if (hit && Date.now() - hit.at < USER_TTL_MS) return hit.user;
   const existing = await db.user.findUnique({ where: { privyUserId: userId } });
-  if (existing) { userCache.set(userId, { at: Date.now(), user: existing }); return existing; }
+  if (existing) {
+    // Users created before email capture existed have none on record; fill it in the first time we see them again.
+    const user = existing.email ? existing : await backfillEmail(userId, existing);
+    userCache.set(userId, { at: Date.now(), user });
+    return user;
+  }
   const pu = await privy().getUser(userId);
   const wallet = pu.wallet?.address ?? pu.linkedAccounts.find((a) => a.type === "wallet")?.address;
   if (!wallet) throw new AuthError("No wallet linked");
-  return db.user.create({ data: { privyUserId: userId, wallet: getAddress(wallet) } });
+  return db.user.create({ data: { privyUserId: userId, wallet: getAddress(wallet), email: pu.email?.address } });
+}
+
+async function backfillEmail(userId: string, existing: Awaited<ReturnType<typeof db.user.findUniqueOrThrow>>) {
+  const email = (await privy().getUser(userId)).email?.address;
+  if (!email) return existing;
+  return db.user.update({ where: { id: existing.id }, data: { email } });
 }
 
 export function authFail(e: unknown) {

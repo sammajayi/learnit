@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAuth } from "@/lib/useAuth";
 import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet, X } from "lucide-react";
 import { LANGS } from "@/lib/languages";
 import { Badge, Button, Card } from "./ui";
@@ -17,7 +17,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 /** The public landing page. The hero and the closing section offer email and wallet side by side; every other call to action opens a short chooser. */
 export function LoginScreen() {
-  const { login } = usePrivy();
+  const { login } = useAuth();
   // Sessions are per-origin, so on the public site (apex) sign-in hands off to the app subdomain.
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
   const handOff = () => {
