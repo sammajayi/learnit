@@ -28,7 +28,7 @@ export default function ChangeLanguage() {
       await api("/api/me", { method: "PATCH", body: JSON.stringify({ course }) });
       await Promise.all([qc.invalidateQueries({ queryKey: ["me"] }), qc.invalidateQueries({ queryKey: ["today"] })]);
       router.push("/learn");
-    } catch (e) { setErr(e instanceof Error ? e.message : "Could not switch language"); setBusy(false); }
+    } catch (e) { setErr(e instanceof Error ? e.message : "We could not switch language. Try again in a moment."); setBusy(false); }
   }
 
   if (!ok || !me) return <LanguageSkeleton />;

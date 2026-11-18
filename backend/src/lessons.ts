@@ -1,7 +1,7 @@
 import { RAW_UNITS } from "./content";
 import { UnitSchema, type Exercise, type Lang, type Unit } from "./content/schema";
 
-/** Each language's units in order (A1, 8 units). A course is just this list walked front to back. */
+/** Each language's units in order (A0 to A2; units 1 to 3 are A0, 4 to 8 A1, 9 onwards A2). A course is just this list walked front to back. */
 export const COURSES: Record<Lang, Unit[]> = {
   fr: RAW_UNITS.fr.map((u) => UnitSchema.parse(u)),
   es: RAW_UNITS.es.map((u) => UnitSchema.parse(u)),

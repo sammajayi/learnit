@@ -46,7 +46,7 @@ export function Home() {
         </p>
       </header>
 
-      {error && <Notice tone="danger" className="mt-6" title="We couldn't load your account">Check your connection and refresh the page.</Notice>}
+      {error && <Notice tone="danger" className="mt-6" title="We couldn't load your account">Check your connection, then refresh the page.</Notice>}
 
       {/* Two columns on desktop. On mobile the columns dissolve (\`contents\`) and \`order\` interleaves them: lesson, daily G$, stats, rewards. */}
       <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
@@ -130,7 +130,7 @@ function StatsRow({ t }: { t: Today }) {
     <Card className="grid grid-cols-2 gap-y-6 divide-line sm:grid-cols-4 sm:gap-y-0 sm:divide-x xl:grid-cols-2 xl:gap-y-6 xl:divide-x-0 2xl:grid-cols-4 2xl:gap-y-0 2xl:divide-x">
       <Stat className="p-5 sm:px-6" icon={Flame} label="Streak" value={t.streak} unit={t.streak === 1 ? "day" : "days"} hint={t.todayDone ? "Safe for today" : "Learn today to extend"} />
       <Stat className="p-5 sm:px-6" icon={Snowflake} label="Freezes" value={t.freezesRemaining} hint="Covers a missed day" />
-      <Stat className="p-5 sm:px-6" icon={BookOpen} label="Completed" value={done} unit={`/ ${total}`} hint={`${t.level} course`} />
+      <Stat className="p-5 sm:px-6" icon={BookOpen} label="Completed" value={done} unit={`/ ${total}`} hint="A0 to A2 course" />
       <Stat className="p-5 sm:px-6" icon={CheckCircle2} label="Units" value={unitsDone} unit={`/ ${t.units.length}`} hint="Checkpoints passed" />
     </Card>
   );
@@ -150,11 +150,11 @@ function RewardsCard({ verified }: { verified: boolean }) {
     <Card className="p-6">
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold text-ink">Lesson rewards</p>
-        <Link href="/earn" className="inline-flex items-center gap-1 text-sm font-medium text-muted transition hover:text-ink">Open <ArrowUpRight size={14} aria-hidden /></Link>
+        <Link href="/earn" className="inline-flex items-center gap-1 text-sm font-medium text-muted transition hover:text-ink">See rewards <ArrowUpRight size={14} aria-hidden /></Link>
       </div>
       <p className="font-mono tabular mt-4 text-3xl font-semibold tracking-[-0.02em] text-ink">{fmtGD(data.earnedToday)} <span className="text-base font-medium text-muted"><span className="font-mono">G$</span> <span className="font-sans">today</span></span></p>
-      <Progress className="mt-4" value={cap > 0n ? Number((earned * 1000n) / cap) / 1000 : 0} label="Share of today's reward cap earned" />
-      <p className="mt-2 text-xs text-muted tabular">{fmtGD(data.capRemaining)} G$ left under today&apos;s cap</p>
+      <Progress className="mt-4" value={cap > 0n ? Number((earned * 1000n) / cap) / 1000 : 0} label="Share of today's reward limit earned" />
+      <p className="mt-2 text-xs text-muted tabular">{fmtGD(data.capRemaining)} G$ left under today&apos;s limit</p>
       {ready.length > 0 && (
         <Link href="/earn" className="mt-5 flex items-center justify-between rounded-input bg-coral-50 px-4 py-3 text-sm font-medium text-coral-700 ring-1 ring-inset ring-coral-100 transition hover:bg-coral-100">
           <span><span className="font-mono tabular font-semibold">{fmtGD(pending)} G$</span> ready to claim</span>
@@ -167,9 +167,9 @@ function RewardsCard({ verified }: { verified: boolean }) {
 
 function QuickLinks() {
   const links = [
-    { href: "/stake", Icon: PiggyBank, title: "Streak challenge", body: "Stake G$ on a daily streak challenge" },
+    { href: "/stake", Icon: PiggyBank, title: "Stake", body: "Optional. Put G$ behind a streak challenge" },
     { href: "/leaderboard", Icon: Trophy, title: "Leaderboard", body: "Weekly top 3 share a G$ bonus" },
-    { href: "/earn", Icon: Coins, title: "Rewards", body: "Claim what you've earned" },
+    { href: "/earn", Icon: Coins, title: "Rewards", body: "Claim the G$ you have earned" },
   ];
   return (
     <Card className="divide-y divide-line">

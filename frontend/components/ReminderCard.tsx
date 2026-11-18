@@ -34,13 +34,13 @@ export function ReminderCard() {
       await api("/api/push/subscribe", { method: "POST", body: JSON.stringify({ subscription, reminderHour: hour }) });
       await qc.invalidateQueries({ queryKey: ["push"] });
     } catch (e) {
-      setErr(e instanceof PermissionDenied ? "Notifications are blocked for this site. Allow them in your browser settings, then try again." : e instanceof Error ? e.message : "Could not turn on reminders.");
+      setErr(e instanceof PermissionDenied ? "Notifications are blocked for this site. Allow them in your browser settings, then try again." : e instanceof Error ? e.message : "We could not turn on reminders. Try again in a moment.");
     } finally { setBusy(false); }
   }
   async function turnOff() {
     setBusy(true); setErr(null);
     try { await api("/api/push/subscribe", { method: "DELETE", body: JSON.stringify({}) }); await unsubscribeThisDevice(); await qc.invalidateQueries({ queryKey: ["push"] }); }
-    catch (e) { setErr(e instanceof Error ? e.message : "Could not turn off reminders."); }
+    catch (e) { setErr(e instanceof Error ? e.message : "We could not turn off reminders. Try again in a moment."); }
     finally { setBusy(false); }
   }
   async function changeHour(h: number) {

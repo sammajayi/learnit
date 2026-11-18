@@ -34,7 +34,7 @@ export function Onboarding() {
       await api("/api/me", { method: "PATCH", body: JSON.stringify({ course, timezone, onboarded: true }) });
       await qc.invalidateQueries({ queryKey: ["me"] });
       await qc.invalidateQueries({ queryKey: ["today"] });
-    } catch (e) { setErr(e instanceof Error ? e.message : "Something went wrong"); setBusy(false); }
+    } catch (e) { setErr(e instanceof Error ? e.message : "We could not save your choices. Try again in a moment."); setBusy(false); }
   }
 
   const STEPS = ["Choose a language", "Set up your profile", "How LearnIt works"];
@@ -57,7 +57,7 @@ export function Onboarding() {
             </li>
           ))}
         </ol>
-        <p className="relative max-w-[30ch] text-sm leading-relaxed text-white/55">Lessons are free for everyone. Rewards and staking unlock after a quick GoodDollar check.</p>
+        <p className="relative max-w-[30ch] text-sm leading-relaxed text-white/55">Lessons are free for everyone. Rewards and staking need a quick GoodDollar check.</p>
       </aside>
 
       <main className="mx-auto flex min-h-[100dvh] w-full max-w-xl flex-col px-5 pb-8 pt-6 sm:px-8 lg:justify-center lg:py-16">

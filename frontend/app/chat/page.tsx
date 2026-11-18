@@ -36,7 +36,7 @@ export default function Chat() {
       <PageHeader
         eyebrow={lang.english}
         title="Chat"
-        description="Talk with an AI partner in the language you're learning. It corrects your mistakes as you go and tells you why."
+        description="An AI partner to talk with in the language you're learning is coming soon. It will correct your mistakes as you go and tell you why."
         action={<Badge tone="coral" icon={Sparkles} className="px-3 py-1 text-sm">Coming soon</Badge>}
       />
 
@@ -51,7 +51,7 @@ export default function Chat() {
           <div className="flex items-center gap-3">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-sage-100 text-sage-700"><Sparkles size={16} aria-hidden /></span>
             <div>
-              <p className="text-[15px] font-semibold text-ink">Your {lang.english} partner</p>
+              <p className="text-[15px] font-semibold text-ink">Your future {lang.english} partner</p>
               <p className="text-xs text-muted">Example conversation, not live</p>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function Chat() {
                 <Mic size={26} strokeWidth={2} aria-hidden />
               </button>
               <p className="text-sm font-medium text-ink">{CHAT_ENABLED ? "Tap and speak" : "Voice opens soon"}</p>
-              <p className="max-w-[40ch] text-pretty text-xs leading-relaxed text-muted">You speak, your partner answers out loud, and any corrections appear here so you can read them.</p>
+              <p className="max-w-[40ch] text-pretty text-xs leading-relaxed text-muted">When it is live, you will speak, your partner will answer out loud, and any corrections will appear here so you can read them.</p>
             </div>
           )}
           <p id="chat-soon" className="sr-only">Chat is not available yet.</p>

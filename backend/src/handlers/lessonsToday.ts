@@ -45,7 +45,7 @@ export async function GET(req: Request) {
       };
     });
     return Response.json({
-      course, level: "A1", units, currentUnit, nextLessonId,
+      course, level: units.find((u) => u.n === currentUnit)?.level ?? "A0", units, currentUnit, nextLessonId,
       streak: st.streak, todayDone: st.todayDone, freezesRemaining: st.freezesRemaining,
     });
   } catch (e) { return authFail(e); }
