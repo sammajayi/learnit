@@ -41,35 +41,43 @@ export async function listCohortIds() {
 const CHUNK = 5_000n; // public Celo RPCs reject eth_getLogs over wide block ranges
 const seen = new Map<number, { upTo: bigint; users: Set<string> }>(); // per cohort: how far we scanned, so later calls only read the new blocks
 
-/** Distinct stakers in a cohort. Scans Staked logs in chunks from VAULT_DEPLOY_BLOCK. A failed scan returns what was found so far instead of breaking the page. */
-async function scanStakers(id: number) {
-  const v = vault(); if (!v) return new Set<string>();
+/** Distinct stakers in a cohort. Scans Staked logs in chunks from VAULT_DEPLOY_BLOCK. A failed scan returns what was found so far instead of breaking the page.
+ *  With a deadline it stops when time is up and says so (`complete: false`); the next call carries on from where it stopped. */
+async function scanStakers(id: number, deadline = Infinity) {
+  const v = vault(); if (!v) return { users: new Set<string>(), complete: true };
   const entry = seen.get(id) ?? { upTo: BigInt(process.env.VAULT_DEPLOY_BLOCK || 0) - 1n, users: new Set<string>() };
   seen.set(id, entry);
+  let complete = false;
   try {
     const latest = await publicClient.getBlockNumber();
     const ranges: [bigint, bigint][] = [];
     for (let from = entry.upTo + 1n; from <= latest; from += CHUNK) ranges.push([from, from + CHUNK - 1n > latest ? latest : from + CHUNK - 1n]);
+    complete = true;
     for (let i = 0; i < ranges.length; i += 6) { // a few chunks at a time
+      if (Date.now() > deadline) { complete = false; break; }
       const batch = ranges.slice(i, i + 6);
       const res = await Promise.all(batch.map(([fromBlock, toBlock]) => publicClient.getContractEvents({ address: v, abi: streakVaultAbi, eventName: "Staked", args: { id: BigInt(id) }, fromBlock, toBlock })));
       for (const logs of res) for (const l of logs) entry.users.add(l.args.user as string);
       entry.upTo = batch[batch.length - 1][1];
     }
   } catch (e) {
+    complete = false;
     console.error("memberCount scan failed", id, e instanceof Error ? e.message.split("\n")[0] : e);
   }
-  return entry.users;
+  return { users: entry.users, complete };
 }
 
-export async function memberCount(id: number) {
-  return (await scanStakers(id)).size;
+/** How many people are in a cohort, or null while the count is still being worked out. The scan is slow on a cold server
+ *  (it reads every block since the vault was deployed), so it gets a time budget and the page never waits for it. */
+export async function memberCount(id: number, budgetMs = 2500) {
+  const { users, complete } = await scanStakers(id, Date.now() + budgetMs);
+  return complete ? users.size : null;
 }
 
 /** The wallet addresses that have ever staked in a cohort. Nobody can withdraw before it ends, so while
  *  it is still live this is exactly who currently has a stake riding on it. */
 export async function stakersOf(id: number) {
-  return scanStakers(id);
+  return (await scanStakers(id)).users;
 }
 
 export async function myState(id: number, user: User) {

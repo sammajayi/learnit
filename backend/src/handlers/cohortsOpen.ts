@@ -6,21 +6,24 @@ export async function GET(req: Request) {
   try {
     const user = await requireUser(req);
     const now = Date.now() / 1000;
-    const out = [];
     const ids = await listCohortIds();
     const recent = new Set(ids.slice(-6));
-    for (const id of ids) {
+    // Every challenge is read at the same time. One at a time, each extra challenge added its own round trips to the wait.
+    const rows = await Promise.all(ids.map(async (id) => {
       const mine = await myState(id, user);
       const owed = !!mine && BigInt(mine.payout) > 0n; // not withdrawn yet: finished a settled challenge, or staked in a cancelled one
       // Older challenges only matter while the person still has a payout to collect, so they never drop off the list.
-      if (!recent.has(id) && !owed) continue;
+      if (!recent.has(id) && !owed) return null;
       const c = await readCohort(id);
-      if (!c) continue;
+      if (!c) return null;
       await mirrorCohort(c);
       const joinable = now < c.start + 86400;
-      if (!joinable && !(mine && BigInt(mine.stake) > 0n)) continue;
-      out.push({ ...c, joinable, members: recent.has(id) ? await memberCount(id) : 0, mine, progress: mine && BigInt(mine.stake) > 0n ? await progressFor(user, c.start, c.end) : null });
-    }
+      const staked = !!mine && BigInt(mine.stake) > 0n;
+      if (!joinable && !staked) return null;
+      const [members, progress] = await Promise.all([recent.has(id) ? memberCount(id) : Promise.resolve(0), staked ? progressFor(user, c.start, c.end) : Promise.resolve(null)]);
+      return { ...c, joinable, members, mine, progress };
+    }));
+    const out = rows.filter((r) => r !== null);
     return Response.json({ cohorts: out.reverse() });
   } catch (e) { return authFail(e); }
 }
