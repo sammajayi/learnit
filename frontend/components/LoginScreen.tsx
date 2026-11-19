@@ -20,14 +20,17 @@ export function LoginScreen() {
   const { login } = useAuth();
   // Sessions are per-origin, so on the public site (apex) sign-in hands off to the app subdomain.
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
-  const handOff = () => {
+  const handOff = (kind: "email" | "wallet") => {
     if (!appUrl || window.location.origin === new URL(appUrl).origin) return false;
     if (window.location.hostname.startsWith("localhost") || window.location.hostname.endsWith(".vercel.app")) return false;
-    window.location.href = appUrl;
+    // Say which button was pressed, so the app opens that sign-in straight away and the visitor does not have to press it twice.
+    const to = new URL(appUrl);
+    to.searchParams.set("login", kind);
+    window.location.href = to.toString();
     return true;
   };
-  const email = () => { if (!handOff()) login({ loginMethods: ["email"] }); };
-  const wallet = () => { if (!handOff()) login({ loginMethods: ["wallet"] }); };
+  const email = () => { if (!handOff("email")) login({ loginMethods: ["email"] }); };
+  const wallet = () => { if (!handOff("wallet")) login({ loginMethods: ["wallet"] }); };
   const [choosing, setChoosing] = useState(false);
   const choose = () => setChoosing(true);
 

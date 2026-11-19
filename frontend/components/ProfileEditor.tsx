@@ -12,8 +12,8 @@ import { cn } from "@/lib/cn";
 
 type Check = { state: "idle" | "checking" | "ok" | "bad"; reason?: string };
 
-/** Photo, username, display name and bio. Used on the profile page and in onboarding. */
-export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = false }: { submitLabel?: string; onDone?: () => void; allowSkipSave?: boolean }) {
+/** Photo, username, display name and bio on the profile page. `compact` is the onboarding version: photo beside the username, display name behind a link, no bio. */
+export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = false, compact = false }: { submitLabel?: string; onDone?: () => void; allowSkipSave?: boolean; compact?: boolean }) {
   const api = useApi();
   const qc = useQueryClient();
   const { data: me } = useMe();
@@ -26,6 +26,7 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [showDisplay, setShowDisplay] = useState(false);
   const loaded = useRef(false);
   const file = useRef<HTMLInputElement>(null);
 
@@ -87,6 +88,50 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
   }
 
   const shownName = displayName.trim() || (username ? `@${username}` : "You");
+  if (compact) {
+    const showName = showDisplay || !!displayName;
+    const link = "font-semibold text-ink underline decoration-line-strong underline-offset-4";
+    return (
+      <div>
+        <div className="flex items-start gap-3">
+          <button type="button" onClick={() => file.current?.click()} disabled={photoBusy} aria-label={me?.avatarUrl ? "Change profile photo" : "Add a profile photo"} className="relative shrink-0 rounded-full transition active:scale-[0.97]">
+            <Avatar src={me?.avatarUrl} name={shownName} size={52} />
+            {photoBusy && <span className="absolute inset-0 grid place-items-center rounded-full bg-ink/50 text-white"><Loader2 size={18} className="animate-spin" aria-hidden /></span>}
+          </button>
+          <input ref={file} type="file" accept="image/jpeg,image/png,image/webp,image/*" className="sr-only" tabIndex={-1} onChange={(e) => void pickPhoto(e.target.files?.[0])} />
+          <div className="min-w-0 flex-1">
+            <Label htmlFor="username" className="sr-only">Username</Label>
+            <div className="relative">
+              <span aria-hidden className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted">@</span>
+              <input id="username" value={username} onChange={(e) => setUsername(e.target.value)} autoCapitalize="none" autoCorrect="off" spellCheck={false} maxLength={20} autoComplete="off"
+                aria-describedby="username-help" aria-invalid={check.state === "bad"} className={cn(fieldClass, "pl-9")} placeholder="Username" />
+              {check.state === "checking" && <Loader2 size={16} className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-muted" aria-hidden />}
+              {check.state === "ok" && <Check size={16} strokeWidth={2.5} className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-600" aria-hidden />}
+            </div>
+            <p id="username-help" className="mt-1.5 min-h-5 text-[13px]" aria-live="polite">
+              {check.state === "checking" && <span className="text-muted">Checking availability…</span>}
+              {check.state === "ok" && <span className="font-medium text-sage-700">Available</span>}
+              {check.state === "bad" && <span className="font-medium text-danger">{check.reason}</span>}
+              {check.state === "idle" && <span className="text-muted">Required. 3 to 20 letters, numbers or underscores.</span>}
+            </p>
+          </div>
+        </div>
+        <div className="mt-1 flex flex-wrap items-baseline gap-x-4 gap-y-1 text-[13px] text-muted">
+          <span>Optional:</span>
+          <button type="button" onClick={() => file.current?.click()} disabled={photoBusy} className={link}>{me?.avatarUrl ? "Change photo" : "Add a photo"}</button>
+          {!showName && <button type="button" onClick={() => setShowDisplay(true)} className={link}>Add a display name</button>}
+        </div>
+        {showName && (
+          <div className="mt-4">
+            <Label htmlFor="display">Display name <span className="ml-1 text-xs font-normal text-muted">Optional</span></Label>
+            <input id="display" autoFocus={showDisplay && !displayName} value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={NAME_MAX} autoComplete="name" className={cn(fieldClass, "mt-2")} placeholder="How you appear to others" />
+          </div>
+        )}
+        {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
+        <Button type="button" onClick={save} loading={saving} disabled={!me || blocked || (!dirty && !allowSkipSave)} size="lg" block className="mt-5">{submitLabel}</Button>
+      </div>
+    );
+  }
   return (
     <div>
       <div className="flex items-center gap-5">
@@ -124,12 +169,12 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
           </p>
         </div>
         <div>
-          <Label htmlFor="display">Display name</Label>
+          <Label htmlFor="display">Display name <span className="ml-1 text-xs font-normal text-muted">Optional</span></Label>
           <input id="display" value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={NAME_MAX} autoComplete="name" className={cn(fieldClass, "mt-2")} placeholder="How you appear to others" />
         </div>
         <div>
           <div className="flex items-baseline justify-between">
-            <Label htmlFor="bio">About you</Label>
+            <Label htmlFor="bio">About you <span className="ml-1 text-xs font-normal text-muted">Optional</span></Label>
             <span className="tabular text-xs text-muted">{bio.length}/{BIO_MAX}</span>
           </div>
           <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} maxLength={BIO_MAX} rows={3} className={cn(fieldClass, "mt-2 resize-none")} placeholder="Why are you learning?" />
