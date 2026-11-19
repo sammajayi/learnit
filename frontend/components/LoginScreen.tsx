@@ -23,7 +23,9 @@ export function LoginScreen() {
   const handOff = () => {
     if (!appUrl || window.location.origin === new URL(appUrl).origin) return false;
     if (window.location.hostname.startsWith("localhost") || window.location.hostname.endsWith(".vercel.app")) return false;
-    window.location.href = appUrl;
+    const to = new URL(appUrl);
+    to.search = window.location.search; // keeps ?ref= and ?c= so an invite survives the move to the app
+    window.location.href = to.toString();
     return true;
   };
   const email = () => { if (!handOff()) login({ loginMethods: ["email"] }); };
