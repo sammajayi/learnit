@@ -19,6 +19,14 @@ export function validateUsername(raw: string): UsernameCheck {
   return { ok: true, value };
 }
 
+export const EMAIL_MAX = 254;
+/** A plain shape check. Real validity is proved by the first email we send. */
+export function validateEmail(raw: string): { ok: true; value: string } | { ok: false; reason: string } {
+  const value = raw.trim().toLowerCase();
+  if (value.length > EMAIL_MAX || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) return { ok: false, reason: "Enter a valid email, like name@example.com" };
+  return { ok: true, value };
+}
+
 /** Trims, collapses whitespace and strips control characters. Empty becomes null. */
 export function cleanText(raw: unknown, max: number): string | null {
   if (typeof raw !== "string") return null;

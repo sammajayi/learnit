@@ -17,6 +17,7 @@ export async function GET(req: Request) {
       username: updated.username,
       displayName: updated.displayName,
       bio: updated.bio,
+      hasEmail: Boolean(updated.email),
       avatarUrl: avatarUrlFor(updated),
       verified: v.verified && (!v.verifiedUntil || v.verifiedUntil > new Date()),
       root: v.root,
@@ -44,6 +45,7 @@ export async function PATCH(req: Request) {
     if (body.onboarded === true && body.course) {
       // Setup cannot be finished without a username, whatever the app sends.
       if (!user.username) return Response.json({ error: "Choose a username to finish setting up." }, { status: 400 });
+      if (!user.email) return Response.json({ error: "Add your email to finish setting up." }, { status: 400 });
       data.onboardedAt = new Date();
     }
     await db.user.update({ where: { id: user.id }, data });

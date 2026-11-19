@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "./useAuth";
 import { useApi } from "./useApi";
 
-export type Me = { id: string; username: string | null; displayName: string | null; bio: string | null; avatarUrl: string | null; wallet: `0x${string}`; verified: boolean; root: string | null; verifiedUntil: string | null; timezone: string; course: "fr" | "es"; gasTopupDone: boolean; onboarded: boolean };
+export type Me = { id: string; username: string | null; displayName: string | null; bio: string | null; hasEmail: boolean; avatarUrl: string | null; wallet: `0x${string}`; verified: boolean; root: string | null; verifiedUntil: string | null; timezone: string; course: "fr" | "es"; gasTopupDone: boolean; onboarded: boolean };
 
 export function useMe() {
   const api = useApi();

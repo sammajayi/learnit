@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, BookOpen, Coins, PiggyBank } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Coins, ExternalLink, PiggyBank, Send } from "lucide-react";
 import { useApi } from "@/lib/useApi";
 import { CELO_HELP_URL } from "@/lib/links";
 import { LanguageCards } from "./LanguageCards";
@@ -13,9 +13,9 @@ import { cn } from "@/lib/cn";
 import type { Course } from "@/lib/languages";
 
 const HOW: { Icon: typeof Coins; title: string; body: string }[] = [
-  { Icon: BookOpen, title: "Learn a little each day", body: "Pass at 80% to keep your streak and earn G$." },
-  { Icon: Coins, title: "Claim your daily G$", body: "Needs a quick GoodDollar face check." },
-  { Icon: PiggyBank, title: "Stake on your streak", body: "Optional. Finish a 7, 14 or 30 day challenge to get it back." },
+  { Icon: BookOpen, title: "Learn a little each day", body: "Short lessons. Pass at 80% to keep your streak and earn G$, the GoodDollar token." },
+  { Icon: Coins, title: "Claim your daily G$", body: "Verified GoodDollar users can claim free G$ every day. This needs a quick face check." },
+  { Icon: PiggyBank, title: "Stake to stay accountable", body: "Optional. Put G$ on a 7, 14 or 30 day challenge to keep yourself on track. Finish it and get your stake back." },
 ];
 
 export function Onboarding() {
@@ -62,8 +62,7 @@ export function Onboarding() {
           {step === 1 && (
             <motion.div key="s1" {...anim} className="flex flex-1 flex-col">
               <h1 className="mt-2 font-display text-[26px] leading-[1.1] tracking-[-0.03em] text-ink">Set up your profile</h1>
-              <p className="mt-2.5 text-[15px] text-muted">Choose a username. It shows on the leaderboard and in challenges.</p>
-              <div className="mt-6"><ProfileEditor compact submitLabel="Save and continue" allowSkipSave onDone={() => setStep(2)} /></div>
+              <div className="mt-4"><ProfileEditor compact submitLabel="Save and continue" allowSkipSave onDone={() => setStep(2)} /></div>
               <div className="mt-3 flex items-center justify-between">
                 <Button variant="ghost" size="sm" icon={ArrowLeft} onClick={() => setStep(0)} className="-ml-3">Back</Button>
               </div>
@@ -75,19 +74,22 @@ export function Onboarding() {
               <h1 className="mt-2 font-display text-[26px] leading-[1.1] tracking-[-0.03em] text-ink">How LearnIt works</h1>
               <ul className="mt-6 grid gap-2">
                 {HOW.map(({ Icon, title, body }) => (
-                  <li key={title} className="flex items-center gap-3 rounded-input border border-line bg-surface px-3 py-2.5">
+                  <li key={title} className="flex items-start gap-3 rounded-input border border-line bg-surface px-3.5 py-2.5">
                     <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-sage-50 text-sage-700"><Icon size={17} strokeWidth={1.85} aria-hidden /></span>
                     <span className="min-w-0"><span className="block text-sm font-semibold text-ink">{title}</span><span className="block text-pretty text-[13px] leading-snug text-muted">{body}</span></span>
                   </li>
                 ))}
               </ul>
-              {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
-              <Button onClick={finish} loading={busy} size="lg" iconRight={ArrowRight} block className="mt-6">Start learning</Button>
-              <a href={CELO_HELP_URL} target="_blank" rel="noreferrer" className="mt-4 block text-pretty text-center text-[13.5px] text-muted">
-                Optional: <span className="font-semibold text-ink underline decoration-line-strong underline-offset-4">join our Telegram group</span> for a little free CELO to cover network fees
+              <p className="mt-3 text-pretty text-[13px] text-muted">Lessons are free for everyone.</p>
+              <a href={CELO_HELP_URL} target="_blank" rel="noreferrer" className="group mt-3 flex items-center gap-3 rounded-input border border-sage-500 bg-sage-50 px-3.5 py-3 transition hover:bg-sage-100">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface text-sage-700"><Send size={17} strokeWidth={1.85} aria-hidden /></span>
+                <span className="min-w-0 flex-1"><span className="block text-sm font-semibold text-ink">Join our Telegram group</span><span className="block text-pretty text-[13px] leading-snug text-ink-2">Optional. Get the free CELO that pays network fees for claiming and staking, and meet other learners.</span></span>
+                <ExternalLink size={15} aria-hidden className="shrink-0 text-muted" />
               </a>
-              <div className="mt-3">
-                <Button variant="ghost" size="sm" icon={ArrowLeft} onClick={() => setStep(1)} disabled={busy} className="-ml-3">Back</Button>
+              {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
+              <div className="mt-4 flex items-center justify-between">
+                <Button variant="ghost" icon={ArrowLeft} onClick={() => setStep(1)} disabled={busy} className="-ml-3">Back</Button>
+                <Button onClick={finish} loading={busy} size="lg" iconRight={ArrowRight}>Start learning</Button>
               </div>
             </motion.div>
           )}
