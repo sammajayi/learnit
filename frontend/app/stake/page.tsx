@@ -210,8 +210,8 @@ export default function Stake() {
 
       {isPaused && <Notice tone="paused" className="mt-6" title="Staking is paused">Your stake is safe. It will resume soon.</Notice>}
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
-        <div className="grid content-start gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6">
           {!c && <EmptyState icon={CalendarDays} title="No open challenge">Check back soon.</EmptyState>}
 
           {owedOlder.length > 0 && (

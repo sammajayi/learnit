@@ -39,8 +39,8 @@ export default function Profile() {
     <AppShell>
       <PageHeader eyebrow="Account" title="Profile and progress" />
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-8">
-        <div className="grid content-start gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-8">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6">
           {/* Identity */}
           <Card className="overflow-hidden">
             <div aria-hidden className="h-20 bg-gradient-to-r from-sage-100 via-sage-50 to-coral-50" />
@@ -97,7 +97,7 @@ export default function Profile() {
           </Card>
         </div>
 
-        <div className="grid content-start gap-6">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6">
           <Card className="p-6">
             <CardHeader title="Edit profile" description="How you appear on the leaderboard." className="mb-6" />
             <ProfileEditor />
