@@ -24,6 +24,8 @@ export const ADDR = {
   ubiScheme: env(process.env.NEXT_PUBLIC_UBI_SCHEME_ADDRESS, IS_TESTNET ? "" : "0x43d72Ff17701B2DA814620735C39C620Ce0ea4A1") as `0x${string}`,
 };
 export const RPC_URL = env(process.env.NEXT_PUBLIC_CELO_RPC_URL, IS_TESTNET ? "https://alfajores-forno.celo-testnet.org" : "https://forno.celo.org");
+/** Other public Celo endpoints to try, in order, when the main one stalls or errors. Mainnet only. The main RPC is still first. */
+export const RPC_FALLBACK_URLS: string[] = IS_TESTNET ? [] : ["https://rpc.ankr.com/celo", "https://celo.drpc.org", "https://celo-json-rpc.stakely.io"];
 
 export const identityAbi = [
   { type: "function", name: "isWhitelisted", stateMutability: "view", inputs: [{ name: "account", type: "address" }], outputs: [{ type: "bool" }] },

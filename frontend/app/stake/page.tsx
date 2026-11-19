@@ -87,6 +87,7 @@ export default function Stake() {
     !live ? "Staking is not live yet."
     : !me?.verified ? "Staking needs a GoodDollar face check."
     : expiresBeforeEnd ? `Your verification expires ${new Date(verifiedUntilSec! * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" })}, before this challenge ends. Renew it to join.`
+    : address && me?.wallet && address.toLowerCase() !== me.wallet.toLowerCase() ? `Connect the wallet you signed in with (${me.wallet.slice(0, 6)}…${me.wallet.slice(-4)}) to stake. A stake from another wallet would not show on your account.`
     : null;
 
   async function run(fn: () => Promise<void>) {
