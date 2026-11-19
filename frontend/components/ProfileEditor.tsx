@@ -124,12 +124,12 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
           </p>
         </div>
         <div>
-          <Label htmlFor="display">Display name</Label>
+          <Label htmlFor="display">Display name <span className="ml-1 text-xs font-normal text-muted">Optional</span></Label>
           <input id="display" value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={NAME_MAX} autoComplete="name" className={cn(fieldClass, "mt-2")} placeholder="How you appear to others" />
         </div>
         <div>
           <div className="flex items-baseline justify-between">
-            <Label htmlFor="bio">About you</Label>
+            <Label htmlFor="bio">About you <span className="ml-1 text-xs font-normal text-muted">Optional</span></Label>
             <span className="tabular text-xs text-muted">{bio.length}/{BIO_MAX}</span>
           </div>
           <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} maxLength={BIO_MAX} rows={3} className={cn(fieldClass, "mt-2 resize-none")} placeholder="Why are you learning?" />

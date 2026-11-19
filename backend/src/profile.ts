@@ -15,7 +15,7 @@ export function validateUsername(raw: string): UsernameCheck {
   if (value.length > USERNAME_MAX) return { ok: false, reason: `Use ${USERNAME_MAX} characters or fewer` };
   if (!/^[a-z]/.test(value)) return { ok: false, reason: "Start with a letter" };
   if (!/^[a-z0-9_]+$/.test(value)) return { ok: false, reason: "Use only letters, numbers and underscores" };
-  if (RESERVED.has(value)) return { ok: false, reason: "That name is reserved" };
+  if (RESERVED.has(value)) return { ok: false, reason: "That username is not available" };
   return { ok: true, value };
 }
 

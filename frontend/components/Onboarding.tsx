@@ -13,9 +13,9 @@ import { cn } from "@/lib/cn";
 import type { Course } from "@/lib/languages";
 
 const HOW: { Icon: typeof Coins; title: string; body: string }[] = [
-  { Icon: BookOpen, title: "Learn a little each day", body: "Short lessons. Pass at 80% to keep your streak and earn G$." },
-  { Icon: Coins, title: "Claim your daily G$", body: "Verified GoodDollar users claim their UBI here, then start a lesson." },
-  { Icon: PiggyBank, title: "Stake on your streak", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge and get it back when you finish." },
+  { Icon: BookOpen, title: "Learn a little each day", body: "Pass at 80% to keep your streak and earn G$, the GoodDollar token." },
+  { Icon: Coins, title: "Claim your daily G$", body: "Verified GoodDollar users can claim free G$ every day, then start a lesson." },
+  { Icon: PiggyBank, title: "Stake on your streak", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Finish and you get it back. Miss a day and you lose it." },
 ];
 
 export function Onboarding() {
@@ -58,7 +58,8 @@ export function Onboarding() {
             </li>
           ))}
         </ol>
-        <p className="relative max-w-[30ch] text-sm leading-relaxed text-white/55">Lessons are free for everyone. Rewards and staking need a quick GoodDollar check.</p>
+        {/* Said once the learner reaches the part that needs it, not on the first screen. */}
+        {step > 0 ? <p className="relative max-w-[30ch] text-sm leading-relaxed text-white/55">Lessons are free for everyone. Claiming, earning and staking need a quick GoodDollar face check.</p> : <span />}
       </aside>
 
       <main className="mx-auto flex min-h-[100dvh] w-full max-w-xl flex-col px-5 pb-8 pt-6 sm:px-8 lg:justify-center lg:py-16">
@@ -75,7 +76,7 @@ export function Onboarding() {
           {step === 0 && (
             <motion.div key="s0" {...anim} className="flex flex-1 flex-col">
               <h1 className="mt-3 font-display text-display-lg text-ink">What would you like to learn?</h1>
-              <p className="mt-3 text-[15px] text-muted">Pick one to start. You can switch any time and keep your progress.</p>
+              <p className="mt-3 text-[15px] text-muted">Pick one to start. You can switch at any time and keep your progress.</p>
               <div className="mt-8"><LanguageCards value={course} onSelect={setCourse} /></div>
               <Button onClick={() => setStep(1)} disabled={!course} size="lg" variant="secondary" iconRight={ArrowRight} className="mt-10 w-full sm:w-auto sm:self-end">Continue</Button>
             </motion.div>
@@ -106,7 +107,7 @@ export function Onboarding() {
               <p className="mt-6 text-pretty text-sm text-muted">Lessons are free for everyone. Claiming, earning and staking need a quick GoodDollar face check.</p>
               <a href={CELO_HELP_URL} target="_blank" rel="noreferrer" className="group mt-5 flex items-center gap-4 rounded-card border border-line bg-surface p-4 shadow-card transition hover:border-line-strong">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sage-50 text-sage-700"><Send size={18} strokeWidth={1.85} aria-hidden /></span>
-                <span className="min-w-0 flex-1"><span className="block text-sm font-semibold text-ink">Join our Telegram group</span><span className="block text-pretty text-sm leading-relaxed text-muted">Ask for free CELO to pay network fees, and meet other learners.</span></span>
+                <span className="min-w-0 flex-1"><span className="block text-sm font-semibold text-ink">Join our Telegram group</span><span className="block text-pretty text-sm leading-relaxed text-muted">Optional. Get a little free CELO to cover network fees for claiming and staking, and meet other learners.</span></span>
                 <ExternalLink size={15} aria-hidden className="shrink-0 text-muted transition group-hover:text-ink" />
               </a>
               {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
