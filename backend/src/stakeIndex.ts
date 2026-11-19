@@ -17,7 +17,8 @@ export async function syncStakeEvents(deadline = Infinity): Promise<boolean> {
   if (!vault) return true;
   const cursor = await db.chainCursor.findUnique({ where: { key: KEY } });
   let from = cursor ? cursor.block + 1n : BigInt(process.env.VAULT_DEPLOY_BLOCK || 0);
-  const latest = await publicClient.getBlockNumber();
+  // A few blocks behind the head: the public RPC is several servers, and one that is slightly behind rejects a range ending at the newest block ("block is out of range").
+  const latest = (await publicClient.getBlockNumber()) - 3n;
   while (from <= latest) {
     if (Date.now() > deadline) return false;
     const ranges: [bigint, bigint][] = [];
@@ -38,6 +39,13 @@ export async function syncStakeEvents(deadline = Infinity): Promise<boolean> {
     await db.chainCursor.updateMany({ where: { key: KEY, block: { lt: last } }, data: { block: last } }); // never moves backwards if another run got further
   }
   return true;
+}
+
+let inflight: Promise<boolean> | null = null;
+/** One top-up at a time. Several challenges asking for their count in the same request share it instead of each reading the same blocks. */
+export function topUpStakeEvents(budgetMs: number) {
+  inflight ??= syncStakeEvents(Date.now() + budgetMs).finally(() => { inflight = null; });
+  return inflight;
 }
 
 /** The wallets that have staked in a challenge, from what has been copied so far. */

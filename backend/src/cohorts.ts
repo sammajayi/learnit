@@ -4,7 +4,7 @@ import { publicClient } from "./identity";
 import { ADDR } from "./chain";
 import { streakVaultAbi } from "./abis";
 import { localDate } from "./streak";
-import { syncStakeEvents, indexedStakers } from "./stakeIndex";
+import { syncStakeEvents, topUpStakeEvents, indexedStakers } from "./stakeIndex";
 
 const vault = () => (ADDR.streakVault || null) as `0x${string}` | null;
 /** Seconds after a challenge ends before anyone may cancel it for lack of results. Same as the vault's RESULTS_DEADLINE. */
@@ -68,17 +68,17 @@ async function scanStakers(id: number, deadline = Infinity) {
   return { users: entry.users, complete };
 }
 
-/** How many people are in a cohort, or null while the count is still being worked out. It reads the stake_events table,
- *  topped up from the chain within a time budget, so a cold server never rescans the whole chain. If that table is not
- *  there yet it falls back to scanning the chain, with the same budget. */
-export async function memberCount(id: number, budgetMs = 2500) {
-  const deadline = Date.now() + budgetMs;
+/** How many people are in a cohort, from the stake_events table. The table is topped up from the chain in the background,
+ *  so the page never waits for the chain and the count can be a few minutes behind at worst. If the table is not there
+ *  yet it falls back to scanning the chain, with a time budget, and returns null while that is unfinished. */
+export async function memberCount(id: number, budgetMs = 800) {
   try {
-    if (!(await syncStakeEvents(deadline))) return null;
-    return (await indexedStakers(id)).size;
+    const stored = await indexedStakers(id);
+    void topUpStakeEvents(10_000).catch((e) => console.error("stake top-up failed", e instanceof Error ? e.message.split("\n")[0] : e));
+    return stored.size;
   } catch (e) {
     console.error("stake index unavailable, scanning the chain instead", e instanceof Error ? e.message.split("\n")[0] : e);
-    const { users, complete } = await scanStakers(id, deadline);
+    const { users, complete } = await scanStakers(id, Date.now() + budgetMs);
     return complete ? users.size : null;
   }
 }

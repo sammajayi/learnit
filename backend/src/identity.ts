@@ -1,7 +1,11 @@
-import { createPublicClient, http } from "viem";
-import { CHAIN, ADDR, RPC_URL, identityAbi } from "./chain";
+import { createPublicClient, fallback, http } from "viem";
+import { CHAIN, ADDR, RPC_URL, RPC_FALLBACK_URLS, identityAbi } from "./chain";
 
-export const publicClient = createPublicClient({ chain: CHAIN, transport: http(RPC_URL) });
+// The public RPC sometimes stalls. Give each endpoint 6 seconds and one retry, then move to the next, so one slow server never fails a page.
+export const publicClient = createPublicClient({
+  chain: CHAIN,
+  transport: fallback([RPC_URL, ...RPC_FALLBACK_URLS.filter((u) => u !== RPC_URL)].map((u) => http(u, { timeout: 6_000, retryCount: 1 }))),
+});
 
 const ZERO = "0x0000000000000000000000000000000000000000";
 
