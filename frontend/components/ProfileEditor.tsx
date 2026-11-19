@@ -53,7 +53,8 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
   }, [username, me?.username, api]);
 
   const dirty = !!me && (username.trim().toLowerCase() !== (me.username ?? "") || displayName.trim() !== (me.displayName ?? "") || bio.trim() !== (me.bio ?? ""));
-  const blocked = check.state === "bad" || check.state === "checking";
+  // A username is required: it is how people appear on the leaderboard and in challenges.
+  const blocked = check.state === "bad" || check.state === "checking" || !username.trim();
 
   async function pickPhoto(f: File | undefined) {
     if (!f) return;
@@ -119,7 +120,7 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
             {check.state === "checking" && <span className="text-muted">Checking availability…</span>}
             {check.state === "ok" && <span className="font-medium text-sage-700">Available</span>}
             {check.state === "bad" && <span className="font-medium text-danger">{check.reason}</span>}
-            {check.state === "idle" && <span className="text-muted">3 to 20 letters, numbers or underscores.</span>}
+            {check.state === "idle" && <span className="text-muted">Required. 3 to 20 letters, numbers or underscores.</span>}
           </p>
         </div>
         <div>

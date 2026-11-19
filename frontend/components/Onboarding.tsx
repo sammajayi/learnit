@@ -83,11 +83,10 @@ export function Onboarding() {
           {step === 1 && (
             <motion.div key="s1" {...anim} className="flex flex-1 flex-col">
               <h1 className="mt-3 font-display text-display-lg text-ink">Set up your profile</h1>
-              <p className="mt-3 text-[15px] text-muted">Add a photo and a username for the leaderboard. You can skip this and do it later.</p>
+              <p className="mt-3 text-[15px] text-muted">Choose a username. It shows on the leaderboard and in challenges. A photo is optional.</p>
               <div className="mt-8"><ProfileEditor submitLabel="Save and continue" allowSkipSave onDone={() => setStep(2)} /></div>
               <div className="mt-4 flex items-center justify-between">
                 <Button variant="ghost" size="sm" icon={ArrowLeft} onClick={() => setStep(0)} className="-ml-3">Back</Button>
-                <Button variant="ghost" size="sm" onClick={() => setStep(2)} className="-mr-3">Skip for now</Button>
               </div>
             </motion.div>
           )}
