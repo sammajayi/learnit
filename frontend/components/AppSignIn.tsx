@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
 import { Mail, Wallet } from "lucide-react";
 import { useAuth } from "@/lib/useAuth";
@@ -7,7 +8,15 @@ import { Logo } from "./Logo";
 
 /** The sign-in screen on the app subdomain. The marketing page lives on the apex domain; this is just the way in. */
 export function AppSignIn() {
-  const { login } = useAuth();
+  const { ready, authenticated, login } = useAuth();
+  // Arriving from the public site with ?login=wallet or ?login=email: open that sign-in now, so one press there is enough.
+  useEffect(() => {
+    if (!ready || authenticated) return;
+    const kind = new URLSearchParams(window.location.search).get("login");
+    if (kind !== "email" && kind !== "wallet") return;
+    window.history.replaceState(null, "", window.location.pathname); // a refresh then does not open it again
+    login({ loginMethods: [kind] });
+  }, [ready, authenticated, login]);
   const site = process.env.NEXT_PUBLIC_SITE_URL || "/";
   return (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center bg-canvas px-4 py-10">

@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, BookOpen, Check, Coins, PiggyBank } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, Coins, ExternalLink, PiggyBank, Send } from "lucide-react";
 import { useApi } from "@/lib/useApi";
+import { CELO_HELP_URL } from "@/lib/links";
 import { LanguageCards } from "./LanguageCards";
 import { ProfileEditor } from "./ProfileEditor";
 import { Logo } from "./Logo";
@@ -103,6 +104,11 @@ export function Onboarding() {
                 ))}
               </ul>
               <p className="mt-6 text-pretty text-sm text-muted">Lessons are free for everyone. Claiming, earning and staking need a quick GoodDollar face check.</p>
+              <a href={CELO_HELP_URL} target="_blank" rel="noreferrer" className="group mt-5 flex items-center gap-4 rounded-card border border-line bg-surface p-4 shadow-card transition hover:border-line-strong">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sage-50 text-sage-700"><Send size={18} strokeWidth={1.85} aria-hidden /></span>
+                <span className="min-w-0 flex-1"><span className="block text-sm font-semibold text-ink">Join our Telegram group</span><span className="block text-pretty text-sm leading-relaxed text-muted">Ask for free CELO to pay network fees, and meet other learners.</span></span>
+                <ExternalLink size={15} aria-hidden className="shrink-0 text-muted transition group-hover:text-ink" />
+              </a>
               {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
               <div className="mt-auto flex flex-col-reverse gap-3 pt-8 sm:mt-10 sm:flex-row sm:items-center sm:justify-between">
                 <Button variant="ghost" icon={ArrowLeft} onClick={() => setStep(1)} disabled={busy} className="sm:-ml-3">Back</Button>
