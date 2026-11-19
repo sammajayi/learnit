@@ -9,7 +9,7 @@ export async function GET(req: Request) {
   try { return Response.json(shape(await requireUser(req))); } catch (e) { return authFail(e); }
 }
 
-/** Saves username, display name and bio. Send only the fields you want to change; an empty string clears one. */
+/** Saves username, display name and bio. Send only the fields you want to change; an empty string clears the display name or bio, but a username is required. */
 export async function PUT(req: Request) {
   try {
     const user = await requireUser(req);
@@ -17,7 +17,7 @@ export async function PUT(req: Request) {
     const data: { username?: string | null; displayName?: string | null; bio?: string | null } = {};
 
     if (typeof body.username === "string") {
-      if (body.username.trim() === "") data.username = null;
+      if (body.username.trim() === "") return Response.json({ error: "Choose a username" }, { status: 400 });
       else {
         const v = validateUsername(body.username);
         if (!v.ok) return Response.json({ error: v.reason }, { status: 400 });
