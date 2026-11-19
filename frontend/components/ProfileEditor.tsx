@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Camera, Check, Loader2, Trash2 } from "lucide-react";
-import { validateUsername, BIO_MAX, NAME_MAX } from "@learnit/backend/profile";
+import { validateUsername, validateEmail, BIO_MAX, NAME_MAX } from "@learnit/backend/profile";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { toAvatarBlob } from "@/lib/resizeImage";
@@ -26,7 +26,7 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
-  const [showDisplay, setShowDisplay] = useState(false);
+  const [email, setEmail] = useState("");
   const loaded = useRef(false);
   const file = useRef<HTMLInputElement>(null);
 
@@ -53,7 +53,7 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
     return () => { dead = true; clearTimeout(t); };
   }, [username, me?.username, api]);
 
-  const dirty = !!me && (username.trim().toLowerCase() !== (me.username ?? "") || displayName.trim() !== (me.displayName ?? "") || bio.trim() !== (me.bio ?? ""));
+  const dirty = !!me && (email.trim() !== "" || username.trim().toLowerCase() !== (me.username ?? "") || displayName.trim() !== (me.displayName ?? "") || bio.trim() !== (me.bio ?? ""));
   // A username is required: it is how people appear on the leaderboard and in challenges.
   const blocked = check.state === "bad" || check.state === "checking" || !username.trim();
 
@@ -79,7 +79,7 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
     if (!dirty) return onDone?.();
     setSaving(true); setErr(null); setSaved(false);
     try {
-      await api("/api/profile", { method: "PUT", body: JSON.stringify({ username, displayName, bio }) });
+      await api("/api/profile", { method: "PUT", body: JSON.stringify({ username, displayName, bio, ...(compact && email.trim() ? { email } : {}) }) });
       await qc.invalidateQueries({ queryKey: ["me"] });
       setSaved(true);
       onDone?.();
@@ -89,49 +89,54 @@ export function ProfileEditor({ submitLabel = "Save", onDone, allowSkipSave = fa
 
   const shownName = displayName.trim() || (username ? `@${username}` : "You");
   if (compact) {
-    const showName = showDisplay || !!displayName;
-    const link = "font-semibold text-ink underline decoration-line-strong underline-offset-4";
+    const needEmail = !!me && !me.hasEmail;
+    const em = email.trim();
+    const emailBad = em !== "" && !validateEmail(em).ok;
+    const compactBlocked = blocked || (needEmail && !validateEmail(em).ok);
     return (
       <div>
-        <div className="flex items-start gap-3">
-          <button type="button" onClick={() => file.current?.click()} disabled={photoBusy} aria-label={me?.avatarUrl ? "Change profile photo" : "Add a profile photo"} className="relative shrink-0 rounded-full transition active:scale-[0.97]">
-            <Avatar src={me?.avatarUrl} name={shownName} size={52} />
+        <div className="flex flex-col items-center gap-1.5">
+          <button type="button" onClick={() => file.current?.click()} disabled={photoBusy} aria-label={me?.avatarUrl ? "Change profile photo, optional" : "Add a profile photo, optional"} className="relative rounded-full transition active:scale-[0.97]">
+            <Avatar src={me?.avatarUrl} name={shownName} size={56} />
             {photoBusy && <span className="absolute inset-0 grid place-items-center rounded-full bg-ink/50 text-white"><Loader2 size={18} className="animate-spin" aria-hidden /></span>}
           </button>
+          <button type="button" onClick={() => file.current?.click()} disabled={photoBusy} className="text-[12.5px] font-medium text-muted">{me?.avatarUrl ? "Change photo" : "Add a photo"}</button>
           <input ref={file} type="file" accept="image/jpeg,image/png,image/webp,image/*" className="sr-only" tabIndex={-1} onChange={(e) => void pickPhoto(e.target.files?.[0])} />
-          <div className="min-w-0 flex-1">
-            <Label htmlFor="username" className="sr-only">Username</Label>
-            <div className="relative">
-              <span aria-hidden className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted">@</span>
-              <input id="username" value={username} onChange={(e) => setUsername(e.target.value)} autoCapitalize="none" autoCorrect="off" spellCheck={false} maxLength={20} autoComplete="off"
-                aria-describedby="username-help" aria-invalid={check.state === "bad"} className={cn(fieldClass, "pl-9")} placeholder="Username" />
-              {check.state === "checking" && <Loader2 size={16} className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-muted" aria-hidden />}
-              {check.state === "ok" && <Check size={16} strokeWidth={2.5} className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-600" aria-hidden />}
-            </div>
-            <p id="username-help" className="mt-1.5 min-h-5 text-[13px]" aria-live="polite">
-              {check.state === "checking" && <span className="text-muted">Checking availability…</span>}
-              {check.state === "ok" && <span className="font-medium text-sage-700">Available</span>}
-              {check.state === "bad" && <span className="font-medium text-danger">{check.reason}</span>}
-              {check.state === "idle" && <span className="text-muted">Required. 3 to 20 letters, numbers or underscores.</span>}
-            </p>
+        </div>
+        <div className="mt-3">
+          <Label htmlFor="username">Username <span className="text-danger" aria-hidden>*</span></Label>
+          <div className="relative mt-2">
+            <span aria-hidden className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-muted">@</span>
+            <input id="username" required aria-required="true" value={username} onChange={(e) => setUsername(e.target.value)} autoCapitalize="none" autoCorrect="off" spellCheck={false} maxLength={20} autoComplete="off"
+              aria-describedby="username-help" aria-invalid={check.state === "bad"} className={cn(fieldClass, "pl-9")} placeholder="yourname" />
+            {check.state === "checking" && <Loader2 size={16} className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-muted" aria-hidden />}
+            {check.state === "ok" && <Check size={16} strokeWidth={2.5} className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-600" aria-hidden />}
           </div>
+          <p id="username-help" className="mt-1.5 min-h-5 text-[13px]" aria-live="polite">
+            {check.state === "checking" && <span className="text-muted">Checking availability…</span>}
+            {check.state === "ok" && <span className="font-medium text-sage-700">Available</span>}
+            {check.state === "bad" && <span className="font-medium text-danger">{check.reason}</span>}
+            {check.state === "idle" && <span className="text-muted">Shown on the leaderboard and in challenges. 3 to 20 letters, numbers or underscores.</span>}
+          </p>
         </div>
-        <div className="mt-1 flex flex-wrap items-baseline gap-x-4 gap-y-1 text-[13px] text-muted">
-          <span>Optional:</span>
-          <button type="button" onClick={() => file.current?.click()} disabled={photoBusy} className={link}>{me?.avatarUrl ? "Change photo" : "Add a photo"}</button>
-          {!showName && <button type="button" onClick={() => setShowDisplay(true)} className={link}>Add a display name</button>}
-        </div>
-        {showName && (
-          <div className="mt-4">
-            <Label htmlFor="display">Display name <span className="ml-1 text-xs font-normal text-muted">Optional</span></Label>
-            <input id="display" autoFocus={showDisplay && !displayName} value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={NAME_MAX} autoComplete="name" className={cn(fieldClass, "mt-2")} placeholder="How you appear to others" />
+        {needEmail && (
+          <div className="mt-3">
+            <Label htmlFor="email">Email <span className="text-danger" aria-hidden>*</span></Label>
+            <input id="email" type="email" required aria-required="true" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" autoCapitalize="none" spellCheck={false}
+              aria-describedby="email-help" aria-invalid={emailBad} className={cn(fieldClass, "mt-2")} placeholder="you@example.com" />
+            <p id="email-help" className="mt-1.5 min-h-5 text-[13px] font-medium text-danger" aria-live="polite">{emailBad ? "Enter a valid email, like name@example.com" : ""}</p>
           </div>
         )}
+        <div className="mt-2">
+          <Label htmlFor="bio" className="flex items-center gap-2">About you <span className="rounded-full bg-sunken px-2 py-px text-[11px] font-semibold uppercase tracking-wide text-muted">Optional</span></Label>
+          <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} maxLength={BIO_MAX} rows={2} className={cn(fieldClass, "mt-2 resize-none")} placeholder="Why are you learning?" />
+        </div>
         {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
-        <Button type="button" onClick={save} loading={saving} disabled={!me || blocked || (!dirty && !allowSkipSave)} size="lg" block className="mt-5">{submitLabel}</Button>
+        <Button type="button" onClick={save} loading={saving} disabled={!me || compactBlocked || (!dirty && !allowSkipSave && !needEmail)} size="lg" block className="mt-4">{submitLabel}</Button>
       </div>
     );
   }
+
   return (
     <div>
       <div className="flex items-center gap-5">

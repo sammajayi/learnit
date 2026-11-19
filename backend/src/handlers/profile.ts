@@ -1,6 +1,6 @@
 import { requireUser, authFail } from "../auth";
 import { db } from "../db";
-import { validateUsername, cleanText, avatarUrlFor, BIO_MAX, NAME_MAX } from "../profile";
+import { validateUsername, validateEmail, cleanText, avatarUrlFor, BIO_MAX, NAME_MAX } from "../profile";
 
 const shape = (u: { id: string; username: string | null; displayName: string | null; bio: string | null; hasAvatar: boolean; avatarVersion: number }) =>
   ({ username: u.username, displayName: u.displayName, bio: u.bio, avatarUrl: avatarUrlFor(u) });
@@ -13,8 +13,8 @@ export async function GET(req: Request) {
 export async function PUT(req: Request) {
   try {
     const user = await requireUser(req);
-    const body = (await req.json().catch(() => ({}))) as { username?: unknown; displayName?: unknown; bio?: unknown };
-    const data: { username?: string | null; displayName?: string | null; bio?: string | null } = {};
+    const body = (await req.json().catch(() => ({}))) as { username?: unknown; displayName?: unknown; bio?: unknown; email?: unknown };
+    const data: { username?: string | null; displayName?: string | null; bio?: string | null; email?: string } = {};
 
     if (typeof body.username === "string") {
       if (body.username.trim() === "") return Response.json({ error: "Choose a username" }, { status: 400 });
@@ -23,6 +23,12 @@ export async function PUT(req: Request) {
         if (!v.ok) return Response.json({ error: v.reason }, { status: 400 });
         data.username = v.value;
       }
+    }
+    // Used for reminders. Only set when we have none, so the sign-in provider's email is never overwritten.
+    if (typeof body.email === "string" && !user.email) {
+      const e = validateEmail(body.email);
+      if (!e.ok) return Response.json({ error: e.reason }, { status: 400 });
+      data.email = e.value;
     }
     if ("displayName" in body) data.displayName = cleanText(body.displayName, NAME_MAX);
     if ("bio" in body) data.bio = cleanText(body.bio, BIO_MAX);

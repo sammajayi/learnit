@@ -46,3 +46,9 @@ describe("display helpers", () => {
     expect(avatarUrlFor({ id: "u1", hasAvatar: false, avatarVersion: 3 })).toBeNull();
   });
 });
+
+import { validateEmail } from "../src/profile";
+describe("validateEmail", () => {
+  it("accepts a normal address and lowercases it", () => { expect(validateEmail(" Ana@Example.com ")).toEqual({ ok: true, value: "ana@example.com" }); });
+  it("rejects missing parts", () => { for (const v of ["", "ana", "ana@", "ana@example", "a b@example.com"]) expect(validateEmail(v).ok).toBe(false); });
+});
