@@ -49,21 +49,21 @@ export function Home() {
       {error && <Notice tone="danger" className="mt-6" title="We couldn't load your account">Check your connection, then refresh the page.</Notice>}
 
       {/* Two columns on desktop. On mobile the columns dissolve (\`contents\`) and \`order\` interleaves them: lesson, daily G$, stats, rewards. */}
-      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
-        <div className="grid content-start gap-6 max-xl:contents">
-          <div className="order-1">{t && me ? <ContinueCard t={t} course={me.course} /> : <ContinueSkeleton />}</div>
-          <div className="order-3">{t ? <StatsRow t={t} /> : <Sk className="h-[104px] w-full rounded-card" />}</div>
-          {me && <div className="order-5 empty:hidden"><InstallPrompt /></div>}
+      <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
+          <div className="order-1 min-w-0">{t && me ? <ContinueCard t={t} course={me.course} /> : <ContinueSkeleton />}</div>
+          <div className="order-3 min-w-0">{t ? <StatsRow t={t} /> : <Sk className="h-[104px] w-full rounded-card" />}</div>
+          {me && <div className="order-5 min-w-0 empty:hidden"><InstallPrompt /></div>}
         </div>
 
-        <div className="grid content-start gap-6 max-xl:contents">
-          <div className="order-2 grid gap-6">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
+          <div className="order-2 grid min-w-0 grid-cols-1 gap-6">
             {isLoading && <Sk className="h-[220px] w-full rounded-card" />}
             {me && (me.verified ? <ClaimCard /> : <VerifyCard />)}
             {me && me.verified && !me.gasTopupDone && <GasCard />}
           </div>
-          {me && <div className="order-4 empty:hidden"><RewardsCard verified={me.verified} /></div>}
-          <div className="order-6"><QuickLinks /></div>
+          {me && <div className="order-4 min-w-0 empty:hidden"><RewardsCard verified={me.verified} /></div>}
+          <div className="order-6 min-w-0"><QuickLinks /></div>
         </div>
       </div>
     </AppShell>
