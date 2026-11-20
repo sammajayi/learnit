@@ -39,7 +39,7 @@ export default function Overview() {
 
   // Things that need a person, most urgent first.
   const attention: { key: string; text: string; href: string }[] = [];
-  if (toFinalize.length) attention.push({ key: "fin", text: `${toFinalize.length === 1 ? `Challenge ${toFinalize[0].id} has` : `${toFinalize.length} challenges have`} ended and need finalizing.`, href: "/admin/challenges" });
+  if (toFinalize.length) attention.push({ key: "fin", text: `${toFinalize.length === 1 ? `Challenge ${toFinalize[0].id} has` : `${toFinalize.length} challenges have`} ended and need finalising.`, href: "/admin/challenges" });
   if (vaultPaused.data) attention.push({ key: "vp", text: "Staking is paused.", href: "/admin/challenges" });
   if (pool.data?.paused) attention.push({ key: "pp", text: "Reward payouts are paused.", href: "/admin/pool" });
   if (pool.data && pool.data.balance < pool.data.dailyBudget) attention.push({ key: "low", text: "The rewards pool holds less than one day's budget.", href: "/admin/pool" });
@@ -58,7 +58,7 @@ export default function Overview() {
 
   return (
     <div className="grid gap-8">
-      <PageHeader title="Overview" description="LearnIt's public performance dashboard: people, G$ claimed and on-chain activity. Totals only, no personal data." />
+      <PageHeader title="Overview" description="Public performance for LearnIt: people, G$ claimed and on-chain activity. Totals only, no personal data." />
 
       <section aria-labelledby="attention">
         <h2 id="attention" className="sr-only">Needs attention</h2>
