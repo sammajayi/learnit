@@ -10,7 +10,7 @@ import { Sk } from "@/components/ui/Sk";
 import { useAdmin } from "@/components/admin/AdminProvider";
 import { useAdminSession } from "@/components/admin/session";
 import { DataTable, type Col } from "@/components/admin/DataTable";
-import { shortAddr } from "@/components/admin/bits";
+import { fmtDuration, shortAddr } from "@/components/admin/bits";
 
 class ApiError extends Error { constructor(message: string, readonly status: number) { super(message); } }
 
@@ -34,6 +34,7 @@ const COLS: Col<AdminUserRow>[] = [
   { key: "verified", header: "GoodDollar", value: (r) => (r.verified ? 1 : 0), exportValue: (r) => (r.verified ? "verified" : "not verified"), render: (r) => (r.verified ? <Badge tone="sage">Verified</Badge> : <Badge tone="neutral">Not verified</Badge>) },
   { key: "passed", header: "Lessons passed", align: "right", value: (r) => r.lessonsPassed },
   { key: "claims", header: "UBI claims", align: "right", value: (r) => r.ubiClaims },
+  { key: "time", header: "Time learning", align: "right", value: (r) => r.learningSeconds, render: (r) => (r.learningSeconds ? fmtDuration(r.learningSeconds) : <span className="text-muted">None</span>) },
   { key: "last", header: "Last active", value: (r) => ts(r.lastActive), exportValue: (r) => r.lastActive, render: (r) => (r.lastActive ? <span title={date(r.lastActive)}>{ago(r.lastActive)}</span> : <span className="text-muted">Never</span>) },
   { key: "joined", header: "Joined", value: (r) => ts(r.joined), exportValue: (r) => r.joined, render: (r) => date(r.joined) },
   { key: "flag", header: "Flagged", value: (r) => (r.flagged ? 1 : 0), exportValue: (r) => (r.flagged ? "yes" : "no"), render: (r) => (r.flagged ? <Badge tone="coral">Flagged</Badge> : <span className="text-muted">No</span>) },
@@ -68,7 +69,7 @@ export default function Users() {
   const stats = useMemo(() => {
     const all = data?.rows ?? [];
     const week = Date.now() - 7 * DAY_MS;
-    return { verified: all.filter((r) => r.verified).length, active: all.filter((r) => (ts(r.lastActive) ?? 0) > week).length, named: all.filter((r) => r.username).length, flagged: all.filter((r) => r.flagged).length };
+    return { time: all.reduce((s, r) => s + r.learningSeconds, 0), verified: all.filter((r) => r.verified).length, active: all.filter((r) => (ts(r.lastActive) ?? 0) > week).length, named: all.filter((r) => r.username).length, flagged: all.filter((r) => r.flagged).length };
   }, [data]);
 
   return (
@@ -94,10 +95,11 @@ export default function Users() {
         </Notice>
       ) : data ? (
         <>
-          <Card className="grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-5">
             <Stat label="People" value={data.total.toLocaleString("en")} hint={data.truncated ? `Showing the newest ${data.rows.length.toLocaleString("en")}` : undefined} />
             <Stat label="Verified" value={stats.verified.toLocaleString("en")} hint="GoodDollar, as last checked" />
             <Stat label="Active this week" value={stats.active.toLocaleString("en")} hint="Attempted a lesson in 7 days" />
+            <Stat label="Time learning" value={fmtDuration(stats.time)} hint="In finished lessons, all time" />
             <Stat label="Have a username" value={stats.named.toLocaleString("en")} hint={stats.flagged ? `${stats.flagged} flagged for review` : undefined} />
           </Card>
 

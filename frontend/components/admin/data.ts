@@ -123,11 +123,11 @@ export function usePoolHistory(n = 14) {
 }
 
 export type UbiDay = { day: string; claims: number; claimers: number; total: string };
-export type ActivityDay = { day: string; signups: number; active: number; passed: number };
+export type ActivityDay = { day: string; signups: number; active: number; passed: number; /** Time in finished lessons that day, in seconds. Absent until the backend is redeployed. */ seconds?: number };
 export type PublicStats = {
   generatedAt: string;
   users: { total: number; newLast7d: number; active1d: number; active7d: number; active30d: number; verified: number | null };
-  learning: { attempts: number; passed: number; learnersWithPass: number };
+  learning: { attempts: number; passed: number; learnersWithPass: number; /** Time in finished lessons, in seconds (one attempt counts for at most 30 minutes). */ totalSeconds?: number; attemptingLearners?: number };
   activity?: ActivityDay[]; // newest first; absent until the backend is redeployed
   ubi: { allTime: Omit<UbiDay, "day">; today: Omit<UbiDay, "day">; days: UbiDay[] };
   /** All-time G$ moved through LearnIt, in wei. A part is null when it could not be read; absent until the backend is redeployed. */
