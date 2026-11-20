@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Heart } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { REGEN_MS } from "@learnit/backend/livesLogic";
-import { cn } from "@/lib/cn";
 
 /** Lives are shared by every lesson: a wrong answer costs one, and one comes back every 30 minutes. */
 export type LivesInfo = { lives: number; max: number; /** When the next life arrives (ms since epoch), or null when the bar is full. */ nextAt: number | null };
@@ -57,20 +56,6 @@ export function Hearts({ lives, max }: { lives: number; max: number }) {
       <span aria-hidden className="tabular flex items-center gap-1 text-sm font-semibold text-ink-2 sm:hidden">
         <Heart size={18} strokeWidth={2} className={lives > 0 ? "fill-coral-500 text-coral-500" : "text-line-strong"} />{lives}
       </span>
-    </div>
-  );
-}
-
-/** Hearts with a line saying how many are left and when the next one arrives. */
-export function LivesLine({ lives: snapshot, className }: { lives: LivesInfo; className?: string }) {
-  const l = useProjectedLives(snapshot) ?? snapshot;
-  const wait = useSecondsUntil(l.nextAt);
-  return (
-    <div className={cn("flex flex-wrap items-center gap-x-3 gap-y-1", className)}>
-      <Hearts lives={l.lives} max={l.max} />
-      <p className="text-sm text-muted">
-        {l.lives >= l.max ? "All lives ready" : l.lives === 0 ? `No lives left. The next one is back in ${fmtWait(wait)}.` : `${l.lives} of ${l.max} lives. Next one in ${fmtWait(wait)}.`}
-      </p>
     </div>
   );
 }

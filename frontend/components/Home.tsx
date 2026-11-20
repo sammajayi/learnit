@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Coins, Flame, Snowflake, Trophy, PiggyBank } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Coins, Trophy, PiggyBank } from "lucide-react";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { langOf } from "@/lib/languages";
@@ -13,7 +13,7 @@ import { VerifyCard } from "./VerifyCard";
 import { ClaimCard } from "./ClaimCard";
 import { GasCard } from "./GasCard";
 import { InstallPrompt } from "./InstallPrompt";
-import { LivesLine } from "./Lives";
+import { StatusChips } from "./StatusChips";
 import { Flag } from "./Flag";
 import { Sk } from "./Skeletons";
 import { Badge, ButtonLink, Card, Notice, Progress, Stat } from "./ui";
@@ -45,6 +45,7 @@ export function Home() {
         <p className="text-[15px] text-muted">
           {!t ? " " : t.todayDone ? "Today's lesson is done. Your streak is safe." : t.streak > 0 ? "One lesson today keeps your streak going." : "Your next lesson takes about 10 minutes."}
         </p>
+        <div className="mt-3">{t ? <StatusChips streak={t.streak} todayDone={t.todayDone} freezes={t.freezesRemaining} lives={t.lives} /> : <Sk className="h-10 w-60 rounded-full" />}</div>
       </header>
 
       {error && <Notice tone="danger" className="mt-6" title="We could not load your account">Check your connection, then refresh the page.</Notice>}
@@ -106,7 +107,6 @@ function ContinueCard({ t, course }: { t: Today; course: string }) {
             : <ButtonLink href={href} size="lg" iconRight={ArrowRight}>{unit.done === 0 && t.currentUnit === 1 ? "Start first lesson" : "Continue learning"}</ButtonLink>}
           {nextTitle && <p className="text-sm text-muted">Up next: <span className="font-medium text-ink-2">{nextTitle}</span></p>}
         </div>
-        <LivesLine lives={t.lives} className="mt-5" />
       </div>
     </Card>
   );
@@ -129,9 +129,7 @@ function StatsRow({ t }: { t: Today }) {
   const total = t.units.reduce((s, u) => s + u.total, 0);
   const unitsDone = t.units.filter((u) => u.checkpoint.state === "passed").length;
   return (
-    <Card className="grid grid-cols-2 gap-y-6 divide-line sm:grid-cols-4 sm:gap-y-0 sm:divide-x xl:grid-cols-2 xl:gap-y-6 xl:divide-x-0 2xl:grid-cols-4 2xl:gap-y-0 2xl:divide-x">
-      <Stat className="p-5 sm:px-6" icon={Flame} label="Streak" value={t.streak} unit={t.streak === 1 ? "day" : "days"} hint={t.todayDone ? "Safe for today" : "Learn today to extend"} />
-      <Stat className="p-5 sm:px-6" icon={Snowflake} label="Freezes" value={t.freezesRemaining} hint="Covers a missed day" />
+    <Card className="grid grid-cols-2 divide-x divide-line">
       <Stat className="p-5 sm:px-6" icon={BookOpen} label="Lessons" value={done} unit={`/ ${total}`} hint="Across the whole course" />
       <Stat className="p-5 sm:px-6" icon={CheckCircle2} label="Units" value={unitsDone} unit={`/ ${t.units.length}`} hint="Checkpoints passed" />
     </Card>
