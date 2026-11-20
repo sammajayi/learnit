@@ -416,7 +416,7 @@ function Results({ r, id, lives }: { r: Result; id: string; lives: LivesInfo | n
               </ButtonLink>
             )}
             {r.passed && !review && <StakePrompt />}
-            {r.passed && !isCheckpoint(id) && !r.rewardEligible && <Notice tone="info" action={<ButtonLink href={`/learn/${id}`} variant="outline" size="sm">Replay this lesson</ButtonLink>}>You scored {pct}%. G$ rewards and leaderboard points need 80% or more.</Notice>}
+            {r.passed && !isCheckpoint(id) && !r.rewardEligible && <Notice tone="info">You scored {pct}%. G$ rewards need 80% or more. Your points still count, and they rise with accuracy.</Notice>}
             {r.passed && !pending && !voucher && review && <Notice tone="info">Your reward is being reviewed. It will show up in Rewards once that clears.</Notice>}
             <ButtonLink href="/learn" size="lg" block variant={voucher ? "secondary" : "primary"} iconRight={ArrowRight}>{r.passed ? "Continue" : "Back to your path"}</ButtonLink>
           </div>

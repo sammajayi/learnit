@@ -2,11 +2,11 @@ import type { User } from "@prisma/client";
 import { db } from "./db";
 import { weekKey } from "./streak";
 import { nameFor, avatarUrlFor } from "./profile";
-import { PASS_ACCURACY } from "./grading";
+import { POINTS_PER_CHECKPOINT, POINTS_PER_LESSON, pointsFor } from "./points";
+
+export { POINTS_PER_CHECKPOINT, POINTS_PER_LESSON };
 
 export const GROUP_SIZE = 30;
-export const POINTS_PER_LESSON = 10;
-export const POINTS_PER_CHECKPOINT = 30;
 export const BONUS_RANKS = 3; // top 3 in a group split a bonus
 
 export const currentWeekKey = () => weekKey(new Date());
@@ -35,24 +35,25 @@ export async function ensureMembership(userId: string, key = currentWeekKey()) {
   }
 }
 
-/** Points earned this week by each of the given users: 10 per distinct lesson scored at the pass mark, 30 per distinct checkpoint passed. */
+/**
+ * Points earned this week by each of the given users. Every finished lesson counts once, at its best score this week:
+ * up to 10 points for a lesson and 30 for a checkpoint, scaled by accuracy (see points.ts).
+ */
 export async function pointsForWeek(userIds: string[], key: string): Promise<Map<string, number>> {
   if (userIds.length === 0) return new Map();
   const { start, end } = weekRange(key);
   const rows = await db.lessonAttempt.findMany({
-    where: { userId: { in: userIds }, passed: true, score: { gte: PASS_ACCURACY }, createdAt: { gte: start, lt: end } },
-    select: { userId: true, lessonId: true, kind: true },
+    where: { userId: { in: userIds }, passed: true, createdAt: { gte: start, lt: end } },
+    select: { userId: true, lessonId: true, kind: true, score: true },
   });
-  const seen = new Map<string, Set<string>>();
-  const points = new Map<string, number>();
+  const best = new Map<string, { userId: string; kind: string; score: number }>();
   for (const r of rows) {
     const k = `${r.userId}:${r.kind}:${r.lessonId}`;
-    const set = seen.get(r.userId) ?? new Set<string>();
-    seen.set(r.userId, set);
-    if (set.has(k)) continue;
-    set.add(k);
-    points.set(r.userId, (points.get(r.userId) ?? 0) + (r.kind === "checkpoint" ? POINTS_PER_CHECKPOINT : POINTS_PER_LESSON));
+    const cur = best.get(k);
+    if (!cur || r.score > cur.score) best.set(k, { userId: r.userId, kind: r.kind, score: r.score });
   }
+  const points = new Map<string, number>();
+  for (const b of best.values()) points.set(b.userId, (points.get(b.userId) ?? 0) + pointsFor(b.kind, b.score));
   for (const id of userIds) if (!points.has(id)) points.set(id, 0);
   return points;
 }
@@ -77,9 +78,10 @@ const ALL_TIME_LIMIT = 50;
 const ALL_TIME_TTL_MS = 60_000;
 let allTimeCache: { at: number; rows: { userId: string; wallet: string; name: string; avatarUrl: string | null; points: number }[] } | null = null;
 
-/** Same points as a league week, summed over every lesson and checkpoint ever passed (each counted once). */
-const POINTS_SQL = `SELECT "userId", SUM(CASE WHEN kind = 'checkpoint' THEN ${POINTS_PER_CHECKPOINT} ELSE ${POINTS_PER_LESSON} END)::bigint AS points
-  FROM (SELECT DISTINCT "userId", "lessonId", kind FROM lesson_attempts WHERE passed AND score >= ${PASS_ACCURACY}) t GROUP BY "userId"`;
+/** Same points as a league week, summed over every lesson and checkpoint ever finished, each counted once at its best score. Mirrors pointsFor. */
+const POINTS_SQL = `SELECT "userId", SUM(pts)::bigint AS points
+  FROM (SELECT "userId", GREATEST(1, ROUND((CASE WHEN kind = 'checkpoint' THEN ${POINTS_PER_CHECKPOINT} ELSE ${POINTS_PER_LESSON} END) * LEAST(1, GREATEST(0, MAX(score)))::numeric)) AS pts
+        FROM lesson_attempts WHERE passed GROUP BY "userId", "lessonId", kind) t GROUP BY "userId"`;
 
 /** The all-time top 50, plus the learner's own rank when they are outside it. No prizes: only the weekly top 3 earn a bonus. */
 export async function allTimeLeaderboard(user: User) {
