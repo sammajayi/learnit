@@ -13,6 +13,7 @@ import { VerifyCard } from "./VerifyCard";
 import { ClaimCard } from "./ClaimCard";
 import { GasCard } from "./GasCard";
 import { InstallPrompt } from "./InstallPrompt";
+import { ReminderPrompt } from "./ReminderPrompt";
 import { StatusChips } from "./StatusChips";
 import { Flag } from "./Flag";
 import { Sk } from "./Skeletons";
@@ -55,7 +56,7 @@ export function Home() {
         <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
           <div className="order-1 min-w-0">{t && me ? <ContinueCard t={t} course={me.course} /> : <ContinueSkeleton />}</div>
           <div className="order-3 min-w-0">{t ? <StatsRow t={t} /> : <Sk className="h-[104px] w-full rounded-card" />}</div>
-          {me && <div className="order-5 min-w-0 empty:hidden"><InstallPrompt /></div>}
+          {me && <div className="order-5 grid min-w-0 gap-6 empty:hidden"><InstallPrompt /><ReminderPrompt enabled={!!t && t.units.some((u) => u.done > 0)} /></div>}
         </div>
 
         <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
