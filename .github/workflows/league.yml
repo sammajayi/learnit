@@ -1,0 +1,25 @@
+# Pays the weekly league bonus. A league week runs Monday to Sunday (UTC), so it is over at 00:00 UTC on Monday.
+# The endpoint is safe to call twice (nobody is paid twice, and a winner whose voucher failed is retried), so the
+# second run a few hours later only catches anything the first one missed.
+name: League bonus
+
+on:
+  schedule:
+    - cron: "30 0 * * 1"
+    - cron: "30 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  settle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Call league endpoint
+        env:
+          APP_URL: ${{ secrets.APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --max-time 120 --retry 2 \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${APP_URL%/}/api/cron/league"
