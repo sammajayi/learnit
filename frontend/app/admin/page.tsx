@@ -106,7 +106,6 @@ export default function Overview() {
               </div>
             ))}
           </dl>
-          <p className="mt-4 text-xs text-muted">Rewards and stakes count from the current contracts. Earlier test contracts are not included.</p>
         </Card>
       )}
 

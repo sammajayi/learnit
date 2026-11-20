@@ -83,7 +83,7 @@ export function Onboarding() {
               <p className="mt-3 text-pretty text-[13px] text-muted">Lessons are free for everyone.</p>
               <a href={CELO_HELP_URL} target="_blank" rel="noreferrer" className="group mt-3 flex items-center gap-3 rounded-input border border-sage-500 bg-sage-50 px-3.5 py-3 transition hover:bg-sage-100">
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface text-sage-700"><Send size={17} strokeWidth={1.85} aria-hidden /></span>
-                <span className="min-w-0 flex-1"><span className="block text-sm font-semibold text-ink">Join our Telegram group</span><span className="block text-pretty text-[13px] leading-snug text-ink-2">Optional. Get the free CELO that pays network fees for claiming and staking, and meet other learners.</span></span>
+                <span className="min-w-0 flex-1"><span className="block text-sm font-semibold text-ink">Join our Telegram group</span><span className="block text-pretty text-[13px] leading-snug text-ink-2">Get free CELO to stake and claim on the app.</span></span>
                 <ExternalLink size={15} aria-hidden className="shrink-0 text-muted" />
               </a>
               {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
