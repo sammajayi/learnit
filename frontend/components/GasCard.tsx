@@ -17,8 +17,8 @@ export function GasCard() {
       <div className="flex gap-4">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sunken text-ink-2"><Fuel size={18} strokeWidth={1.85} aria-hidden /></span>
         <div className="min-w-0 flex-1">
-          <h2 className="text-sm font-semibold text-ink">Get CELO for network fees</h2>
-          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">Claims and stakes need a little CELO to pay network fees. Ask for some in our Telegram group. It is free.</p>
+          <h2 className="text-sm font-semibold text-ink">Get free CELO to stake and claim</h2>
+          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">Claiming and staking need a little CELO to pay network fees. Ask for some in our Telegram group. It is free.</p>
         </div>
         <button type="button" onClick={dismiss} aria-label="Dismiss, I already have CELO" className="-mr-2 -mt-2 grid h-10 w-10 shrink-0 place-items-center rounded-full text-muted transition hover:bg-sunken hover:text-ink">
           <X size={16} aria-hidden />
