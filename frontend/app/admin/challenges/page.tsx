@@ -11,9 +11,10 @@ import { fmtGD } from "@learnit/backend/format";
 import { Badge, Button, Card, CardHeader, EmptyState, Label, Notice, PageHeader, fieldClass } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
 import { useAdmin } from "@/components/admin/AdminProvider";
-import { DAY, RESULTS_DEADLINE, useBonus, useCohorts, useVaultPaused, useVaultPending } from "@/components/admin/data";
-import { SafeTx, parseG, when } from "@/components/admin/bits";
+import { DAY, RESULTS_DEADLINE, type Cohort, type CohortStatus, useBonus, useCohorts, useVaultPaused, useVaultPending } from "@/components/admin/data";
+import { ConfirmAction, SafeTx, parseG, when } from "@/components/admin/bits";
 import { CohortTimeline } from "@/components/admin/CohortTimeline";
+import { ChallengeTable } from "@/components/admin/ChallengeTable";
 import { HBars } from "@/components/admin/charts";
 
 const LENGTHS = [7, 14, 30] as const; // the contract only accepts these
@@ -33,7 +34,7 @@ export default function Challenges() {
   const pc = usePublicClient();
   const { address } = useAccount();
   const { writeContractAsync } = useWriteContract();
-  const { roles } = useAdmin();
+  const { roles, rolesLoading, wrongNetwork, networkName } = useAdmin();
   const vault = ADDR.streakVault;
   const cohorts = useCohorts();
   const paused = useVaultPaused();
@@ -50,6 +51,7 @@ export default function Challenges() {
   const [bonusPct, setBonusPct] = useState<Record<number, string>>({});
   const [fundAmount, setFundAmount] = useState("");
   const [busy, setBusy] = useState<null | "create" | "pause" | `bonus-${number}` | "fund" | `settle-${number}` | `void-${number}` | "distribute">(null);
+  const [view, setView] = useState<"timeline" | "table">("timeline");
   const [err, setErr] = useState<string | null>(null);
   const [done, setDone] = useState<{ text: string; hash: `0x${string}` } | null>(null);
 
@@ -67,6 +69,7 @@ export default function Challenges() {
 
   async function send(kind: NonNullable<typeof busy>, fn: string, args: readonly unknown[], text: string) {
     if (!pc || !address) return;
+    if (wrongNetwork) { setErr(`Switch your wallet to ${networkName} first.`); return; }
     setBusy(kind); setErr(null); setDone(null);
     try {
       // Simulate first: a wrong wallet or bad value fails here with a readable reason, before any gas is spent.
@@ -88,6 +91,7 @@ export default function Challenges() {
   const fundReserve = async () => {
     const wei = parseG(fundAmount);
     if (!pc || !address || wei === null || wei === 0n) return;
+    if (wrongNetwork) { setErr(`Switch your wallet to ${networkName} first.`); return; }
     setBusy("fund"); setErr(null); setDone(null);
     try {
       const allowance = await pc.readContract({ address: ADDR.gd, abi: erc20Abi, functionName: "allowance", args: [address, vault] });
@@ -102,6 +106,23 @@ export default function Challenges() {
       setFundAmount("");
       await qc.invalidateQueries({ queryKey: ["admin", "bonus"] });
     } catch (e) { setErr(friendlyError(e)); } finally { setBusy(null); }
+  };
+
+  // Neither settle nor cancel needs a role, so every connected wallet sees them where they apply.
+  const rowAction = (c: Cohort, status: CohortStatus) => {
+                // Neither call needs a role: the contract lets anyone settle confirmed results, or cancel once the deadline has passed.
+                if (!address) return null;
+                if (status === "settle") return (
+                  <Button size="sm" className="justify-self-start" loading={busy === `settle-${c.id}`} disabled={busy !== null}
+                    onClick={() => send(`settle-${c.id}`, "settle", [BigInt(c.id)], `Challenge ${c.id} is settled. The people who finished can withdraw.`)}>Settle challenge {c.id}</Button>
+                );
+                if (status === "finalize" && now >= c.end + RESULTS_DEADLINE) return (
+                  <ConfirmAction className="justify-self-start" label={`Cancel challenge ${c.id} and refund everyone`} confirmLabel={`Cancel challenge ${c.id}`}
+                    consequence={`This cancels challenge ${c.id} for everyone. All who joined can take their stake back, whether or not they finished. It cannot be undone.`}
+                    loading={busy === `void-${c.id}`} disabled={busy !== null}
+                    onConfirm={() => send(`void-${c.id}`, "voidCohort", [BigInt(c.id)], `Challenge ${c.id} is cancelled. Everyone who joined can take their stake back.`)} />
+                );
+                return null;
   };
 
   if (!vault) {
@@ -126,26 +147,24 @@ export default function Challenges() {
 
       <section aria-labelledby="all-challenges">
         <Card className="p-6">
-          <CardHeader id="all-challenges" title="All challenges" description="Newest first, on one calendar." />
+          <CardHeader id="all-challenges" title="All challenges" description={view === "timeline" ? "Newest first, on one calendar." : "Click a heading to sort. Search by number or status."}
+            action={
+              <div role="group" aria-label="View" className="inline-flex shrink-0 rounded-btn bg-sunken p-0.5">
+                {(["timeline", "table"] as const).map((v) => (
+                  <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)}
+                    className={`h-8 rounded-[10px] px-3 text-sm font-medium capitalize transition duration-150 ${view === v ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink"}`}>{v}</button>
+                ))}
+              </div>
+            } />
           <div className="mt-5">
             {cohorts.isLoading ? (
               <div className="grid gap-5">{[0, 1, 2].map((i) => <Sk key={i} className="h-14 rounded-input" />)}</div>
             ) : !cohorts.data?.length ? (
               <EmptyState icon={Flame} title="No challenges yet">Create the first one below.</EmptyState>
             ) : (
-              <CohortTimeline cohorts={cohorts.data} now={now} action={(c, status) => {
-                // Neither call needs a role: the contract lets anyone settle confirmed results, or cancel once the deadline has passed.
-                if (!address) return null;
-                if (status === "settle") return (
-                  <Button size="sm" className="justify-self-start" loading={busy === `settle-${c.id}`} disabled={busy !== null}
-                    onClick={() => send(`settle-${c.id}`, "settle", [BigInt(c.id)], `Challenge ${c.id} is settled. The people who finished can withdraw.`)}>Settle challenge {c.id}</Button>
-                );
-                if (status === "finalize" && now >= c.end + RESULTS_DEADLINE) return (
-                  <Button size="sm" variant="outline" className="justify-self-start" loading={busy === `void-${c.id}`} disabled={busy !== null}
-                    onClick={() => send(`void-${c.id}`, "voidCohort", [BigInt(c.id)], `Challenge ${c.id} is cancelled. Everyone who joined can take their stake back.`)}>Cancel challenge {c.id} and refund everyone</Button>
-                );
-                return null;
-              }} />
+              view === "timeline"
+                ? <CohortTimeline cohorts={cohorts.data} now={now} action={rowAction} />
+                : <ChallengeTable cohorts={cohorts.data} now={now} action={rowAction} />
             )}
           </div>
         </Card>
@@ -154,14 +173,16 @@ export default function Challenges() {
       <div className="grid gap-6 xl:grid-cols-[1.15fr_1fr]">
         {!address ? (
           <Card className="p-6">
-            <CardHeader title="Create a challenge" description="Only the admin Safe can create challenges. Use Admin sign-in (top right) with an authorised wallet to make changes." />
+            <CardHeader title="Create a challenge" description="Only the admin Safe can create challenges. Connect an authorised wallet (top right) to make changes." />
           </Card>
+        ) : rolesLoading ? (
+          <Sk className="h-72 rounded-card" />
         ) : (
         <Card className="p-6">
           <CardHeader title="Create a challenge" description={isAdmin ? "Sent from your wallet. The contract checks your role." : "Your wallet is not the admin, so this prepares a transaction for the Safe."} />
           <div className="mt-5 grid gap-4">
             <div>
-              <Label htmlFor="start">Starts</Label>
+              <Label htmlFor="start">Starts (your local time)</Label>
               <input id="start" type="datetime-local" value={start} onChange={(e) => setStart(e.target.value)} className={`${fieldClass} mt-1.5`} />
               {Number.isFinite(startSec) && <p className="mt-1.5 text-sm text-muted">Joining closes {when(startSec + DAY)}. It ends {when(startSec + lengthDays * DAY)}.</p>}
             </div>
@@ -185,7 +206,7 @@ export default function Challenges() {
             {isAdmin ? (
               <Button onClick={() => { if (!problem) void send("create", "createCohort", [BigInt(startSec), lengthDays, minWei!, maxWei!], `Challenge created. It starts ${when(startSec)} and runs for ${lengthDays} days.`); }}
                 disabled={!!problem} loading={busy === "create"} icon={Plus} block>
-                {busy === "create" ? "Confirm in your wallet..." : "Create challenge"}
+                {busy === "create" ? "Confirm in your wallet…" : "Create challenge"}
               </Button>
             ) : problem ? (
               <p className="text-sm text-muted">Fill in the fields to get the Safe transaction.</p>
@@ -203,13 +224,14 @@ export default function Challenges() {
           <div className="mt-4 flex items-center justify-between gap-3">
             {paused.isLoading ? <Sk className="h-6 w-20 rounded-full" /> : <Badge tone={paused.data ? "coral" : "sage"}>{paused.data ? "Paused" : "Running"}</Badge>}
             {isGuardian && (
-              <Button variant="outline" size="sm" loading={busy === "pause"} icon={paused.data ? PlayCircle : PauseCircle}
-                onClick={() => send("pause", paused.data ? "unpause" : "pause", [], paused.data ? "Staking is running again." : "Staking is paused.")}>
-                {paused.data ? "Resume staking" : "Pause staking"}
-              </Button>
+              paused.data
+                ? <Button variant="outline" size="sm" loading={busy === "pause"} icon={PlayCircle} onClick={() => send("pause", "unpause", [], "Staking is running again.")}>Resume staking</Button>
+                : <ConfirmAction label="Pause staking" confirmLabel="Pause staking" icon={PauseCircle} loading={busy === "pause"} disabled={busy !== null}
+                    consequence="Nobody can stake until you resume. Stakes already in stay safe."
+                    onConfirm={() => send("pause", "pause", [], "Staking is paused.")} />
             )}
           </div>
-          {!!address && !isGuardian && paused.data !== undefined && (
+          {!!address && !rolesLoading && !isGuardian && paused.data !== undefined && (
             <div className="mt-4">
               <SafeTx to={vault} data={encodeFunctionData({ abi: streakVaultAbi, functionName: paused.data ? "unpause" : "pause" })}
                 note={`Only the guardian (the Safe) can ${paused.data ? "resume" : "pause"} staking. Send this from the Safe.`} />
@@ -257,8 +279,8 @@ export default function Challenges() {
             );
           })}
         </div>
-        <p className="mt-3 text-xs text-muted">Currently set: {LENGTHS.map((d) => `${d}d ${bonus.data ? bpsToPct(bonus.data.bpsFor[d]) : "..."}%`).join(" · ")}. Capped at {bonus.data ? bpsToPct(bonus.data.capBps) : "50"}%.</p>
-        {!isAdmin && !!address && bonus.data && (
+        <p className="mt-3 text-xs text-muted">Currently set: {LENGTHS.map((d) => `${d}d ${bonus.data ? bpsToPct(bonus.data.bpsFor[d]) : "…"}%`).join(" · ")}. Capped at {bonus.data ? bpsToPct(bonus.data.capBps) : "50"}%.</p>
+        {!isAdmin && !rolesLoading && !!address && bonus.data && (
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {LENGTHS.map((d) => {
               const bps = pctToBps(bonusPct[d] ?? "");
@@ -273,10 +295,10 @@ export default function Challenges() {
         {!!address && (
           <div className="mt-6 border-t border-line pt-5">
             <Label htmlFor="fund">Fund the bonus reserve</Label>
-            <p className="mt-1 text-xs text-muted">Current reserve: <span className="tabular font-medium text-ink-2">{bonus.data ? fmtGD(bonus.data.reserve) : "..."} G$</span>. Anyone can fund it, no admin role needed.</p>
+            <p className="mt-1 text-xs text-muted">Current reserve: <span className="tabular font-medium text-ink-2">{bonus.data ? fmtGD(bonus.data.reserve) : "…"} G$</span>. Anyone can fund it, no admin role needed.</p>
             <div className="mt-2 flex gap-3">
               <input id="fund" inputMode="decimal" value={fundAmount} onChange={(e) => setFundAmount(e.target.value)} placeholder="Amount in G$" className={fieldClass} />
-              <Button variant="outline" icon={Sparkles} loading={busy === "fund"} onClick={fundReserve}>Fund</Button>
+              <Button variant="outline" icon={Sparkles} loading={busy === "fund"} onClick={fundReserve}>{busy === "fund" ? "Confirm in wallet…" : "Fund"}</Button>
             </div>
             <p className="mt-2 text-xs text-muted">Two steps in your wallet if allowance is short: approve, then fund.</p>
           </div>

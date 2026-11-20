@@ -8,6 +8,8 @@ import { ADDR } from "@learnit/backend/chain";
 export const DAY = 86_400;
 /** After a challenge ends, the signer has this long to confirm the results. Past it, anyone may cancel the challenge. Same as the vault's RESULTS_DEADLINE. */
 export const RESULTS_DEADLINE = 7 * DAY;
+/** On-chain numbers reload this often while the tab is open. */
+const POLL = 30_000;
 export type Cohort = { id: number; start: number; end: number; min: bigint; max: bigint; pot: bigint; finishedStake: bigint; settled: boolean; voided: boolean; resultsFinal: boolean };
 /** "finalize": ended, results not confirmed yet (the signer's job). "settle": results confirmed, waiting for anyone to call settle. */
 export type CohortStatus = "upcoming" | "open" | "running" | "finalize" | "settle" | "settled" | "voided";
@@ -25,7 +27,7 @@ export function useCohorts() {
   const pc = usePublicClient();
   const vault = ADDR.streakVault;
   return useQuery({
-    queryKey: ["admin", "cohorts"], enabled: !!vault && !!pc, staleTime: 15_000,
+    queryKey: ["admin", "cohorts"], enabled: !!vault && !!pc, staleTime: 15_000, refetchInterval: POLL,
     queryFn: async (): Promise<Cohort[]> => {
       const next = Number(await pc!.readContract({ address: vault, abi: streakVaultAbi, functionName: "nextCohortId" }));
       const ids = Array.from({ length: Math.max(0, next - 1) }, (_, i) => i + 1);
@@ -44,7 +46,7 @@ export function useVaultPending() {
   const pc = usePublicClient();
   const vault = ADDR.streakVault;
   return useQuery({
-    queryKey: ["admin", "vault-pending"], enabled: !!vault && !!pc, staleTime: 15_000,
+    queryKey: ["admin", "vault-pending"], enabled: !!vault && !!pc, staleTime: 15_000, refetchInterval: POLL,
     queryFn: async () => {
       try {
         const [rewards, ubi] = await Promise.all([
@@ -60,7 +62,7 @@ export function useVaultPending() {
 export function useVaultPaused() {
   const pc = usePublicClient();
   const vault = ADDR.streakVault;
-  return useQuery({ queryKey: ["admin", "vault-paused"], enabled: !!vault && !!pc, staleTime: 10_000,
+  return useQuery({ queryKey: ["admin", "vault-paused"], enabled: !!vault && !!pc, staleTime: 10_000, refetchInterval: POLL,
     queryFn: () => pc!.readContract({ address: vault, abi: streakVaultAbi, functionName: "paused" }) });
 }
 
@@ -70,7 +72,7 @@ export function useBonus() {
   const pc = usePublicClient();
   const vault = ADDR.streakVault;
   return useQuery({
-    queryKey: ["admin", "bonus"], enabled: !!vault && !!pc, staleTime: 15_000,
+    queryKey: ["admin", "bonus"], enabled: !!vault && !!pc, staleTime: 15_000, refetchInterval: POLL,
     queryFn: async () => {
       const [bps7, bps14, bps30, reserve, capBps] = await Promise.all([
         pc!.readContract({ address: vault, abi: streakVaultAbi, functionName: "bonusBpsFor", args: [7] }),
@@ -88,7 +90,7 @@ export function usePool() {
   const pc = usePublicClient();
   const pool = ADDR.rewardsPool;
   return useQuery({
-    queryKey: ["admin", "pool"], enabled: !!pool && !!pc, staleTime: 15_000,
+    queryKey: ["admin", "pool"], enabled: !!pool && !!pc, staleTime: 15_000, refetchInterval: POLL,
     queryFn: async () => {
       const day = BigInt(Math.floor(Date.now() / 1000 / DAY));
       const [balance, dailyCap, weeklyCap, dailyBudget, spentToday, paused, signer] = await Promise.all([

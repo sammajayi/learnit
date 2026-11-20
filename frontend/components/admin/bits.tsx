@@ -1,12 +1,13 @@
 "use client";
 import { useState, type ReactNode } from "react";
+import type { LucideIcon } from "lucide-react";
 import { Copy, Check } from "lucide-react";
 import { parseUnits } from "viem";
 import { Button, Notice } from "@/components/ui";
 import type { ActivityDay, UbiDay } from "./data";
 
 export const when = (s: number) => new Date(s * 1000).toLocaleString("en", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
-export const shortAddr = (a: string) => `${a.slice(0, 6)}...${a.slice(-4)}`;
+export const shortAddr = (a: string) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 export const parseG = (v: string): bigint | null => {
   const t = v.trim();
   if (!/^\d*\.?\d*$/.test(t) || t === "" || t === ".") return null;
@@ -35,7 +36,28 @@ export function SafeTx({ to, data, note }: { to: string; data: `0x${string}`; no
 
 export function ErrorNote({ error }: { error: unknown }) {
   if (!error) return null;
-  return <Notice tone="danger">{error instanceof Error ? error.message : "Something went wrong."}</Notice>;
+  const detail = error instanceof Error ? error.message : null;
+  return <Notice tone="danger" title="We could not load these numbers">Try again in a moment.{detail ? ` (${detail})` : ""}</Notice>;
+}
+
+/**
+ * A button for an action that cannot be undone. The first click shows what will happen; a second, labelled click sends it.
+ * Focus lands on the safe choice, so a stray Enter keeps things as they are.
+ */
+export function ConfirmAction({ label, confirmLabel, consequence, onConfirm, loading, disabled, icon, className }: {
+  label: string; confirmLabel: string; consequence: ReactNode; onConfirm: () => void | Promise<void>; loading?: boolean; disabled?: boolean; icon?: LucideIcon; className?: string;
+}) {
+  const [asking, setAsking] = useState(false);
+  if (!asking) return <Button variant="outline" size="sm" icon={icon} className={className} disabled={disabled} onClick={() => setAsking(true)}>{label}</Button>;
+  return (
+    <div role="group" aria-label={label} className={`grid gap-3 rounded-input border border-coral-100 bg-coral-50 p-4 text-sm ${className ?? ""}`}>
+      <p className="text-pretty leading-relaxed text-ink-2">{consequence}</p>
+      <div className="flex flex-wrap gap-2">
+        <Button size="sm" loading={loading} onClick={async () => { try { await onConfirm(); } finally { setAsking(false); } }}>{confirmLabel}</Button>
+        <Button size="sm" variant="ghost" disabled={loading} onClick={() => setAsking(false)} autoFocus>Keep it as it is</Button>
+      </div>
+    </div>
+  );
 }
 
 /** The last `n` UTC days, oldest first, with zeros for days nobody claimed. */
