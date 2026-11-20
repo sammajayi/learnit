@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, BookOpen, Coins, ExternalLink, PiggyBank, Send } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Coins, ExternalLink, PiggyBank, Send } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { CELO_HELP_URL } from "@/lib/links";
 import { LanguageCards } from "./LanguageCards";

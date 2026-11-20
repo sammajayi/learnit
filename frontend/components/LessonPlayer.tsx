@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Check, Clock, Flame, HeartCrack, RotateCcw, Target, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowRight, Check, Clock, Flame, Heart, HeartCrack, RotateCcw, Target, Volume2, VolumeX, X } from "@/components/icons";
 import { cn } from "@/lib/cn";
 import { Button, ButtonLink, Card, Notice, ProgressRing } from "./ui";
 import { ApiError, useApi } from "@/lib/useApi";
@@ -153,7 +153,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
     </main>
   );
   if (!data) return <LessonSkeleton />;
-  if (result) return <Results r={result} id={id} />;
+  if (result) return <Results r={result} id={id} lives={livesOn ? livesInfo : null} />;
   if (data.intro?.length && !introSeen) return <Intro words={data.intro} tip={data.tip} lang={data.speechLang} title={data.title} lives={livesOn ? livesInfo : null} onStart={() => setIntroSeen(true)} />;
   if (!ex) return <LessonSkeleton label="Submitting your answers" />;
 
@@ -361,7 +361,7 @@ function Match({ ex, onFinish }: { ex: Extract<PublicExercise, { type: "match" }
   );
 }
 
-function Results({ r, id }: { r: Result; id: string }) {
+function Results({ r, id, lives }: { r: Result; id: string; lives: LivesInfo | null }) {
   const api = useApi();
   const reduce = useReducedMotion();
   const [voucher, setVoucher] = useState<{ amount: string } | null>(null);
@@ -394,11 +394,12 @@ function Results({ r, id }: { r: Result; id: string }) {
             <h1 className="mt-2 text-display-md text-ink">{title}</h1>
             <p className="mx-auto mt-2 max-w-[36ch] text-pretty leading-relaxed text-ink-2">{body}</p>
           </div>
-          <dl className="grid grid-cols-3 divide-x divide-line border-y border-line">
+          <dl className={`grid divide-x divide-line border-y border-line ${lives ? "grid-cols-4" : "grid-cols-3"}`}>
             {[
               { Icon: Target, k: "Accuracy", v: `${pct}%` },
               { Icon: Clock, k: "Time", v: mins ? `${mins}m ${secs}s` : `${secs}s` },
               { Icon: Flame, k: "Streak", v: `${r.streak}` },
+              ...(lives ? [{ Icon: Heart, k: "Lives", v: `${lives.lives}/${lives.max}` }] : []),
             ].map(({ Icon, k, v }) => (
               <div key={k} className="px-3 py-4">
                 <dt className="flex items-center justify-center gap-1 text-xs font-medium text-muted"><Icon size={13} aria-hidden />{k}</dt>
@@ -478,7 +479,7 @@ function OutOfLives({ info, onReady }: { info: LivesInfo; onReady: () => void })
       <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>
         <Card className="overflow-hidden text-center">
           <div className="bg-canvas px-6 pb-8 pt-10">
-            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-coral-50 text-coral-600"><HeartCrack size={30} aria-hidden /></span>
+            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-sunken text-ink-2"><HeartCrack size={30} strokeWidth={1.75} aria-hidden /></span>
             <p className="mt-6 text-eyebrow uppercase text-muted">Lessons paused</p>
             <h1 className="mt-2 text-display-md text-ink">You are out of lives</h1>
             <p className="mx-auto mt-2 max-w-[38ch] text-pretty leading-relaxed text-ink-2">

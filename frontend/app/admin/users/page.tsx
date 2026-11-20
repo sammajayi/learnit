@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Lock, Wallet } from "lucide-react";
+import { Lock, Wallet } from "@/components/icons";
 import type { AdminUserRow, AdminUsers } from "@learnit/backend/handlers/adminUsers";
 import { langOf } from "@/lib/languages";
 import { cn } from "@/lib/cn";

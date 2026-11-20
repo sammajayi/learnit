@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "@/components/icons";
 import { fmtGD } from "@learnit/backend/format";
 import { Badge, Card, CardHeader, Notice, PageHeader } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";

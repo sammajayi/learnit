@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Coins, Download } from "lucide-react";
+import { Coins, Download } from "@/components/icons";
 import { fmtGD } from "@learnit/backend/format";
 import { Button, Card, CardHeader, EmptyState, PageHeader, Stat } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";

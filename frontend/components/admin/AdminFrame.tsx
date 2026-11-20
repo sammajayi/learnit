@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { useIsFetching, useQueryClient } from "@tanstack/react-query";
-import { Coins, Flame, LayoutDashboard, LogOut, RefreshCw, Users, Vault, Wallet } from "lucide-react";
+import { Coins, Flame, LayoutDashboard, LogOut, RefreshCw, Users, Vault, Wallet } from "@/components/icons";
 import { cn } from "@/lib/cn";
 import { Logo } from "@/components/Logo";
 import { Badge, Button, Notice } from "@/components/ui";

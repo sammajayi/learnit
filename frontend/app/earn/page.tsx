@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
-import { BookOpen, CheckCircle2, ChevronDown, Clock, ExternalLink, Gift, Trophy } from "lucide-react";
+import { BookOpen, CheckCircle2, ChevronDown, Clock, ExternalLink, Gift, Trophy, XCircle } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { friendlyError, STALE_ERRORS } from "@/lib/txErrors";
 import { rewardsPoolAbi } from "@learnit/backend/abis";
@@ -101,12 +101,14 @@ export default function Earn() {
     const st = stateOf(v);
     const reason = REASON[v.reason] ?? { label: "Reward", Icon: Gift };
     const soon = st === "ready" && v.expiry - now < 86_400;
+    // The icon says the state before the words do: a clock while it waits, a tick once paid, a cross when it lapsed.
+    const StateIcon = st === "claimed" ? CheckCircle2 : st === "expired" ? XCircle : Clock;
     return (
       <li key={v.id} className={cn("flex items-center gap-4 px-6 py-4", st !== "ready" && "bg-canvas/50")}>
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sunken text-ink-2"><reason.Icon size={18} strokeWidth={1.85} aria-hidden /></span>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold text-ink">{reason.label}</p>
-          <p className={cn("mt-0.5 flex items-center gap-1 text-xs", soon ? "font-medium text-coral-700" : "text-muted")}><Clock size={12} aria-hidden />{st === "claimed" ? "Paid to your wallet" : st === "expired" ? "Not claimed in time" : expiresIn(v.expiry)}</p>
+          <p className={cn("mt-0.5 flex items-center gap-1 text-xs", soon ? "font-medium text-coral-700" : "text-muted")}><StateIcon size={13} aria-hidden className={st === "claimed" ? "text-sage-700" : undefined} />{st === "claimed" ? "Paid to your wallet" : st === "expired" ? "Not claimed in time" : expiresIn(v.expiry)}</p>
         </div>
         <p className="font-mono tabular flex items-center gap-2 text-[15px] font-semibold text-ink"><GMark size={20} />{fmtGD(v.amount)}</p>
         <div className="w-[96px] text-right">

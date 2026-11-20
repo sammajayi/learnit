@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ExternalLink, Fuel, X } from "lucide-react";
+import { ExternalLink, Fuel, X } from "@/components/icons";
 import { CELO_HELP_URL } from "@/lib/links";
 import { ButtonLink, Card } from "./ui";
 

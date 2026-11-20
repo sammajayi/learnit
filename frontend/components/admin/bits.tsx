@@ -1,7 +1,7 @@
 "use client";
 import { useState, type ReactNode } from "react";
-import type { LucideIcon } from "lucide-react";
-import { Copy, Check } from "lucide-react";
+import type { IconType } from "@/components/icons";
+import { Copy, Check } from "@/components/icons";
 import { parseUnits } from "viem";
 import { Button, Notice } from "@/components/ui";
 import type { ActivityDay, UbiDay } from "./data";
@@ -45,7 +45,7 @@ export function ErrorNote({ error }: { error: unknown }) {
  * Focus lands on the safe choice, so a stray Enter keeps things as they are.
  */
 export function ConfirmAction({ label, confirmLabel, consequence, onConfirm, loading, disabled, icon, className }: {
-  label: string; confirmLabel: string; consequence: ReactNode; onConfirm: () => void | Promise<void>; loading?: boolean; disabled?: boolean; icon?: LucideIcon; className?: string;
+  label: string; confirmLabel: string; consequence: ReactNode; onConfirm: () => void | Promise<void>; loading?: boolean; disabled?: boolean; icon?: IconType; className?: string;
 }) {
   const [asking, setAsking] = useState(false);
   if (!asking) return <Button variant="outline" size="sm" icon={icon} className={className} disabled={disabled} onClick={() => setAsking(true)}>{label}</Button>;
