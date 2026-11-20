@@ -13,7 +13,7 @@ export function InstallPrompt() {
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sunken text-ink-2"><Smartphone size={18} strokeWidth={1.85} aria-hidden /></span>
         <div className="min-w-0 flex-1">
           <h2 className="text-sm font-semibold text-ink">Install LearnIt</h2>
-          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">Open it from your home screen like an app. Faster to start, and it&apos;s how daily reminders reach you.</p>
+          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">Open it from your home screen like an app. Faster to start. On iPhone, it is also how daily reminders reach you.</p>
         </div>
         <button onClick={dismiss} aria-label="Not now" className="-mr-2 -mt-2 grid h-9 w-9 place-items-center rounded-full text-muted transition hover:bg-sunken hover:text-ink"><X size={18} aria-hidden /></button>
       </div>
@@ -24,7 +24,7 @@ export function InstallPrompt() {
             <li className="flex items-center gap-3"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-sage-50 text-sage-700"><Share size={15} aria-hidden /></span>Tap the Share button in Safari</li>
             <li className="flex items-center gap-3"><span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-sage-50 text-sage-700"><PlusSquare size={15} aria-hidden /></span>Choose Add to Home Screen</li>
           </ol>
-          <Button onClick={markInstalled} variant="outline" size="sm" className="mt-5">I&apos;ve added it</Button>
+          <Button onClick={markInstalled} variant="outline" size="sm" className="mt-5">I have added it</Button>
         </>
       )}
     </Card>

@@ -109,14 +109,14 @@ export default function Stake() {
       setStep("approve");
       const h = await writeContractAsync({ address: ADDR.gd, abi: erc20Abi, functionName: "approve", args: [ADDR.streakVault, wei] });
       const r = await pc.waitForTransactionReceipt({ hash: h });
-      if (r.status !== "success") throw new Error("The approval didn't go through. Nothing was staked.");
+      if (r.status !== "success") throw new Error("The approval did not go through. Nothing was staked.");
     }
     setStep("checking");
     const { request } = await pc.simulateContract({ account: address, address: ADDR.streakVault, abi: streakVaultAbi, functionName: "stake", args: [BigInt(c.id), wei] });
     setStep("stake");
     const h2 = await writeContractAsync(request);
     const r2 = await pc.waitForTransactionReceipt({ hash: h2 });
-    if (r2.status !== "success") throw new Error("The stake didn't go through. Your G$ stayed in your wallet.");
+    if (r2.status !== "success") throw new Error("The stake did not go through. Your G$ stayed in your wallet.");
     setAmount("");
   });
 
@@ -126,7 +126,7 @@ export default function Stake() {
     setStep("withdraw");
     const h = await writeContractAsync(request);
     const r = await pc!.waitForTransactionReceipt({ hash: h });
-    if (r.status !== "success") throw new Error("The withdrawal didn't go through. Your payout is still waiting for you.");
+    if (r.status !== "success") throw new Error("The withdrawal did not go through. Your payout is still waiting for you.");
   }
 
   const withdraw = (id: number | undefined = c?.id) => run(async () => {
@@ -145,7 +145,7 @@ export default function Stake() {
     setStep("cancel");
     const h = await writeContractAsync(request);
     const r = await pc.waitForTransactionReceipt({ hash: h });
-    if (r.status !== "success") throw new Error("The cancellation didn't go through. Your stake is still in the challenge.");
+    if (r.status !== "success") throw new Error("The cancellation did not go through. Your stake is still in the challenge.");
     await sendWithdraw(id);
   });
 
@@ -291,7 +291,7 @@ export default function Stake() {
                 {formShown && (
                   <form onSubmit={(e) => { e.preventDefault(); if (!busy) void stake(); }} noValidate>
                     <div className="mb-5 rounded-input bg-sunken px-4 lg:hidden">{howItWorks(false)}</div>
-                    {blocker && <Notice tone="warning" className="mb-5" action={!me?.verified && live ? <ButtonLink href="/home" variant="outline" size="sm">Verify on Home</ButtonLink> : undefined}>{blocker}</Notice>}
+                    {blocker && <Notice tone="warning" className="mb-5" action={!me?.verified && live ? <ButtonLink href="/home" variant="outline" size="sm">Verify with GoodDollar</ButtonLink> : undefined}>{blocker}</Notice>}
                     <Label htmlFor="amt">Amount</Label>
                     <div className="relative mt-2">
                       <input id="amt" inputMode="decimal" autoComplete="off" value={amount} onChange={(e) => { setAmount(e.target.value); setErr(null); }} placeholder={`e.g. ${fmtGD(c.min, 0)}…`} spellCheck={false} aria-invalid={outOfBounds} aria-describedby="amt-help"

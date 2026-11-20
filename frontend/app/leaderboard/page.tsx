@@ -48,7 +48,7 @@ function RankRow({ r, bonusLine = false }: { r: Row; bonusLine?: boolean }) {
         {r.rank <= 3 ? <Medal size={15} role="img" aria-label={`Rank ${r.rank}`} /> : r.rank}
       </span>
       <Avatar src={r.avatarUrl} name={r.name} size={32} className="shrink-0" />
-      <span className={cn("min-w-0 flex-1 truncate text-[15px] text-ink", r.you ? "font-semibold" : "font-medium")}>{r.name}{r.you && <span className="sr-only"> (you)</span>}</span>
+      <span className={cn("min-w-0 flex-1 truncate text-[15px] text-ink", r.you ? "font-semibold" : "font-medium")}>{r.name}{r.you && <span className="sr-only"> (you)</span>}{bonusLine && r.rank === 3 && <span className="sr-only">. Top 3 share the bonus.</span>}</span>
       <span className="tabular shrink-0 text-right text-sm font-semibold text-ink">{pts(r.points)}<span className="sr-only"> points</span></span>
     </li>
   );
@@ -109,7 +109,7 @@ function Weekly({ data }: { data: WeekBoard | undefined }) {
   if (!data) return <ListSkeleton />;
   if (!data.joined) {
     return (
-      <EmptyState icon={Users} title="You're not in a group yet" className="mt-8" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>
+      <EmptyState icon={Users} title="You are not in a group yet" className="mt-8" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>
         Pass a lesson today to join this week&apos;s group.
       </EmptyState>
     );

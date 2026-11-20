@@ -10,7 +10,7 @@ const MESSAGES: Record<string, string> = {
   BadSignature: "This reward is no longer valid.",
   DailyCapExceeded: "You have reached today's reward limit. Try again tomorrow.",
   WeeklyCapExceeded: "You have reached this week's reward limit. Try again next week.",
-  BudgetExceeded: "Today's reward pool has run out. Try again tomorrow.",
+  BudgetExceeded: "Today's reward budget has run out. Try again tomorrow.",
   ZeroAmount: "This reward has no amount.",
   LengthMismatch: "Something went wrong with that batch. Claim them one at a time.",
   EnforcedPause: "This is paused for now. Please try again later.",
@@ -48,7 +48,7 @@ export function friendlyError(e: unknown): string {
     if (/insufficient funds|exceeds the balance/i.test(e.shortMessage)) return `Not enough CELO to pay the network fee. Get more in our Telegram group: ${CELO_HELP_URL}`;
     if (/allowance/i.test(e.shortMessage)) return "G$ spending was not approved. Try again and approve when your wallet asks.";
     if (/transfer amount exceeds balance|insufficient balance/i.test(e.shortMessage)) return "You do not have enough G$ for that amount.";
-    return e.shortMessage;
+    return "We could not complete that. Nothing was sent. Try again in a moment.";
   }
   const code = (e as { code?: number } | null)?.code;
   if (code === 4001) return "You cancelled the request in your wallet. Nothing was sent.";
