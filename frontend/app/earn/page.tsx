@@ -25,7 +25,7 @@ function expiresIn(expiry: number) {
   const s = expiry - Math.floor(Date.now() / 1000);
   if (s <= 0) return "Expired";
   const h = Math.floor(s / 3600), d = Math.floor(h / 24);
-  return d >= 1 ? `Expires in ${d} day${d === 1 ? "" : "s"}` : h >= 1 ? `Expires in ${h}h` : "Expires soon";
+  return d >= 1 ? `Expires in ${d} day${d === 1 ? "" : "s"}` : h >= 1 ? `Expires in ${h} ${h === 1 ? "hour" : "hours"}` : "Expires soon";
 }
 const STEP_LABEL: Record<Exclude<Step, null>, string> = { checking: "Checking…", wallet: "Confirm in your wallet", confirming: "Waiting for confirmation" };
 const toArg = (v: V) => ({ root: v.root, amount: BigInt(v.amount), nonce: BigInt(v.nonce), expiry: BigInt(v.expiry) });
@@ -121,7 +121,7 @@ export default function Earn() {
 
   return (
     <AppShell>
-      <PageHeader eyebrow="Rewards and staking" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly leaderboard. Claim to your wallet whenever you like, before each reward expires." action={<RewardsTabs />} />
+      <PageHeader eyebrow="Rewards and staking" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly leaderboard." action={<RewardsTabs />} />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Card className="grain relative overflow-hidden bg-ink p-6 text-white sm:col-span-1">
@@ -138,7 +138,7 @@ export default function Earn() {
       </div>
 
       <div className="mt-6 grid gap-3">
-        {!data.verified && <Notice tone="warning" title="Verify to earn" action={<ButtonLink href="/home" variant="outline" size="sm">Go to verification</ButtonLink>}>Rewards need a quick GoodDollar face check. You can keep learning in the meantime.</Notice>}
+        {!data.verified && <Notice tone="warning" title="Verify to earn" action={<ButtonLink href="/home" variant="outline" size="sm">Verify with GoodDollar</ButtonLink>}>Rewards need a quick GoodDollar face check. You can keep learning in the meantime.</Notice>}
         {!live && <Notice tone="info">Rewards aren&apos;t live yet. Anything you earn will be kept here.</Notice>}
         {isPaused && <Notice tone="paused" title="Rewards are paused">Your rewards are safe and will be here when claiming resumes.</Notice>}
       </div>
@@ -147,7 +147,7 @@ export default function Earn() {
         <div className="flex flex-col gap-3 border-b border-line px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-[15px] font-semibold text-ink">Your rewards</h2>
-            <p className="mt-0.5 text-sm text-muted">Each one is a signed voucher, paid out by the rewards pool contract.</p>
+            <p className="mt-0.5 text-sm text-muted">Claim each one to your wallet before it expires.</p>
           </div>
           {ready.length > 1 && !isPaused && (
             <Button onClick={() => claim(ready)} loading={busy} disabled={!live}>{busy ? STEP_LABEL[step!] : `Claim all · ${fmtGD(total)} G$`}</Button>
@@ -156,7 +156,7 @@ export default function Earn() {
 
         {list.length === 0 ? (
           <EmptyState icon={Gift} title="No rewards yet" className="m-6 border-line" action={<ButtonLink href="/learn" variant="outline" size="sm">Go to your lessons</ButtonLink>}>
-            {data.verified ? "Pass a lesson to earn G$. New rewards show up here straight away." : "Once you're verified, every lesson you pass earns G$ here."}
+            {data.verified ? "Pass a lesson to earn G$. New rewards show up here straight away." : "Once you are verified, passed lessons earn G$ here, up to the daily limit."}
           </EmptyState>
         ) : (
           <>

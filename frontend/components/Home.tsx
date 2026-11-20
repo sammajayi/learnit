@@ -42,11 +42,11 @@ export function Home() {
         <p className="text-sm text-muted">{new Date().toLocaleDateString("en", { weekday: "long", month: "long", day: "numeric" })}</p>
         {me ? <h1 className="font-display text-display-md text-ink sm:text-[2rem]">{greeting()}{first ? `, ${first}` : ""}</h1> : <Sk className="mt-1 h-9 w-64 rounded-lg" />}
         <p className="text-[15px] text-muted">
-          {!t ? " " : t.todayDone ? "Today's lesson is done. Your streak is safe." : t.streak > 0 ? "One lesson today keeps your streak going." : "Your next lesson takes about ten minutes."}
+          {!t ? " " : t.todayDone ? "Today's lesson is done. Your streak is safe." : t.streak > 0 ? "One lesson today keeps your streak going." : "Your next lesson takes about 10 minutes."}
         </p>
       </header>
 
-      {error && <Notice tone="danger" className="mt-6" title="We couldn't load your account">Check your connection, then refresh the page.</Notice>}
+      {error && <Notice tone="danger" className="mt-6" title="We could not load your account">Check your connection, then refresh the page.</Notice>}
 
       {/* Two columns on desktop. On mobile the columns dissolve (\`contents\`) and \`order\` interleaves them: lesson, daily G$, stats, rewards. */}
       <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
@@ -130,7 +130,7 @@ function StatsRow({ t }: { t: Today }) {
     <Card className="grid grid-cols-2 gap-y-6 divide-line sm:grid-cols-4 sm:gap-y-0 sm:divide-x xl:grid-cols-2 xl:gap-y-6 xl:divide-x-0 2xl:grid-cols-4 2xl:gap-y-0 2xl:divide-x">
       <Stat className="p-5 sm:px-6" icon={Flame} label="Streak" value={t.streak} unit={t.streak === 1 ? "day" : "days"} hint={t.todayDone ? "Safe for today" : "Learn today to extend"} />
       <Stat className="p-5 sm:px-6" icon={Snowflake} label="Freezes" value={t.freezesRemaining} hint="Covers a missed day" />
-      <Stat className="p-5 sm:px-6" icon={BookOpen} label="Completed" value={done} unit={`/ ${total}`} hint="A0 to A2 course" />
+      <Stat className="p-5 sm:px-6" icon={BookOpen} label="Lessons" value={done} unit={`/ ${total}`} hint="Across the whole course" />
       <Stat className="p-5 sm:px-6" icon={CheckCircle2} label="Units" value={unitsDone} unit={`/ ${t.units.length}`} hint="Checkpoints passed" />
     </Card>
   );

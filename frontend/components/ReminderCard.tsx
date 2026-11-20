@@ -20,7 +20,7 @@ export function ReminderCard() {
   const [err, setErr] = useState<string | null>(null);
 
   const head = <h2 id="reminder" className="flex items-center gap-2 text-[15px] font-semibold text-ink"><Bell size={17} strokeWidth={2} aria-hidden /> Daily reminder</h2>;
-  if (isError) return <Card className="p-6">{head}<p className="mt-3 text-sm text-muted">Reminders aren&apos;t available right now.</p></Card>;
+  if (isError) return <Card className="p-6">{head}<p className="mt-3 text-sm text-muted">Reminders are not available right now.</p></Card>;
   if (!data) return <Sk className="h-[200px] w-full rounded-card" />;
 
   const supported = pushSupported();
@@ -52,17 +52,17 @@ export function ReminderCard() {
     <Card className="p-6" aria-labelledby="reminder" role="region">
       {head}
       {!data.available ? (
-        <p className="mt-3 text-sm text-muted">Reminders aren&apos;t available right now.</p>
+        <p className="mt-3 text-sm text-muted">Reminders are not available right now.</p>
       ) : installFirst ? (
         <p className="mt-3 text-pretty text-sm leading-relaxed text-muted">On iPhone, add LearnIt to your Home Screen first (Share, then Add to Home Screen). Then come back here to turn on reminders.</p>
       ) : !supported ? (
-        <p className="mt-3 text-sm text-muted">This browser doesn&apos;t support notifications.</p>
+        <p className="mt-3 text-sm text-muted">This browser does not support notifications.</p>
       ) : (
         <>
           <div className="mt-4 flex items-center justify-between gap-4">
             <div>
               <p className="text-sm font-medium text-ink">Remind me to learn</p>
-              <p className="mt-0.5 text-pretty text-sm text-muted">One short nudge a day. Skipped if you&apos;ve already learned.</p>
+              <p className="mt-0.5 text-pretty text-sm text-muted">One short nudge a day. Skipped if you have already learned.</p>
             </div>
             <button role="switch" aria-checked={data.subscribed} aria-label="Daily reminder" disabled={busy} onClick={() => (data.subscribed ? turnOff() : turnOn())}
               className={cn("relative h-7 w-12 shrink-0 rounded-full transition-colors duration-200 disabled:opacity-60", data.subscribed ? "bg-sage-600" : "bg-line-strong")}>

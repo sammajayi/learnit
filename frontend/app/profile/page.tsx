@@ -67,7 +67,7 @@ export default function Profile() {
                 <div className="grid grid-cols-2 border-y border-line sm:grid-cols-4 sm:divide-x sm:divide-line">
                   <Stat className="px-6 py-5" icon={Flame} label="Streak" value={t.streak} unit={t.streak === 1 ? "day" : "days"} />
                   <Stat className="px-6 py-5" icon={Snowflake} label="Freezes" value={t.freezesRemaining} />
-                  <Stat className="px-6 py-5" icon={BookOpen} label="Completed" value={done} unit={`/ ${total}`} />
+                  <Stat className="px-6 py-5" icon={BookOpen} label="Lessons" value={done} unit={`/ ${total}`} />
                   <Stat className="px-6 py-5" icon={CheckCircle2} label="Units" value={t.units.filter((u) => u.checkpoint.state === "passed").length} unit={`/ ${t.units.length}`} />
                 </div>
                 <ol className="divide-y divide-line">
@@ -106,7 +106,7 @@ export default function Profile() {
           <ReminderCard />
 
           <Card>
-            <div className="px-6 pt-6"><CardHeader title="Account" /></div>
+            <div className="px-6 pt-6"><CardHeader title="Details" /></div>
             <dl className="mt-4 divide-y divide-line border-t border-line text-sm">
               <div className="flex items-center justify-between gap-4 px-6 py-4">
                 <dt className="text-muted">Wallet</dt>

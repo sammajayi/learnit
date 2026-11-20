@@ -118,7 +118,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
 
   if (err && !data) return (
     <main className="mx-auto grid min-h-[100dvh] max-w-md place-items-center px-5">
-      <Notice tone="danger" title="This lesson couldn't load" action={<ButtonLink href="/learn" variant="outline" size="sm">Back to your path</ButtonLink>}>{err}</Notice>
+      <Notice tone="danger" title="This lesson could not load" action={<ButtonLink href="/learn" variant="outline" size="sm">Back to your path</ButtonLink>}>{err}</Notice>
     </main>
   );
   if (!data) return <LessonSkeleton />;
@@ -170,7 +170,6 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
                   <div>
                     <p className={cn("text-lg font-semibold tracking-[-0.015em]", fb.correct ? "text-sage-700" : "text-coral-700")}>{fb.correct ? "Well done" : "Not quite"}</p>
                     {!fb.correct && <p className="mt-0.5 text-[15px] text-ink-2">Correct answer: <span className="font-semibold text-ink">{fmtAnswer(ex, fb.answer)}</span></p>}
-                    {fb.correct && <p className="mt-0.5 text-[15px] text-ink-2">That&apos;s right.</p>}
                   </div>
                 </div>
                 <Button onClick={next} size="lg" variant={fb.correct ? "secondary" : "primary"} iconRight={ArrowRight} className="sm:min-w-[180px]" autoFocus>Continue</Button>
@@ -348,7 +347,7 @@ function Results({ r, id }: { r: Result; id: string }) {
   const mins = Math.floor(r.durationS / 60), secs = Math.round(r.durationS % 60);
   const title = r.passed ? (isCheckpoint(id) ? "Checkpoint cleared" : "Lesson complete") : r.tooFast ? "A little too fast" : "Almost there";
   const body = r.passed
-    ? `Your streak is now ${r.streak} day${r.streak === 1 ? "" : "s"}. Nicely done.`
+    ? `Your streak is now ${r.streak} day${r.streak === 1 ? "" : "s"}. Well done.`
     : r.tooFast ? `You got it right, but a pass needs at least ${r.minSeconds} seconds. Slow down and listen to each word.`
     : "So close. Pass at 80% to keep your streak today. Have another go and the words you missed will come up first.";
   return (
