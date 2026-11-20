@@ -36,30 +36,31 @@ export function AdminFrame({ children }: { children: ReactNode }) {
     <div className="min-h-[100dvh]">
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-btn focus:bg-ink focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
       <header className="sticky top-0 z-30 border-b border-line/70 bg-canvas/85 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-6xl 2xl:max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
           <div className="flex items-center gap-3">
             <Link href="/admin" aria-label="Admin home"><Logo compact /></Link>
-            <Badge tone="navy">Dashboard</Badge>
+            <Badge tone="navy" className="max-sm:hidden">Dashboard</Badge>
           </div>
           {a.address ? (
             <div className="flex items-center gap-2">
               {role && <Badge tone={role === "Read only" ? "outline" : "sage"} className="hidden sm:inline-flex">{role}</Badge>}
               <span className="rounded-full border border-line-strong bg-surface px-3 py-1.5 font-mono text-xs text-ink-2">{shortAddr(a.address)}</span>
-              <Button variant="ghost" size="sm" icon={LogOut} onClick={a.disconnect} aria-label="Disconnect wallet"><span className="hidden sm:inline">Disconnect</span></Button>
+              <Button variant="ghost" size="sm" icon={LogOut} onClick={a.disconnect} aria-label="Disconnect wallet" className="max-sm:h-11 max-sm:w-11 max-sm:px-0"><span className="hidden sm:inline">Disconnect</span></Button>
             </div>
           ) : (
-            <Button size="sm" variant="outline" icon={Wallet} loading={a.connecting} onClick={a.connect} disabled={!a.hasInjected} title={a.hasInjected ? undefined : "No wallet found in this browser"}>Connect wallet</Button>
+            <Button size="sm" variant="outline" icon={Wallet} loading={a.connecting} onClick={a.connect} disabled={!a.hasInjected} className="max-sm:h-11" title={a.hasInjected ? undefined : "No wallet found in this browser"}>Connect wallet</Button>
           )}
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[208px_1fr] lg:gap-10 lg:py-10">
-        <nav aria-label="Admin sections" className="-mx-4 overflow-x-auto px-4 lg:mx-0 lg:overflow-visible lg:px-0">
-          <ul className="flex gap-1 lg:sticky lg:top-24 lg:grid lg:gap-0.5">
+      <div className="mx-auto grid max-w-6xl 2xl:max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[208px_1fr] lg:gap-10 lg:py-10">
+        <nav aria-label="Admin sections">
+          {/* Wraps on a small screen so every section is visible at once, then becomes a sidebar. A scrolling row hid half of them. */}
+          <ul className="flex flex-wrap gap-1 lg:sticky lg:top-24 lg:grid lg:gap-0.5">
             {NAV.map(({ href, label, Icon }) => (
-              <li key={href} className="shrink-0">
+              <li key={href}>
                 <Link href={href} aria-current={on(href) ? "page" : undefined}
-                  className={cn("flex items-center gap-2.5 rounded-btn px-3 py-2.5 text-[15px] font-medium transition duration-150",
+                  className={cn("flex min-h-11 items-center gap-2 rounded-btn px-2.5 py-2.5 text-sm font-medium transition duration-150 lg:gap-2.5 lg:px-3 lg:text-[15px]",
                     on(href) ? "bg-ink text-white shadow-card" : "text-ink-2 hover:bg-sunken hover:text-ink")}>
                   <Icon size={17} strokeWidth={on(href) ? 2.25 : 1.85} aria-hidden />{label}
                 </Link>
@@ -67,7 +68,8 @@ export function AdminFrame({ children }: { children: ReactNode }) {
             ))}
           </ul>
         </nav>
-        <main id="main" className="min-w-0">
+        {/* A grid column grows to fit its widest child unless told it may shrink. Without this a wide table stretched the whole page instead of scrolling inside its card. */}
+        <main id="main" className="min-w-0 [&>.grid]:grid-cols-[minmax(0,1fr)]">
           {a.wrongNetwork && (
             <Notice tone="warning" className="mb-4" title={`Your wallet is on the wrong network`}
               action={<Button variant="outline" size="sm" loading={a.switching} onClick={a.switchNetwork}>Switch to {a.networkName}</Button>}>
@@ -76,7 +78,7 @@ export function AdminFrame({ children }: { children: ReactNode }) {
           )}
           <div className="mb-4 flex items-center justify-end gap-2 text-xs text-muted">
             {updated && <span className="tabular" aria-live="polite">Updated {updated.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}</span>}
-            <Button variant="ghost" size="sm" icon={RefreshCw} loading={fetching > 0} onClick={() => void qc.invalidateQueries({ queryKey: ["admin"] })}>Refresh</Button>
+            <Button variant="ghost" size="sm" icon={RefreshCw} loading={fetching > 0} className="max-sm:h-11" onClick={() => void qc.invalidateQueries({ queryKey: ["admin"] })}>Refresh</Button>
           </div>
           {children}
         </main>

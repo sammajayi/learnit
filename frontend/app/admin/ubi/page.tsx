@@ -56,7 +56,7 @@ export default function Ubi() {
                 <div role="radiogroup" aria-label="Chart shows" className="inline-flex shrink-0 rounded-btn bg-sunken p-0.5">
                   {(Object.keys(SERIES) as SeriesKey[]).map((k) => (
                     <button key={k} type="button" role="radio" aria-checked={series === k} onClick={() => setSeries(k)}
-                      className={cn("h-8 rounded-[10px] px-3 text-sm font-medium transition duration-150", series === k ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink")}>{SERIES[k].name}</button>
+                      className={cn("h-10 rounded-[10px] px-3 text-sm font-medium transition duration-150 sm:h-8", series === k ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink")}>{SERIES[k].name}</button>
                   ))}
                 </div>
               } />

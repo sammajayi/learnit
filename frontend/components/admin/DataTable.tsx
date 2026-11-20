@@ -118,6 +118,7 @@ export function DataTable<T>({ label, rows, cols, rowKey, initialSort, pageSize 
         </table>
       </div>
 
+      <p className="mt-2 text-xs text-muted sm:hidden">Swipe sideways to see every column.</p>
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
         <p aria-live="polite" className="tabular">{shown.length ? `${from} to ${to} of ${shown.length.toLocaleString("en")}` : "No rows"}{shown.length !== rows.length && ` (filtered from ${rows.length.toLocaleString("en")})`}</p>
         {pages > 1 && (
