@@ -152,7 +152,7 @@ export default function Challenges() {
               <div role="group" aria-label="View" className="inline-flex shrink-0 rounded-btn bg-sunken p-0.5">
                 {(["timeline", "table"] as const).map((v) => (
                   <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)}
-                    className={`h-8 rounded-[10px] px-3 text-sm font-medium capitalize transition duration-150 ${view === v ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink"}`}>{v}</button>
+                    className={`h-10 rounded-[10px] px-3 text-sm font-medium capitalize sm:h-8 transition duration-150 ${view === v ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink"}`}>{v}</button>
                 ))}
               </div>
             } />
