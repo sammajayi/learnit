@@ -2,6 +2,7 @@ import type { User } from "@prisma/client";
 import { db } from "./db";
 import { weekKey } from "./streak";
 import { nameFor, avatarUrlFor } from "./profile";
+import { PASS_ACCURACY } from "./grading";
 
 export const GROUP_SIZE = 30;
 export const POINTS_PER_LESSON = 10;
@@ -34,12 +35,12 @@ export async function ensureMembership(userId: string, key = currentWeekKey()) {
   }
 }
 
-/** Points earned this week by each of the given users: 10 per distinct lesson passed, 30 per distinct checkpoint passed. */
+/** Points earned this week by each of the given users: 10 per distinct lesson scored at the pass mark, 30 per distinct checkpoint passed. */
 export async function pointsForWeek(userIds: string[], key: string): Promise<Map<string, number>> {
   if (userIds.length === 0) return new Map();
   const { start, end } = weekRange(key);
   const rows = await db.lessonAttempt.findMany({
-    where: { userId: { in: userIds }, passed: true, createdAt: { gte: start, lt: end } },
+    where: { userId: { in: userIds }, passed: true, score: { gte: PASS_ACCURACY }, createdAt: { gte: start, lt: end } },
     select: { userId: true, lessonId: true, kind: true },
   });
   const seen = new Map<string, Set<string>>();
@@ -78,7 +79,7 @@ let allTimeCache: { at: number; rows: { userId: string; wallet: string; name: st
 
 /** Same points as a league week, summed over every lesson and checkpoint ever passed (each counted once). */
 const POINTS_SQL = `SELECT "userId", SUM(CASE WHEN kind = 'checkpoint' THEN ${POINTS_PER_CHECKPOINT} ELSE ${POINTS_PER_LESSON} END)::bigint AS points
-  FROM (SELECT DISTINCT "userId", "lessonId", kind FROM lesson_attempts WHERE passed) t GROUP BY "userId"`;
+  FROM (SELECT DISTINCT "userId", "lessonId", kind FROM lesson_attempts WHERE passed AND score >= ${PASS_ACCURACY}) t GROUP BY "userId"`;
 
 /** The all-time top 50, plus the learner's own rank when they are outside it. No prizes: only the weekly top 3 earn a bonus. */
 export async function allTimeLeaderboard(user: User) {

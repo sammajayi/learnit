@@ -156,7 +156,7 @@ export default function Earn() {
 
         {list.length === 0 ? (
           <EmptyState icon={Gift} title="No rewards yet" className="m-6 border-line" action={<ButtonLink href="/learn" variant="outline" size="sm">Go to your lessons</ButtonLink>}>
-            {data.verified ? "Pass a lesson to earn G$. New rewards show up here straight away." : "Once you are verified, passed lessons earn G$ here, up to the daily limit."}
+            {data.verified ? "Score 80% or more on a lesson to earn G$. New rewards show up here straight away." : "Once you are verified, passed lessons earn G$ here, up to the daily limit."}
           </EmptyState>
         ) : (
           <>

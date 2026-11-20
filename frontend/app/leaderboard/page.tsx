@@ -94,7 +94,7 @@ export default function Leaderboard() {
 
   const header = (
     <PageHeader eyebrow={tab === "week" ? "This week" : "All time"} title="Leaderboard" action={switcher}
-      description={tab === "week" ? "Pass lessons to earn points. The top 3 share a G$ bonus when the week ends." : "Every lesson and checkpoint you have passed. Only the weekly top 3 earn a bonus."} />
+      description={tab === "week" ? "Score 80% or more on lessons to earn points. The top 3 share a G$ bonus when the week ends." : "Every lesson and checkpoint you have passed. Only the weekly top 3 earn a bonus."} />
   );
 
   return (
@@ -110,7 +110,7 @@ function Weekly({ data }: { data: WeekBoard | undefined }) {
   if (!data.joined) {
     return (
       <EmptyState icon={Users} title="You are not in a group yet" className="mt-8" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>
-        Pass a lesson today to join this week&apos;s group.
+        Finish a lesson today to join this week&apos;s group.
       </EmptyState>
     );
   }
@@ -143,7 +143,7 @@ function AllTime({ data, who }: { data: AllBoard | undefined; who: { name: strin
   if (data.rows.length === 0) {
     return (
       <EmptyState icon={Trophy} title="No points yet" className="mt-8" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>
-        Pass a lesson to appear here.
+        Score 80% or more on a lesson to appear here.
       </EmptyState>
     );
   }
@@ -165,7 +165,7 @@ function AllTime({ data, who }: { data: AllBoard | undefined; who: { name: strin
             {nudge && <p className="mt-4 border-t border-line pt-3 text-sm font-medium text-sage-700">{nudge}</p>}
           </>
         ) : (
-          <p className="text-sm text-ink-2">You have no points yet. Pass a lesson to join the board.</p>
+          <p className="text-sm text-ink-2">You have no points yet. Score 80% or more on a lesson to join the board.</p>
         )}
       </Card>
 

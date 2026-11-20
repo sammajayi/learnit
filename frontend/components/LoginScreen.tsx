@@ -193,7 +193,7 @@ function SectionIntro({ eyebrow, title, body, center = false, inverse = false }:
 
 const STEPS = [
   { Icon: BookOpen, title: "Learn for ten minutes", body: "Short lessons that start from zero. Meet new words, hear them spoken, then practise until they stick." },
-  { Icon: Flame, title: "Show up each day", body: "Pass a lesson at 80% to keep your streak. Miss a day? A streak freeze can cover you." },
+  { Icon: Flame, title: "Show up each day", body: "Finish a lesson to keep your streak. Miss a day? A streak freeze can cover you." },
   { Icon: Coins, title: "Earn G$ for progress", body: "Passed lessons and unit checkpoints earn GoodDollar. Claim it to your wallet within 7 days." },
 ];
 
@@ -256,7 +256,7 @@ function Languages({ onStart }: { onStart: () => void }) {
 const TRUST = [
   { Icon: ScanFace, title: "One person, one account", body: "Rewards need a quick GoodDollar face check, so they go to real learners and not bots. Lessons stay free either way." },
   { Icon: ShieldCheck, title: "Paid on-chain, on Celo", body: "Rewards are signed vouchers you claim from the LearnIt rewards pool contract. Every claim is a transaction anyone can look up." },
-  { Icon: PiggyBank, title: "Stake to stay committed", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Pass a lesson every day to get your stake back. Miss a day and it is shared with the people who finished." },
+  { Icon: PiggyBank, title: "Stake to stay committed", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Finish a lesson every day to get your stake back. Miss a day and it is shared with the people who finished." },
   { Icon: Lock, title: "Fair by design", body: "A daily limit on rewards, a minimum time per lesson and contracts that can be paused if anything looks wrong." },
 ];
 
