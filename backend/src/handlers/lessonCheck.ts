@@ -3,6 +3,7 @@ import { findLesson, findCheckpoint, seededDraw } from "../lessons";
 import { readStart } from "../token";
 import { gradeExercise, type Answer } from "../grading";
 import type { Exercise } from "../content/schema";
+import { loseLife } from "../lives";
 
 const Body = z.object({ token: z.string(), exerciseId: z.string(), answer: z.any() });
 
@@ -10,7 +11,7 @@ function reveal(ex: Exercise) {
   return ex.type === "mc" ? ex.answer : ex.type === "translate" ? ex.answer : ex.pairs.map((p) => ({ target: p.target, english: p.english }));
 }
 
-/** Instant feedback only. No auth or database: the HMAC-signed start token (bound to the user, 6h expiry) is the credential. The final grade always comes from /submit. Works for lessons and checkpoints. */
+/** Instant feedback. A wrong answer in a lesson costs one life, the only database write here. No login:  the HMAC-signed start token (bound to the user, 6h expiry) is the credential. The final grade always comes from /submit. Works for lessons and checkpoints. */
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   try {
     const b = Body.parse(await req.json());
@@ -23,7 +24,9 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     const ex = pool.find((e) => e.id === b.exerciseId);
     if (!ex) return Response.json({ error: "Not found" }, { status: 404 });
     const r = gradeExercise(ex, b.answer as Answer);
-    return Response.json({ correct: r.correct, answer: reveal(ex) });
+    // Lives belong to lessons. Checkpoints are exams and do not use them.
+    const lives = !r.correct && l ? await loseLife(start.userId) : undefined;
+    return Response.json({ correct: r.correct, answer: reveal(ex), lives: lives && { lives: lives.lives, max: lives.max, nextAt: lives.nextAt } });
   } catch (e) {
     if (e instanceof z.ZodError) return Response.json({ error: "We could not read that answer. Try again." }, { status: 400 });
     console.error(e);
