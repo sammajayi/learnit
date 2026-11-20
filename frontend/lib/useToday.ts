@@ -10,5 +10,5 @@ export type Today = { course: "fr" | "es"; level: string; units: PathUnit[]; cur
 export function useToday() {
   const api = useApi();
   const { ready, authenticated } = useAuth();
-  return useQuery({ queryKey: ["today"], queryFn: () => api<Today>("/api/lessons/today"), enabled: ready && authenticated });
+  return useQuery({ queryKey: ["today"], queryFn: () => api<Today>("/api/lessons/today"), enabled: ready && authenticated, refetchOnWindowFocus: true });
 }

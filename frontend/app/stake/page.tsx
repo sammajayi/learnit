@@ -187,7 +187,7 @@ export default function Stake() {
       <ol className="mt-2 grid gap-5">
         {[
           { Icon: PiggyBank, t: "Stake G$", b: c ? `Pick ${fmtGD(c.min, 0)} to ${fmtGD(c.max, 0)} G$ while it is open.` : "Pick an amount while a challenge is open." },
-          { Icon: Flame, t: `Learn for ${days} days`, b: "Pass a lesson every day, in your timezone." },
+          { Icon: Flame, t: `Learn for ${days} days`, b: "Finish a lesson every day, in your timezone." },
           { Icon: Trophy, t: "Get it back", b: `Finish all ${days} days and withdraw it${bonusBps > 0 ? `, plus ${bonusBps / 100}% bonus` : ""}.` },
         ].map(({ Icon, t, b }, i) => (
           <li key={t} className="flex gap-4">
@@ -281,7 +281,7 @@ export default function Stake() {
                       if (c.settled || ended) return null;
                       const i = c.progress.required.indexOf(new Date().toLocaleDateString("en-CA"));
                       if (i < 0) return null;
-                      return <p className="mt-4 text-sm text-ink-2">{c.progress.done[i] ? "Done today." : "Pass a lesson today."}</p>;
+                      return <p className="mt-4 text-sm text-ink-2">{c.progress.done[i] ? "Done today." : "Finish a lesson today."}</p>;
                     })()}
                   </div>
                 )}

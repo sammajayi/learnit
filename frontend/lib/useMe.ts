@@ -8,5 +8,5 @@ export type Me = { id: string; username: string | null; displayName: string | nu
 export function useMe() {
   const api = useApi();
   const { authenticated, ready } = useAuth();
-  return useQuery({ queryKey: ["me"], queryFn: () => api<Me>("/api/me"), enabled: ready && authenticated, staleTime: 30_000 });
+  return useQuery({ queryKey: ["me"], queryFn: () => api<Me>("/api/me"), enabled: ready && authenticated, staleTime: 30_000, refetchOnWindowFocus: true });
 }

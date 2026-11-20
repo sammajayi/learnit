@@ -2,15 +2,16 @@ import { z } from "zod";
 import { requireUser, authFail } from "../auth";
 import { db } from "../db";
 import { issueVoucher, publicVoucher } from "../vouchers";
+import { PASS_ACCURACY } from "../grading";
 
 const Body = z.object({ attemptId: z.string() });
 
-/** Issues the reward voucher for a passed attempt. Safe to call twice: returns the voucher that already exists. */
+/** Issues the reward voucher for a passed attempt that scored high enough to earn one. Safe to call twice: returns the voucher that already exists. */
 export async function POST(req: Request) {
   try {
     const user = await requireUser(req);
     const { attemptId } = Body.parse(await req.json());
-    const attempt = await db.lessonAttempt.findFirst({ where: { id: attemptId, userId: user.id, passed: true } });
+    const attempt = await db.lessonAttempt.findFirst({ where: { id: attemptId, userId: user.id, passed: true, score: { gte: PASS_ACCURACY } } });
     if (!attempt) return Response.json({ error: "Not found" }, { status: 404 });
 
     const [existing, flagged] = await Promise.all([
