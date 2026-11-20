@@ -2,6 +2,11 @@
 import { useAuth } from "./useAuth";
 import { useCallback, useRef } from "react";
 
+/** A failed request. `body` is the server's JSON, so a caller can read a `code` as well as the message. */
+export class ApiError extends Error {
+  constructor(message: string, readonly status: number, readonly body: Record<string, unknown>) { super(message); }
+}
+
 /** fetch wrapper that attaches the Privy access token. The returned function never changes identity. */
 export function useApi() {
   const { getAccessToken } = useAuth();
@@ -13,7 +18,7 @@ export function useApi() {
       ...init,
       headers: { "content-type": "application/json", ...(init?.headers ?? {}), authorization: `Bearer ${token}` },
     });
-    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? `HTTP ${res.status}`);
+    if (!res.ok) { const body = await res.json().catch(() => ({})); throw new ApiError((body as { error?: string }).error ?? `HTTP ${res.status}`, res.status, body); }
     return res.json() as Promise<T>;
   }, []);
 }

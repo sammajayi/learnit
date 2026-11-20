@@ -13,6 +13,7 @@ import { VerifyCard } from "./VerifyCard";
 import { ClaimCard } from "./ClaimCard";
 import { GasCard } from "./GasCard";
 import { InstallPrompt } from "./InstallPrompt";
+import { LivesLine } from "./Lives";
 import { Flag } from "./Flag";
 import { Sk } from "./Skeletons";
 import { Badge, ButtonLink, Card, Notice, Progress, Stat } from "./ui";
@@ -105,6 +106,7 @@ function ContinueCard({ t, course }: { t: Today; course: string }) {
             : <ButtonLink href={href} size="lg" iconRight={ArrowRight}>{unit.done === 0 && t.currentUnit === 1 ? "Start first lesson" : "Continue learning"}</ButtonLink>}
           {nextTitle && <p className="text-sm text-muted">Up next: <span className="font-medium text-ink-2">{nextTitle}</span></p>}
         </div>
+        <LivesLine lives={t.lives} className="mt-5" />
       </div>
     </Card>
   );

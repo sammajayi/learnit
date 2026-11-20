@@ -1,6 +1,7 @@
 import { requireUser, authFail } from "../auth";
 import { db } from "../db";
 import { streakFor } from "../attempts";
+import { getLives } from "../lives";
 import { COURSES } from "../lessons";
 import type { Lang } from "../content/schema";
 
@@ -9,10 +10,11 @@ type State = "passed" | "next" | "locked";
 export async function GET(req: Request) {
   try {
     const user = await requireUser(req);
-    const [passed, recentFails, st] = await Promise.all([
+    const [passed, recentFails, st, lives] = await Promise.all([
       db.lessonAttempt.findMany({ where: { userId: user.id, passed: true }, select: { lessonId: true } }),
       db.lessonAttempt.findMany({ where: { userId: user.id, kind: "checkpoint", passed: false, createdAt: { gte: new Date(Date.now() - 86400_000) } }, orderBy: { createdAt: "desc" }, select: { lessonId: true, createdAt: true } }),
       streakFor(user),
+      getLives(user.id),
     ]);
     const passedSet = new Set(passed.map((p) => p.lessonId));
     const course = (user.course === "es" ? "es" : "fr") as Lang;
@@ -46,7 +48,7 @@ export async function GET(req: Request) {
     });
     return Response.json({
       course, level: units.find((u) => u.n === currentUnit)?.level ?? "A0", units, currentUnit, nextLessonId,
-      streak: st.streak, todayDone: st.todayDone, freezesRemaining: st.freezesRemaining,
+      streak: st.streak, todayDone: st.todayDone, freezesRemaining: st.freezesRemaining, lives,
     });
   } catch (e) { return authFail(e); }
 }
