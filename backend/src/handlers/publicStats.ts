@@ -2,11 +2,12 @@ import { db } from "../db";
 import { publicClient } from "../identity";
 import { ADDR, identityAbi } from "../chain";
 import { rewardsPoolAbi, streakVaultAbi } from "../abis";
+import { LEARNING_CAP_SECONDS } from "../learningTime";
 
 type DayRow = { day: Date; claims: bigint; claimers: bigint; total: string | null };
 type TotalRow = { claims: bigint; claimers: bigint; total: string | null };
-type ActivityRow = { day: Date; signups: bigint; active: bigint; passed: bigint };
-type LearnRow = { a1: bigint; a7: bigint; a30: bigint; attempts: bigint; passed: bigint; learners: bigint };
+type ActivityRow = { day: Date; signups: bigint; active: bigint; passed: bigint; seconds: bigint | null };
+type LearnRow = { a1: bigint; a7: bigint; a30: bigint; attempts: bigint; passed: bigint; learners: bigint; seconds: bigint | null; everyone: bigint };
 
 const DAYS = 30;
 const TTL_MS = 5 * 60_000;
@@ -78,14 +79,16 @@ export async function GET() {
                COUNT(DISTINCT "userId") FILTER (WHERE "createdAt" >= NOW() - INTERVAL '7 days') AS a7,
                COUNT(DISTINCT "userId") FILTER (WHERE "createdAt" >= NOW() - INTERVAL '30 days') AS a30,
                COUNT(*) AS attempts, COUNT(*) FILTER (WHERE passed) AS passed,
-               COUNT(DISTINCT "userId") FILTER (WHERE passed) AS learners
+               COUNT(DISTINCT "userId") FILTER (WHERE passed) AS learners,
+               SUM(LEAST("durationS", ${LEARNING_CAP_SECONDS}::int)) AS seconds, COUNT(DISTINCT "userId") AS everyone
         FROM lesson_attempts`,
       // One row per UTC day for the trend charts: new people, people who attempted a lesson, lessons passed.
       db.$queryRaw<ActivityRow[]>`
         SELECT d.day AS day,
                COALESCE((SELECT COUNT(*) FROM users u WHERE date_trunc('day', u."createdAt" AT TIME ZONE 'UTC') = d.day), 0) AS signups,
                COALESCE((SELECT COUNT(DISTINCT a."userId") FROM lesson_attempts a WHERE date_trunc('day', a."createdAt" AT TIME ZONE 'UTC') = d.day), 0) AS active,
-               COALESCE((SELECT COUNT(*) FROM lesson_attempts a WHERE a.passed AND date_trunc('day', a."createdAt" AT TIME ZONE 'UTC') = d.day), 0) AS passed
+               COALESCE((SELECT COUNT(*) FROM lesson_attempts a WHERE a.passed AND date_trunc('day', a."createdAt" AT TIME ZONE 'UTC') = d.day), 0) AS passed,
+               COALESCE((SELECT SUM(LEAST(a."durationS", ${LEARNING_CAP_SECONDS}::int)) FROM lesson_attempts a WHERE date_trunc('day', a."createdAt" AT TIME ZONE 'UTC') = d.day), 0) AS seconds
         FROM generate_series(date_trunc('day', NOW() AT TIME ZONE 'UTC') - ${DAYS - 1} * INTERVAL '1 day', date_trunc('day', NOW() AT TIME ZONE 'UTC'), INTERVAL '1 day') AS d(day)
         ORDER BY 1 DESC`,
       onChainUsed(),
@@ -97,8 +100,8 @@ export async function GET() {
     const body = {
       generatedAt: new Date().toISOString(),
       users: { total: wallets.length, newLast7d: signups7, active1d: Number(l.a1), active7d: Number(l.a7), active30d: Number(l.a30), verified },
-      learning: { attempts: Number(l.attempts), passed: Number(l.passed), learnersWithPass: Number(l.learners) },
-      activity: activity.map((a) => ({ day: a.day.toISOString().slice(0, 10), signups: Number(a.signups), active: Number(a.active), passed: Number(a.passed) })),
+      learning: { attempts: Number(l.attempts), passed: Number(l.passed), learnersWithPass: Number(l.learners), totalSeconds: Number(l.seconds ?? 0), attemptingLearners: Number(l.everyone) },
+      activity: activity.map((a) => ({ day: a.day.toISOString().slice(0, 10), signups: Number(a.signups), active: Number(a.active), passed: Number(a.passed), seconds: Number(a.seconds ?? 0) })),
       // Everything that has moved through LearnIt, all time: UBI claimed, rewards paid out and G$ staked (wei, as strings).
       gUsed: (() => {
         const ubi = BigInt(n(all[0]).total);

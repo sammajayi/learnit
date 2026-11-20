@@ -75,6 +75,18 @@ export function fillDays(days: UbiDay[], n: number): UbiDay[] {
 /** Whole G$ as a plain number, for charts. Precision below a thousandth is irrelevant at chart scale. */
 export const gdNum = (wei: bigint | string) => Number(BigInt(wei) / 10n ** 14n) / 10_000;
 
+/** A length of time for people: "45 s", "12 min", "3 h 20 min". */
+export function fmtDuration(seconds: number): string {
+  const s = Math.max(0, Math.round(seconds));
+  if (s < 60) return `${s} s`;
+  const m = Math.round(s / 60);
+  if (m < 60) return `${m} min`;
+  const h = Math.floor(m / 60), r = m % 60;
+  return r ? `${h.toLocaleString("en")} h ${r} min` : `${h.toLocaleString("en")} h`;
+}
+/** Short axis text for a chart of durations in seconds: "30m", "2h". */
+export const axisDuration = (s: number) => (s >= 3600 ? `${+(s / 3600).toFixed(1)}h` : `${Math.round(s / 60)}m`);
+
 /** "Mar 4" for a UTC date key. */
 export const dayLabel = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
 
@@ -83,7 +95,7 @@ export function fillActivity(rows: ActivityDay[], n: number): ActivityDay[] {
   const by = new Map(rows.map((r) => [r.day, r]));
   return Array.from({ length: n }, (_, i) => {
     const k = new Date(Date.now() - (n - 1 - i) * 86_400_000).toISOString().slice(0, 10);
-    return by.get(k) ?? { day: k, signups: 0, active: 0, passed: 0 };
+    return by.get(k) ?? { day: k, signups: 0, active: 0, passed: 0, seconds: 0 };
   });
 }
 
