@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Heart } from "lucide-react";
+import { Heart } from "@/components/icons";
 import { motion, useReducedMotion } from "motion/react";
 import { REGEN_MS } from "@learnit/backend/livesLogic";
 
@@ -39,7 +39,8 @@ export function useSecondsUntil(at: number | null) {
   return at === null ? 0 : Math.max(0, Math.ceil((at - now) / 1000));
 }
 
-export const fmtWait = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+/** A calm wait, in whole minutes ("12 min"). The design system has no countdown timers, so nothing here counts seconds. */
+export const fmtWait = (s: number) => `${Math.max(1, Math.ceil(s / 60))} min`;
 
 /** The lives bar. Full hearts on a wide screen, one heart and a number on a narrow one. */
 export function Hearts({ lives, max }: { lives: number; max: number }) {
@@ -49,12 +50,12 @@ export function Hearts({ lives, max }: { lives: number; max: number }) {
       <span aria-hidden className="flex items-center gap-1 max-sm:hidden">
         {Array.from({ length: max }, (_, i) => (
           <motion.span key={i} animate={reduce ? undefined : { scale: i === lives ? [1, 1.35, 1] : 1 }} transition={{ duration: 0.3 }} className="grid">
-            <Heart size={18} strokeWidth={2} className={i < lives ? "fill-coral-500 text-coral-500" : "text-line-strong"} />
+            <Heart size={20} strokeWidth={1.75} className={i < lives ? "text-sage-600 [&_path]:fill-sage-600" : "text-line-strong"} />
           </motion.span>
         ))}
       </span>
       <span aria-hidden className="tabular flex items-center gap-1 text-sm font-semibold text-ink-2 sm:hidden">
-        <Heart size={18} strokeWidth={2} className={lives > 0 ? "fill-coral-500 text-coral-500" : "text-line-strong"} />{lives}
+        <Heart size={20} strokeWidth={1.75} className={lives > 0 ? "text-sage-600 [&_path]:fill-sage-600" : "text-line-strong"} />{lives}
       </span>
     </div>
   );

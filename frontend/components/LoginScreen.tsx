@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { useAuth } from "@/lib/useAuth";
-import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet, X } from "@/components/icons";
 import { LANGS } from "@/lib/languages";
 import { Badge, Button, Card } from "./ui";
 import { Logo } from "./Logo";

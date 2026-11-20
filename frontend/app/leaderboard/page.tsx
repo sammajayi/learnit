@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { CalendarDays, Medal, Trophy, Users } from "lucide-react";
+import { CalendarDays, Medal, Trophy, Users } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { AppShell } from "@/components/AppShell";
@@ -125,7 +125,7 @@ function Weekly({ data }: { data: WeekBoard | undefined }) {
             <p className="text-[13px] font-medium text-muted">Your rank</p>
             <p className="tabular mt-1.5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">{me ? `#${me.rank}` : "Not ranked"} {me && <span className="text-sm font-medium tracking-normal text-muted">of {data.rows.length}</span>}</p>
           </div>
-          <p className="shrink-0 text-right text-[13px] font-medium text-muted">Ends in<span className="tabular mt-1.5 block text-base font-semibold text-ink">{left.n} {left.unit}</span></p>
+          <p aria-label={`Ends in ${left.n} ${left.unit}`} className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sunken px-3 py-1.5 text-sm font-semibold text-ink"><CalendarDays size={18} strokeWidth={1.75} aria-hidden className="text-muted" /><span className="tabular" aria-hidden>{left.n} {left.unit} left</span></p>
         </div>
         {nudge && <p className="mt-4 border-t border-line pt-3 text-sm font-medium text-sage-700">{nudge}</p>}
       </Card>

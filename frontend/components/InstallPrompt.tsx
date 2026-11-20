@@ -1,5 +1,5 @@
 "use client";
-import { Download, PlusSquare, Share, Smartphone, X } from "lucide-react";
+import { Download, PlusSquare, Share, Smartphone, X } from "@/components/icons";
 import { useInstall } from "@/lib/install";
 import { Button, Card } from "./ui";
 

@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState, type ReactNode } from "react";
-import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, ChevronsUpDown, Download, Search } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, ChevronsUpDown, Download, Search } from "@/components/icons";
 import { Button, fieldClass } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { sortRows, toCsv, type Dir, type Sortable } from "./tableLogic";

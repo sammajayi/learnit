@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ScanFace } from "lucide-react";
+import { ScanFace } from "@/components/icons";
 import { useGoodSdk } from "@/lib/useGoodSdk";
 import { CHAIN_ID } from "@learnit/backend/chain";
 import { Button, Card } from "./ui";
