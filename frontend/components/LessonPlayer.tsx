@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Check, Clock, Flame, Heart, HeartCrack, RotateCcw, Target, Volume2, VolumeX, X } from "@/components/icons";
+import { ArrowRight, Check, Clock, CalendarCheck, HeartCrack, RotateCcw, Target, Volume2, VolumeX, X } from "@/components/icons";
 import { cn } from "@/lib/cn";
 import { Button, ButtonLink, Card, Notice, ProgressRing } from "./ui";
 import { ApiError, useApi } from "@/lib/useApi";
@@ -20,7 +20,7 @@ type Loaded = { id: string; title: string; speechLang: string; token: string; li
 type Pair = { target: string; english: string };
 type Ans = number | string[] | Pair[];
 type Feedback = { correct: boolean; answer: unknown; lives?: LivesInfo };
-type Result = { passed: boolean; rewardEligible: boolean; accuracy: number; durationS: number; missedWordIds: string[]; streak: number; attemptId: string; voucherPending: boolean; reviewPending: boolean };
+type Result = { passed: boolean; rewardEligible: boolean; accuracy: number; durationS: number; missedWordIds: string[]; streak: number; streakExtended: boolean; attemptId: string; voucherPending: boolean; reviewPending: boolean };
 
 import { preloadSpeech, speak } from "@/lib/speech";
 
@@ -154,7 +154,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
     </main>
   );
   if (!data) return <LessonSkeleton />;
-  if (result) return <Results r={result} id={id} lives={livesOn ? livesInfo : null} />;
+  if (result) return <Results r={result} id={id} />;
   if (data.intro?.length && !introSeen) return <Intro words={data.intro} tip={data.tip} lang={data.speechLang} title={data.title} lives={livesOn ? livesInfo : null} onStart={() => setIntroSeen(true)} />;
   if (!ex) return <LessonSkeleton label="Submitting your answers" />;
 
@@ -362,7 +362,7 @@ function Match({ ex, onFinish }: { ex: Extract<PublicExercise, { type: "match" }
   );
 }
 
-function Results({ r, id, lives }: { r: Result; id: string; lives: LivesInfo | null }) {
+function Results({ r, id }: { r: Result; id: string }) {
   const api = useApi();
   const reduce = useReducedMotion();
   const [voucher, setVoucher] = useState<{ amount: string } | null>(null);
@@ -381,7 +381,7 @@ function Results({ r, id, lives }: { r: Result; id: string; lives: LivesInfo | n
   const mins = Math.floor(r.durationS / 60), secs = Math.round(r.durationS % 60);
   const title = r.passed ? (isCheckpoint(id) ? "Checkpoint cleared" : "Lesson complete") : "Almost there";
   const body = r.passed
-    ? `Your streak is now ${r.streak} day${r.streak === 1 ? "" : "s"}. Well done.`
+    ? (r.streakExtended ? `Your streak is now ${r.streak} day${r.streak === 1 ? "" : "s"}. Well done.` : "Well done.")
     : "So close. Pass at 80% to clear this checkpoint. Have another go and the words you missed will come up first.";
   return (
     <main className="mx-auto flex min-h-[100dvh] max-w-lg flex-col justify-center px-5 py-12">
@@ -395,12 +395,12 @@ function Results({ r, id, lives }: { r: Result; id: string; lives: LivesInfo | n
             <h1 className="mt-2 text-display-md text-ink">{title}</h1>
             <p className="mx-auto mt-2 max-w-[36ch] text-pretty leading-relaxed text-ink-2">{body}</p>
           </div>
-          <dl className={`grid divide-x divide-line border-y border-line ${lives ? "grid-cols-4" : "grid-cols-3"}`}>
+          <dl className={`grid divide-x divide-line border-y border-line ${r.streakExtended ? "grid-cols-3" : "grid-cols-2"}`}>
             {[
               { Icon: Target, k: "Accuracy", v: `${pct}%` },
               { Icon: Clock, k: "Time", v: mins ? `${mins}m ${secs}s` : `${secs}s` },
-              { Icon: Flame, k: "Streak", v: `${r.streak}` },
-              ...(lives ? [{ Icon: Heart, k: "Lives", v: `${lives.lives}/${lives.max}` }] : []),
+              // The streak is news only on the day it grows, so it shows once a day.
+              ...(r.streakExtended ? [{ Icon: CalendarCheck, k: "Streak", v: `${r.streak}` }] : []),
             ].map(({ Icon, k, v }) => (
               <div key={k} className="px-3 py-4">
                 <dt className="flex items-center justify-center gap-1 text-xs font-medium text-muted"><Icon size={13} aria-hidden />{k}</dt>

@@ -83,7 +83,8 @@ export async function submitAttempt(opts: {
   return {
     attemptId: attempt.id, passed, accuracy, durationS, missedWordIds, rewardEligible,
     results: results.map((r) => ({ id: r.id, correct: r.correct })),
-    streak: st.streak, reviewPending,
+    // True only for the first finished lesson of the learner's day, the one that extends the streak.
+    streak: st.streak, streakExtended: newDay, reviewPending,
     voucherPending: rewardEligible && !reviewPending,
   };
 }
