@@ -13,6 +13,7 @@ import type { PublicExercise } from "@learnit/backend/lessons";
 import { fmtGD } from "@learnit/backend/format";
 import { LessonSkeleton } from "./Skeletons";
 import { StakePrompt } from "./StakePrompt";
+import { ReminderPrompt } from "./ReminderPrompt";
 import { playCorrect, playTap, playWrong, soundEnabled, setSoundEnabled } from "@/lib/sounds";
 
 type Loaded = { id: string; title: string; speechLang: string; token: string; lives?: LivesInfo; intro?: { target: string; english: string }[]; tip?: { title: string; body: string } | null; exercises: PublicExercise[] };
@@ -416,6 +417,7 @@ function Results({ r, id, lives }: { r: Result; id: string; lives: LivesInfo | n
               </ButtonLink>
             )}
             {r.passed && !review && <StakePrompt />}
+            {r.passed && <ReminderPrompt />}
             {r.passed && !isCheckpoint(id) && !r.rewardEligible && <Notice tone="info">You scored {pct}%. G$ rewards need 80% or more. Your points still count, and they rise with accuracy.</Notice>}
             {r.passed && !pending && !voucher && review && <Notice tone="info">Your reward is being reviewed. It will show up in Rewards once that clears.</Notice>}
             <ButtonLink href="/learn" size="lg" block variant={voucher ? "secondary" : "primary"} iconRight={ArrowRight}>{r.passed ? "Continue" : "Back to your path"}</ButtonLink>
