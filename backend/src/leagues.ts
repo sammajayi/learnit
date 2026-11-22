@@ -74,7 +74,10 @@ export async function leaderboardFor(user: User): Promise<{ weekKey: string; gro
   return { weekKey: key, groupIndex: mine.groupIndex, rows, endsAt: weekRange(key).end.toISOString() };
 }
 
-const ALL_TIME_LIMIT = 50;
+export const ALL_TIME_LIMIT = 200;
+export const ALL_TIME_PAGE = 20;
+/** The weekly board shows the top of the group only; the learner's own row is added when they are lower. */
+export const WEEK_SHOWN = 15;
 const ALL_TIME_TTL_MS = 60_000;
 let allTimeCache: { at: number; rows: { userId: string; wallet: string; name: string; avatarUrl: string | null; points: number }[] } | null = null;
 
@@ -83,8 +86,8 @@ const POINTS_SQL = `SELECT "userId", SUM(pts)::bigint AS points
   FROM (SELECT "userId", GREATEST(1, ROUND((CASE WHEN kind = 'checkpoint' THEN ${POINTS_PER_CHECKPOINT} ELSE ${POINTS_PER_LESSON} END) * LEAST(1, GREATEST(0, MAX(score)))::numeric)) AS pts
         FROM lesson_attempts WHERE passed GROUP BY "userId", "lessonId", kind) t GROUP BY "userId"`;
 
-/** The all-time top 50, plus the learner's own rank when they are outside it. No prizes: only the weekly top 3 earn a bonus. */
-export async function allTimeLeaderboard(user: User) {
+/** The all-time board, 20 to a page over the top 200, plus the learner's own rank and who is just ahead of them. No prizes: only the weekly top 3 earn a bonus. */
+export async function allTimeLeaderboard(user: User, page = 1) {
   if (!allTimeCache || Date.now() - allTimeCache.at > ALL_TIME_TTL_MS) {
     const top = await db.$queryRawUnsafe<{ userId: string; points: bigint }[]>(`${POINTS_SQL} ORDER BY points DESC, "userId" LIMIT ${ALL_TIME_LIMIT}`);
     const users = await db.user.findMany({ where: { id: { in: top.map((t) => t.userId) } }, select: { id: true, wallet: true, username: true, displayName: true, hasAvatar: true, avatarVersion: true } });
@@ -97,11 +100,19 @@ export async function allTimeLeaderboard(user: User) {
       }),
     };
   }
-  const rows = allTimeCache.rows.map((r, i) => ({ ...r, rank: i + 1 }));
-  if (rows.some((r) => r.userId === user.id)) return { rows, you: null as { rank: number; points: number } | null };
-  const mine = await db.$queryRawUnsafe<{ points: bigint; rank: bigint }[]>(
-    `WITH p AS (${POINTS_SQL}) SELECT points, (SELECT COUNT(*) FROM p p2 WHERE p2.points > p.points) + 1 AS rank FROM p WHERE "userId" = $1`, user.id);
-  return { rows, you: mine[0] ? { rank: Number(mine[0].rank), points: Number(mine[0].points) } : null };
+  const all = allTimeCache.rows.map((r, i) => ({ ...r, rank: i + 1 }));
+  const pages = Math.max(1, Math.ceil(all.length / ALL_TIME_PAGE));
+  const at = Math.min(Math.max(1, Math.floor(page) || 1), pages);
+  const rows = all.slice((at - 1) * ALL_TIME_PAGE, at * ALL_TIME_PAGE);
+  const inList = all.find((r) => r.userId === user.id);
+  let you: { rank: number; points: number } | null = inList ? { rank: inList.rank, points: inList.points } : null;
+  if (!you) {
+    const mine = await db.$queryRawUnsafe<{ points: bigint; rank: bigint }[]>(
+      `WITH p AS (${POINTS_SQL}) SELECT points, (SELECT COUNT(*) FROM p p2 WHERE p2.points > p.points) + 1 AS rank FROM p WHERE "userId" = $1`, user.id);
+    if (mine[0]) you = { rank: Number(mine[0].rank), points: Number(mine[0].points) };
+  }
+  const ahead = inList && inList.rank > 1 ? all[inList.rank - 2] : null;
+  return { rows, you, inList: Boolean(inList), page: at, pages, total: all.length, ahead: ahead ? { name: ahead.name, points: ahead.points } : null };
 }
 
 export { weekRange };
