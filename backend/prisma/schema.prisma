@@ -213,3 +213,16 @@ model ChainCursor {
   block BigInt // last block fully read
   @@map("chain_cursors")
 }
+
+/// Who invited a user and which community link they came from. A separate table, so adding it changes no existing table.
+/// Plain ids, no foreign keys. Either referrerId or source (or both) is set.
+model Referral {
+  id         String   @id @default(cuid())
+  userId     String   @unique // the invited person; one referral per person
+  referrerId String?
+  source     String?  // community tag from the link, such as "celo"
+  createdAt  DateTime @default(now())
+
+  @@index([referrerId])
+  @@map("referrals")
+}

@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { CHAIN, RPC_URL, RPC_FALLBACK_URLS } from "@learnit/backend/chain";
 import { startInstallListener } from "@/lib/install";
 import { useAuth } from "@/lib/useAuth";
+import { ReferralCapture } from "./ReferralCapture";
 
 // CHAIN is one of two chains picked at runtime by env var, so its static type is a union; wagmi's
 // transports map type demands both branches' ids unless we tell it which one actually applies here.
@@ -63,6 +64,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       <QueryClientProvider client={qc}>
         <CacheGuard />
+        <ReferralCapture />
         <WagmiProvider config={wagmiConfig}>{children}</WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>

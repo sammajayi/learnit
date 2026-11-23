@@ -25,6 +25,7 @@ export function LoginScreen() {
     if (window.location.hostname.startsWith("localhost") || window.location.hostname.endsWith(".vercel.app")) return false;
     // Say which button was pressed, so the app opens that sign-in straight away and the visitor does not have to press it twice.
     const to = new URL(appUrl);
+    to.search = window.location.search; // keeps ?ref= and ?c= so an invite survives the move to the app
     to.searchParams.set("login", kind);
     window.location.href = to.toString();
     return true;

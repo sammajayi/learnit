@@ -11,6 +11,7 @@ import { AppShell } from "@/components/AppShell";
 import { Avatar } from "@/components/Avatar";
 import { Flag } from "@/components/Flag";
 import { ProfileEditor } from "@/components/ProfileEditor";
+import { InviteCard } from "@/components/InviteCard";
 import { ReminderCard } from "@/components/ReminderCard";
 import { ProfileSkeleton, Sk } from "@/components/Skeletons";
 import { useAuthGate } from "@/components/useAuthGate";
@@ -102,6 +103,8 @@ export default function Profile() {
             <CardHeader title="Edit profile" description="How you appear on the leaderboard." className="mb-6" />
             <ProfileEditor />
           </Card>
+
+          <InviteCard />
 
           <ReminderCard />
 

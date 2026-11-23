@@ -2,6 +2,7 @@ import { db } from "../db";
 import { publicClient } from "../identity";
 import { ADDR, identityAbi } from "../chain";
 import { rewardsPoolAbi, streakVaultAbi } from "../abis";
+import { referralsEnabled, referralTotals } from "../referrals";
 import { LEARNING_CAP_SECONDS } from "../learningTime";
 
 type DayRow = { day: Date; claims: bigint; claimers: bigint; total: string | null };
@@ -94,12 +95,15 @@ export async function GET() {
       onChainUsed(),
     ]);
     const verified = await verifiedCount(wallets.map((u) => u.wallet)).catch(() => null);
+    // Only when referrals are switched on, and a failure here never hides the other numbers.
+    const referrals = referralsEnabled() ? await referralTotals().catch(() => null) : null;
     const rows = days.map((d) => ({ day: d.day.toISOString().slice(0, 10), ...n(d) }));
     const todayKey = new Date().toISOString().slice(0, 10);
     const l = learn[0];
     const body = {
       generatedAt: new Date().toISOString(),
       users: { total: wallets.length, newLast7d: signups7, active1d: Number(l.a1), active7d: Number(l.a7), active30d: Number(l.a30), verified },
+      referrals,
       learning: { attempts: Number(l.attempts), passed: Number(l.passed), learnersWithPass: Number(l.learners), totalSeconds: Number(l.seconds ?? 0), attemptingLearners: Number(l.everyone) },
       activity: activity.map((a) => ({ day: a.day.toISOString().slice(0, 10), signups: Number(a.signups), active: Number(a.active), passed: Number(a.passed), seconds: Number(a.seconds ?? 0) })),
       // Everything that has moved through LearnIt, all time: UBI claimed, rewards paid out and G$ staked (wei, as strings).
