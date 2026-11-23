@@ -36,13 +36,63 @@ export async function findAtRisk(now = new Date()): Promise<AtRiskUser[]> {
   return out;
 }
 
-/** Plain, short copy naming exactly what is at stake. */
+/** Branded HTML, inline-styled and table-based so it renders consistently across email clients
+ *  (including Outlook, which ignores most modern CSS). Colors match the app's own design tokens
+ *  (frontend/app/globals.css): warm canvas, navy ink, coral as the one call-to-action color. Logo is
+ *  the same mark as frontend/public/icon.svg, hosted so every client (SVG support in email is poor)
+ *  can render it. */
 export function riskEmail(daysLeft: number, language: "fr" | "es") {
   const lang = language === "es" ? "Spanish" : "French";
-  const left = daysLeft > 0 ? ` with ${daysLeft} day${daysLeft === 1 ? "" : "s"} left on the clock` : "";
-  const url = `${(process.env.APP_URL || "https://www.uselearnit.xyz").replace(/\/$/, "")}/learn`;
-  return {
-    subject: "Your stake is at risk tonight",
-    html: `<p>You haven't done today's ${lang} lesson yet, and you have an active stake running${left}. Missing today could cost you that stake when the challenge settles.</p><p><a href="${url}">Do today's lesson</a></p>`,
-  };
+  const left = daysLeft > 0 ? `${daysLeft} day${daysLeft === 1 ? "" : "s"} left in the challenge` : "last day of the challenge";
+  const appUrl = (process.env.APP_URL || "https://www.uselearnit.xyz").replace(/\/$/, "");
+  const url = `${appUrl}/learn`;
+  const logo = `${appUrl}/icon-512.png`;
+  const subject = "Your stake is at risk tonight";
+  const html = `<!doctype html>
+<html>
+  <body style="margin:0;padding:0;background:#f8f6f1;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8f6f1;padding:32px 0;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="max-width:480px;width:100%;">
+            <tr>
+              <td style="padding:0 4px 20px;">
+                <table role="presentation" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="vertical-align:middle;padding-right:10px;">
+                      <img src="${logo}" width="32" height="32" alt="" style="display:block;border-radius:9px;">
+                    </td>
+                    <td style="vertical-align:middle;">
+                      <span style="font-size:16px;font-weight:700;color:#0f172a;letter-spacing:-0.2px;">LearnIt</span>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#ffffff;border:1px solid #e7e2d8;border-radius:16px;padding:32px;">
+                <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#a24a35;text-transform:uppercase;letter-spacing:0.08em;">Stake at risk</p>
+                <h1 style="margin:0 0 14px;font-size:21px;line-height:1.3;color:#0f172a;font-weight:600;letter-spacing:-0.02em;">You haven't done today's ${lang} lesson yet</h1>
+                <p style="margin:0 0 22px;font-size:15px;line-height:1.6;color:#334155;">You have an active stake riding on this challenge, with ${left}. Missing today could cost you that stake when the challenge settles.</p>
+                <table role="presentation" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="border-radius:12px;background:#b9563e;">
+                      <a href="${url}" style="display:inline-block;padding:12px 24px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:12px;">Do today's lesson</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:20px 4px 0;">
+                <p style="margin:0;font-size:12px;line-height:1.6;color:#5b6577;">It only takes a minute. Sent only on evenings a staked challenge is still open and today isn't done yet.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+  return { subject, html };
 }
