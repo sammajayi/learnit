@@ -6,7 +6,20 @@ import { parseUnits } from "viem";
 import { Button, Notice } from "@/components/ui";
 import type { ActivityDay, UbiDay } from "./data";
 
-export const when = (s: number) => new Date(s * 1000).toLocaleString("en", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+export const when = (s: number) => new Date(s * 1000).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+/** One compact title row for an admin page: a short title, an optional one-line hint, and actions at the end. */
+export function AdminHeader({ title, hint, action }: { title: ReactNode; hint?: ReactNode; action?: ReactNode }) {
+  return (
+    <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+      <div className="min-w-0">
+        <h1 className="text-xl font-semibold tracking-[-0.01em] text-ink">{title}</h1>
+        {hint && <p className="mt-0.5 text-pretty text-sm text-muted">{hint}</p>}
+      </div>
+      {action && <div className="flex shrink-0 items-center gap-2">{action}</div>}
+    </header>
+  );
+}
+
 export const shortAddr = (a: string) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 export const parseG = (v: string): bigint | null => {
   const t = v.trim();
@@ -88,7 +101,7 @@ export function fmtDuration(seconds: number): string {
 export const axisDuration = (s: number) => (s >= 3600 ? `${+(s / 3600).toFixed(1)}h` : `${Math.round(s / 60)}m`);
 
 /** "Mar 4" for a UTC date key. */
-export const dayLabel = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
+export const dayLabel = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 
 /** The last `n` UTC days of the activity series, oldest first, with zeros for any day the server left out. */
 export function fillActivity(rows: ActivityDay[], n: number): ActivityDay[] {
