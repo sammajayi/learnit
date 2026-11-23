@@ -53,7 +53,11 @@ export default function Stake() {
   const [paying, setPaying] = useState<number | null>(null); // which payout is being withdrawn, so only that row shows progress
   const [err, setErr] = useState<string | null>(null);
   // The lesson result screen links here with the minimum filled in.
-  useEffect(() => { const a = new URLSearchParams(window.location.search).get("amount"); if (a && /^\d*\.?\d*$/.test(a)) setAmount(a); }, []);
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const a = q.get("amount"); if (a && /^\d*\.?\d*$/.test(a)) setAmount(a);
+    const d = Number(q.get("days")); if ([7, 14, 30].includes(d)) setPick(d);
+  }, []);
   const live = Boolean(ADDR.streakVault);
   const busy = step !== null;
 

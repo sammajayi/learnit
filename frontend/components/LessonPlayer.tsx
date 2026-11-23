@@ -14,6 +14,9 @@ import { fmtGD } from "@learnit/backend/format";
 import { LessonSkeleton } from "./Skeletons";
 import { StakePrompt } from "./StakePrompt";
 import { ReminderPrompt } from "./ReminderPrompt";
+import { GoalReminder } from "./GoalReminder";
+import { GoalPrompt } from "./GoalPrompt";
+import { VerifyCard } from "./VerifyCard";
 import { playCorrect, playTap, playWrong, soundEnabled, setSoundEnabled } from "@/lib/sounds";
 
 type Loaded = { id: string; title: string; speechLang: string; token: string; lives?: LivesInfo; intro?: { target: string; english: string }[]; tip?: { title: string; body: string } | null; exercises: PublicExercise[] };
@@ -32,6 +35,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   const reduce = useReducedMotion();
   const [data, setData] = useState<Loaded | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [needVerify, setNeedVerify] = useState(false);
   const [queue, setQueue] = useState<number[]>([]);
   const [pos, setPos] = useState(0);
   const [first, setFirst] = useState<Record<string, Ans>>({});
@@ -60,6 +64,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
       preloadSpeech([...(d.intro ?? []).map((w) => w.target), ...d.exercises.flatMap((e) => (e.type === "mc" && e.speak ? [e.speak] : []))], d.speechLang);
     }).catch((e) => {
       if (e instanceof ApiError && e.body.code === "no-lives") setGate(e.body.lives as LivesInfo);
+      else if (e instanceof ApiError && e.body.code === "not-verified") setNeedVerify(true);
       else setErr(e.message);
     });
   }, [api, base, livesOn, loadKey]);
@@ -148,6 +153,13 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   }, [fb, cur, busy, ex, next, check]);
 
   if (gate) return <OutOfLives info={gate} onReady={reset} />;
+  if (needVerify) return (
+    <main className="mx-auto grid min-h-[100dvh] max-w-md content-center gap-4 px-5 py-8">
+      <Notice tone="info" title="Verify to take lessons">GoodDollar checks you are one real person. It is a quick face check, and lessons open as soon as it is done.</Notice>
+      <VerifyCard />
+      <ButtonLink href="/home" variant="ghost" size="md">Back to home</ButtonLink>
+    </main>
+  );
   if (err && !data) return (
     <main className="mx-auto grid min-h-[100dvh] max-w-md place-items-center px-5">
       <Notice tone="danger" title="This lesson could not load" action={<ButtonLink href="/learn" variant="outline" size="sm">Back to your path</ButtonLink>}>{err}</Notice>
@@ -416,7 +428,9 @@ function Results({ r, id }: { r: Result; id: string }) {
                 <span className="flex items-center gap-1 text-sm">Claim <ArrowRight size={15} aria-hidden /></span>
               </ButtonLink>
             )}
+            {r.passed && <GoalPrompt />}
             {r.passed && !review && <StakePrompt />}
+            {!r.passed && <GoalReminder />}
             {r.passed && <ReminderPrompt />}
             {r.passed && !isCheckpoint(id) && !r.rewardEligible && <Notice tone="info">You scored {pct}%. G$ rewards need 80% or more. Your points still count, and they rise with accuracy.</Notice>}
             {r.passed && !pending && !voucher && review && <Notice tone="info">Your reward is being reviewed. It will show up in Rewards once that clears.</Notice>}
