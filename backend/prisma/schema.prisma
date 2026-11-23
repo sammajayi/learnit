@@ -164,6 +164,16 @@ model LeagueNotice {
   @@map("league_notices")
 }
 
+/// One GoodDollar engagement reward claim per learner. The row is taken before the claim is sent, so a double tap cannot send twice.
+model EngagementClaim {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  txHash    String?
+  createdAt DateTime @default(now())
+
+  @@map("engagement_claims")
+}
+
 model AbuseFlag {
   id        String   @id @default(cuid())
   userId    String

@@ -50,16 +50,9 @@ export function ReminderCard() {
 
   return (
     <Card className="p-4" aria-labelledby="reminder" role="region">
-      {head}
-      {!data.available ? (
-        <p className="mt-1 text-sm text-muted">Reminders are not available right now.</p>
-      ) : installFirst ? (
-        <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">On iPhone, add LearnIt to your Home Screen first (Share, then Add to Home Screen). Then come back here to turn on reminders.</p>
-      ) : !supported ? (
-        <p className="mt-1 text-sm text-muted">This browser does not support notifications.</p>
-      ) : (
-        <div className="mt-1 flex items-center justify-between gap-3">
-          <p className="min-w-0 text-pretty text-xs text-muted">One nudge a day, skipped if you have already learned. Your timezone.</p>
+      {data.available && !installFirst && supported ? (
+        <div className="flex items-center justify-between gap-3">
+          {head}
           <div className="flex shrink-0 items-center gap-3">
             <div className="relative">
               <select id="remind-at" aria-label="Reminder time" value={hour} onChange={(e) => void changeHour(Number(e.target.value))} className="h-9 appearance-none rounded-input border border-line bg-surface pl-3 pr-8 text-sm text-ink">
@@ -75,6 +68,13 @@ export function ReminderCard() {
             </button>
           </div>
         </div>
+      ) : (
+        <>
+          {head}
+          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">
+            {!data.available ? "Reminders are not available right now." : installFirst ? "On iPhone, add LearnIt to your Home Screen first (Share, then Add to Home Screen). Then come back here to turn on reminders." : "This browser does not support notifications."}
+          </p>
+        </>
       )}
       {err && <Notice tone="danger" className="mt-3">{err}</Notice>}
     </Card>

@@ -11,6 +11,7 @@ import { useToday, type Today } from "@/lib/useToday";
 import { AppShell } from "./AppShell";
 import { VerifyCard } from "./VerifyCard";
 import { ClaimCard } from "./ClaimCard";
+import { EngagementCard } from "./EngagementCard";
 import { GasCard } from "./GasCard";
 import { InstallPrompt } from "./InstallPrompt";
 import { ReminderPrompt } from "./ReminderPrompt";
@@ -63,6 +64,7 @@ export function Home() {
           <div className="order-2 grid min-w-0 grid-cols-1 gap-6">
             {isLoading && <Sk className="h-[220px] w-full rounded-card" />}
             {me && (me.verified ? <ClaimCard /> : <VerifyCard />)}
+            {me && me.verified && <EngagementCard />}
             {me && me.verified && !me.gasTopupDone && <GasCard />}
           </div>
           {me && <div className="order-4 min-w-0 empty:hidden"><RewardsCard verified={me.verified} /></div>}
