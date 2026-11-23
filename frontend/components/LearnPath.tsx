@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { CheckCircle2, Lock } from "lucide-react";
+import { CheckCircle2, Lock } from "@/lib/icons";
 import { cn } from "@/lib/cn";
 import { PathNode, type NodeState } from "./PathNode";
 import { Badge, ProgressRing } from "./ui";

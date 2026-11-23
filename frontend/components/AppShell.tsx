@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { BookOpen, Coins, Home, MessageCircle, Trophy, type LucideIcon } from "lucide-react";
+import { BookOpen, Coins, Home, MessageCircle, Trophy, type IconType } from "@/lib/icons";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
 import { LanguageChip } from "./LanguageChip";
 import { ProfileMenu } from "./ProfileMenu";
 
-type NavItem = { href: string; label: string; Icon: LucideIcon; /** other paths that belong under this menu item */ match?: string[]; soon?: boolean };
+type NavItem = { href: string; label: string; Icon: IconType; /** other paths that belong under this menu item */ match?: string[]; soon?: boolean };
 
 export const NAV: NavItem[] = [
   { href: "/home", label: "Home", Icon: Home },

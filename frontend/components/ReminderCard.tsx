@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bell, ChevronDown, Loader2 } from "lucide-react";
+import { Bell, ChevronDown, Loader2 } from "@/lib/icons";
 import { useApi } from "@/lib/useApi";
 import { needsInstallFirst, pushSupported, PermissionDenied, subscribeThisDevice, unsubscribeThisDevice } from "@/lib/push";
 import { Sk } from "./Skeletons";

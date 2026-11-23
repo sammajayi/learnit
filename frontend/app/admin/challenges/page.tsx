@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAccount, usePublicClient, useWriteContract } from "wagmi";
 import { encodeFunctionData, erc20Abi } from "viem";
-import { ExternalLink, Flame, PauseCircle, PlayCircle, Plus, Send, Sparkles } from "lucide-react";
+import { ExternalLink, Flame, PauseCircle, PlayCircle, Plus, Send, Sparkles } from "@/lib/icons";
 import { friendlyError } from "@/lib/txErrors";
 import { streakVaultAbi } from "@learnit/backend/abis";
 import { ADDR } from "@learnit/backend/chain";

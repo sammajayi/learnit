@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
-import { BookOpen, CheckCircle2, ChevronDown, Clock, ExternalLink, Gift, Trophy } from "lucide-react";
+import { BookOpen, CheckCircle2, ChevronDown, Clock, ExternalLink, Gift, Trophy } from "@/lib/icons";
 import { useApi } from "@/lib/useApi";
 import { friendlyError, STALE_ERRORS } from "@/lib/txErrors";
 import { rewardsPoolAbi } from "@learnit/backend/abis";

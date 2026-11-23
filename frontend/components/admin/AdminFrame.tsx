@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { Coins, Flame, LayoutDashboard, LogOut, Vault, Wallet } from "lucide-react";
+import { Coins, Flame, LayoutDashboard, LogOut, Vault, Wallet } from "@/lib/icons";
 import { cn } from "@/lib/cn";
 import { Logo } from "@/components/Logo";
 import { Badge, Button } from "@/components/ui";

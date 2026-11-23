@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Keyboard, Mic, SendHorizontal, Sparkles } from "lucide-react";
+import { Keyboard, Mic, SendHorizontal, Sparkles } from "@/lib/icons";
 import { AppShell } from "@/components/AppShell";
 import { Badge, Button, Card, Notice, PageHeader, fieldClass } from "@/components/ui";
 import { cn } from "@/lib/cn";

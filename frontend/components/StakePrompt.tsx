@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, PiggyBank } from "lucide-react";
+import { ArrowRight, PiggyBank } from "@/lib/icons";
 import { ADDR } from "@learnit/backend/chain";
 import { fmtGD } from "@learnit/backend/format";
 import { useApi } from "@/lib/useApi";

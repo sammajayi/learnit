@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { CalendarDays, Medal, Trophy, Users } from "lucide-react";
+import { CalendarDays, Medal, Trophy, Users } from "@/lib/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { AppShell } from "@/components/AppShell";

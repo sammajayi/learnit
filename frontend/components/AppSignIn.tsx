@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Mail, Wallet } from "lucide-react";
+import { Mail, Wallet } from "@/lib/icons";
 import { useAuth } from "@/lib/useAuth";
 import { Button } from "./ui";
 import { Logo } from "./Logo";

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Coins, Flame, Snowflake, Trophy, PiggyBank } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Coins, Flame, Snowflake, Trophy, PiggyBank } from "@/lib/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { langOf } from "@/lib/languages";

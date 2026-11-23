@@ -1,6 +1,6 @@
 "use client";
 import { useState, type ReactNode } from "react";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check } from "@/lib/icons";
 import { parseUnits } from "viem";
 import { Button, Notice } from "@/components/ui";
 import type { ActivityDay, UbiDay } from "./data";

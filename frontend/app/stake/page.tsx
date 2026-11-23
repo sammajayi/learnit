@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
 import { erc20Abi, formatUnits, parseUnits } from "viem";
-import { CalendarDays, Check, ChevronDown, Flame, Minus, SlidersHorizontal, Trophy, Users, PiggyBank } from "lucide-react";
+import { CalendarDays, Check, ChevronDown, Flame, Minus, SlidersHorizontal, Trophy, Users, PiggyBank } from "@/lib/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { friendlyError } from "@/lib/txErrors";

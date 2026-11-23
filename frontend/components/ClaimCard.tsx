@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
+import { ArrowRight, CheckCircle2, ExternalLink } from "@/lib/icons";
 import { useApi } from "@/lib/useApi";
 import { useGoodSdk } from "@/lib/useGoodSdk";
 import { fmtGD } from "@learnit/backend/format";

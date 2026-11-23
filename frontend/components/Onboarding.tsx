@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, BookOpen, Check, Coins, PiggyBank } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, Coins, PiggyBank } from "@/lib/icons";
 import { useApi } from "@/lib/useApi";
 import { LanguageCards } from "./LanguageCards";
 import { ProfileEditor } from "./ProfileEditor";

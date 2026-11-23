@@ -1,5 +1,5 @@
 "use client";
-import { Check } from "lucide-react";
+import { Check } from "@/lib/icons";
 import { LANGS, type Course } from "@/lib/languages";
 import { cn } from "@/lib/cn";
 import { Flag } from "./Flag";

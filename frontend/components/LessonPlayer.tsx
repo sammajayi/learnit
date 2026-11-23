@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Check, Clock, Flame, RotateCcw, Target, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowRight, Check, Clock, Flame, RotateCcw, Target, Volume2, VolumeX, X } from "@/lib/icons";
 import { cn } from "@/lib/cn";
 import { Button, ButtonLink, Card, Notice, ProgressRing } from "./ui";
 import { useApi } from "@/lib/useApi";

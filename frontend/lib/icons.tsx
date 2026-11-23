@@ -1,0 +1,74 @@
+"use client";
+import type { ComponentProps } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { AlertCircleIcon, ArrowDown01Icon, ArrowLeft02Icon, ArrowRight02Icon, ArrowUpRight01Icon, Award01Icon, BookOpen01Icon, Calendar03Icon, Camera01Icon, Cancel01Icon, CheckmarkBadge01Icon, CheckmarkCircle02Icon, Clock01Icon, Coins01Icon, Copy01Icon, CrownIcon, DashboardSquare01Icon, Delete02Icon, Download01Icon, FaceIdIcon, Fire02Icon, FuelStationIcon, GiftIcon, Home01Icon, InformationCircleIcon, KeyboardIcon, LinkSquare02Icon, Loading03Icon, LockIcon, Logout01Icon, Mail01Icon, Medal01Icon, Message01Icon, Mic01Icon, MinusSignIcon, Notification01Icon, PauseCircleIcon, PiggyBankIcon, PlayCircleIcon, PlayIcon, PlusSignIcon, PlusSignSquareIcon, RotateLeft01Icon, SafeIcon, Sent02Icon, SentIcon, Share08Icon, ShieldCheckIcon, SlidersHorizontalIcon, SmartPhone01Icon, SnowIcon, SparklesIcon, Target01Icon, Tick02Icon, UnfoldMoreIcon, UserIcon, UserMultipleIcon, VolumeHighIcon, VolumeMute01Icon, Wallet01Icon } from "@hugeicons/core-free-icons";
+
+/**
+ * The app's icons. Each keeps the name it had before, so call sites read the same, and draws a Hugeicons icon.
+ * Props: size, strokeWidth, className and the usual SVG ones.
+ */
+type Glyph = ComponentProps<typeof HugeiconsIcon>["icon"];
+export type IconProps = Omit<ComponentProps<typeof HugeiconsIcon>, "icon">;
+export type IconType = (props: IconProps) => React.JSX.Element;
+const make = (icon: Glyph): IconType => function Icon(props) { return <HugeiconsIcon icon={icon} {...props} />; };
+
+export const AlertCircle = make(AlertCircleIcon);
+export const ArrowLeft = make(ArrowLeft02Icon);
+export const ArrowRight = make(ArrowRight02Icon);
+export const ArrowUpRight = make(ArrowUpRight01Icon);
+export const Award = make(Award01Icon);
+export const BadgeCheck = make(CheckmarkBadge01Icon);
+export const Bell = make(Notification01Icon);
+export const BookOpen = make(BookOpen01Icon);
+export const CalendarDays = make(Calendar03Icon);
+export const Camera = make(Camera01Icon);
+export const Check = make(Tick02Icon);
+export const CheckCircle2 = make(CheckmarkCircle02Icon);
+export const ChevronDown = make(ArrowDown01Icon);
+export const ChevronsUpDown = make(UnfoldMoreIcon);
+export const Clock = make(Clock01Icon);
+export const Coins = make(Coins01Icon);
+export const Copy = make(Copy01Icon);
+export const Download = make(Download01Icon);
+export const ExternalLink = make(LinkSquare02Icon);
+export const Flame = make(Fire02Icon);
+export const Fuel = make(FuelStationIcon);
+export const Gift = make(GiftIcon);
+export const Home = make(Home01Icon);
+export const Info = make(InformationCircleIcon);
+export const Keyboard = make(KeyboardIcon);
+export const LayoutDashboard = make(DashboardSquare01Icon);
+export const Loader2 = make(Loading03Icon);
+export const Lock = make(LockIcon);
+export const LogOut = make(Logout01Icon);
+export const Mail = make(Mail01Icon);
+export const Medal = make(Medal01Icon);
+export const MessageCircle = make(Message01Icon);
+export const Mic = make(Mic01Icon);
+export const Minus = make(MinusSignIcon);
+export const PauseCircle = make(PauseCircleIcon);
+export const PiggyBank = make(PiggyBankIcon);
+export const Play = make(PlayIcon);
+export const PlayCircle = make(PlayCircleIcon);
+export const Plus = make(PlusSignIcon);
+export const PlusSquare = make(PlusSignSquareIcon);
+export const RotateCcw = make(RotateLeft01Icon);
+export const ScanFace = make(FaceIdIcon);
+export const Send = make(Sent02Icon);
+export const SendHorizontal = make(SentIcon);
+export const Share = make(Share08Icon);
+export const ShieldCheck = make(ShieldCheckIcon);
+export const SlidersHorizontal = make(SlidersHorizontalIcon);
+export const Smartphone = make(SmartPhone01Icon);
+export const Snowflake = make(SnowIcon);
+export const Sparkles = make(SparklesIcon);
+export const Target = make(Target01Icon);
+export const Trash2 = make(Delete02Icon);
+export const Trophy = make(CrownIcon);
+export const UserRound = make(UserIcon);
+export const Users = make(UserMultipleIcon);
+export const Vault = make(SafeIcon);
+export const Volume2 = make(VolumeHighIcon);
+export const VolumeX = make(VolumeMute01Icon);
+export const Wallet = make(Wallet01Icon);
+export const X = make(Cancel01Icon);

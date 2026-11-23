@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
-import { ArrowRight, BadgeCheck, BookOpen, Check, CheckCircle2, Copy, Flame, Lock, LogOut, ScanFace, Snowflake } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, Check, CheckCircle2, Copy, Flame, Lock, LogOut, ScanFace, Snowflake } from "@/lib/icons";
 import { useMe } from "@/lib/useMe";
 import { useToday } from "@/lib/useToday";
 import { langOf } from "@/lib/languages";

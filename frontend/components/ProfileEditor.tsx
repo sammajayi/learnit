@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { Camera, Check, Loader2, Trash2 } from "lucide-react";
+import { Camera, Check, Loader2, Trash2 } from "@/lib/icons";
 import { validateUsername, BIO_MAX, NAME_MAX } from "@learnit/backend/profile";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
