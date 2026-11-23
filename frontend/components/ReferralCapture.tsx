@@ -17,7 +17,13 @@ export function ReferralCapture() {
     try {
       const q = new URLSearchParams(window.location.search);
       const ref = q.get("ref") ?? undefined, source = q.get("c") ?? undefined;
-      if (ref || source) localStorage.setItem(REF_STORAGE_KEY, JSON.stringify({ ref, source } satisfies StoredReferral));
+      if (ref || source) {
+        // Merge into what is already saved, so a later link with only a community tag does not wipe an invite code.
+        let prev: StoredReferral = {};
+        try { prev = JSON.parse(localStorage.getItem(REF_STORAGE_KEY) ?? "{}") ?? {}; } catch { /* start fresh */ }
+        const next: StoredReferral = { ref: ref ?? prev.ref, source: source ?? prev.source };
+        localStorage.setItem(REF_STORAGE_KEY, JSON.stringify(next));
+      }
     } catch { /* storage can be blocked; the link then simply does not count */ }
   }, []);
 
@@ -26,10 +32,11 @@ export function ReferralCapture() {
     let stored: StoredReferral | null = null;
     try { stored = JSON.parse(localStorage.getItem(REF_STORAGE_KEY) ?? "null"); } catch { /* ignore */ }
     if (!stored || (!stored.ref && !stored.source)) return;
-    // Sent once. Whatever the answer (counted, already recorded, account too old), asking again would give the same answer.
+    // Cleared once the server has answered (counted, already recorded, account too old: asking again gives the same answer).
+    // If the request fails, the code stays saved and is sent again on the next visit.
     api("/api/referral", { method: "POST", body: JSON.stringify(stored) })
-      .catch(() => {})
-      .finally(() => { try { localStorage.removeItem(REF_STORAGE_KEY); } catch { /* ignore */ } });
+      .then(() => { try { localStorage.removeItem(REF_STORAGE_KEY); } catch { /* ignore */ } })
+      .catch(() => {});
   }, [ready, authenticated, api]);
 
   return null;
