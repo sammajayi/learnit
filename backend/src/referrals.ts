@@ -36,11 +36,11 @@ export async function attachReferral(user: User, ref: unknown, source: unknown) 
   }
 }
 
-export type ReferredPerson = { username: string | null; joined: string; verified: boolean; claimed: boolean; learned: boolean; counted: boolean };
+export type ReferredPerson = { username: string | null; joined: string; verified: boolean; learned: boolean; counted: boolean };
 
 /**
- * A referred person counts once they have done all three: verified with GoodDollar, claimed G$ in the app, and passed a lesson.
- * Claiming needs verification, so a claim also shows they are verified.
+ * A referred person counts once they are GoodDollar verified and have passed at least one lesson.
+ * A G$ claim needs verification, so a claim also shows they are verified (covers an expired or unsynced verifiedUntil).
  */
 async function progressOf(userIds: string[]) {
   if (!userIds.length) return { users: new Map<string, { username: string | null; verifiedUntil: Date | null }>(), claimed: new Set<string>(), learned: new Set<string>() };
@@ -52,15 +52,20 @@ async function progressOf(userIds: string[]) {
   return { users: new Map(users.map((u) => [u.id, u])), claimed: new Set(claims.map((c) => c.userId)), learned: new Set(passes.map((p) => p.userId)) };
 }
 
+type Progress = Awaited<ReturnType<typeof progressOf>>;
+const isVerified = (p: Progress, id: string) => {
+  const u = p.users.get(id);
+  return p.claimed.has(id) || (!!u?.verifiedUntil && u.verifiedUntil > new Date());
+};
+
 /** The people one user has invited, and how far each has got. */
 export async function referralSummary(user: User) {
   const rows = await db.referral.findMany({ where: { referrerId: user.id }, orderBy: { createdAt: "desc" } });
   const p = await progressOf(rows.map((r) => r.userId));
   const people: ReferredPerson[] = rows.map((r) => {
     const u = p.users.get(r.userId);
-    const claimed = p.claimed.has(r.userId), learned = p.learned.has(r.userId);
-    const verified = claimed || (!!u?.verifiedUntil && u.verifiedUntil > new Date());
-    return { username: u?.username ?? null, joined: r.createdAt.toISOString(), verified, claimed, learned, counted: verified && claimed && learned };
+    const verified = isVerified(p, r.userId), learned = p.learned.has(r.userId);
+    return { username: u?.username ?? null, joined: r.createdAt.toISOString(), verified, learned, counted: verified && learned };
   });
   return { people, invited: people.length, counted: people.filter((x) => x.counted).length };
 }
@@ -69,11 +74,7 @@ export async function referralSummary(user: User) {
 export async function referralTotals() {
   const rows = await db.referral.findMany({ select: { userId: true, referrerId: true, source: true } });
   const p = await progressOf(rows.map((r) => r.userId));
-  const isCounted = (id: string) => {
-    const u = p.users.get(id);
-    const claimed = p.claimed.has(id);
-    return (claimed || (!!u?.verifiedUntil && u.verifiedUntil > new Date())) && claimed && p.learned.has(id);
-  };
+  const isCounted = (id: string) => isVerified(p, id) && p.learned.has(id);
   const bySource: Record<string, { joined: number; counted: number }> = {};
   for (const r of rows) {
     if (!r.source) continue;
