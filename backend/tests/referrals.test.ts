@@ -25,3 +25,16 @@ describe("referral helpers", () => {
     expect(referralsEnabled()).toBe(false);
   });
 });
+
+import { referralCounts } from "../src/referrals";
+
+describe("when a referral counts", () => {
+  it("needs verification, a passed lesson and a confirmed engagement reward", () => {
+    expect(referralCounts({ verified: true, learned: true, engaged: true })).toBe(true);
+  });
+  it("does not count while any one of the three is missing", () => {
+    expect(referralCounts({ verified: false, learned: true, engaged: true })).toBe(false);
+    expect(referralCounts({ verified: true, learned: false, engaged: true })).toBe(false);
+    expect(referralCounts({ verified: true, learned: true, engaged: false })).toBe(false);
+  });
+});

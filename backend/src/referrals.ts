@@ -36,20 +36,24 @@ export async function attachReferral(user: User, ref: unknown, source: unknown) 
   }
 }
 
-export type ReferredPerson = { username: string | null; joined: string; verified: boolean; learned: boolean; counted: boolean };
+export type ReferredPerson = { username: string | null; joined: string; verified: boolean; learned: boolean; engaged: boolean; counted: boolean };
 
 /**
- * A referred person counts once they are GoodDollar verified and have passed at least one lesson.
- * A G$ claim needs verification, so a claim also shows they are verified (covers an expired or unsynced verifiedUntil).
+ * A referred person counts once they are GoodDollar verified, have passed at least one lesson and have claimed their
+ * GoodDollar engagement reward (confirmed on-chain). The engagement claim is what pays the inviter, so it is part of the rule.
  */
+export const referralCounts = (o: { verified: boolean; learned: boolean; engaged: boolean }) => o.verified && o.learned && o.engaged;
+
+/** A G$ claim needs verification, so a claim also shows they are verified (covers an expired or unsynced verifiedUntil). */
 async function progressOf(userIds: string[]) {
-  if (!userIds.length) return { users: new Map<string, { username: string | null; verifiedUntil: Date | null }>(), claimed: new Set<string>(), learned: new Set<string>() };
-  const [users, claims, passes] = await Promise.all([
+  if (!userIds.length) return { users: new Map<string, { username: string | null; verifiedUntil: Date | null }>(), claimed: new Set<string>(), learned: new Set<string>(), engaged: new Set<string>() };
+  const [users, claims, passes, engagement] = await Promise.all([
     db.user.findMany({ where: { id: { in: userIds } }, select: { id: true, username: true, verifiedUntil: true } }),
     db.ubiClaim.groupBy({ by: ["userId"], where: { userId: { in: userIds } } }),
     db.lessonAttempt.groupBy({ by: ["userId"], where: { userId: { in: userIds }, passed: true } }),
+    db.engagementClaim.findMany({ where: { userId: { in: userIds }, confirmed: true }, select: { userId: true } }),
   ]);
-  return { users: new Map(users.map((u) => [u.id, u])), claimed: new Set(claims.map((c) => c.userId)), learned: new Set(passes.map((p) => p.userId)) };
+  return { users: new Map(users.map((u) => [u.id, u])), claimed: new Set(claims.map((c) => c.userId)), learned: new Set(passes.map((p) => p.userId)), engaged: new Set(engagement.map((e) => e.userId)) };
 }
 
 type Progress = Awaited<ReturnType<typeof progressOf>>;
@@ -64,8 +68,8 @@ export async function referralSummary(user: User) {
   const p = await progressOf(rows.map((r) => r.userId));
   const people: ReferredPerson[] = rows.map((r) => {
     const u = p.users.get(r.userId);
-    const verified = isVerified(p, r.userId), learned = p.learned.has(r.userId);
-    return { username: u?.username ?? null, joined: r.createdAt.toISOString(), verified, learned, counted: verified && learned };
+    const verified = isVerified(p, r.userId), learned = p.learned.has(r.userId), engaged = p.engaged.has(r.userId);
+    return { username: u?.username ?? null, joined: r.createdAt.toISOString(), verified, learned, engaged, counted: referralCounts({ verified, learned, engaged }) };
   });
   return { people, invited: people.length, counted: people.filter((x) => x.counted).length };
 }
@@ -74,7 +78,7 @@ export async function referralSummary(user: User) {
 export async function referralTotals() {
   const rows = await db.referral.findMany({ select: { userId: true, referrerId: true, source: true } });
   const p = await progressOf(rows.map((r) => r.userId));
-  const isCounted = (id: string) => isVerified(p, id) && p.learned.has(id);
+  const isCounted = (id: string) => referralCounts({ verified: isVerified(p, id), learned: p.learned.has(id), engaged: p.engaged.has(id) });
   const bySource: Record<string, { joined: number; counted: number }> = {};
   for (const r of rows) {
     if (!r.source) continue;

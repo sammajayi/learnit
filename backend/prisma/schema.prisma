@@ -169,6 +169,8 @@ model EngagementClaim {
   id        String   @id @default(cuid())
   userId    String   @unique
   txHash    String?
+  inviter   String?  // the wallet that was named as inviter in the claim, if any
+  confirmed Boolean  @default(false) // true once the transaction is mined and succeeded; only then does a referral count
   createdAt DateTime @default(now())
 
   @@map("engagement_claims")
