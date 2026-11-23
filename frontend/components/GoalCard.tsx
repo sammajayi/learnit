@@ -45,8 +45,8 @@ export function GoalCard({ t, verified }: { t: Today; verified: boolean }) {
     line = !t.todayDone && goal ? `“${goal.reason}”` : `${fmtGD(running.mine!.stake, 0)} G$ staked. Keep going.`;
   } else if (!goal) {
     if (!completedALesson || snoozed) return null;
-    title = "Set a learning goal";
-    line = "Pick 7, 14 or 30 days and say why you are learning.";
+    title = "Pick a goal";
+    line = "7, 14 or 30 days, and why you are learning.";
     action = { href: "/goal", label: "Set goal" }; dismissible = true;
   } else if (verified && next && !snoozed) {
     const days = lenOf(next);

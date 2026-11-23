@@ -107,7 +107,7 @@ function ContinueCard({ t, course, verified }: { t: Today; course: string; verif
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           {!verified
-            ? <p className="text-[15px] text-ink-2">Verify with GoodDollar to start your first lesson. It is a quick face check.</p>
+            ? <p className="text-[15px] text-ink-2">Verify with GoodDollar to start your first lesson.</p>
             : allDone
             ? <ButtonLink href="/learn" size="lg" variant="secondary" iconRight={ArrowRight}>Review your path</ButtonLink>
             : <ButtonLink href={href} size="lg" iconRight={ArrowRight}>{unit.done === 0 && t.currentUnit === 1 ? "Start first lesson" : "Continue learning"}</ButtonLink>}

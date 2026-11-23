@@ -155,7 +155,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   if (gate) return <OutOfLives info={gate} onReady={reset} />;
   if (needVerify) return (
     <main className="mx-auto grid min-h-[100dvh] max-w-md content-center gap-4 px-5 py-8">
-      <Notice tone="info" title="Verify to take lessons">GoodDollar checks you are one real person. It is a quick face check, and lessons open as soon as it is done.</Notice>
+      <Notice tone="info" title="Verify to take lessons">A quick face check proves you are one real person. Lessons open as soon as it is done.</Notice>
       <VerifyCard />
       <ButtonLink href="/home" variant="ghost" size="md">Back to home</ButtonLink>
     </main>
