@@ -2,8 +2,9 @@
 //   npx tsx --env-file=.env scripts/register-engagement-app.mts            (dry run, prints what it would send)
 //   npx tsx --env-file=.env scripts/register-engagement-app.mts --send     (sends the transactions)
 // Needs ENGAGEMENT_APP_PRIVATE_KEY (this wallet becomes the app and pays the network fee, so it needs a little CELO).
-// On production the approval is GoodDollar's to give: this script only applies. Percentages: 80 of the reward goes to
-// the user and inviter together, and 60 of that is the user's share, so the app keeps 20, the user gets 48 and the inviter 32.
+// On production the approval is GoodDollar's to give: this script only applies. Percentages: 74 of the reward goes to
+// the user and inviter together, and 57 of that is the user's share. Per 5,000 G$: the app keeps 1,300, the learner gets 2,109
+// and the inviter 1,591 (whole-number percentages only, so this is the closest to moving 300 G$ from the learner to LearnIt).
 import { createWalletClient, http, parseAbi } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { CHAIN, RPC_URL } from "../src/chain";
@@ -21,7 +22,7 @@ const abi = parseAbi([
   "function applyApp(address app, address rewardReceiver, uint8 userAndInviterPercentage, uint8 userPercentage, string description, string url, string email)",
   "function approve(address app)",
 ]);
-const args = [account.address, account.address, 80, 60,
+const args = [account.address, account.address, 74, 57,
   "LearnIt teaches French and Spanish in short daily lessons, and rewards verified learners with GoodDollar.",
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.uselearnit.xyz",
   process.env.ENGAGEMENT_APP_EMAIL || "hello@uselearnit.xyz"] as const;

@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useWalletClient } from "wagmi";
 import { CheckCircle2, Gift } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
-import { Button, Card } from "./ui";
+import { Button, ButtonLink, Card } from "./ui";
 
 type Typed = { domain: { name: string; version: string; chainId: number; verifyingContract: `0x${string}` }; types: Record<string, { name: string; type: string }[]>; primaryType: string; message: { app: `0x${string}`; inviter: `0x${string}`; validUntilBlock: string; description: string } };
 type Prepared = { ready: true; typedData: Typed } | { ready: false; why: string };
@@ -16,6 +17,7 @@ type Prepared = { ready: true; typedData: Typed } | { ready: false; why: string 
 export function EngagementCard() {
   const api = useApi();
   const qc = useQueryClient();
+  const router = useRouter();
   const { data: wallet } = useWalletClient();
   const { data } = useQuery({ queryKey: ["engagement"], queryFn: () => api<Prepared>("/api/engagement"), retry: false, staleTime: 60_000 });
   const [busy, setBusy] = useState(false);
@@ -26,7 +28,8 @@ export function EngagementCard() {
     return (
       <Card className="flex items-center gap-3 p-4">
         <CheckCircle2 size={20} className="shrink-0 text-sage-600" aria-hidden />
-        <p className="text-sm text-ink-2">Engagement reward claimed. It is in your wallet.</p>
+        <p className="min-w-0 flex-1 text-sm text-ink-2">Engagement reward claimed. Put 1,000 G$ of it into a streak challenge.</p>
+        <ButtonLink href="/stake?amount=1000" size="sm" variant="outline">Stake</ButtonLink>
       </Card>
     );
   }
@@ -50,6 +53,7 @@ export function EngagementCard() {
       await api("/api/engagement", { method: "POST", body: JSON.stringify({ validUntilBlock: t.message.validUntilBlock, signature }) });
       setDone(true);
       void qc.invalidateQueries({ queryKey: ["engagement"] });
+      router.push("/stake?amount=1000"); // signed, claimed, now stake: straight on to the challenge with 1,000 G$ filled in
     } catch (e) {
       setErr(e instanceof Error ? e.message : "We could not claim it. Try again in a moment.");
     } finally { setBusy(false); }
