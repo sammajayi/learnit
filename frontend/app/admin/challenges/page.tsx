@@ -8,11 +8,11 @@ import { friendlyError } from "@/lib/txErrors";
 import { streakVaultAbi } from "@learnit/backend/abis";
 import { ADDR } from "@learnit/backend/chain";
 import { fmtGD } from "@learnit/backend/format";
-import { Badge, Button, Card, CardHeader, EmptyState, Label, Notice, PageHeader, fieldClass } from "@/components/ui";
+import { Badge, Button, Card, CardHeader, EmptyState, Label, Notice, fieldClass } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
 import { useAdmin } from "@/components/admin/AdminProvider";
 import { DAY, RESULTS_DEADLINE, type Cohort, type CohortStatus, useBonus, useCohorts, useVaultPaused, useVaultPending } from "@/components/admin/data";
-import { ConfirmAction, SafeTx, parseG, when } from "@/components/admin/bits";
+import { AdminHeader, ConfirmAction, SafeTx, parseG, when } from "@/components/admin/bits";
 import { CohortTimeline } from "@/components/admin/CohortTimeline";
 import { ChallengeTable } from "@/components/admin/ChallengeTable";
 import { HBars } from "@/components/admin/charts";
@@ -128,15 +128,15 @@ export default function Challenges() {
   if (!vault) {
     return (
       <div className="grid gap-6">
-        <PageHeader title="Challenges" />
+        <AdminHeader title="Challenges" />
         <Notice tone="info" title="The StreakVault is not set up yet">Set NEXT_PUBLIC_STREAK_VAULT_ADDRESS after you deploy the contracts, then reload.</Notice>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-8">
-      <PageHeader title="Challenges" description="Streak challenges of 7, 14 or 30 days. People can join until the first day is over." />
+    <div className="grid gap-4">
+      <AdminHeader title="Challenges" hint="Streak challenges of 7, 14 or 30 days. People can join until the first day is over." />
 
       {err && <Notice tone="danger">{err}</Notice>}
       {done && (
@@ -146,7 +146,7 @@ export default function Challenges() {
       )}
 
       <section aria-labelledby="all-challenges">
-        <Card className="p-6">
+        <Card className="p-4">
           <CardHeader id="all-challenges" title="All challenges" description={view === "timeline" ? "Newest first, on one calendar." : "Click a heading to sort. Search by number or status."}
             action={
               <div role="group" aria-label="View" className="inline-flex shrink-0 rounded-btn bg-sunken p-0.5">
@@ -156,7 +156,7 @@ export default function Challenges() {
                 ))}
               </div>
             } />
-          <div className="mt-5">
+          <div className="mt-3">
             {cohorts.isLoading ? (
               <div className="grid gap-5">{[0, 1, 2].map((i) => <Sk key={i} className="h-14 rounded-input" />)}</div>
             ) : !cohorts.data?.length ? (
@@ -172,15 +172,15 @@ export default function Challenges() {
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_1fr]">
         {!address ? (
-          <Card className="p-6">
+          <Card className="p-4">
             <CardHeader title="Create a challenge" description="Only the admin Safe can create challenges. Connect an authorised wallet (top right) to make changes." />
           </Card>
         ) : rolesLoading ? (
           <Sk className="h-72 rounded-card" />
         ) : (
-        <Card className="p-6">
+        <Card className="p-4">
           <CardHeader title="Create a challenge" description={isAdmin ? "Sent from your wallet. The contract checks your role." : "Your wallet is not the admin, so this prepares a transaction for the Safe."} />
-          <div className="mt-5 grid gap-4">
+          <div className="mt-3 grid gap-4">
             <div>
               <Label htmlFor="start">Starts (your local time)</Label>
               <input id="start" type="datetime-local" value={start} onChange={(e) => setStart(e.target.value)} className={`${fieldClass} mt-1.5`} />
@@ -195,11 +195,11 @@ export default function Challenges() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <Label htmlFor="min">Minimum stake (G$)</Label>
-                <input id="min" inputMode="decimal" value={min} onChange={(e) => setMin(e.target.value)} placeholder="100" className={`${fieldClass} mt-1.5`} />
+                <input id="min" inputMode="decimal" value={min} onChange={(e) => setMin(e.target.value)} placeholder="e.g. 100" autoComplete="off" name="min-stake" className={`${fieldClass} mt-1.5`} />
               </div>
               <div>
                 <Label htmlFor="max">Maximum stake (G$)</Label>
-                <input id="max" inputMode="decimal" value={max} onChange={(e) => setMax(e.target.value)} placeholder="3000" className={`${fieldClass} mt-1.5`} />
+                <input id="max" inputMode="decimal" value={max} onChange={(e) => setMax(e.target.value)} placeholder="e.g. 3000" autoComplete="off" name="max-stake" className={`${fieldClass} mt-1.5`} />
               </div>
             </div>
             {problem && touched && <p className="text-sm text-danger" role="alert">{problem}</p>}
@@ -219,7 +219,7 @@ export default function Challenges() {
         )}
 
         <div className="grid gap-6 xl:self-start">
-        <Card className="p-6">
+        <Card className="p-4">
           <CardHeader title="Staking" description="Pausing stops new stakes. Stakes already in stay safe." />
           <div className="mt-4 flex items-center justify-between gap-3">
             {paused.isLoading ? <Sk className="h-6 w-20 rounded-full" /> : <Badge tone={paused.data ? "coral" : "sage"}>{paused.data ? "Paused" : "Running"}</Badge>}
@@ -239,7 +239,7 @@ export default function Challenges() {
           )}
         </Card>
         {pendingTotal > 0n && (
-          <Card className="p-6">
+          <Card className="p-4">
             <CardHeader title="Forfeit shares to send on" description="Settling a challenge sets these aside in the vault. Sending them on is a separate step, so a problem with the destination can never hold up a withdrawal." />
             <dl className="mt-4 grid grid-cols-2 gap-4 text-sm">
               <div><dt className="text-muted">To the rewards pool</dt><dd className="tabular mt-0.5 font-semibold text-ink">{fmtGD(pending.data!.rewards)} G$</dd></div>
@@ -252,7 +252,7 @@ export default function Challenges() {
           </Card>
         )}
         {settled.length > 0 && (
-          <Card className="p-6">
+          <Card className="p-4">
             <CardHeader title="Who finishes" description="Share of the G$ staked that belonged to people who finished, per settled challenge." />
             <HBars className="mt-5" max={100} rows={settled.map((c) => { const pct = Math.round(Number((c.finishedStake * 1000n) / c.pot) / 10); return { label: `Challenge ${c.id}`, value: pct, display: `${pct}%`, note: `${fmtGD(c.finishedStake)} of ${fmtGD(c.pot)} G$` }; })} />
           </Card>
@@ -260,9 +260,9 @@ export default function Challenges() {
         </div>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-4">
         <CardHeader title="Length bonus" description="An extra bonus for finishers, on top of the usual forfeit-sharing, by challenge length. Paid only from the reserve below, never from stakers' own principal. A new rate applies to challenges created after it is saved. Fund the reserve before a challenge with a bonus opens: a stake is refused if the reserve cannot cover its bonus." />
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
           {LENGTHS.map((d) => {
             const current = bonus.data?.bpsFor[d];
             return (
@@ -274,7 +274,7 @@ export default function Challenges() {
                     disabled={!isAdmin} className={`${fieldClass} pr-9`} />
                   <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm font-semibold text-muted">%</span>
                 </div>
-                {isAdmin && <Button variant="outline" size="sm" className="mt-2 w-full" loading={busy === `bonus-${d}`} onClick={() => saveBonus(d)}>Save</Button>}
+                {isAdmin && <Button variant="outline" size="sm" className="mt-2 w-full" loading={busy === `bonus-${d}`} onClick={() => saveBonus(d)} aria-label={`Save the ${d}-day bonus`}>Save</Button>}
               </div>
             );
           })}
@@ -297,7 +297,7 @@ export default function Challenges() {
             <Label htmlFor="fund">Fund the bonus reserve</Label>
             <p className="mt-1 text-xs text-muted">Current reserve: <span className="tabular font-medium text-ink-2">{bonus.data ? fmtGD(bonus.data.reserve) : "…"} G$</span>. Anyone can fund it, no admin role needed.</p>
             <div className="mt-2 flex gap-3">
-              <input id="fund" inputMode="decimal" value={fundAmount} onChange={(e) => setFundAmount(e.target.value)} placeholder="Amount in G$" className={fieldClass} />
+              <input id="fund" inputMode="decimal" value={fundAmount} onChange={(e) => setFundAmount(e.target.value)} placeholder="e.g. 500" autoComplete="off" name="fund-amount" className={fieldClass} />
               <Button variant="outline" icon={Sparkles} loading={busy === "fund"} onClick={fundReserve}>{busy === "fund" ? "Confirm in wallet…" : "Fund"}</Button>
             </div>
             <p className="mt-2 text-xs text-muted">Two steps in your wallet if allowance is short: approve, then fund.</p>

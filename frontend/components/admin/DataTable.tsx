@@ -15,6 +15,8 @@ export type Col<T> = {
   align?: "right";
   /** Leave the column out of the CSV, for buttons. */
   noExport?: boolean;
+  /** Kept out of the table view, but still in the CSV. */
+  noView?: boolean;
 };
 
 type Props<T> = {
@@ -93,10 +95,10 @@ export function DataTable<T>({ label, rows, cols, rowKey, initialSort, pageSize 
           <caption className="sr-only">{label}. Use the column headings to sort.</caption>
           <thead className="bg-sunken">
             <tr>
-              {cols.map((c) => {
+              {cols.filter((c) => !c.noView).map((c) => {
                 const on = sort?.key === c.key;
                 return (
-                  <th key={c.key} scope="col" aria-sort={on ? (sort!.dir === "asc" ? "ascending" : "descending") : "none"} className={cn("whitespace-nowrap px-4 py-2.5 text-[13px] font-medium text-muted", c.align === "right" && "text-right")}>
+                  <th key={c.key} scope="col" aria-sort={on ? (sort!.dir === "asc" ? "ascending" : "descending") : "none"} className={cn("whitespace-nowrap px-3 py-2 text-[13px] font-medium text-muted", c.align === "right" && "text-right")}>
                     <button type="button" onClick={() => toggle(c)} className={cn("inline-flex items-center gap-1.5 rounded-md py-0.5 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500", on && "text-ink", c.align === "right" && "flex-row-reverse")}>
                       {c.header}
                       {on ? (sort!.dir === "asc" ? <ArrowUp size={13} aria-hidden /> : <ArrowDown size={13} aria-hidden />) : <ChevronsUpDown size={13} aria-hidden className="opacity-50" />}
@@ -109,10 +111,10 @@ export function DataTable<T>({ label, rows, cols, rowKey, initialSort, pageSize 
           <tbody>
             {slice.length ? slice.map((r) => (
               <tr key={rowKey(r)} className="border-t border-line align-top">
-                {cols.map((c) => <td key={c.key} className={cn("tabular px-4 py-3 text-sm text-ink", c.align === "right" && "text-right")}>{c.render ? c.render(r) : (c.value(r) ?? <span className="text-muted">n/a</span>)}</td>)}
+                {cols.filter((c) => !c.noView).map((c) => <td key={c.key} className={cn("tabular px-3 py-2 text-sm text-ink", c.align === "right" && "text-right")}>{c.render ? c.render(r) : (c.value(r) ?? <span className="text-muted">n/a</span>)}</td>)}
               </tr>
             )) : (
-              <tr><td colSpan={cols.length} className="px-4 py-10 text-center text-sm text-muted">{empty}</td></tr>
+              <tr><td colSpan={cols.filter((c) => !c.noView).length} className="px-4 py-10 text-center text-sm text-muted">{empty}</td></tr>
             )}
           </tbody>
         </table>
@@ -120,7 +122,7 @@ export function DataTable<T>({ label, rows, cols, rowKey, initialSort, pageSize 
 
       <p className="mt-2 text-xs text-muted sm:hidden">Swipe sideways to see every column.</p>
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
-        <p aria-live="polite" className="tabular">{shown.length ? `${from} to ${to} of ${shown.length.toLocaleString("en")}` : "No rows"}{shown.length !== rows.length && ` (filtered from ${rows.length.toLocaleString("en")})`}</p>
+        <p aria-live="polite" className="tabular">{shown.length ? `${from} to ${to} of ${shown.length.toLocaleString("en-GB")}` : "No rows"}{shown.length !== rows.length && ` (filtered from ${rows.length.toLocaleString("en-GB")})`}</p>
         {pages > 1 && (
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="sm" icon={ChevronLeft} disabled={at === 0} onClick={() => setPage(at - 1)} aria-label="Previous page" />

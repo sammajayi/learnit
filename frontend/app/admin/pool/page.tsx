@@ -3,10 +3,10 @@ import { encodeFunctionData } from "viem";
 import { rewardsPoolAbi } from "@learnit/backend/abis";
 import { ADDR } from "@learnit/backend/chain";
 import { fmtGD } from "@learnit/backend/format";
-import { Badge, Card, CardHeader, Notice, PageHeader, Stat } from "@/components/ui";
+import { Badge, Card, CardHeader, Notice, Stat } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
 import { usePool, usePoolHistory } from "@/components/admin/data";
-import { ErrorNote, SafeTx, dayLabel, gdNum, shortAddr } from "@/components/admin/bits";
+import { AdminHeader, ErrorNote, SafeTx, dayLabel, gdNum, shortAddr } from "@/components/admin/bits";
 import { BarChart, LineChart } from "@/components/admin/charts";
 
 const gdText = (v: number) => `${v.toLocaleString("en", { maximumFractionDigits: v < 10 ? 2 : 0 })} G$`;
@@ -20,7 +20,7 @@ export default function Pool() {
   if (!addr) {
     return (
       <div className="grid gap-6">
-        <PageHeader title="Rewards pool" />
+        <AdminHeader title="Rewards pool" />
         <Notice tone="info" title="The RewardsPool is not set up yet">Set NEXT_PUBLIC_REWARDS_POOL_ADDRESS after you deploy the contracts, then reload.</Notice>
       </div>
     );
@@ -39,8 +39,8 @@ export default function Pool() {
   })();
 
   return (
-    <div className="grid gap-8">
-      <PageHeader title="Rewards pool" description="The G$ that pays lesson and checkpoint rewards. It only pays out what has been deposited."
+    <div className="grid gap-4">
+      <AdminHeader title="Rewards pool" hint="The G$ that pays lesson and checkpoint rewards. It only pays out what has been deposited."
         action={d && <Badge tone={d.paused ? "coral" : "sage"}>{d.paused ? "Paused" : "Paying out"}</Badge>} />
 
       <ErrorNote error={pool.error} />
@@ -61,18 +61,18 @@ export default function Pool() {
 
       {d && (
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="p-6">
+          <Card className="p-4">
             <CardHeader title="Paid out per day" description="Last 14 days (UTC). The dashed line is the daily budget." />
-            <div className="mt-5">
+            <div className="mt-3">
               {history.data ? (
                 <BarChart values={history.data.map((h) => gdNum(h.spent))} labels={history.data.map((h) => dayLabel(h.day))} format={gdText} caption="paid out"
                   limit={d.dailyBudget > 0n ? { value: gdNum(d.dailyBudget), label: "Budget" } : undefined} />
               ) : history.isLoading ? <Sk className="h-48" /> : <p className="text-sm text-muted">Payout history is unavailable right now.</p>}
             </div>
           </Card>
-          <Card className="p-6">
+          <Card className="p-4">
             <CardHeader title="How long the pool lasts" description="Balance if every day pays out the full budget. Real spending is usually lower." />
-            <div className="mt-5">
+            <div className="mt-3">
               {runway ? <LineChart points={runway.points} labels={runway.labels} format={gdText} caption="balance" zeroLabel="Runs out" /> : <p className="text-sm text-muted">Set a daily budget to see how long the balance lasts.</p>}
             </div>
           </Card>
@@ -80,7 +80,7 @@ export default function Pool() {
       )}
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="p-6">
+        <Card className="p-4">
           <CardHeader title="Contract" />
           <dl className="mt-4 grid gap-3 text-sm">
             <div><dt className="text-xs font-medium text-muted">Pool address</dt><dd className="mt-0.5 break-all font-mono text-xs text-ink">{addr}</dd></div>
@@ -95,7 +95,7 @@ export default function Pool() {
           </dl>
         </Card>
         {d && (
-          <Card className="p-6">
+          <Card className="p-4">
             <CardHeader title={d.paused ? "Resume payouts" : "Pause payouts"} description="Only the guardian (the Safe) can do this." />
             <div className="mt-4">
               <SafeTx to={addr} data={encodeFunctionData({ abi: rewardsPoolAbi, functionName: d.paused ? "unpause" : "pause" })}
