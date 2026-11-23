@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { leagueNotice, ordinal } from "../src/leagueNotify";
+import { leagueNotice, midweekNotice, ordinal } from "../src/leagueNotify";
 
 const G = 10n ** 18n;
 
@@ -37,5 +37,22 @@ describe("league result push", () => {
       const n = leagueNotice({ rank: r, points: 5, bonus: G, claimable: c });
       expect(`${n.title}${n.body}`).not.toContain("—");
     }
+  });
+
+  describe("midweek nudge", () => {
+    it("says how far the podium is", () => {
+      const n = midweekNotice({ rank: 7, points: 4, podiumPoints: 25 });
+      expect(n.title).toBe("You are 7th this week");
+      expect(n.body).toBe("You are 22 points off the podium. A lesson is worth up to 10.");
+    });
+    it("says one lesson could do it when the gap is small", () => {
+      expect(midweekNotice({ rank: 4, points: 20, podiumPoints: 25 }).body).toBe("One lesson could put you on the podium.");
+    });
+    it("tells the podium to hold their place", () => {
+      expect(midweekNotice({ rank: 2, points: 30, podiumPoints: 25 }).body).toBe("Pass a lesson to hold your place on the podium.");
+    });
+    it("asks someone with no points to start", () => {
+      expect(midweekNotice({ rank: 9, points: 0, podiumPoints: 25 }).title).toBe("You have no league points yet");
+    });
   });
 });

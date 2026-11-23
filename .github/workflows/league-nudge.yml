@@ -1,0 +1,24 @@
+# Midweek league nudge: a push to everyone in this week's league saying where they stand and how far the podium is.
+# A league week runs Monday to Sunday (UTC), so Thursday afternoon leaves three days to climb. The endpoint sends once per
+# person per week, so a rerun is harmless.
+name: League nudge
+
+on:
+  schedule:
+    - cron: "0 16 * * 4"
+  workflow_dispatch:
+
+jobs:
+  nudge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Call league nudge endpoint
+        env:
+          APP_URL: ${{ secrets.APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error --max-time 120 --retry 2 \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${APP_URL%/}/api/cron/league-nudge"
