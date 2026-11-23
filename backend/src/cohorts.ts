@@ -33,6 +33,28 @@ export async function readCohort(id: number) {
   };
 }
 
+/** Start and end of every cohort in one batched read, so a long list of rolling cohorts costs one round trip and not one each. */
+export async function cohortSpans(ids: number[]) {
+  const v = vault();
+  const out = new Map<number, { start: number; end: number }>();
+  if (!v || !ids.length) return out;
+  const res = await publicClient.multicall({ contracts: ids.map((id) => ({ address: v, abi: streakVaultAbi, functionName: "cohorts" as const, args: [BigInt(id)] as const })), allowFailure: true });
+  res.forEach((r, i) => { if (r.status === "success") { const [start, end] = r.result; if (start !== 0n) out.set(ids[i], { start: Number(start), end: Number(end) }); } });
+  return out;
+}
+
+/** The open challenge: for each length (7, 14, 30 days) the cohort a learner can join now, which is the earliest one whose first day is not over. */
+export function joinableByLength(spans: Map<number, { start: number; end: number }>, nowSec: number) {
+  const best = new Map<number, number>(); // length -> cohort id
+  for (const [id, s] of spans) {
+    if (nowSec >= s.start + 86400) continue;
+    const len = Math.round((s.end - s.start) / 86400);
+    const cur = best.get(len);
+    if (cur === undefined || s.start < spans.get(cur)!.start || (s.start === spans.get(cur)!.start && id < cur)) best.set(len, id);
+  }
+  return best;
+}
+
 export async function listCohortIds() {
   const v = vault(); if (!v) return [];
   const next = await publicClient.readContract({ address: v, abi: streakVaultAbi, functionName: "nextCohortId" });

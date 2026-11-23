@@ -48,6 +48,7 @@ export default function Stake() {
   const { data: me } = useMe();
   const { writeContractAsync } = useWriteContract();
   const [amount, setAmount] = useState("");
+  const [pick, setPick] = useState(7); // which goal length to join: 7, 14 or 30 days
   const [step, setStep] = useState<Step>(null);
   const [paying, setPaying] = useState<number | null>(null); // which payout is being withdrawn, so only that row shows progress
   const [err, setErr] = useState<string | null>(null);
@@ -72,7 +73,13 @@ export default function Stake() {
   );
   if (!data) return <StakeSkeleton />;
 
-  const c = data.cohorts[0];
+  // The challenge is always open. If you are in one that is running, that is shown; otherwise the one to join for the goal you pick.
+  const lenOf = (x: Cohort) => Math.round((x.end - x.start) / 86400);
+  const isIn = (x: Cohort) => !!x.mine && BigInt(x.mine.stake) > 0n;
+  const running = data.cohorts.find((x) => isIn(x) && !x.settled && !x.voided);
+  const joinables = data.cohorts.filter((x) => x.joinable && !isIn(x));
+  const lengths = [...new Set(joinables.map(lenOf))].sort((a, b) => a - b);
+  const c = running ?? joinables.find((x) => lenOf(x) === (lengths.includes(pick) ? pick : lengths[0])) ?? data.cohorts[0];
   const staked = !!c?.mine && BigInt(c.mine.stake) > 0n;
   // Closed challenges where a payout is still waiting. They stay visible even after a newer challenge opens.
   const owedOlder = data.cohorts.filter((x) => x.id !== c?.id && !!x.mine && BigInt(x.mine.payout) > 0n);
@@ -234,6 +241,22 @@ export default function Stake() {
               </ul>
               {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
             </section>
+          )}
+
+          {!running && lengths.length > 1 && (
+            <div role="radiogroup" aria-label="How many days" className="grid grid-cols-3 gap-2">
+              {lengths.map((L) => {
+                const x = joinables.find((j) => lenOf(j) === L)!;
+                const on = c?.id === x.id;
+                return (
+                  <button key={L} type="button" role="radio" aria-checked={on} onClick={() => setPick(L)}
+                    className={cn("rounded-card border px-3 py-3 text-left transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15", on ? "border-ink bg-surface shadow-card" : "border-line bg-sunken hover:border-line-strong")}>
+                    <span className="block text-[15px] font-semibold text-ink">{L} days</span>
+                    <span className="block text-xs text-muted">{x.bonusBps > 0 ? `${x.bonusBps / 100}% bonus` : "No bonus"}</span>
+                  </button>
+                );
+              })}
+            </div>
           )}
 
           {c && (
