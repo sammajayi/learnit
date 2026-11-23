@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { BookOpen, Coins, Home, MessageCircle, Trophy, type IconType } from "@/lib/icons";
+import { BookOpen, Coins, Home, MessageCircle, Trophy, type IconType } from "@/components/icons";
 import { cn } from "@/lib/cn";
 import { Logo } from "./Logo";
 import { LanguageChip } from "./LanguageChip";

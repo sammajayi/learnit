@@ -17,6 +17,7 @@ export async function GET(req: Request) {
       username: updated.username,
       displayName: updated.displayName,
       bio: updated.bio,
+      hasEmail: Boolean(updated.email),
       avatarUrl: avatarUrlFor(updated),
       verified: v.verified && (!v.verifiedUntil || v.verifiedUntil > new Date()),
       root: v.root,
@@ -24,7 +25,8 @@ export async function GET(req: Request) {
       timezone: updated.timezone,
       course: updated.course,
       gasTopupDone: Boolean(updated.gasTopupTx),
-      onboarded: Boolean(updated.onboardedAt),
+      // Setup counts as done only with a username, so anyone who finished it without one before it was required is asked for one.
+      onboarded: Boolean(updated.onboardedAt) && Boolean(updated.username),
     });
   } catch (e) {
     return authFail(e);
@@ -40,7 +42,12 @@ export async function PATCH(req: Request) {
       try { new Intl.DateTimeFormat("en", { timeZone: body.timezone }); data.timezone = body.timezone; } catch {}
     }
     if (body.course === "fr" || body.course === "es") data.course = body.course;
-    if (body.onboarded === true && body.course) data.onboardedAt = new Date();
+    if (body.onboarded === true && body.course) {
+      // Setup cannot be finished without a username, whatever the app sends.
+      if (!user.username) return Response.json({ error: "Choose a username to finish setting up." }, { status: 400 });
+      if (!user.email) return Response.json({ error: "Add your email to finish setting up." }, { status: 400 });
+      data.onboardedAt = new Date();
+    }
     await db.user.update({ where: { id: user.id }, data });
     return Response.json({ ok: true });
   } catch (e) {

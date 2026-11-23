@@ -25,6 +25,8 @@ model User {
   bio             String?
   hasAvatar       Boolean  @default(false)
   avatarVersion   Int      @default(0) // bumped on every change so image URLs can be cached forever
+  lives           Int      @default(5) // shared by all lessons; see src/lives.ts
+  livesAt         DateTime? // when the current wait for the next life began
   streakFreezes   Int      @default(0) // banked freezes, earned at streak milestones, auto-spent to cover one missed day
   flagged         Boolean  @default(false) // set when an AbuseFlag is raised; reviewed manually, does not block learning
   createdAt       DateTime @default(now())

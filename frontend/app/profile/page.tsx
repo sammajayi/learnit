@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
-import { ArrowRight, BadgeCheck, BookOpen, Check, CheckCircle2, Copy, Flame, Lock, LogOut, ScanFace, Snowflake } from "@/lib/icons";
+import { ArrowRight, BadgeCheck, BookOpen, Check, CheckCircle2, Copy, Flame, Lock, LogOut, ScanFace, Snowflake } from "@/components/icons";
 import { useMe } from "@/lib/useMe";
 import { useToday } from "@/lib/useToday";
 import { langOf } from "@/lib/languages";
@@ -40,8 +40,8 @@ export default function Profile() {
     <AppShell>
       <PageHeader eyebrow="Account" title="Profile and progress" />
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-8">
-        <div className="grid content-start gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_400px] xl:gap-8">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6">
           {/* Identity */}
           <Card className="overflow-hidden">
             <div aria-hidden className="h-20 bg-gradient-to-r from-sage-100 via-sage-50 to-coral-50" />
@@ -68,7 +68,7 @@ export default function Profile() {
                 <div className="grid grid-cols-2 border-y border-line sm:grid-cols-4 sm:divide-x sm:divide-line">
                   <Stat className="px-6 py-5" icon={Flame} label="Streak" value={t.streak} unit={t.streak === 1 ? "day" : "days"} />
                   <Stat className="px-6 py-5" icon={Snowflake} label="Freezes" value={t.freezesRemaining} />
-                  <Stat className="px-6 py-5" icon={BookOpen} label="Completed" value={done} unit={`/ ${total}`} />
+                  <Stat className="px-6 py-5" icon={BookOpen} label="Lessons" value={done} unit={`/ ${total}`} />
                   <Stat className="px-6 py-5" icon={CheckCircle2} label="Units" value={t.units.filter((u) => u.checkpoint.state === "passed").length} unit={`/ ${t.units.length}`} />
                 </div>
                 <ol className="divide-y divide-line">
@@ -98,7 +98,7 @@ export default function Profile() {
           </Card>
         </div>
 
-        <div className="grid content-start gap-6">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6">
           <Card className="p-6">
             <CardHeader title="Edit profile" description="How you appear on the leaderboard." className="mb-6" />
             <ProfileEditor />
@@ -109,7 +109,7 @@ export default function Profile() {
           <ReminderCard />
 
           <Card>
-            <div className="px-6 pt-6"><CardHeader title="Account" /></div>
+            <div className="px-6 pt-6"><CardHeader title="Details" /></div>
             <dl className="mt-4 divide-y divide-line border-t border-line text-sm">
               <div className="flex items-center justify-between gap-4 px-6 py-4">
                 <dt className="text-muted">Wallet</dt>

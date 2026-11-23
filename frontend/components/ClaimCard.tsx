@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowRight, CheckCircle2, ExternalLink } from "@/lib/icons";
+import { ArrowRight, CheckCircle2, ExternalLink } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { useGoodSdk } from "@/lib/useGoodSdk";
 import { fmtGD } from "@learnit/backend/format";
@@ -67,6 +67,7 @@ export function ClaimCard() {
             <Button onClick={claim} loading={busy} disabled={!sdk} size="lg" block className="mt-6">
               {busy ? "Claiming…" : "Claim your daily G$"}
             </Button>
+            <p className="mt-3 text-xs text-white/60">Needs a little CELO for the network fee.</p>
           </>
         ) : (
           <>
@@ -77,7 +78,7 @@ export function ClaimCard() {
         )}
         {tx && (
           <a href={`https://celoscan.io/tx/${tx}`} target="_blank" rel="noreferrer" aria-label="View your claim on Celoscan" className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs text-white/60 underline-offset-2 hover:text-white hover:underline">
-            {tx.slice(0, 10)}...{tx.slice(-6)} <ExternalLink size={12} aria-hidden />
+            {tx.slice(0, 10)}…{tx.slice(-6)} <ExternalLink size={12} aria-hidden />
           </a>
         )}
         {err && <p role="alert" className="mt-4 rounded-input bg-white/10 px-3 py-2 text-sm text-white">{err}</p>}

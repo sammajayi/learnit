@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { ScanFace } from "@/lib/icons";
+import { ScanFace } from "@/components/icons";
 import { useGoodSdk } from "@/lib/useGoodSdk";
 import { CHAIN_ID } from "@learnit/backend/chain";
 import { Button, Card } from "./ui";
@@ -26,7 +26,7 @@ export function VerifyCard() {
       <div className="bg-sage-50 px-6 pb-5 pt-6">
         <span className="grid h-11 w-11 place-items-center rounded-input bg-surface text-sage-700 shadow-card ring-1 ring-sage-100"><ScanFace size={22} strokeWidth={1.75} aria-hidden /></span>
         <h2 className="mt-4 text-lg font-semibold tracking-[-0.015em] text-ink">Verify to claim and earn</h2>
-        <p className="mt-1 text-pretty text-sm leading-relaxed text-ink-2">A quick GoodDollar face check proves you&apos;re one person. You need it to claim daily G$, earn lesson rewards and stake.</p>
+        <p className="mt-1 text-pretty text-sm leading-relaxed text-ink-2">A quick GoodDollar face check proves you are one person. You need it to claim daily G$, earn lesson rewards and stake.</p>
       </div>
       <div className="p-6 pt-5">
         <Button onClick={go} loading={busy} disabled={!sdk} block>{busy ? "Opening GoodDollar…" : "Verify with GoodDollar"}</Button>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
 import { erc20Abi, formatUnits, parseUnits } from "viem";
-import { CalendarDays, Check, ChevronDown, Flame, Minus, SlidersHorizontal, Trophy, Users, PiggyBank } from "@/lib/icons";
+import { CalendarDays, Check, ChevronDown, Flame, Minus, SlidersHorizontal, Trophy, Users, PiggyBank } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { friendlyError } from "@/lib/txErrors";
@@ -109,14 +109,14 @@ export default function Stake() {
       setStep("approve");
       const h = await writeContractAsync({ address: ADDR.gd, abi: erc20Abi, functionName: "approve", args: [ADDR.streakVault, wei] });
       const r = await pc.waitForTransactionReceipt({ hash: h });
-      if (r.status !== "success") throw new Error("The approval didn't go through. Nothing was staked.");
+      if (r.status !== "success") throw new Error("The approval did not go through. Nothing was staked.");
     }
     setStep("checking");
     const { request } = await pc.simulateContract({ account: address, address: ADDR.streakVault, abi: streakVaultAbi, functionName: "stake", args: [BigInt(c.id), wei] });
     setStep("stake");
     const h2 = await writeContractAsync(request);
     const r2 = await pc.waitForTransactionReceipt({ hash: h2 });
-    if (r2.status !== "success") throw new Error("The stake didn't go through. Your G$ stayed in your wallet.");
+    if (r2.status !== "success") throw new Error("The stake did not go through. Your G$ stayed in your wallet.");
     setAmount("");
   });
 
@@ -126,7 +126,7 @@ export default function Stake() {
     setStep("withdraw");
     const h = await writeContractAsync(request);
     const r = await pc!.waitForTransactionReceipt({ hash: h });
-    if (r.status !== "success") throw new Error("The withdrawal didn't go through. Your payout is still waiting for you.");
+    if (r.status !== "success") throw new Error("The withdrawal did not go through. Your payout is still waiting for you.");
   }
 
   const withdraw = (id: number | undefined = c?.id) => run(async () => {
@@ -145,7 +145,7 @@ export default function Stake() {
     setStep("cancel");
     const h = await writeContractAsync(request);
     const r = await pc.waitForTransactionReceipt({ hash: h });
-    if (r.status !== "success") throw new Error("The cancellation didn't go through. Your stake is still in the challenge.");
+    if (r.status !== "success") throw new Error("The cancellation did not go through. Your stake is still in the challenge.");
     await sendWithdraw(id);
   });
 
@@ -187,7 +187,7 @@ export default function Stake() {
       <ol className="mt-2 grid gap-5">
         {[
           { Icon: PiggyBank, t: "Stake G$", b: c ? `Pick ${fmtGD(c.min, 0)} to ${fmtGD(c.max, 0)} G$ while it is open.` : "Pick an amount while a challenge is open." },
-          { Icon: Flame, t: `Learn for ${days} days`, b: "Pass a lesson every day, in your timezone." },
+          { Icon: Flame, t: `Learn for ${days} days`, b: "Finish a lesson every day, in your timezone." },
           { Icon: Trophy, t: "Get it back", b: `Finish all ${days} days and withdraw it${bonusBps > 0 ? `, plus ${bonusBps / 100}% bonus` : ""}.` },
         ].map(({ Icon, t, b }, i) => (
           <li key={t} className="flex gap-4">
@@ -210,8 +210,8 @@ export default function Stake() {
 
       {isPaused && <Notice tone="paused" className="mt-6" title="Staking is paused">Your stake is safe. It will resume soon.</Notice>}
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
-        <div className="grid content-start gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6">
           {!c && <EmptyState icon={CalendarDays} title="No open challenge">Check back soon.</EmptyState>}
 
           {owedOlder.length > 0 && (
@@ -281,7 +281,7 @@ export default function Stake() {
                       if (c.settled || ended) return null;
                       const i = c.progress.required.indexOf(new Date().toLocaleDateString("en-CA"));
                       if (i < 0) return null;
-                      return <p className="mt-4 text-sm text-ink-2">{c.progress.done[i] ? "Done today." : "Pass a lesson today."}</p>;
+                      return <p className="mt-4 text-sm text-ink-2">{c.progress.done[i] ? "Done today." : "Finish a lesson today."}</p>;
                     })()}
                   </div>
                 )}
@@ -291,7 +291,7 @@ export default function Stake() {
                 {formShown && (
                   <form onSubmit={(e) => { e.preventDefault(); if (!busy) void stake(); }} noValidate>
                     <div className="mb-5 rounded-input bg-sunken px-4 lg:hidden">{howItWorks(false)}</div>
-                    {blocker && <Notice tone="warning" className="mb-5" action={!me?.verified && live ? <ButtonLink href="/home" variant="outline" size="sm">Verify on Home</ButtonLink> : undefined}>{blocker}</Notice>}
+                    {blocker && <Notice tone="warning" className="mb-5" action={!me?.verified && live ? <ButtonLink href="/home" variant="outline" size="sm">Verify with GoodDollar</ButtonLink> : undefined}>{blocker}</Notice>}
                     <Label htmlFor="amt">Amount</Label>
                     <div className="relative mt-2">
                       <input id="amt" inputMode="decimal" autoComplete="off" value={amount} onChange={(e) => { setAmount(e.target.value); setErr(null); }} placeholder={`e.g. ${fmtGD(c.min, 0)}…`} spellCheck={false} aria-invalid={outOfBounds} aria-describedby="amt-help"

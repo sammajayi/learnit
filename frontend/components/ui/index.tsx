@@ -6,7 +6,7 @@
 import Link from "next/link";
 import { forwardRef, type ComponentProps, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { AlertCircle, CheckCircle2, Info, Loader2, PauseCircle, type IconType } from "@/lib/icons";
+import { AlertCircle, CheckCircle2, Info, Loader2, PauseCircle, type IconType } from "@/components/icons";
 import { cn } from "@/lib/cn";
 
 /* ---------- Button ---------- */

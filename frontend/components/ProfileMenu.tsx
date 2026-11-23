@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useAuth } from "@/lib/useAuth";
-import { BadgeCheck, Check, ChevronsUpDown, Copy, LogOut, UserRound } from "@/lib/icons";
+import { BadgeCheck, Check, ChevronsUpDown, Copy, LogOut, UserRound } from "@/components/icons";
 import { short } from "@learnit/backend/format";
 import { useMe } from "@/lib/useMe";
 import { cn } from "@/lib/cn";

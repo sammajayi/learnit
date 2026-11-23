@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, PiggyBank } from "@/lib/icons";
+import { ArrowRight, PiggyBank } from "@/components/icons";
 import { ADDR } from "@learnit/backend/chain";
 import { fmtGD } from "@learnit/backend/format";
 import { useApi } from "@/lib/useApi";
@@ -28,9 +28,9 @@ export function StakePrompt() {
       <div className="flex items-start gap-3">
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-surface text-ink-2"><PiggyBank size={18} aria-hidden /></span>
         <div className="min-w-0">
-          <h2 id="stake-prompt" className="text-[15px] font-semibold text-ink">Keep the streak going</h2>
+          <h2 id="stake-prompt" className="text-[15px] font-semibold text-ink">{`Put G$ behind a ${days} day streak`}</h2>
           <p className="mt-1 text-pretty text-sm leading-relaxed text-ink-2">
-            Join the {days}-day challenge with {fmtGD(c.min, 0)} G$ or more. Finish all {days} days and you get your stake back{c.bonusBps > 0 ? `, plus a ${c.bonusBps / 100}% bonus` : ""}. Miss a day and you lose it.
+            Join the {days} day challenge with {fmtGD(c.min, 0)} G$ or more. Finish all {days} days and you get your stake back{c.bonusBps > 0 ? `, plus a ${c.bonusBps / 100}% bonus` : ""}. Miss a day and you lose it.
           </p>
         </div>
       </div>

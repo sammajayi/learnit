@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { CalendarDays, Medal, Trophy, Users } from "@/lib/icons";
+import { CalendarDays, Medal, Trophy, Users } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { AppShell } from "@/components/AppShell";
@@ -13,8 +13,9 @@ import { cn } from "@/lib/cn";
 
 type Tab = "week" | "all";
 type Row = { you: boolean; wallet: string; name: string; avatarUrl: string | null; points: number; rank: number };
-type WeekBoard = { joined: false } | { joined: true; weekKey: string; endsAt: string; rows: Row[] };
-type AllBoard = { scope: "all"; rows: Row[]; you: { rank: number; points: number } | null };
+type WeekBoard = { joined: false } | { joined: true; weekKey: string; endsAt: string; size: number; rows: Row[] };
+type AllBoard = { scope: "all"; rows: Row[]; you: { rank: number; points: number } | null; ahead: { name: string; points: number } | null; page: number; pages: number; total: number };
+const WEEK_SHOWN = 15;
 
 // Gold, silver and bronze, softened to sit with the rest of the palette.
 const MEDAL: Record<number, string> = { 1: "bg-[#f3e3b5] text-[#7a5a12]", 2: "bg-[#e3e6ea] text-[#475163]", 3: "bg-[#f0d9c8] text-[#87502c]" };
@@ -48,7 +49,7 @@ function RankRow({ r, bonusLine = false }: { r: Row; bonusLine?: boolean }) {
         {r.rank <= 3 ? <Medal size={15} role="img" aria-label={`Rank ${r.rank}`} /> : r.rank}
       </span>
       <Avatar src={r.avatarUrl} name={r.name} size={32} className="shrink-0" />
-      <span className={cn("min-w-0 flex-1 truncate text-[15px] text-ink", r.you ? "font-semibold" : "font-medium")}>{r.name}{r.you && <span className="sr-only"> (you)</span>}</span>
+      <span className={cn("min-w-0 flex-1 truncate text-[15px] text-ink", r.you ? "font-semibold" : "font-medium")}>{r.name}{r.you && <span className="sr-only"> (you)</span>}{bonusLine && r.rank === 3 && <span className="sr-only">. Top 3 share the bonus.</span>}</span>
       <span className="tabular shrink-0 text-right text-sm font-semibold text-ink">{pts(r.points)}<span className="sr-only"> points</span></span>
     </li>
   );
@@ -73,7 +74,8 @@ export default function Leaderboard() {
   // The tab lives in the address (?tab=all) so a link or a refresh keeps it. The server never renders the lists, so this cannot mismatch.
   const [tab, setTab] = useState<Tab>(() => (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("tab") === "all" ? "all" : "week"));
   const week = useQuery({ queryKey: ["leaderboard", "week"], queryFn: () => api<WeekBoard>("/api/leaderboard"), enabled: ok && tab === "week" });
-  const all = useQuery({ queryKey: ["leaderboard", "all"], queryFn: () => api<AllBoard>("/api/leaderboard?scope=all"), enabled: ok && tab === "all", staleTime: 30_000 });
+  const [page, setPage] = useState(1);
+  const all = useQuery({ queryKey: ["leaderboard", "all", page], queryFn: () => api<AllBoard>(`/api/leaderboard?scope=all&page=${page}`), enabled: ok && tab === "all", staleTime: 30_000, placeholderData: (prev) => prev });
 
   function pick(t: Tab) {
     setTab(t);
@@ -94,13 +96,13 @@ export default function Leaderboard() {
 
   const header = (
     <PageHeader eyebrow={tab === "week" ? "This week" : "All time"} title="Leaderboard" action={switcher}
-      description={tab === "week" ? "Pass lessons to earn points. The top 3 share a G$ bonus when the week ends." : "Every lesson and checkpoint you have passed. Only the weekly top 3 earn a bonus."} />
+      description={tab === "week" ? "Every finished lesson earns points, and the higher your accuracy, the more you earn. The top 3 share a G$ bonus when the week ends." : "Every lesson and checkpoint you have finished, at your best score. Only the weekly top 3 earn a bonus."} />
   );
 
   return (
     <AppShell width="narrow">
       {header}
-      {tab === "week" ? <Weekly data={week.data} /> : <AllTime data={all.data} who={{ name: me?.displayName || me?.username || "You", avatarUrl: me?.avatarUrl ?? null }} />}
+      {tab === "week" ? <Weekly data={week.data} /> : <AllTime data={all.data} onPage={setPage} who={{ name: me?.displayName || me?.username || "You", avatarUrl: me?.avatarUrl ?? null }} />}
     </AppShell>
   );
 }
@@ -109,8 +111,8 @@ function Weekly({ data }: { data: WeekBoard | undefined }) {
   if (!data) return <ListSkeleton />;
   if (!data.joined) {
     return (
-      <EmptyState icon={Users} title="You're not in a group yet" className="mt-8" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>
-        Pass a lesson today to join this week&apos;s group.
+      <EmptyState icon={Users} title="You are not in a group yet" className="mt-8" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>
+        Finish a lesson today to join this week&apos;s group.
       </EmptyState>
     );
   }
@@ -123,33 +125,34 @@ function Weekly({ data }: { data: WeekBoard | undefined }) {
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <p className="text-[13px] font-medium text-muted">Your rank</p>
-            <p className="tabular mt-1.5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">{me ? `#${me.rank}` : "Not ranked"} {me && <span className="text-sm font-medium tracking-normal text-muted">of {data.rows.length}</span>}</p>
+            <p className="tabular mt-1.5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">{me ? `#${me.rank}` : "Not ranked"} {me && <span className="text-sm font-medium tracking-normal text-muted">of {data.size}</span>}</p>
           </div>
-          <p className="shrink-0 text-right text-[13px] font-medium text-muted">Ends in<span className="tabular mt-1.5 block text-base font-semibold text-ink">{left.n} {left.unit}</span></p>
+          <p aria-label={`Ends in ${left.n} ${left.unit}`} className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sunken px-3 py-1.5 text-sm font-semibold text-ink"><CalendarDays size={18} strokeWidth={1.75} aria-hidden className="text-muted" /><span className="tabular" aria-hidden>{left.n} {left.unit} left</span></p>
         </div>
         {nudge && <p className="mt-4 border-t border-line pt-3 text-sm font-medium text-sage-700">{nudge}</p>}
       </Card>
 
       {/* overflow-clip keeps the rounded corners without stopping the "You" row from sticking while you scroll. */}
       <Card className="mt-6 overflow-clip">
-        <ol className="divide-y divide-line">{data.rows.map((r) => <RankRow key={r.wallet + r.rank} r={r} bonusLine />)}</ol>
+        <ol className="divide-y divide-line">{data.rows.filter((r) => r.rank <= WEEK_SHOWN || r.you).map((r) => <RankRow key={r.wallet + r.rank} r={r} bonusLine />)}</ol>
       </Card>
     </>
   );
 }
 
-function AllTime({ data, who }: { data: AllBoard | undefined; who: { name: string; avatarUrl: string | null } }) {
+function AllTime({ data, who, onPage }: { data: AllBoard | undefined; onPage: (n: number) => void; who: { name: string; avatarUrl: string | null } }) {
   if (!data) return <ListSkeleton />;
   if (data.rows.length === 0) {
     return (
       <EmptyState icon={Trophy} title="No points yet" className="mt-8" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>
-        Pass a lesson to appear here.
+        Finish a lesson to appear here.
       </EmptyState>
     );
   }
   const inList = data.rows.find((r) => r.you);
-  const mine = inList ? { rank: inList.rank, points: inList.points } : data.you;
-  const nudge = nudgeFor(data.rows, inList);
+  const mine = data.you;
+  const gap = data.ahead && mine ? Math.max(1, data.ahead.points - mine.points + 1) : 0;
+  const nudge = data.ahead && mine ? `${pts(gap)} ${word(gap)} to pass ${data.ahead.name}` : mine?.rank === 1 ? "You are first" : null;
   return (
     <>
       <Card className="mt-8 p-5 sm:p-6">
@@ -165,7 +168,7 @@ function AllTime({ data, who }: { data: AllBoard | undefined; who: { name: strin
             {nudge && <p className="mt-4 border-t border-line pt-3 text-sm font-medium text-sage-700">{nudge}</p>}
           </>
         ) : (
-          <p className="text-sm text-ink-2">You have no points yet. Pass a lesson to join the board.</p>
+          <p className="text-sm text-ink-2">You have no points yet. Finish a lesson to join the board.</p>
         )}
       </Card>
 
@@ -173,7 +176,15 @@ function AllTime({ data, who }: { data: AllBoard | undefined; who: { name: strin
         <ol className="divide-y divide-line">{data.rows.map((r) => <RankRow key={r.wallet + r.rank} r={r} />)}</ol>
       </Card>
 
-      {/* Outside the top 50: show where you stand, so the board is never a list you cannot find yourself on. */}
+      {data.pages > 1 && (
+        <nav aria-label="Leaderboard pages" className="mt-4 flex items-center justify-between gap-3">
+          <button type="button" onClick={() => onPage(data.page - 1)} disabled={data.page <= 1} className="rounded-btn px-3 py-2 text-sm font-medium text-ink ring-1 ring-line disabled:opacity-40">Previous</button>
+          <span className="tabular text-sm text-muted" aria-live="polite">Page {data.page} of {data.pages}</span>
+          <button type="button" onClick={() => onPage(data.page + 1)} disabled={data.page >= data.pages} className="rounded-btn px-3 py-2 text-sm font-medium text-ink ring-1 ring-line disabled:opacity-40">Next</button>
+        </nav>
+      )}
+
+      {/* Not on this page: show where you stand, so the board is never a list you cannot find yourself on. */}
       {!inList && data.you && (
         <Card className="mt-3 overflow-clip">
           <ol><RankRow r={{ you: true, wallet: "you", name: who.name, avatarUrl: who.avatarUrl, points: data.you.points, rank: data.you.rank }} /></ol>

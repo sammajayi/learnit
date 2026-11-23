@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Coins, PiggyBank } from "@/lib/icons";
+import { Coins, PiggyBank } from "@/components/icons";
 import { cn } from "@/lib/cn";
 
 /** Switches between the two money pages: claiming rewards and staking on a streak. */

@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "@/lib/icons";
+import { ArrowRight, CheckCircle2 } from "@/components/icons";
 import { fmtGD } from "@learnit/backend/format";
 import { Badge, Card, CardHeader, Notice, PageHeader } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
 import { cohortStatus, useCohorts, usePool, usePublicStats, useVaultPaused } from "@/components/admin/data";
-import { ErrorNote, dayLabel, fillActivity, fillDays, gdNum } from "@/components/admin/bits";
+import { ErrorNote, axisDuration, dayLabel, fillActivity, fillDays, fmtDuration, gdNum } from "@/components/admin/bits";
 import { BarChart, Delta, HBars, Sparkline, delta } from "@/components/admin/charts";
 
 const num = (n: number | null | undefined) => (n === null || n === undefined ? "n/a" : n.toLocaleString("en"));
@@ -39,7 +39,7 @@ export default function Overview() {
 
   // Things that need a person, most urgent first.
   const attention: { key: string; text: string; href: string }[] = [];
-  if (toFinalize.length) attention.push({ key: "fin", text: `${toFinalize.length === 1 ? `Challenge ${toFinalize[0].id} has` : `${toFinalize.length} challenges have`} ended and need finalizing.`, href: "/admin/challenges" });
+  if (toFinalize.length) attention.push({ key: "fin", text: `${toFinalize.length === 1 ? `Challenge ${toFinalize[0].id} has` : `${toFinalize.length} challenges have`} ended and need finalising.`, href: "/admin/challenges" });
   if (vaultPaused.data) attention.push({ key: "vp", text: "Staking is paused.", href: "/admin/challenges" });
   if (pool.data?.paused) attention.push({ key: "pp", text: "Reward payouts are paused.", href: "/admin/pool" });
   if (pool.data && pool.data.balance < pool.data.dailyBudget) attention.push({ key: "low", text: "The rewards pool holds less than one day's budget.", href: "/admin/pool" });
@@ -58,7 +58,7 @@ export default function Overview() {
 
   return (
     <div className="grid gap-8">
-      <PageHeader title="Overview" description="LearnIt's public performance dashboard: people, G$ claimed and on-chain activity. Totals only, no personal data." />
+      <PageHeader title="Overview" description="Public performance for LearnIt: people, G$ claimed and on-chain activity. Totals only, no personal data." />
 
       <section aria-labelledby="attention">
         <h2 id="attention" className="sr-only">Needs attention</h2>
@@ -106,7 +106,6 @@ export default function Overview() {
               </div>
             ))}
           </dl>
-          <p className="mt-4 text-xs text-muted">Rewards and stakes count from the current contracts. Earlier test contracts are not included.</p>
         </Card>
       )}
 
@@ -158,6 +157,38 @@ export default function Overview() {
               </div>
             </dl>
           )}
+        </Card>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+        <Card className="p-6">
+          <CardHeader title="Time spent learning per day" description="Time in finished lessons, last 14 days (UTC)." />
+          <div className="mt-5">
+            {act && s?.learning.totalSeconds !== undefined ? <BarChart values={act.slice(-14).map((a) => a.seconds ?? 0)} labels={act.slice(-14).map((a) => dayLabel(a.day))} format={fmtDuration} axis={axisDuration} caption="learning" />
+              : stats.isLoading ? <Sk className="h-48" /> : <p className="text-sm text-muted">Learning time appears once the stats service is updated.</p>}
+          </div>
+        </Card>
+
+        <Card className="p-6">
+          <CardHeader title="Learning time" description="Finished lessons and checkpoints. A lesson left open counts for 30 minutes at most." />
+          {stats.isLoading ? <div className="mt-5 grid gap-4">{[0, 1, 2].map((i) => <Sk key={i} className="h-12 rounded-input" />)}</div> : s?.learning.totalSeconds !== undefined ? (
+            <dl className="tabular mt-5 grid gap-5">
+              <div>
+                <dt className="text-[13px] font-medium text-muted">Total</dt>
+                <dd className="mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{fmtDuration(s.learning.totalSeconds)}</dd>
+              </div>
+              <div>
+                <dt className="text-[13px] font-medium text-muted">Per learner</dt>
+                <dd className="mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{s.learning.attemptingLearners ? fmtDuration(s.learning.totalSeconds / s.learning.attemptingLearners) : "n/a"}</dd>
+                <dd className="mt-0.5 text-xs text-muted">{num(s.learning.attemptingLearners)} people have tried a lesson</dd>
+              </div>
+              <div>
+                <dt className="text-[13px] font-medium text-muted">Per lesson</dt>
+                <dd className="mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{s.learning.attempts ? fmtDuration(s.learning.totalSeconds / s.learning.attempts) : "n/a"}</dd>
+                <dd className="mt-0.5 text-xs text-muted">{num(s.learning.attempts)} attempts</dd>
+              </div>
+            </dl>
+          ) : <p className="mt-5 text-sm text-muted">Numbers are unavailable right now.</p>}
         </Card>
       </div>
     </div>

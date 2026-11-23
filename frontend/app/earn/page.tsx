@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
-import { BookOpen, CheckCircle2, ChevronDown, Clock, ExternalLink, Gift, Trophy } from "@/lib/icons";
+import { BookOpen, CheckCircle2, ChevronDown, Clock, ExternalLink, Gift, Trophy, XCircle } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { friendlyError, STALE_ERRORS } from "@/lib/txErrors";
 import { rewardsPoolAbi } from "@learnit/backend/abis";
@@ -25,7 +25,7 @@ function expiresIn(expiry: number) {
   const s = expiry - Math.floor(Date.now() / 1000);
   if (s <= 0) return "Expired";
   const h = Math.floor(s / 3600), d = Math.floor(h / 24);
-  return d >= 1 ? `Expires in ${d} day${d === 1 ? "" : "s"}` : h >= 1 ? `Expires in ${h}h` : "Expires soon";
+  return d >= 1 ? `Expires in ${d} day${d === 1 ? "" : "s"}` : h >= 1 ? `Expires in ${h} ${h === 1 ? "hour" : "hours"}` : "Expires soon";
 }
 const STEP_LABEL: Record<Exclude<Step, null>, string> = { checking: "Checking…", wallet: "Confirm in your wallet", confirming: "Waiting for confirmation" };
 const toArg = (v: V) => ({ root: v.root, amount: BigInt(v.amount), nonce: BigInt(v.nonce), expiry: BigInt(v.expiry) });
@@ -101,12 +101,14 @@ export default function Earn() {
     const st = stateOf(v);
     const reason = REASON[v.reason] ?? { label: "Reward", Icon: Gift };
     const soon = st === "ready" && v.expiry - now < 86_400;
+    // The icon says the state before the words do: a clock while it waits, a tick once paid, a cross when it lapsed.
+    const StateIcon = st === "claimed" ? CheckCircle2 : st === "expired" ? XCircle : Clock;
     return (
       <li key={v.id} className={cn("flex items-center gap-4 px-6 py-4", st !== "ready" && "bg-canvas/50")}>
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sunken text-ink-2"><reason.Icon size={18} strokeWidth={1.85} aria-hidden /></span>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold text-ink">{reason.label}</p>
-          <p className={cn("mt-0.5 flex items-center gap-1 text-xs", soon ? "font-medium text-coral-700" : "text-muted")}><Clock size={12} aria-hidden />{st === "claimed" ? "Paid to your wallet" : st === "expired" ? "Not claimed in time" : expiresIn(v.expiry)}</p>
+          <p className={cn("mt-0.5 flex items-center gap-1 text-xs", soon ? "font-medium text-coral-700" : "text-muted")}><StateIcon size={13} aria-hidden className={st === "claimed" ? "text-sage-700" : undefined} />{st === "claimed" ? "Paid to your wallet" : st === "expired" ? "Not claimed in time" : expiresIn(v.expiry)}</p>
         </div>
         <p className="font-mono tabular flex items-center gap-2 text-[15px] font-semibold text-ink"><GMark size={20} />{fmtGD(v.amount)}</p>
         <div className="w-[96px] text-right">
@@ -121,7 +123,7 @@ export default function Earn() {
 
   return (
     <AppShell>
-      <PageHeader eyebrow="Rewards and staking" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly leaderboard. Claim to your wallet whenever you like, before each reward expires." action={<RewardsTabs />} />
+      <PageHeader eyebrow="Rewards and staking" title="Rewards" description="G$ you earn from lessons, checkpoints and the weekly leaderboard." action={<RewardsTabs />} />
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         <Card className="grain relative overflow-hidden bg-ink p-6 text-white sm:col-span-1">
@@ -138,7 +140,7 @@ export default function Earn() {
       </div>
 
       <div className="mt-6 grid gap-3">
-        {!data.verified && <Notice tone="warning" title="Verify to earn" action={<ButtonLink href="/home" variant="outline" size="sm">Go to verification</ButtonLink>}>Rewards need a quick GoodDollar face check. You can keep learning in the meantime.</Notice>}
+        {!data.verified && <Notice tone="warning" title="Verify to earn" action={<ButtonLink href="/home" variant="outline" size="sm">Verify with GoodDollar</ButtonLink>}>Rewards need a quick GoodDollar face check. You can keep learning in the meantime.</Notice>}
         {!live && <Notice tone="info">Rewards aren&apos;t live yet. Anything you earn will be kept here.</Notice>}
         {isPaused && <Notice tone="paused" title="Rewards are paused">Your rewards are safe and will be here when claiming resumes.</Notice>}
       </div>
@@ -147,7 +149,7 @@ export default function Earn() {
         <div className="flex flex-col gap-3 border-b border-line px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-[15px] font-semibold text-ink">Your rewards</h2>
-            <p className="mt-0.5 text-sm text-muted">Each one is a signed voucher, paid out by the rewards pool contract.</p>
+            <p className="mt-0.5 text-sm text-muted">Claim each one to your wallet before it expires.</p>
           </div>
           {ready.length > 1 && !isPaused && (
             <Button onClick={() => claim(ready)} loading={busy} disabled={!live}>{busy ? STEP_LABEL[step!] : `Claim all · ${fmtGD(total)} G$`}</Button>
@@ -156,7 +158,7 @@ export default function Earn() {
 
         {list.length === 0 ? (
           <EmptyState icon={Gift} title="No rewards yet" className="m-6 border-line" action={<ButtonLink href="/learn" variant="outline" size="sm">Go to your lessons</ButtonLink>}>
-            {data.verified ? "Pass a lesson to earn G$. New rewards show up here straight away." : "Once you're verified, every lesson you pass earns G$ here."}
+            {data.verified ? "Score 80% or more on a lesson to earn G$. New rewards show up here straight away." : "Once you are verified, passed lessons earn G$ here, up to the daily limit."}
           </EmptyState>
         ) : (
           <>

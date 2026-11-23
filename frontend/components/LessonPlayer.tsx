@@ -3,21 +3,24 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Check, Clock, Flame, RotateCcw, Target, Volume2, VolumeX, X } from "@/lib/icons";
+import { ArrowRight, Check, Clock, CalendarCheck, HeartCrack, RotateCcw, Target, Volume2, VolumeX, X } from "@/components/icons";
 import { cn } from "@/lib/cn";
 import { Button, ButtonLink, Card, Notice, ProgressRing } from "./ui";
-import { useApi } from "@/lib/useApi";
+import { ApiError, useApi } from "@/lib/useApi";
+import { REGEN_MS } from "@learnit/backend/livesLogic";
+import { Hearts, fmtWait, useSecondsUntil, type LivesInfo } from "./Lives";
 import type { PublicExercise } from "@learnit/backend/lessons";
 import { fmtGD } from "@learnit/backend/format";
 import { LessonSkeleton } from "./Skeletons";
 import { StakePrompt } from "./StakePrompt";
+import { ReminderPrompt } from "./ReminderPrompt";
 import { playCorrect, playTap, playWrong, soundEnabled, setSoundEnabled } from "@/lib/sounds";
 
-type Loaded = { id: string; title: string; speechLang: string; token: string; intro?: { target: string; english: string }[]; tip?: { title: string; body: string } | null; exercises: PublicExercise[] };
+type Loaded = { id: string; title: string; speechLang: string; token: string; lives?: LivesInfo; intro?: { target: string; english: string }[]; tip?: { title: string; body: string } | null; exercises: PublicExercise[] };
 type Pair = { target: string; english: string };
 type Ans = number | string[] | Pair[];
-type Feedback = { correct: boolean; answer: unknown };
-type Result = { passed: boolean; accuracy: number; durationS: number; minSeconds: number; tooFast: boolean; missedWordIds: string[]; streak: number; attemptId: string; voucherPending: boolean; reviewPending: boolean };
+type Feedback = { correct: boolean; answer: unknown; lives?: LivesInfo };
+type Result = { passed: boolean; rewardEligible: boolean; accuracy: number; durationS: number; missedWordIds: string[]; streak: number; streakExtended: boolean; attemptId: string; voucherPending: boolean; reviewPending: boolean };
 
 import { preloadSpeech, speak } from "@/lib/speech";
 
@@ -40,16 +43,26 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   const firstRef = useRef<Record<string, Ans>>({}); // mirrors `first` so submit never reads a stale value
   const [introSeen, setIntroSeen] = useState(false);
   const [round, setRound] = useState(1); // 2 and up: retrying missed exercises
+  // Lives belong to the learner, not the lesson: the server keeps the count and tells us after each wrong answer. Checkpoints are exams and use none.
+  const livesOn = !isCheckpoint(id);
+  const [livesInfo, setLivesInfo] = useState<LivesInfo | null>(null);
+  const lives = livesInfo?.lives ?? 0;
+  /** Set when the last life goes: nothing can be played until the next one is back. */
+  const [gate, setGate] = useState<LivesInfo | null>(null);
+  const [loadKey, setLoadKey] = useState(0);
   const [sound, setSound] = useState(true);
   useEffect(() => setSound(soundEnabled()), []);
   const base = isCheckpoint(id) ? `/api/checkpoints/${id}` : `/api/lessons/${id}`;
 
   useEffect(() => {
     api<Loaded>(base).then((d) => {
-      setData(d); setQueue(d.exercises.map((_, i) => i));
+      setData(d); setQueue(d.exercises.map((_, i) => i)); setLivesInfo(livesOn ? d.lives ?? null : null);
       preloadSpeech([...(d.intro ?? []).map((w) => w.target), ...d.exercises.flatMap((e) => (e.type === "mc" && e.speak ? [e.speak] : []))], d.speechLang);
-    }).catch((e) => setErr(e.message));
-  }, [api, base]);
+    }).catch((e) => {
+      if (e instanceof ApiError && e.body.code === "no-lives") setGate(e.body.lives as LivesInfo);
+      else setErr(e.message);
+    });
+  }, [api, base, livesOn, loadKey]);
 
   const ex = data && queue[pos] !== undefined ? data.exercises[queue[pos]] : null;
   useEffect(() => { if (ex?.type === "mc" && ex.speak && data && (introSeen || !data.intro?.length)) speak(ex.speak, data.speechLang); }, [ex, data, introSeen]);
@@ -72,9 +85,10 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
       r.correct ? playCorrect() : playWrong();
       record(ex.id, cur);
       if (!r.correct && !missed.current.includes(queue[pos])) missed.current.push(queue[pos]);
+      if (r.lives) { setLivesInfo(r.lives); void qc.invalidateQueries({ queryKey: ["today"] }); }
       setFb(r);
     } catch (e) { setErr(e instanceof Error ? e.message : "We could not check that answer. Try again."); } finally { setBusy(false); }
-  }, [data, ex, cur, queue, pos, record]);
+  }, [data, ex, cur, queue, pos, record, qc]);
 
   const submit = useCallback(async (answers: Record<string, Ans>) => {
     if (!data) return;
@@ -89,21 +103,38 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   const next = useCallback(() => {
     if (!data) return;
     setFb(null); setCur(null);
+    if (livesOn && livesInfo && livesInfo.lives <= 0) { setGate(livesInfo); return; }
     if (pos + 1 < queue.length) return setPos(pos + 1);
     // End of round: retry the exercises that were missed until all are right.
     const again = missed.current;
     missed.current = [];
     if (again.length) { setQueue(again); setPos(0); setRound((n) => n + 1); return; }
     void submit(firstRef.current);
-  }, [data, pos, queue, submit]);
+  }, [data, pos, queue, submit, livesOn, livesInfo]);
 
   /** Match pairs are checked on the device, so finishing one needs no Check button and no network call. */
   const matchDone = useCallback((answer: Pair[], mistake: boolean) => {
     if (!ex) return;
     record(ex.id, answer);
     if (mistake && !missed.current.includes(queue[pos])) missed.current.push(queue[pos]);
+    // A match is judged on the device, so tell the server. It costs one life however many pairs were wrong.
+    if (mistake && livesOn) {
+      const left = Math.max(0, lives - 1);
+      setLivesInfo((p) => (p ? { ...p, lives: left } : p));
+      const told = api<{ lives: LivesInfo }>("/api/lives/lose", { method: "POST", body: "{}" })
+        .then((r) => { setLivesInfo(r.lives); void qc.invalidateQueries({ queryKey: ["today"] }); return r.lives; })
+        .catch(() => null);
+      if (left <= 0) { void told.then((l) => setGate(l ?? { lives: 0, max: livesInfo?.max ?? 5, nextAt: Date.now() + REGEN_MS })); return; }
+    }
     next();
-  }, [ex, record, queue, pos, next]);
+  }, [ex, record, queue, pos, next, livesOn, lives, livesInfo, api, qc]);
+
+  /** A life is back: load the lesson again from the start. */
+  const reset = useCallback(() => {
+    firstRef.current = {}; missed.current = [];
+    setFirst({}); setData(null); setQueue([]); setPos(0); setCur(null); setFb(null); setRound(1); setErr(null);
+    setGate(null); setLoadKey((k) => k + 1);
+  }, []);
 
   // Enter checks the answer, then continues. Ignored while typing in a field.
   useEffect(() => {
@@ -116,14 +147,15 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
     return () => window.removeEventListener("keydown", onKey);
   }, [fb, cur, busy, ex, next, check]);
 
+  if (gate) return <OutOfLives info={gate} onReady={reset} />;
   if (err && !data) return (
     <main className="mx-auto grid min-h-[100dvh] max-w-md place-items-center px-5">
-      <Notice tone="danger" title="This lesson couldn't load" action={<ButtonLink href="/learn" variant="outline" size="sm">Back to your path</ButtonLink>}>{err}</Notice>
+      <Notice tone="danger" title="This lesson could not load" action={<ButtonLink href="/learn" variant="outline" size="sm">Back to your path</ButtonLink>}>{err}</Notice>
     </main>
   );
   if (!data) return <LessonSkeleton />;
   if (result) return <Results r={result} id={id} />;
-  if (data.intro?.length && !introSeen) return <Intro words={data.intro} tip={data.tip} lang={data.speechLang} title={data.title} onStart={() => setIntroSeen(true)} />;
+  if (data.intro?.length && !introSeen) return <Intro words={data.intro} tip={data.tip} lang={data.speechLang} title={data.title} lives={livesOn ? livesInfo : null} onStart={() => setIntroSeen(true)} />;
   if (!ex) return <LessonSkeleton label="Submitting your answers" />;
 
   const total = data.exercises.length;
@@ -131,7 +163,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   const retry = round > 1;
   return (
     <div className="flex min-h-[100dvh] flex-col bg-canvas">
-      <LessonTopBar title={data.title} done={done} total={total} sound={sound} onSound={() => { const on = !sound; setSound(on); setSoundEnabled(on); if (on) playCorrect(); }} />
+      <LessonTopBar title={data.title} done={done} total={total} lives={livesOn ? livesInfo : null} sound={sound} onSound={() => { const on = !sound; setSound(on); setSoundEnabled(on); if (on) playCorrect(); }} />
 
       <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-5 pb-40 pt-8 sm:pt-14">
         <motion.section key={`${ex.id}-${pos}`} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}>
@@ -170,7 +202,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
                   <div>
                     <p className={cn("text-lg font-semibold tracking-[-0.015em]", fb.correct ? "text-sage-700" : "text-coral-700")}>{fb.correct ? "Well done" : "Not quite"}</p>
                     {!fb.correct && <p className="mt-0.5 text-[15px] text-ink-2">Correct answer: <span className="font-semibold text-ink">{fmtAnswer(ex, fb.answer)}</span></p>}
-                    {fb.correct && <p className="mt-0.5 text-[15px] text-ink-2">That&apos;s right.</p>}
+                    {!fb.correct && livesOn && livesInfo && <p className="mt-0.5 text-sm font-medium text-coral-700">{lives === 0 ? "That was your last life." : `${lives} ${lives === 1 ? "life" : "lives"} left.`}</p>}
                   </div>
                 </div>
                 <Button onClick={next} size="lg" variant={fb.correct ? "secondary" : "primary"} iconRight={ArrowRight} className="sm:min-w-[180px]" autoFocus>Continue</Button>
@@ -190,7 +222,7 @@ export function LessonPlayer({ id, onDone }: { id: string; onDone?: (r: Result) 
   );
 }
 
-function LessonTopBar({ title, done, total, sound, onSound }: { title: string; done: number; total: number; sound: boolean; onSound: () => void }) {
+function LessonTopBar({ title, done, total, lives, sound, onSound }: { title: string; done: number; total: number; lives: LivesInfo | null; sound: boolean; onSound: () => void }) {
   return (
     <header className="sticky top-0 z-20 border-b border-line/70 bg-canvas/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-2xl items-center gap-4 px-3 sm:px-5">
@@ -202,6 +234,7 @@ function LessonTopBar({ title, done, total, sound, onSound }: { title: string; d
           </div>
         </div>
         <span className="tabular w-10 text-right text-sm font-medium text-muted">{done}/{total}</span>
+        {lives && <Hearts lives={lives.lives} max={lives.max} />}
         <button onClick={onSound} aria-label={sound ? "Mute sounds" : "Turn sounds on"} aria-pressed={!sound} className="grid h-10 w-10 place-items-center rounded-full text-ink-2 transition hover:bg-sunken hover:text-ink">
           {sound ? <Volume2 size={19} aria-hidden /> : <VolumeX size={19} aria-hidden />}
         </button>
@@ -346,11 +379,10 @@ function Results({ r, id }: { r: Result; id: string }) {
   }, [api, r]);
   const pct = Math.round(r.accuracy * 100);
   const mins = Math.floor(r.durationS / 60), secs = Math.round(r.durationS % 60);
-  const title = r.passed ? (isCheckpoint(id) ? "Checkpoint cleared" : "Lesson complete") : r.tooFast ? "A little too fast" : "Almost there";
+  const title = r.passed ? (isCheckpoint(id) ? "Checkpoint cleared" : "Lesson complete") : "Almost there";
   const body = r.passed
-    ? `Your streak is now ${r.streak} day${r.streak === 1 ? "" : "s"}. Nicely done.`
-    : r.tooFast ? `You got it right, but a pass needs at least ${r.minSeconds} seconds. Slow down and listen to each word.`
-    : "So close. Pass at 80% to keep your streak today. Have another go and the words you missed will come up first.";
+    ? (r.streakExtended ? `Your streak is now ${r.streak} day${r.streak === 1 ? "" : "s"}. Well done.` : "Well done.")
+    : "So close. Pass at 80% to clear this checkpoint. Have another go and the words you missed will come up first.";
   return (
     <main className="mx-auto flex min-h-[100dvh] max-w-lg flex-col justify-center px-5 py-12">
       <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
@@ -363,11 +395,12 @@ function Results({ r, id }: { r: Result; id: string }) {
             <h1 className="mt-2 text-display-md text-ink">{title}</h1>
             <p className="mx-auto mt-2 max-w-[36ch] text-pretty leading-relaxed text-ink-2">{body}</p>
           </div>
-          <dl className="grid grid-cols-3 divide-x divide-line border-y border-line">
+          <dl className={`grid divide-x divide-line border-y border-line ${r.streakExtended ? "grid-cols-3" : "grid-cols-2"}`}>
             {[
               { Icon: Target, k: "Accuracy", v: `${pct}%` },
               { Icon: Clock, k: "Time", v: mins ? `${mins}m ${secs}s` : `${secs}s` },
-              { Icon: Flame, k: "Streak", v: `${r.streak}` },
+              // The streak is news only on the day it grows, so it shows once a day.
+              ...(r.streakExtended ? [{ Icon: CalendarCheck, k: "Streak", v: `${r.streak}` }] : []),
             ].map(({ Icon, k, v }) => (
               <div key={k} className="px-3 py-4">
                 <dt className="flex items-center justify-center gap-1 text-xs font-medium text-muted"><Icon size={13} aria-hidden />{k}</dt>
@@ -384,6 +417,8 @@ function Results({ r, id }: { r: Result; id: string }) {
               </ButtonLink>
             )}
             {r.passed && !review && <StakePrompt />}
+            {r.passed && <ReminderPrompt />}
+            {r.passed && !isCheckpoint(id) && !r.rewardEligible && <Notice tone="info">You scored {pct}%. G$ rewards need 80% or more. Your points still count, and they rise with accuracy.</Notice>}
             {r.passed && !pending && !voucher && review && <Notice tone="info">Your reward is being reviewed. It will show up in Rewards once that clears.</Notice>}
             <ButtonLink href="/learn" size="lg" block variant={voucher ? "secondary" : "primary"} iconRight={ArrowRight}>{r.passed ? "Continue" : "Back to your path"}</ButtonLink>
           </div>
@@ -394,7 +429,7 @@ function Results({ r, id }: { r: Result; id: string }) {
 }
 
 /** Shown before the questions so a complete beginner meets each word, and hears it, before being asked about it. */
-function Intro({ words, tip, lang, title, onStart }: { words: { target: string; english: string }[]; tip?: { title: string; body: string } | null; lang: string; title: string; onStart: () => void }) {
+function Intro({ words, tip, lang, title, lives, onStart }: { words: { target: string; english: string }[]; tip?: { title: string; body: string } | null; lang: string; title: string; lives: LivesInfo | null; onStart: () => void }) {
   const reduce = useReducedMotion();
   return (
     <div className="flex min-h-[100dvh] flex-col bg-canvas">
@@ -407,7 +442,7 @@ function Intro({ words, tip, lang, title, onStart }: { words: { target: string; 
       <main className="mx-auto w-full max-w-2xl flex-1 px-5 pb-36 pt-10 sm:pt-14">
         <p className="text-eyebrow uppercase text-sage-700">New words</p>
         <h1 className="mt-3 text-display-md text-ink sm:text-[2rem]">Meet the words first</h1>
-        <p className="mt-2 text-[15px] text-muted">Tap a word to hear it. Then you will practise them.</p>
+        <p className="mt-2 text-[15px] text-muted">Tap a word to hear it. Then you will practise them.{lives && ` You have ${lives.lives} of ${lives.max} lives, shared across lessons. A wrong answer costs one, and one comes back every 30 minutes.`}</p>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {words.map((w, i) => (
             <motion.li key={w.target} initial={reduce ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}>
@@ -433,5 +468,32 @@ function Intro({ words, tip, lang, title, onStart }: { words: { target: string; 
         </div>
       </div>
     </div>
+  );
+}
+
+/** Shown when the last life goes, or when a lesson is opened with none. Lessons wait until the next one is back. */
+function OutOfLives({ info, onReady }: { info: LivesInfo; onReady: () => void }) {
+  const reduce = useReducedMotion();
+  const left = useSecondsUntil(info.nextAt);
+  const ready = left <= 0;
+  return (
+    <main className="mx-auto flex min-h-[100dvh] max-w-lg flex-col justify-center px-5 py-12">
+      <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>
+        <Card className="overflow-hidden text-center">
+          <div className="bg-canvas px-6 pb-8 pt-10">
+            <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-sunken text-ink-2"><HeartCrack size={30} strokeWidth={1.75} aria-hidden /></span>
+            <p className="mt-6 text-eyebrow uppercase text-muted">Lessons paused</p>
+            <h1 className="mt-2 text-display-md text-ink">You are out of lives</h1>
+            <p className="mx-auto mt-2 max-w-[38ch] text-pretty leading-relaxed text-ink-2">
+              {ready ? "A life is back. Pick up where you left off." : `Lives are shared by every lesson, and one comes back every 30 minutes. Your progress and streak are safe.`}
+            </p>
+          </div>
+          <div className="grid gap-3 p-6">
+            <Button onClick={onReady} size="lg" block icon={ready ? RotateCcw : undefined} disabled={!ready} autoFocus={ready}>{ready ? "Start this lesson" : `Next life in ${fmtWait(left)}`}</Button>
+            <ButtonLink href="/learn" size="lg" block variant="outline">Back to your path</ButtonLink>
+          </div>
+        </Card>
+      </motion.div>
+    </main>
   );
 }

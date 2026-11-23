@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Coins, Flame, Snowflake, Trophy, PiggyBank } from "@/lib/icons";
+import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Coins, Trophy, PiggyBank } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { langOf } from "@/lib/languages";
@@ -13,6 +13,8 @@ import { VerifyCard } from "./VerifyCard";
 import { ClaimCard } from "./ClaimCard";
 import { GasCard } from "./GasCard";
 import { InstallPrompt } from "./InstallPrompt";
+import { ReminderPrompt } from "./ReminderPrompt";
+import { StatusChips } from "./StatusChips";
 import { Flag } from "./Flag";
 import { Sk } from "./Skeletons";
 import { Badge, ButtonLink, Card, Notice, Progress, Stat } from "./ui";
@@ -42,28 +44,29 @@ export function Home() {
         <p className="text-sm text-muted">{new Date().toLocaleDateString("en", { weekday: "long", month: "long", day: "numeric" })}</p>
         {me ? <h1 className="font-display text-display-md text-ink sm:text-[2rem]">{greeting()}{first ? `, ${first}` : ""}</h1> : <Sk className="mt-1 h-9 w-64 rounded-lg" />}
         <p className="text-[15px] text-muted">
-          {!t ? " " : t.todayDone ? "Today's lesson is done. Your streak is safe." : t.streak > 0 ? "One lesson today keeps your streak going." : "Your next lesson takes about ten minutes."}
+          {!t ? " " : t.todayDone ? "Today's lesson is done. Your streak is safe." : t.streak > 0 ? "One lesson today keeps your streak going." : "Your next lesson takes about 10 minutes."}
         </p>
+        <div className="mt-3">{t ? <StatusChips streak={t.streak} todayDone={t.todayDone} freezes={t.freezesRemaining} lives={t.lives} /> : <Sk className="h-10 w-60 rounded-full" />}</div>
       </header>
 
-      {error && <Notice tone="danger" className="mt-6" title="We couldn't load your account">Check your connection, then refresh the page.</Notice>}
+      {error && <Notice tone="danger" className="mt-6" title="We could not load your account">Check your connection, then refresh the page.</Notice>}
 
       {/* Two columns on desktop. On mobile the columns dissolve (\`contents\`) and \`order\` interleaves them: lesson, daily G$, stats, rewards. */}
-      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
-        <div className="grid content-start gap-6 max-xl:contents">
-          <div className="order-1">{t && me ? <ContinueCard t={t} course={me.course} /> : <ContinueSkeleton />}</div>
-          <div className="order-3">{t ? <StatsRow t={t} /> : <Sk className="h-[104px] w-full rounded-card" />}</div>
-          {me && <div className="order-5 empty:hidden"><InstallPrompt /></div>}
+      <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
+          <div className="order-1 min-w-0">{t && me ? <ContinueCard t={t} course={me.course} /> : <ContinueSkeleton />}</div>
+          <div className="order-3 min-w-0">{t ? <StatsRow t={t} /> : <Sk className="h-[104px] w-full rounded-card" />}</div>
+          {me && <div className="order-5 grid min-w-0 gap-6 empty:hidden"><InstallPrompt /><ReminderPrompt enabled={!!t && t.units.some((u) => u.done > 0)} /></div>}
         </div>
 
-        <div className="grid content-start gap-6 max-xl:contents">
-          <div className="order-2 grid gap-6">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
+          <div className="order-2 grid min-w-0 grid-cols-1 gap-6">
             {isLoading && <Sk className="h-[220px] w-full rounded-card" />}
             {me && (me.verified ? <ClaimCard /> : <VerifyCard />)}
             {me && me.verified && !me.gasTopupDone && <GasCard />}
           </div>
-          {me && <div className="order-4 empty:hidden"><RewardsCard verified={me.verified} /></div>}
-          <div className="order-6"><QuickLinks /></div>
+          {me && <div className="order-4 min-w-0 empty:hidden"><RewardsCard verified={me.verified} /></div>}
+          <div className="order-6 min-w-0"><QuickLinks /></div>
         </div>
       </div>
     </AppShell>
@@ -127,10 +130,8 @@ function StatsRow({ t }: { t: Today }) {
   const total = t.units.reduce((s, u) => s + u.total, 0);
   const unitsDone = t.units.filter((u) => u.checkpoint.state === "passed").length;
   return (
-    <Card className="grid grid-cols-2 gap-y-6 divide-line sm:grid-cols-4 sm:gap-y-0 sm:divide-x xl:grid-cols-2 xl:gap-y-6 xl:divide-x-0 2xl:grid-cols-4 2xl:gap-y-0 2xl:divide-x">
-      <Stat className="p-5 sm:px-6" icon={Flame} label="Streak" value={t.streak} unit={t.streak === 1 ? "day" : "days"} hint={t.todayDone ? "Safe for today" : "Learn today to extend"} />
-      <Stat className="p-5 sm:px-6" icon={Snowflake} label="Freezes" value={t.freezesRemaining} hint="Covers a missed day" />
-      <Stat className="p-5 sm:px-6" icon={BookOpen} label="Completed" value={done} unit={`/ ${total}`} hint="A0 to A2 course" />
+    <Card className="grid grid-cols-2 divide-x divide-line">
+      <Stat className="p-5 sm:px-6" icon={BookOpen} label="Lessons" value={done} unit={`/ ${total}`} hint="Across the whole course" />
       <Stat className="p-5 sm:px-6" icon={CheckCircle2} label="Units" value={unitsDone} unit={`/ ${t.units.length}`} hint="Checkpoints passed" />
     </Card>
   );

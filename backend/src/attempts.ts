@@ -2,7 +2,7 @@ import type { User } from "@prisma/client";
 import type { Exercise } from "./content/schema";
 import { db } from "./db";
 import { readStart, type Start } from "./token";
-import { gradeAll, isPass, MIN_SECONDS, type Answer } from "./grading";
+import { gradeAll, outcomeFor, type Answer } from "./grading";
 import { localDate, streakCount, freezeGapDate, FREEZE_MILESTONE_DAYS, FREEZE_CAP } from "./streak";
 import { detectAnomaly } from "./abuse";
 import { ensureMembership } from "./leagues";
@@ -25,7 +25,7 @@ export async function streakFor(user: User) {
 
 export class SubmitError extends Error { constructor(m: string, public status = 400) { super(m); } }
 
-/** Grades on the server, records the attempt, ticks the streak on a pass. */
+/** Grades on the server, records the attempt, ticks the streak when a lesson is completed (or a checkpoint passed). */
 export async function submitAttempt(opts: {
   user: User; kind: "lesson" | "checkpoint"; targetId: string; token: string;
   answers: Record<string, Answer>; exercises: (start: Start) => Exercise[];
@@ -36,8 +36,10 @@ export async function submitAttempt(opts: {
   if (now - start.startedAt > 6 * 3600_000) throw new SubmitError("This attempt expired. Start again.");
   const durationS = Math.floor((now - start.startedAt) / 1000);
   const exercises = opts.exercises(start);
+  // Finishing means every question was answered. Without this an empty request would count as a finished lesson.
+  if (!exercises.every((e) => e.id in opts.answers)) throw new SubmitError("Answer every question to finish.");
   const { results, accuracy, missedWordIds } = gradeAll(exercises, opts.answers);
-  const passed = isPass(accuracy, durationS);
+  const { passed, rewardEligible } = outcomeFor(opts.kind, accuracy);
   const key = `${opts.user.id}:${opts.targetId}:${start.startedAt}`;
   const date = localDate(new Date(), opts.user.timezone);
 
@@ -79,10 +81,10 @@ export async function submitAttempt(opts: {
 
   // Rewards are issued by POST /api/vouchers/issue so the result screen does not wait on chain reads and signing.
   return {
-    attemptId: attempt.id, passed, accuracy, durationS, minSeconds: MIN_SECONDS, missedWordIds,
-    tooFast: accuracy >= 0.8 && durationS < MIN_SECONDS,
+    attemptId: attempt.id, passed, accuracy, durationS, missedWordIds, rewardEligible,
     results: results.map((r) => ({ id: r.id, correct: r.correct })),
-    streak: st.streak, reviewPending,
-    voucherPending: passed && !reviewPending,
+    // True only for the first finished lesson of the learner's day, the one that extends the streak.
+    streak: st.streak, streakExtended: newDay, reviewPending,
+    voucherPending: rewardEligible && !reviewPending,
   };
 }

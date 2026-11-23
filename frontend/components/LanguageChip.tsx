@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ChevronDown } from "@/lib/icons";
+import { ChevronDown } from "@/components/icons";
 import { useMe } from "@/lib/useMe";
 import { langOf } from "@/lib/languages";
 import { cn } from "@/lib/cn";

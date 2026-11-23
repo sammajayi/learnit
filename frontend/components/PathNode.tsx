@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Award, Check, Clock, Lock, Play } from "@/lib/icons";
+import { Award, Check, Clock, Lock, Play } from "@/components/icons";
 import { cn } from "@/lib/cn";
 
 export type NodeState = "passed" | "next" | "locked" | "cooldown";
