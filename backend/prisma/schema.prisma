@@ -152,6 +152,17 @@ model LeagueBonus {
   @@map("league_bonuses")
 }
 
+/// Who has been told how a league week went, so a second cron run never sends the same push twice.
+model LeagueNotice {
+  id      String   @id @default(cuid())
+  userId  String
+  weekKey String
+  sentAt  DateTime @default(now())
+
+  @@unique([userId, weekKey])
+  @@map("league_notices")
+}
+
 model AbuseFlag {
   id        String   @id @default(cuid())
   userId    String
