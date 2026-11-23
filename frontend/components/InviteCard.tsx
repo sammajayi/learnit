@@ -7,12 +7,13 @@ import { useApi } from "@/lib/useApi";
 import { REFERRALS_ENABLED, inviteLink } from "@/lib/referral";
 import { Badge, Card } from "./ui";
 
-type Person = { username: string | null; joined: string; verified: boolean; learned: boolean; counted: boolean };
+type Person = { username: string | null; joined: string; verified: boolean; learned: boolean; claimed: boolean; counted: boolean };
 type Referral = { code: string | null; invited: number; counted: number; people: Person[] };
 
-const STEPS: { key: "verified" | "learned"; label: string }[] = [
+const STEPS: { key: "verified" | "learned" | "claimed"; label: string }[] = [
   { key: "verified", label: "Verified" },
   { key: "learned", label: "Passed a lesson" },
+  { key: "claimed", label: "Claimed G$" },
 ];
 
 /** The invite link and how far each invited person has got. Hidden unless referrals are switched on. */
@@ -35,7 +36,7 @@ export function InviteCard() {
         <h2 className="text-[15px] font-semibold text-ink">Invite friends</h2>
         <p className="text-xs text-muted"><span className="tabular font-semibold text-ink">{data.invited}</span> invited, <span className="tabular font-semibold text-ink">{data.counted}</span> counted</p>
       </div>
-      <p className="mt-0.5 text-xs text-muted">Counts once they verify with GoodDollar and pass a lesson.</p>
+      <p className="mt-0.5 text-xs text-muted">Counts once they verify with GoodDollar, pass a lesson and claim their daily G$.</p>
       <div className="mt-3 flex gap-2">
         <input readOnly value={data.code} aria-label="Your invite code" onFocus={(e) => e.currentTarget.select()} className="h-9 min-w-0 flex-1 rounded-input border border-line bg-sunken px-3 font-mono text-sm font-semibold text-ink" />
         <button type="button" onClick={() => copy("code")} className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-input border border-line px-3 text-sm font-medium text-ink transition-colors hover:bg-sunken">

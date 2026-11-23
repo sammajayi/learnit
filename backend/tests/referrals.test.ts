@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { cleanSource, referralsEnabled } from "../src/referrals";
+import { cleanSource, referralsEnabled, referralCounts } from "../src/referrals";
 
 describe("referral helpers", () => {
   afterEach(() => { delete process.env.NEXT_PUBLIC_REFERRALS_ENABLED; });
@@ -23,5 +23,16 @@ describe("referral helpers", () => {
     expect(referralsEnabled()).toBe(true);
     process.env.NEXT_PUBLIC_REFERRALS_ENABLED = "yes";
     expect(referralsEnabled()).toBe(false);
+  });
+});
+
+describe("when a referral counts", () => {
+  it("needs verification, a passed lesson and a claimed daily G$", () => {
+    expect(referralCounts({ verified: true, learned: true, claimed: true })).toBe(true);
+  });
+  it("does not count while any one of the three is missing", () => {
+    expect(referralCounts({ verified: false, learned: true, claimed: true })).toBe(false);
+    expect(referralCounts({ verified: true, learned: false, claimed: true })).toBe(false);
+    expect(referralCounts({ verified: true, learned: true, claimed: false })).toBe(false);
   });
 });
