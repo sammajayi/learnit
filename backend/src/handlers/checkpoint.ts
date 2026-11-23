@@ -1,4 +1,5 @@
 import { requireUser, authFail } from "../auth";
+import { notVerifiedResponse } from "../verifiedGate";
 import { db } from "../db";
 import { issueStart } from "../token";
 import { findCheckpoint, seededDraw, toPublic } from "../lessons";
@@ -6,6 +7,8 @@ import { findCheckpoint, seededDraw, toPublic } from "../lessons";
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   try {
     const user = await requireUser(req);
+    const blocked = await notVerifiedResponse(user);
+    if (blocked) return blocked;
     const hit = findCheckpoint(params.id);
     if (!hit) return Response.json({ error: "Not found" }, { status: 404 });
     const passed = await db.lessonAttempt.findMany({ where: { userId: user.id, passed: true, kind: "lesson", lessonId: { in: hit.unit.lessons.map((l) => l.id) } }, select: { lessonId: true }, distinct: ["lessonId"] });

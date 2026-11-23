@@ -89,7 +89,7 @@ model Voucher {
   amount    String   // wei, as a decimal string
   nonce     String   @unique
   expiry    Int      // unix seconds
-  reason    String   // lesson | checkpoint | league
+  reason    String   // lesson | checkpoint | league | welcome
   sourceId  String   @unique // attempt id that earned it
   signature String
   status    String   @default("issued") // issued | claimed | expired
@@ -162,6 +162,18 @@ model LeagueNotice {
 
   @@unique([userId, weekKey, kind])
   @@map("league_notices")
+}
+
+/// Why a learner is learning and the streak goal they picked, written once and shown back on hard days. One per learner.
+model GoalNote {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  reason    String   // up to 200 characters
+  goalDays  Int      // 7, 14 or 30
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("goal_notes")
 }
 
 model AbuseFlag {

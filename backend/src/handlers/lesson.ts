@@ -1,4 +1,5 @@
 import { requireUser, authFail } from "../auth";
+import { notVerifiedResponse } from "../verifiedGate";
 import { issueStart } from "../token";
 import { findLesson, toPublic } from "../lessons";
 import { getLives } from "../lives";
@@ -6,6 +7,8 @@ import { getLives } from "../lives";
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   try {
     const user = await requireUser(req);
+    const blocked = await notVerifiedResponse(user);
+    if (blocked) return blocked;
     const hit = findLesson(params.id);
     if (!hit) return Response.json({ error: "Not found" }, { status: 404 });
     // Lessons pause while there are no lives. The next one is on its way, so say when.

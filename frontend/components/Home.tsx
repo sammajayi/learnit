@@ -12,8 +12,10 @@ import { AppShell } from "./AppShell";
 import { VerifyCard } from "./VerifyCard";
 import { ClaimCard } from "./ClaimCard";
 import { GasCard } from "./GasCard";
+import { WelcomeCard } from "./WelcomeCard";
 import { InstallPrompt } from "./InstallPrompt";
 import { ReminderPrompt } from "./ReminderPrompt";
+import { GoalCard } from "./GoalCard";
 import { StatusChips } from "./StatusChips";
 import { Flag } from "./Flag";
 import { Sk } from "./Skeletons";
@@ -54,15 +56,16 @@ export function Home() {
       {/* Two columns on desktop. On mobile the columns dissolve (\`contents\`) and \`order\` interleaves them: lesson, daily G$, stats, rewards. */}
       <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px] xl:gap-8">
         <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
-          <div className="order-1 min-w-0">{t && me ? <ContinueCard t={t} course={me.course} /> : <ContinueSkeleton />}</div>
+          <div className="order-1 min-w-0">{t && me ? <ContinueCard t={t} course={me.course} verified={me.verified} /> : <ContinueSkeleton />}</div>
           <div className="order-3 min-w-0">{t ? <StatsRow t={t} /> : <Sk className="h-[104px] w-full rounded-card" />}</div>
-          {me && <div className="order-5 grid min-w-0 gap-6 empty:hidden"><InstallPrompt /><ReminderPrompt enabled={!!t && t.units.some((u) => u.done > 0)} /></div>}
+          {me && <div className="order-5 grid min-w-0 gap-6 empty:hidden">{t && <GoalCard t={t} verified={me.verified} />}<InstallPrompt /><ReminderPrompt enabled={!!t && t.units.some((u) => u.done > 0)} /></div>}
         </div>
 
         <div className="grid min-w-0 grid-cols-1 content-start gap-6 max-xl:contents">
           <div className="order-2 grid min-w-0 grid-cols-1 gap-6">
             {isLoading && <Sk className="h-[220px] w-full rounded-card" />}
             {me && (me.verified ? <ClaimCard /> : <VerifyCard />)}
+            {me && me.verified && <WelcomeCard />}
             {me && me.verified && !me.gasTopupDone && <GasCard />}
           </div>
           {me && <div className="order-4 min-w-0 empty:hidden"><RewardsCard verified={me.verified} /></div>}
@@ -73,7 +76,7 @@ export function Home() {
   );
 }
 
-function ContinueCard({ t, course }: { t: Today; course: string }) {
+function ContinueCard({ t, course, verified }: { t: Today; course: string; verified: boolean }) {
   const lang = langOf(course);
   const unit = t.units.find((u) => u.n === t.currentUnit) ?? t.units[0];
   const allDone = !t.nextLessonId && unit?.checkpoint.state !== "next";
@@ -103,7 +106,9 @@ function ContinueCard({ t, course }: { t: Today; course: string }) {
         </div>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-          {allDone
+          {!verified
+            ? <p className="text-[15px] text-ink-2">Verify with GoodDollar to start your first lesson. It is a quick face check.</p>
+            : allDone
             ? <ButtonLink href="/learn" size="lg" variant="secondary" iconRight={ArrowRight}>Review your path</ButtonLink>
             : <ButtonLink href={href} size="lg" iconRight={ArrowRight}>{unit.done === 0 && t.currentUnit === 1 ? "Start first lesson" : "Continue learning"}</ButtonLink>}
           {nextTitle && <p className="text-sm text-muted">Up next: <span className="font-medium text-ink-2">{nextTitle}</span></p>}
