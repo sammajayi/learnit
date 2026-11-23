@@ -19,7 +19,7 @@ type V = { id: string; root: `0x${string}`; amount: string; nonce: string; expir
 type Data = { verified: boolean; vouchers: V[]; earnedToday: string; dailyCap: string; capRemaining: string };
 type Step = null | "checking" | "wallet" | "confirming";
 
-const REASON: Record<string, { label: string; Icon: typeof BookOpen }> = { lesson: { label: "Lesson passed", Icon: BookOpen }, checkpoint: { label: "Checkpoint passed", Icon: CheckCircle2 }, league: { label: "Leaderboard bonus", Icon: Trophy } };
+const REASON: Record<string, { label: string; Icon: typeof BookOpen }> = { lesson: { label: "Lesson passed", Icon: BookOpen }, checkpoint: { label: "Checkpoint passed", Icon: CheckCircle2 }, league: { label: "Leaderboard bonus", Icon: Trophy }, welcome: { label: "Welcome G$", Icon: Gift } };
 
 function expiresIn(expiry: number) {
   const s = expiry - Math.floor(Date.now() / 1000);

@@ -89,7 +89,7 @@ export async function issueVoucher(user: User, attempt: { id: string; lessonId: 
  * Signs a voucher and stores it. `sourceId` is unique, so asking twice for the same source never pays twice.
  * `createdAt` lets a late voucher carry the date of the lesson it rewards, so it does not use up today's limit.
  */
-export async function issueVoucherFor(root: `0x${string}`, amount: bigint, reason: "lesson" | "checkpoint" | "league", sourceId: string, createdAt?: Date) {
+export async function issueVoucherFor(root: `0x${string}`, amount: bigint, reason: "lesson" | "checkpoint" | "league" | "welcome", sourceId: string, createdAt?: Date) {
   const key = process.env.SIGNER_PRIVATE_KEY as Hex | undefined;
   if (!key || !ADDR.rewardsPool) return null;
   const cfg = rewardConfig();

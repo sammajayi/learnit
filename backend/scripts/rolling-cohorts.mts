@@ -1,5 +1,5 @@
 // Builds the Safe batch that keeps the open challenge running: one cohort per day for each length (7, 14, 30 days), each
-// with a 1,000 G$ minimum. createCohort is admin only, so the backend cannot do this itself; import the JSON file into the
+// with an 800 G$ minimum. createCohort is admin only, so the backend cannot do this itself; import the JSON file into the
 // Safe app (Transaction Builder, "Upload a batch") and sign it.
 //   npx tsx --env-file=.env scripts/rolling-cohorts.mts                 (next 30 days, all three lengths)
 //   npx tsx --env-file=.env scripts/rolling-cohorts.mts --days 60 --lengths 7,14 --max 5000
@@ -14,14 +14,14 @@ const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i 
 const days = Number(arg("days") ?? 30);
 const lengths = (arg("lengths") ?? "7,14,30").split(",").map(Number);
 const G = 10n ** 18n;
-const min = 1000n * G; // at least 1,000 G$ to stake
+const min = 800n * G; // at least 800 G$ to stake
 if (!ADDR.streakVault) throw new Error("NEXT_PUBLIC_STREAK_VAULT_ADDRESS is not set");
 if (lengths.some((l) => ![7, 14, 30].includes(l))) throw new Error("lengths must be 7, 14 or 30");
 
 const ids = await listCohortIds();
 const last = ids.length ? await readCohort(ids[ids.length - 1]) : null;
 const max = arg("max") ? BigInt(arg("max")!) * G : last ? BigInt(last.max) : 10_000n * G;
-if (max < min) throw new Error("max must be at least 1,000 G$");
+if (max < min) throw new Error("max must be at least 800 G$");
 const spans = await cohortSpans(ids);
 const have = new Set([...spans.values()].map((s) => `${s.start}:${Math.round((s.end - s.start) / 86400)}`));
 
@@ -40,5 +40,5 @@ for (let d = 0; d < days; d++) for (const len of lengths) {
 }
 
 const file = `rolling-cohorts-${new Date().toISOString().slice(0, 10)}.json`;
-writeFileSync(file, JSON.stringify({ version: "1.0", chainId: String(CHAIN_ID), createdAt: Date.now(), meta: { name: "LearnIt open challenge cohorts", description: `${days} days of daily cohorts, lengths ${lengths.join("/")}, min 1,000 G$` }, transactions: txs }, null, 2));
-console.log(`${txs.length} transaction(s) written to ${file}. Stake limits 1,000 to ${max / G} G$. Import it in the Safe app (Transaction Builder).`);
+writeFileSync(file, JSON.stringify({ version: "1.0", chainId: String(CHAIN_ID), createdAt: Date.now(), meta: { name: "LearnIt open challenge cohorts", description: `${days} days of daily cohorts, lengths ${lengths.join("/")}, min 800 G$` }, transactions: txs }, null, 2));
+console.log(`${txs.length} transaction(s) written to ${file}. Stake limits 800 to ${max / G} G$. Import it in the Safe app (Transaction Builder).`);
