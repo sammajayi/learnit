@@ -26,15 +26,17 @@ describe("referral helpers", () => {
   });
 });
 
-import { referralCounts } from "../src/referrals";
+import { referralCounts, MIN_REFERRAL_STAKE } from "../src/referrals";
 
 describe("when a referral counts", () => {
-  it("needs verification, a passed lesson and a confirmed engagement reward", () => {
-    expect(referralCounts({ verified: true, learned: true, engaged: true })).toBe(true);
+  const all = { verified: true, learned: true, engaged: true, staked: true };
+  it("needs verification, a passed lesson, a confirmed engagement reward and a 1,000 G$ stake", () => {
+    expect(referralCounts(all)).toBe(true);
   });
-  it("does not count while any one of the three is missing", () => {
-    expect(referralCounts({ verified: false, learned: true, engaged: true })).toBe(false);
-    expect(referralCounts({ verified: true, learned: false, engaged: true })).toBe(false);
-    expect(referralCounts({ verified: true, learned: true, engaged: false })).toBe(false);
+  it("does not count while any one of the four is missing", () => {
+    for (const k of Object.keys(all) as (keyof typeof all)[]) expect(referralCounts({ ...all, [k]: false })).toBe(false);
+  });
+  it("sets the stake bar at 1,000 G$", () => {
+    expect(MIN_REFERRAL_STAKE).toBe(1000n * 10n ** 18n);
   });
 });

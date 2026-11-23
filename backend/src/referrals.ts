@@ -1,5 +1,7 @@
 import type { User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { db } from "./db";
+import { topUpStakeEvents } from "./stakeIndex";
 import { validateUsername } from "./profile";
 
 /** Referrals stay off until NEXT_PUBLIC_REFERRALS_ENABLED=true. Nothing is written or shown while it is off. */
@@ -36,24 +38,34 @@ export async function attachReferral(user: User, ref: unknown, source: unknown) 
   }
 }
 
-export type ReferredPerson = { username: string | null; joined: string; verified: boolean; learned: boolean; engaged: boolean; counted: boolean };
+/** The least a referred person must stake for the referral to count: 1,000 G$ (18 decimals). Also the minimum for the open challenge. */
+export const MIN_REFERRAL_STAKE = 1000n * 10n ** 18n;
+
+export type ReferredPerson = { username: string | null; joined: string; verified: boolean; learned: boolean; engaged: boolean; staked: boolean; counted: boolean };
 
 /**
- * A referred person counts once they are GoodDollar verified, have passed at least one lesson and have claimed their
- * GoodDollar engagement reward (confirmed on-chain). The engagement claim is what pays the inviter, so it is part of the rule.
+ * A referred person counts once they are GoodDollar verified, have passed at least one lesson, have claimed their
+ * GoodDollar engagement reward (confirmed on-chain) and have staked at least 1,000 G$. The engagement claim is what pays
+ * the inviter, so it is part of the rule.
  */
-export const referralCounts = (o: { verified: boolean; learned: boolean; engaged: boolean }) => o.verified && o.learned && o.engaged;
+export const referralCounts = (o: { verified: boolean; learned: boolean; engaged: boolean; staked: boolean }) => o.verified && o.learned && o.engaged && o.staked;
 
 /** A G$ claim needs verification, so a claim also shows they are verified (covers an expired or unsynced verifiedUntil). */
 async function progressOf(userIds: string[]) {
-  if (!userIds.length) return { users: new Map<string, { username: string | null; verifiedUntil: Date | null }>(), claimed: new Set<string>(), learned: new Set<string>(), engaged: new Set<string>() };
+  if (!userIds.length) return { users: new Map<string, { username: string | null; verifiedUntil: Date | null }>(), claimed: new Set<string>(), learned: new Set<string>(), engaged: new Set<string>(), staked: new Set<string>() };
   const [users, claims, passes, engagement] = await Promise.all([
     db.user.findMany({ where: { id: { in: userIds } }, select: { id: true, username: true, verifiedUntil: true } }),
     db.ubiClaim.groupBy({ by: ["userId"], where: { userId: { in: userIds } } }),
     db.lessonAttempt.groupBy({ by: ["userId"], where: { userId: { in: userIds }, passed: true } }),
     db.engagementClaim.findMany({ where: { userId: { in: userIds }, confirmed: true }, select: { userId: true } }),
   ]);
-  return { users: new Map(users.map((u) => [u.id, u])), claimed: new Set(claims.map((c) => c.userId)), learned: new Set(passes.map((p) => p.userId)), engaged: new Set(engagement.map((e) => e.userId)) };
+  // One stake of 1,000 G$ or more, read from the stake index (topped up briefly first, so a stake made a moment ago shows).
+  await topUpStakeEvents(1500).catch(() => {});
+  const wallets = await db.user.findMany({ where: { id: { in: userIds } }, select: { id: true, wallet: true } });
+  const big = await db.$queryRaw<{ w: string }[]>(Prisma.sql`SELECT DISTINCT lower(wallet) AS w FROM stake_events WHERE lower(wallet) IN (${Prisma.join(wallets.map((x) => x.wallet.toLowerCase()))}) AND amount::numeric >= ${MIN_REFERRAL_STAKE.toString()}::numeric`).catch(() => []);
+  const bigSet = new Set(big.map((b) => b.w));
+  const staked = new Set(wallets.filter((x) => bigSet.has(x.wallet.toLowerCase())).map((x) => x.id));
+  return { users: new Map(users.map((u) => [u.id, u])), staked, claimed: new Set(claims.map((c) => c.userId)), learned: new Set(passes.map((p) => p.userId)), engaged: new Set(engagement.map((e) => e.userId)) };
 }
 
 type Progress = Awaited<ReturnType<typeof progressOf>>;
@@ -68,8 +80,8 @@ export async function referralSummary(user: User) {
   const p = await progressOf(rows.map((r) => r.userId));
   const people: ReferredPerson[] = rows.map((r) => {
     const u = p.users.get(r.userId);
-    const verified = isVerified(p, r.userId), learned = p.learned.has(r.userId), engaged = p.engaged.has(r.userId);
-    return { username: u?.username ?? null, joined: r.createdAt.toISOString(), verified, learned, engaged, counted: referralCounts({ verified, learned, engaged }) };
+    const verified = isVerified(p, r.userId), learned = p.learned.has(r.userId), engaged = p.engaged.has(r.userId), staked = p.staked.has(r.userId);
+    return { username: u?.username ?? null, joined: r.createdAt.toISOString(), verified, learned, engaged, staked, counted: referralCounts({ verified, learned, engaged, staked }) };
   });
   return { people, invited: people.length, counted: people.filter((x) => x.counted).length };
 }
@@ -78,7 +90,7 @@ export async function referralSummary(user: User) {
 export async function referralTotals() {
   const rows = await db.referral.findMany({ select: { userId: true, referrerId: true, source: true } });
   const p = await progressOf(rows.map((r) => r.userId));
-  const isCounted = (id: string) => referralCounts({ verified: isVerified(p, id), learned: p.learned.has(id), engaged: p.engaged.has(id) });
+  const isCounted = (id: string) => referralCounts({ verified: isVerified(p, id), learned: p.learned.has(id), engaged: p.engaged.has(id), staked: p.staked.has(id) });
   const bySource: Record<string, { joined: number; counted: number }> = {};
   for (const r of rows) {
     if (!r.source) continue;
