@@ -1,14 +1,15 @@
 "use client";
 import Link from "next/link";
+import { useState } from "react";
 import { ArrowRight, CheckCircle2 } from "@/components/icons";
 import { fmtGD } from "@learnit/backend/format";
-import { Badge, Card, CardHeader, Notice, PageHeader } from "@/components/ui";
+import { Badge, Card, CardHeader } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
 import { cohortStatus, useCohorts, usePool, usePublicStats, useVaultPaused } from "@/components/admin/data";
-import { ErrorNote, axisDuration, dayLabel, fillActivity, fillDays, fmtDuration, gdNum } from "@/components/admin/bits";
+import { AdminHeader, ErrorNote, axisDuration, dayLabel, fillActivity, fillDays, fmtDuration, gdNum } from "@/components/admin/bits";
 import { BarChart, Delta, HBars, Sparkline, delta } from "@/components/admin/charts";
 
-const num = (n: number | null | undefined) => (n === null || n === undefined ? "n/a" : n.toLocaleString("en"));
+const num = (n: number | null | undefined) => (n === null || n === undefined ? "n/a" : n.toLocaleString("en-GB"));
 const gdText = (v: number) => `${v.toLocaleString("en", { maximumFractionDigits: v < 10 ? 2 : 0 })} G$`;
 
 /** One headline number with its 14-day shape and week-on-week change. The chart is optional so a tile still works before trend data exists. */
@@ -17,14 +18,15 @@ function Kpi({ label, value, unit, series, summary, hint }: { label: string; val
   return (
     <div className="min-w-0">
       <p className="text-[13px] font-medium text-muted">{label}</p>
-      <p className="tabular mt-1 truncate text-2xl font-semibold tracking-[-0.02em] text-ink">{value}{unit && <span className="ml-1 text-sm font-medium text-muted">{unit}</span>}</p>
-      {series && <div className="mt-3"><Sparkline values={series.slice(-14)} summary={summary} /></div>}
-      <div className="mt-2 min-h-4">{d ? <Delta pct={d.pct} /> : hint && <span className="text-xs text-muted">{hint}</span>}</div>
+      <p className="tabular mt-0.5 truncate text-2xl font-semibold tracking-[-0.02em] text-ink">{value}{unit && <span className="ml-1 text-sm font-medium text-muted">{unit}</span>}</p>
+      {series && <div className="mt-2"><Sparkline values={series.slice(-14)} summary={summary} /></div>}
+      <div className="mt-1 min-h-4">{d ? <Delta pct={d.pct} /> : hint && <span className="text-xs text-muted">{hint}</span>}</div>
     </div>
   );
 }
 
 export default function Overview() {
+  const [metric, setMetric] = useState<"learners" | "time">("learners");
   const stats = usePublicStats();
   const cohorts = useCohorts();
   const pool = usePool();
@@ -57,16 +59,16 @@ export default function Overview() {
   ].map((r) => ({ ...r, note: r.note ?? (s.users.total && r.label !== "Signed up" ? `${Math.round((r.value / s.users.total) * 100)}% of people who signed up` : undefined) })) : [];
 
   return (
-    <div className="grid gap-8">
-      <PageHeader title="Overview" description="Public performance for LearnIt: people, G$ claimed and on-chain activity. Totals only, no personal data." />
+    <div className="grid gap-4">
+      <AdminHeader title="Overview" hint="Totals only, no personal data." />
 
       <section aria-labelledby="attention">
         <h2 id="attention" className="sr-only">Needs attention</h2>
-        {cohorts.isLoading || pool.isLoading ? <Sk className="h-14 rounded-input" /> : attention.length ? (
+        {cohorts.isLoading || pool.isLoading ? <Sk className="h-10 rounded-input" /> : attention.length ? (
           <ul className="grid gap-2">
             {attention.map((a) => (
               <li key={a.key}>
-                <Link href={a.href} className="group flex items-center justify-between gap-3 rounded-input border border-coral-100 bg-coral-50 px-4 py-3 text-sm text-coral-700 transition hover:border-coral-300">
+                <Link href={a.href} className="group flex items-center justify-between gap-3 rounded-input border border-coral-100 bg-coral-50 px-3 py-2 text-sm text-coral-700 transition hover:border-coral-300">
                   <span className="font-medium">{a.text}</span>
                   <ArrowRight size={16} aria-hidden className="shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" />
                 </Link>
@@ -74,13 +76,13 @@ export default function Overview() {
             ))}
           </ul>
         ) : (
-          <Notice tone="success" title="Nothing needs attention">Challenges are running, and the pool is funded and paying out.</Notice>
+          <p className="flex items-center gap-2 text-sm text-muted"><CheckCircle2 size={16} className="text-sage-600" aria-hidden />Nothing needs attention. Challenges are running and the pool is paying out.</p>
         )}
       </section>
 
       <ErrorNote error={stats.error} />
 
-      <Card className="grid gap-x-8 gap-y-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
+      <Card className="grid gap-x-6 gap-y-4 p-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.isLoading ? [0, 1, 2, 3].map((i) => <Sk key={i} className="h-24 rounded-input" />) : s ? (
           <>
             <Kpi label="People" value={num(s.users.total)} series={act?.map((a) => a.signups)} summary="New people per day, last 14 days" hint={`${num(s.users.newLast7d)} new this week`} />
@@ -92,9 +94,9 @@ export default function Overview() {
       </Card>
 
       {s?.gUsed && (
-        <Card className="p-6">
-          <CardHeader title="G$ used" description="UBI claimed, rewards paid out and G$ staked through LearnIt, all time." />
-          <dl className="mt-5 grid gap-6 sm:grid-cols-[1.3fr_1fr_1fr_1fr] sm:items-end">
+        <Card className="p-4">
+          <CardHeader title="G$ used" description="All time." />
+          <dl className="mt-3 grid gap-4 sm:grid-cols-[1.3fr_1fr_1fr_1fr] sm:items-end">
             <div className="min-w-0">
               <dt className="text-[13px] font-medium text-muted">Total</dt>
               <dd className="font-mono tabular mt-1 truncate text-3xl font-semibold tracking-[-0.02em] text-ink">{s.gUsed.total !== null ? fmtGD(s.gUsed.total) : "n/a"}{s.gUsed.total !== null && <span className="ml-1 text-sm font-medium text-muted">G$</span>}</dd>
@@ -109,34 +111,45 @@ export default function Overview() {
         </Card>
       )}
 
-      <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-        <Card className="p-6">
-          <CardHeader title="UBI claimed per day" description="G$ claimed through LearnIt, last 14 days (UTC)."
+      <div className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
+        <Card className="p-4">
+          <CardHeader title="UBI claimed per day" description="Last 14 days, UTC."
             action={s && <Link href="/admin/ubi" className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-ink underline-offset-4 hover:underline">Details <ArrowRight size={14} aria-hidden /></Link>} />
-          <div className="mt-5">
-            {s ? <BarChart values={ubiSeries.slice(-14)} labels={ubiDays.slice(-14).map((d) => dayLabel(d.day))} format={gdText} caption="claimed" /> : stats.isLoading ? <Sk className="h-48" /> : <p className="text-sm text-muted">Numbers are unavailable right now.</p>}
+          <div className="mt-3">
+            {s ? <BarChart values={ubiSeries.slice(-14)} labels={ubiDays.slice(-14).map((d) => dayLabel(d.day))} format={gdText} caption="claimed" /> : stats.isLoading ? <Sk className="h-40" /> : <p className="text-sm text-muted">Numbers are unavailable right now.</p>}
           </div>
         </Card>
 
-        <Card className="p-6">
-          <CardHeader title="From sign-up to learning" description="How many of the people who signed up get each step." />
-          <div className="mt-5">{s ? <HBars rows={funnel} max={Math.max(s.users.total, 1)} /> : stats.isLoading ? <Sk className="h-48" /> : null}</div>
+        <Card className="p-4">
+          <CardHeader title="From sign-up to learning" />
+          <div className="mt-3">{s ? <HBars rows={funnel} max={Math.max(s.users.total, 1)} /> : stats.isLoading ? <Sk className="h-40" /> : null}</div>
         </Card>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-        <Card className="p-6">
-          <CardHeader title="Learners per day" description="People who attempted at least one lesson, last 14 days (UTC)." />
-          <div className="mt-5">
-            {act ? <BarChart values={act.slice(-14).map((a) => a.active)} labels={act.slice(-14).map((a) => dayLabel(a.day))} format={(v) => `${v.toLocaleString("en")} ${v === 1 ? "learner" : "learners"}`} caption="active" />
-              : stats.isLoading ? <Sk className="h-48" /> : <p className="text-sm text-muted">Daily learner counts appear once the stats service is updated.</p>}
+      <div className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
+        <Card className="p-4">
+          <CardHeader title={metric === "learners" ? "Learners per day" : "Time spent learning per day"} description="Last 14 days, UTC."
+            action={
+              <div role="tablist" aria-label="Chart metric" className="inline-flex shrink-0 rounded-input border border-line p-0.5 text-xs font-medium">
+                {([["learners", "Learners"], ["time", "Time"]] as const).map(([k, l]) => (
+                  <button key={k} role="tab" type="button" aria-selected={metric === k} onClick={() => setMetric(k)}
+                    className={`rounded-md px-2.5 py-1 transition-colors ${metric === k ? "bg-ink text-white" : "text-muted hover:text-ink"}`}>{l}</button>
+                ))}
+              </div>
+            } />
+          <div className="mt-3">
+            {metric === "learners"
+              ? act ? <BarChart values={act.slice(-14).map((a) => a.active)} labels={act.slice(-14).map((a) => dayLabel(a.day))} format={(v) => `${v.toLocaleString("en-GB")} ${v === 1 ? "learner" : "learners"}`} caption="active" />
+                : stats.isLoading ? <Sk className="h-40" /> : <p className="text-sm text-muted">Daily learner counts appear once the stats service is updated.</p>
+              : act && s?.learning.totalSeconds !== undefined ? <BarChart values={act.slice(-14).map((a) => a.seconds ?? 0)} labels={act.slice(-14).map((a) => dayLabel(a.day))} format={fmtDuration} axis={axisDuration} caption="learning" />
+                : stats.isLoading ? <Sk className="h-40" /> : <p className="text-sm text-muted">Learning time appears once the stats service is updated.</p>}
           </div>
         </Card>
 
-        <Card className="p-6">
+        <Card className="p-4">
           <CardHeader title="On-chain now" />
-          {stats.isLoading || pool.isLoading || cohorts.isLoading ? <div className="mt-5 grid gap-4">{[0, 1, 2].map((i) => <Sk key={i} className="h-12 rounded-input" />)}</div> : (
-            <dl className="tabular mt-5 grid gap-5">
+          {stats.isLoading || pool.isLoading || cohorts.isLoading ? <div className="mt-3 grid gap-3">{[0, 1, 2].map((i) => <Sk key={i} className="h-12 rounded-input" />)}</div> : (
+            <dl className="tabular mt-3 grid gap-4">
               <div>
                 <dt className="text-[13px] font-medium text-muted">Rewards pool</dt>
                 <dd className="mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{pool.data ? fmtGD(pool.data.balance) : "n/a"}{pool.data && <span className="ml-1 text-sm font-medium text-muted">G$</span>}</dd>
@@ -160,19 +173,11 @@ export default function Overview() {
         </Card>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-        <Card className="p-6">
-          <CardHeader title="Time spent learning per day" description="Time in finished lessons, last 14 days (UTC)." />
-          <div className="mt-5">
-            {act && s?.learning.totalSeconds !== undefined ? <BarChart values={act.slice(-14).map((a) => a.seconds ?? 0)} labels={act.slice(-14).map((a) => dayLabel(a.day))} format={fmtDuration} axis={axisDuration} caption="learning" />
-              : stats.isLoading ? <Sk className="h-48" /> : <p className="text-sm text-muted">Learning time appears once the stats service is updated.</p>}
-          </div>
-        </Card>
-
-        <Card className="p-6">
+      <div className="grid gap-4">
+        <Card className="p-4">
           <CardHeader title="Learning time" description="Finished lessons and checkpoints. A lesson left open counts for 30 minutes at most." />
-          {stats.isLoading ? <div className="mt-5 grid gap-4">{[0, 1, 2].map((i) => <Sk key={i} className="h-12 rounded-input" />)}</div> : s?.learning.totalSeconds !== undefined ? (
-            <dl className="tabular mt-5 grid gap-5">
+          {stats.isLoading ? <div className="mt-3 grid gap-3">{[0, 1, 2].map((i) => <Sk key={i} className="h-12 rounded-input" />)}</div> : s?.learning.totalSeconds !== undefined ? (
+            <dl className="tabular mt-3 grid gap-4 sm:grid-cols-3">
               <div>
                 <dt className="text-[13px] font-medium text-muted">Total</dt>
                 <dd className="mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{fmtDuration(s.learning.totalSeconds)}</dd>

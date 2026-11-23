@@ -5,18 +5,18 @@ import { Lock, Wallet } from "@/components/icons";
 import type { AdminUserRow, AdminUsers } from "@learnit/backend/handlers/adminUsers";
 import { langOf } from "@/lib/languages";
 import { cn } from "@/lib/cn";
-import { Badge, Button, Card, EmptyState, Notice, PageHeader, Stat, fieldClass } from "@/components/ui";
+import { Badge, Button, Card, EmptyState, Notice, fieldClass } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
 import { useAdmin } from "@/components/admin/AdminProvider";
 import { useAdminSession } from "@/components/admin/session";
 import { DataTable, type Col } from "@/components/admin/DataTable";
-import { fmtDuration, shortAddr } from "@/components/admin/bits";
+import { AdminHeader, fmtDuration, shortAddr } from "@/components/admin/bits";
 
 class ApiError extends Error { constructor(message: string, readonly status: number) { super(message); } }
 
 const DAY_MS = 86_400_000;
-const date = (iso: string) => new Date(iso).toLocaleDateString("en", { day: "numeric", month: "short", year: "numeric" });
-const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+const date = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const rtf = new Intl.RelativeTimeFormat("en-GB", { numeric: "auto" });
 function ago(iso: string) {
   const ms = Date.now() - Date.parse(iso);
   if (ms < 3_600_000) return "Just now";
@@ -27,17 +27,24 @@ function ago(iso: string) {
 const ts = (iso: string | null) => (iso ? Date.parse(iso) : null);
 
 const COLS: Col<AdminUserRow>[] = [
-  { key: "username", header: "Username", value: (r) => r.username, render: (r) => (r.username ? <span className="font-medium">@{r.username}</span> : <span className="text-muted">Not set</span>), exportValue: (r) => r.username },
-  { key: "name", header: "Name", value: (r) => r.displayName, render: (r) => r.displayName ?? <span className="text-muted">Not set</span> },
-  { key: "wallet", header: "Wallet", value: (r) => r.wallet, render: (r) => <span title={r.wallet} className="font-mono text-xs">{shortAddr(r.wallet)}</span> },
+  { key: "person", header: "Person", value: (r) => r.username ?? r.displayName ?? r.wallet,
+    render: (r) => (
+      <div className="min-w-0">
+        <p className="font-medium text-ink">{r.username ? `@${r.username}` : r.displayName ?? <span className="text-muted">No username</span>}</p>
+        <p className="mt-0.5 text-xs text-muted">{r.username && r.displayName ? `${r.displayName} · ` : ""}<span title={r.wallet} className="font-mono">{shortAddr(r.wallet)}</span></p>
+      </div>
+    ),
+    exportValue: (r) => r.username },
+  { key: "name", header: "Name", value: (r) => r.displayName, noView: true },
+  { key: "wallet", header: "Wallet", value: (r) => r.wallet, noView: true },
   { key: "course", header: "Learning", value: (r) => langOf(r.course).english },
-  { key: "verified", header: "GoodDollar", value: (r) => (r.verified ? 1 : 0), exportValue: (r) => (r.verified ? "verified" : "not verified"), render: (r) => (r.verified ? <Badge tone="sage">Verified</Badge> : <Badge tone="neutral">Not verified</Badge>) },
-  { key: "passed", header: "Lessons passed", align: "right", value: (r) => r.lessonsPassed },
-  { key: "claims", header: "UBI claims", align: "right", value: (r) => r.ubiClaims },
-  { key: "time", header: "Time learning", align: "right", value: (r) => r.learningSeconds, render: (r) => (r.learningSeconds ? fmtDuration(r.learningSeconds) : <span className="text-muted">None</span>) },
+  { key: "verified", header: "GoodDollar", value: (r) => (r.verified ? 1 : 0), exportValue: (r) => (r.verified ? "verified" : "not verified"), render: (r) => (r.verified ? <Badge tone="sage">Verified</Badge> : <span className="text-muted">No</span>) },
+  { key: "passed", header: "Passed", align: "right", value: (r) => r.lessonsPassed },
+  { key: "claims", header: "Claims", align: "right", value: (r) => r.ubiClaims },
+  { key: "time", header: "Time", align: "right", value: (r) => r.learningSeconds, render: (r) => (r.learningSeconds ? fmtDuration(r.learningSeconds) : <span className="text-muted">None</span>) },
   { key: "last", header: "Last active", value: (r) => ts(r.lastActive), exportValue: (r) => r.lastActive, render: (r) => (r.lastActive ? <span title={date(r.lastActive)}>{ago(r.lastActive)}</span> : <span className="text-muted">Never</span>) },
   { key: "joined", header: "Joined", value: (r) => ts(r.joined), exportValue: (r) => r.joined, render: (r) => date(r.joined) },
-  { key: "flag", header: "Flagged", value: (r) => (r.flagged ? 1 : 0), exportValue: (r) => (r.flagged ? "yes" : "no"), render: (r) => (r.flagged ? <Badge tone="coral">Flagged</Badge> : <span className="text-muted">No</span>) },
+  { key: "flag", header: "Flagged", value: (r) => (r.flagged ? 1 : 0), exportValue: (r) => (r.flagged ? "yes" : "no"), render: (r) => (r.flagged ? <Badge tone="coral">Flagged</Badge> : null) },
 ];
 
 const select = cn(fieldClass, "h-10 w-auto py-0 pr-8");
@@ -73,9 +80,8 @@ export default function Users() {
   }, [data]);
 
   return (
-    <div className="grid gap-8">
-      <PageHeader title="People" description="Everyone who has signed up, with their username and how they are learning. Click a heading to sort." />
-      <Notice tone="warning" title="Personal data">Only wallets on the server's admin list can open this. Do not share exports outside the team.</Notice>
+    <div className="grid gap-4">
+      <AdminHeader title="People" hint="Personal data: share exports only inside the team." />
 
       {!admin.address ? (
         <EmptyState icon={Wallet} title="Connect an admin wallet" action={<Button variant="outline" size="sm" icon={Wallet} loading={admin.connecting} onClick={admin.connect} disabled={!admin.hasInjected}>Connect wallet</Button>}>
@@ -87,7 +93,7 @@ export default function Users() {
           {s.error && <span className="mt-2 block text-danger">{s.error}</span>}
         </EmptyState>
       ) : q.isLoading ? (
-        <Card className="grid gap-3 p-6">{[0, 1, 2, 3, 4].map((i) => <Sk key={i} className="h-10 rounded-input" />)}</Card>
+        <Card className="grid gap-3 p-4">{[0, 1, 2, 3, 4].map((i) => <Sk key={i} className="h-10 rounded-input" />)}</Card>
       ) : failure && failure.status !== 401 ? (
         <Notice tone="danger" title={failure.status === 403 ? "This wallet is not on the admin list" : failure.status === 503 ? "The people list is not set up" : "We could not load people"}
           action={failure.status === 403 || failure.status === 503 ? undefined : <Button variant="outline" size="sm" onClick={() => void q.refetch()}>Try again</Button>}>
@@ -95,15 +101,14 @@ export default function Users() {
         </Notice>
       ) : data ? (
         <>
-          <Card className="grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-5">
-            <Stat label="People" value={data.total.toLocaleString("en")} hint={data.truncated ? `Showing the newest ${data.rows.length.toLocaleString("en")}` : undefined} />
-            <Stat label="Verified" value={stats.verified.toLocaleString("en")} hint="GoodDollar, as last checked" />
-            <Stat label="Active this week" value={stats.active.toLocaleString("en")} hint="Attempted a lesson in 7 days" />
-            <Stat label="Time learning" value={fmtDuration(stats.time)} hint="In finished lessons, all time" />
-            <Stat label="Have a username" value={stats.named.toLocaleString("en")} hint={stats.flagged ? `${stats.flagged} flagged for review` : undefined} />
-          </Card>
+          <p className="tabular text-sm text-muted">
+            <span className="font-semibold text-ink">{data.total.toLocaleString("en-GB")}</span> people{data.truncated ? ` (newest ${data.rows.length.toLocaleString("en-GB")} shown)` : ""},{" "}
+            <span className="font-semibold text-ink">{stats.verified.toLocaleString("en-GB")}</span> verified,{" "}
+            <span className="font-semibold text-ink">{stats.active.toLocaleString("en-GB")}</span> active this week
+            {stats.flagged ? <>, <span className="font-semibold text-coral-700">{stats.flagged}</span> flagged</> : null}.
+          </p>
 
-          <Card className="p-6">
+          <Card className="p-4">
             <DataTable label="People" rows={rows} cols={COLS} rowKey={(r) => r.wallet} initialSort={{ key: "joined", dir: "desc" }} exportName="learnit-people"
               searchText={(r) => `${r.username ?? ""} ${r.displayName ?? ""} ${r.wallet}`} empty="No one matches these filters."
               filters={
