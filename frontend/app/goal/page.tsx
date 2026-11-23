@@ -65,7 +65,7 @@ export default function Goal() {
 
   return (
     <AppShell>
-      <PageHeader title="Set a goal" description="Pick how long, say why, then put a stake behind it." />
+      <PageHeader title="Set a goal" />
       <div className="mt-6 grid max-w-xl gap-4">
         {me && !me.verified && <VerifyCard />}
         {me?.verified && !me.gasTopupDone && <GasCard />}
@@ -107,7 +107,7 @@ export default function Goal() {
             <Notice tone="info" className="mt-4">You are already in a challenge. You can change your reason here any time.</Notice>
           ) : chosen && minLabel ? (
             <p className="mt-4 text-pretty text-sm leading-relaxed text-ink-2">
-              You are putting {minLabel} G$ behind a {days} day streak. Finish all {days} days and it comes back to you{chosen.bonusBps > 0 ? `, plus a ${chosen.bonusBps / 100}% bonus` : ""}. Miss a day and you lose it.
+              You put {minLabel} G$ behind it. Finish every day and it comes back{chosen.bonusBps > 0 ? `, plus a ${chosen.bonusBps / 100}% bonus` : ""}. Miss a day and you lose it.
             </p>
           ) : (
             <Notice tone="info" className="mt-4">No {days} day challenge is open yet. Save your goal now and stake when one opens.</Notice>

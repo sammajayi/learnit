@@ -20,8 +20,8 @@ export function GoalPrompt({ enabled = true, className }: { enabled?: boolean; c
       <div className="flex items-start gap-3">
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-surface text-ink-2"><Target size={18} aria-hidden /></span>
         <div className="min-w-0">
-          <h2 id="goal-prompt" className="text-[15px] font-semibold text-ink">Set a learning goal</h2>
-          <p className="mt-1 text-pretty text-sm leading-relaxed text-ink-2">Pick 7, 14 or 30 days and write why you are learning. We show it to you again on hard days.</p>
+          <h2 id="goal-prompt" className="text-[15px] font-semibold text-ink">Pick a goal</h2>
+          <p className="mt-1 text-pretty text-sm leading-relaxed text-ink-2">7, 14 or 30 days, and why you are learning. We show it to you again on hard days.</p>
         </div>
       </div>
       <div className="mt-3 flex flex-wrap items-center gap-2">

@@ -41,9 +41,9 @@ export function StakePrompt() {
       <div className="flex items-start gap-3">
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-surface text-ink-2"><PiggyBank size={18} aria-hidden /></span>
         <div className="min-w-0">
-          <h2 id="stake-prompt" className="text-[15px] font-semibold text-ink">{`Put G$ behind your ${days} day goal`}</h2>
+          <h2 id="stake-prompt" className="text-[15px] font-semibold text-ink">{`Stake ${fmtGD(c.min, 0)} G$ on your ${days} day goal`}</h2>
           <p className="mt-1 text-pretty text-sm leading-relaxed text-ink-2">
-            Join the {days} day challenge with {fmtGD(c.min, 0)} G$ or more. Finish all {days} days and you get your stake back{c.bonusBps > 0 ? `, plus a ${c.bonusBps / 100}% bonus` : ""}. Miss a day and you lose it.
+            Finish every day and your stake comes back{c.bonusBps > 0 ? `, plus a ${c.bonusBps / 100}% bonus` : ""}. Miss a day and you lose it.
           </p>
         </div>
       </div>

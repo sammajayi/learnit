@@ -20,8 +20,8 @@ export function GasCard() {
       <div className="flex gap-4">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sunken text-ink-2"><Fuel size={18} strokeWidth={1.85} aria-hidden /></span>
         <div className="min-w-0 flex-1">
-          <h2 className="text-sm font-semibold text-ink">Get free CELO to stake and claim</h2>
-          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">Claiming and staking need a little CELO to pay network fees. Join our Telegram group and send your wallet address in the chat. It is free.</p>
+          <h2 className="text-sm font-semibold text-ink">You need a little CELO for fees</h2>
+          <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">Join our Telegram group and send your wallet address in the chat. It is free.</p>
           {me?.wallet && (
             <button type="button" onClick={async () => { try { await navigator.clipboard.writeText(me.wallet); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* the address is shown, so it can be copied by hand */ } }}
               className="mt-2 inline-flex min-h-9 items-center gap-2 rounded-input border border-line bg-sunken px-3 font-mono text-[13px] text-ink-2 transition hover:border-line-strong focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15" aria-label="Copy your wallet address">
@@ -35,7 +35,7 @@ export function GasCard() {
           <X size={16} aria-hidden />
         </button>
       </div>
-      <ButtonLink href={CELO_HELP_URL} target="_blank" rel="noreferrer" variant="outline" block icon={ExternalLink} className="mt-5">Get free CELO on Telegram</ButtonLink>
+      <ButtonLink href={CELO_HELP_URL} target="_blank" rel="noreferrer" variant="outline" block icon={ExternalLink} className="mt-5">Join Telegram</ButtonLink>
     </Card>
   );
 }
