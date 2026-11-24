@@ -30,17 +30,32 @@ const abi = [
         { name: "recipientId", type: "uint160" }, { name: "amount", type: "uint96" }] }] }] },
 ] as const;
 
-/** Whether this wallet already has any votes on LearnIt, read straight from the chain so a page
- *  reload doesn't forget it (a client-only flag would). */
-function useAlreadyVoted() {
+type Ballot = { kind: "none-to-add" | "already-voted" | "no-power"; votes: { recipient: `0x${string}`; amount: bigint }[] };
+
+/** The next vote() call this wallet should make, computed ahead of the tap so onVote() has nothing
+ *  left to read: just one read (not two sequential ones) before the wallet is asked to sign, which
+ *  matters on mobile WalletConnect, where extra delay between tapping and sending the request widens
+ *  the window for the relay/session to drop it (wallet opens but never receives anything). */
+function useNextBallot() {
   const { address } = useAccount();
   const client = usePublicClient({ chainId: celo.id });
   return useQuery({
-    queryKey: ["flow-council-voted", address],
+    queryKey: ["flow-council-ballot", address],
     enabled: !!address && !!client,
-    queryFn: async () => {
-      const current = await client!.readContract({ address: COUNCIL, abi, functionName: "getVotes", args: [address!] });
-      return (current.find((v) => v.recipient.toLowerCase() === LEARNIT.toLowerCase())?.amount ?? 0n) > 0n;
+    queryFn: async (): Promise<Ballot> => {
+      const [voter, current] = await Promise.all([
+        client!.readContract({ address: COUNCIL, abi, functionName: "getVoter", args: [address!] }),
+        client!.readContract({ address: COUNCIL, abi, functionName: "getVotes", args: [address!] }),
+      ]);
+      const existing = current.find((v) => v.recipient.toLowerCase() === LEARNIT.toLowerCase())?.amount ?? 0n;
+      if (existing > 0n) return { kind: "already-voted", votes: [] };
+      if (voter.votingPower === 0n) return { kind: "no-power", votes: [] };
+
+      const others = current.filter((v) => v.recipient.toLowerCase() !== LEARNIT.toLowerCase());
+      const used = others.reduce((s, v) => s + v.amount, 0n);
+      const add = voter.votingPower - used < POPUP_VOTES ? voter.votingPower - used : POPUP_VOTES;
+      if (add <= 0n) return { kind: "no-power", votes: [] };
+      return { kind: "none-to-add", votes: [...others, { recipient: LEARNIT as `0x${string}`, amount: add }] };
     },
   });
 }
@@ -50,31 +65,21 @@ function useAlreadyVoted() {
  *  on-chain action in the app. A wallet with no voting power there gets a clear message instead of
  *  a wallet popup that would only fail. */
 export function VoteCard() {
-  const { address } = useAccount();
-  const client = usePublicClient({ chainId: celo.id });
   const { writeContractAsync, isPending } = useWriteContract();
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
-  const { data: alreadyVoted, isLoading: checking } = useAlreadyVoted();
-  const voted = result?.ok || alreadyVoted === true;
+  const { data: ballot, isLoading: checking, refetch } = useNextBallot();
+  const voted = result?.ok || ballot?.kind === "already-voted";
 
   async function onVote() {
-    if (!address || !client) return;
+    if (!ballot) return;
     setResult(null);
+    if (ballot.kind === "no-power") { setResult({ ok: false, message: "This wallet has no voting power left in the Flow Council, so it can't vote." }); return; }
     try {
-      const voter = await client.readContract({ address: COUNCIL, abi, functionName: "getVoter", args: [address] });
-      if (voter.votingPower === 0n) { setResult({ ok: false, message: "This wallet has no voting power in the Flow Council, so it can't vote." }); return; }
-
-      const current = await client.readContract({ address: COUNCIL, abi, functionName: "getVotes", args: [address] });
-      const others = current.filter((v) => v.recipient.toLowerCase() !== LEARNIT.toLowerCase());
-      const used = others.reduce((s, v) => s + v.amount, 0n);
-      const add = voter.votingPower - used < POPUP_VOTES ? voter.votingPower - used : POPUP_VOTES;
-      if (add <= 0n) { setResult({ ok: false, message: "This wallet's voting power is already fully used on other projects." }); return; }
-
-      const ballot = [...others, { recipient: LEARNIT as `0x${string}`, amount: add }];
-      await writeContractAsync({ address: COUNCIL, abi, functionName: "vote", chainId: celo.id, args: [ballot] });
+      await writeContractAsync({ address: COUNCIL, abi, functionName: "vote", chainId: celo.id, args: [ballot.votes] });
       setResult({ ok: true, message: "Thank you! Your vote for LearnIt is in." });
     } catch (e) {
       setResult({ ok: false, message: friendlyError(e) });
+      void refetch(); // the chain read that fed this ballot may now be stale either way
     }
   }
 
@@ -87,9 +92,10 @@ export function VoteCard() {
       <p className="mt-0.5 text-xs text-muted">
         GoodDollar's GoodBuilders Flow Council funds projects by vote. One tap puts {POPUP_VOTES.toString()} votes behind LearnIt.
       </p>
-      <Button onClick={onVote} loading={isPending || checking} disabled={voted} icon={Award} block className="mt-3">
+      <Button onClick={onVote} loading={isPending || checking} disabled={voted || !ballot} icon={Award} block className="mt-3">
         {voted ? "Voted" : "Vote for LearnIt"}
       </Button>
+      {isPending && <p className="mt-2 text-xs text-muted">Check your wallet app. If it opened but shows nothing after a few seconds, close and reopen it, or try the tap again.</p>}
       {(result || voted) && (
         <Notice tone={voted ? "success" : "danger"} className="mt-3">
           {voted ? "Thank you! Your vote for LearnIt is in." : result?.message}
