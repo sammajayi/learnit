@@ -60,6 +60,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
         defaultChain: CHAIN,
         supportedChains: [CHAIN],
         externalWallets: {},
+        // Without this, WalletConnect falls back to Privy's shared default project, which is rate-limited
+        // and shows exactly as "wallet says Connecting... and never gets to the sign prompt" under load.
+        ...(process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ? { walletConnectCloudProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID } : {}),
       }}
     >
       <QueryClientProvider client={qc}>
