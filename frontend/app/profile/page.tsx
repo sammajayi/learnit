@@ -13,6 +13,7 @@ import { Flag } from "@/components/Flag";
 import { ProfileEditor } from "@/components/ProfileEditor";
 import { InviteCard } from "@/components/InviteCard";
 import { ReminderCard } from "@/components/ReminderCard";
+import { VoteCard } from "@/components/VoteCard";
 import { ProfileSkeleton, Sk } from "@/components/Skeletons";
 import { useAuthGate } from "@/components/useAuthGate";
 import { Badge, Button, Card, CardHeader, PageHeader, Progress, ProgressRing, Stat } from "@/components/ui";
@@ -105,6 +106,8 @@ export default function Profile() {
           </Card>
 
           <InviteCard />
+
+          <VoteCard />
 
           <ReminderCard />
 
