@@ -21,17 +21,20 @@ function useIsDesktop() {
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
 /**
- * A bottom sheet on a phone and a modal on desktop.
+ * A bottom sheet on a phone and a modal on desktop, or with `modal`, a centred popup box everywhere.
  * Motion: a spring (response 0.3 s, damping ratio about 0.9) on transform and opacity only. It starts from wherever the
  * element is, so opening, closing or dragging mid-animation never waits for the last one to finish, and input is never blocked.
  * On a phone the sheet drags down from its handle and closes past a short distance or a quick flick. With reduced motion
  * it only fades. `onClose` is a request: the parent may keep the sheet open (for example to ask about unsaved changes).
  */
-export function Sheet({ open, onClose, title, children, footer, className }: {
+export function Sheet({ open, onClose, title, children, footer, className, modal = false }: {
   open: boolean; onClose: () => void; title: string; children: ReactNode; footer?: ReactNode; className?: string;
+  /** Always a centred popup box, even on a phone: no bottom sheet and no drag handle. */
+  modal?: boolean;
 }) {
   const reduce = useReducedMotion();
-  const desktop = useIsDesktop();
+  const wide = useIsDesktop();
+  const desktop = wide || modal; // "desktop" here means the centred layout
   const controls = useDragControls();
   const panel = useRef<HTMLDivElement>(null);
   const opener = useRef<HTMLElement | null>(null);
@@ -80,8 +83,8 @@ export function Sheet({ open, onClose, title, children, footer, className }: {
           <motion.div ref={panel} role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}
             {...variants} transition={reduce ? fade : spring}
             drag={draggable ? "y" : false} dragListener={false} dragControls={controls} dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: 0.6 }} dragSnapToOrigin onDragEnd={onDragEnd}
-            className={cn("relative flex max-h-[92dvh] w-full flex-col bg-surface shadow-float outline-none will-change-transform",
-              desktop ? "max-w-[480px] rounded-card" : "rounded-t-[24px]", className)}>
+            className={cn("relative flex max-h-[92dvh] w-full flex-col bg-surface shadow-float outline-none focus-visible:outline-none will-change-transform",
+              desktop ? cn("rounded-card focus-visible:rounded-card", modal ? "max-w-[420px]" : "max-w-[480px]") : "rounded-t-[24px] focus-visible:rounded-t-[24px] focus-visible:rounded-b-none", className)}>
             {!desktop && (
               <div className="flex shrink-0 cursor-grab touch-none justify-center pb-1 pt-2.5 active:cursor-grabbing" onPointerDown={(e) => controls.start(e)} aria-hidden>
                 <span className="h-1 w-10 rounded-full bg-line-strong" />

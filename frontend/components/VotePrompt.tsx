@@ -12,8 +12,8 @@ const read = (store: Storage | undefined, key: string) => { try { return store?.
 
 /**
  * A popup that asks people who have not voted to vote for LearnIt. It opens a moment after Home settles, and only for someone
- * who can vote right now. "Not now" hides it for five minutes, then it comes back; voting ends it for good. It is a sheet on a
- * phone and a modal on desktop.
+ * who can vote right now. "Not now" hides it for five minutes, then it comes back; voting ends it for good. It is a centred popup box on every
+ * screen size.
  */
 export function VotePrompt() {
   const { data: me } = useMe();
@@ -47,7 +47,7 @@ export function VotePrompt() {
   };
 
   return (
-    <Sheet open={open} onClose={thanks ? () => setOpen(false) : notNow} title="Vote for LearnIt">
+    <Sheet modal open={open} onClose={thanks ? () => setOpen(false) : notNow} title="Vote for LearnIt">
       {thanks ? (
         <p role="status" className="flex items-center gap-2 py-2 text-[15px] font-medium text-sage-700"><Check size={18} aria-hidden /> Vote recorded. Thank you.</p>
       ) : (
