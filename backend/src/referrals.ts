@@ -36,8 +36,6 @@ export async function attachReferral(user: User, ref: unknown, source: unknown) 
   }
 }
 
-export type ReferredPerson = { username: string | null; joined: string; verified: boolean; learned: boolean; claimed: boolean; counted: boolean };
-
 /** A referred person counts once they are GoodDollar verified, have passed at least one lesson and have claimed their daily G$ (UBI) in the app. */
 export const referralCounts = (o: { verified: boolean; learned: boolean; claimed: boolean }) => o.verified && o.learned && o.claimed;
 
@@ -58,16 +56,12 @@ const isVerified = (p: Progress, id: string) => {
   return p.claimed.has(id) || (!!u?.verifiedUntil && u.verifiedUntil > new Date());
 };
 
-/** The people one user has invited, and how far each has got. */
+/** How many people one user has invited, and how many of them count. Counts only: nobody sees who the others are or how far they have got. */
 export async function referralSummary(user: User) {
-  const rows = await db.referral.findMany({ where: { referrerId: user.id }, orderBy: { createdAt: "desc" } });
+  const rows = await db.referral.findMany({ where: { referrerId: user.id }, select: { userId: true } });
   const p = await progressOf(rows.map((r) => r.userId));
-  const people: ReferredPerson[] = rows.map((r) => {
-    const u = p.users.get(r.userId);
-    const verified = isVerified(p, r.userId), learned = p.learned.has(r.userId), claimed = p.claimed.has(r.userId);
-    return { username: u?.username ?? null, joined: r.createdAt.toISOString(), verified, learned, claimed, counted: referralCounts({ verified, learned, claimed }) };
-  });
-  return { people, invited: people.length, counted: people.filter((x) => x.counted).length };
+  const counted = rows.filter((r) => referralCounts({ verified: isVerified(p, r.userId), learned: p.learned.has(r.userId), claimed: p.claimed.has(r.userId) })).length;
+  return { invited: rows.length, counted };
 }
 
 /** Aggregate numbers for the public dashboard: no names, only counts, in total and by community tag. */

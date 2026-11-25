@@ -63,7 +63,7 @@ export function ProfileMenu({ placement = "down", showName = false }: { placemen
               </div>
             </div>
             <div className="grid gap-0.5 border-t border-line pt-2">
-              <Link role="menuitem" href="/profile" onClick={() => setOpen(false)} className={item}><UserRound size={16} aria-hidden /> Profile and progress</Link>
+              <Link role="menuitem" href="/profile" onClick={() => setOpen(false)} className={item}><UserRound size={16} aria-hidden /> Profile</Link>
               <Link role="menuitem" href="/settings" onClick={() => setOpen(false)} className={item}><Settings size={16} aria-hidden /> Settings</Link>
               <button role="menuitem" onClick={() => void logout()} className={item}><LogOut size={16} aria-hidden /> Sign out</button>
             </div>
