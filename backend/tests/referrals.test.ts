@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { cleanSource, referralsEnabled, referralCounts, MIN_REFERRAL_STAKE } from "../src/referrals";
+import { cleanSource, referralsEnabled, referralCounts } from "../src/referrals";
 
 describe("referral helpers", () => {
   afterEach(() => { delete process.env.NEXT_PUBLIC_REFERRALS_ENABLED; });
@@ -27,17 +27,12 @@ describe("referral helpers", () => {
 });
 
 describe("when a referral counts", () => {
-  const all = { verified: true, learned: true, staked: true };
-  it("needs verification, a passed lesson and an 800 G$ stake", () => {
-    expect(referralCounts(all)).toBe(true);
+  it("needs verification, a passed lesson and a claimed daily G$", () => {
+    expect(referralCounts({ verified: true, learned: true, claimed: true })).toBe(true);
   });
   it("does not count while any one of the three is missing", () => {
-    for (const k of Object.keys(all) as (keyof typeof all)[]) expect(referralCounts({ ...all, [k]: false })).toBe(false);
-  });
-  it("does not need a claimed daily G$", () => {
-    expect(referralCounts({ verified: true, learned: true, staked: true })).toBe(true);
-  });
-  it("sets the stake bar at 800 G$", () => {
-    expect(MIN_REFERRAL_STAKE).toBe(800n * 10n ** 18n);
+    expect(referralCounts({ verified: false, learned: true, claimed: true })).toBe(false);
+    expect(referralCounts({ verified: true, learned: false, claimed: true })).toBe(false);
+    expect(referralCounts({ verified: true, learned: true, claimed: false })).toBe(false);
   });
 });
