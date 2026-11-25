@@ -8,12 +8,11 @@ import { Sheet } from "./ui/Sheet";
 import { useVote } from "./VoteCard";
 
 const SNOOZE_KEY = "learnit.vote-prompt-until";
-const SEEN_KEY = "learnit.vote-prompt-seen";
 const read = (store: Storage | undefined, key: string) => { try { return store?.getItem(key) ?? null; } catch { return null; } };
 
 /**
- * A popup that asks people who have not voted to vote for LearnIt. It opens once per visit, a moment after Home settles, and
- * only for someone who can vote right now. "Not now" hides it for three days; voting ends it for good. It is a sheet on a
+ * A popup that asks people who have not voted to vote for LearnIt. It opens a moment after Home settles, and only for someone
+ * who can vote right now. "Not now" hides it for five minutes, then it comes back; voting ends it for good. It is a sheet on a
  * phone and a modal on desktop.
  */
 export function VotePrompt() {
@@ -21,15 +20,15 @@ export function VotePrompt() {
   const v = useVote();
   const [open, setOpen] = useState(false);
   const [thanks, setThanks] = useState(false);
+  const [, recheck] = useState(0); // bumped when a snooze runs out, so the popup can come back without a reload
 
   const eligible = !open && !!me && shouldOfferVotePrompt({
     onboarded: me.onboarded, verified: me.verified, voted: v.voted, ballotKind: v.ballot?.kind ?? null,
-    snoozedUntil: Number(read(typeof window === "undefined" ? undefined : localStorage, SNOOZE_KEY) ?? 0),
-    seenThisVisit: read(typeof window === "undefined" ? undefined : sessionStorage, SEEN_KEY) === "1", now: Date.now(),
+    snoozedUntil: Number(read(typeof window === "undefined" ? undefined : localStorage, SNOOZE_KEY) ?? 0), now: Date.now(),
   });
   useEffect(() => {
     if (!eligible) return;
-    const t = setTimeout(() => { setOpen(true); try { sessionStorage.setItem(SEEN_KEY, "1"); } catch { /* ignore */ } }, 2500);
+    const t = setTimeout(() => setOpen(true), 2500);
     return () => clearTimeout(t);
   }, [eligible]);
 
@@ -41,7 +40,11 @@ export function VotePrompt() {
     return () => clearTimeout(t);
   }, [open, v.voted]);
 
-  const notNow = () => { try { localStorage.setItem(SNOOZE_KEY, String(Date.now() + VOTE_SNOOZE_MS)); } catch { /* ignore */ } setOpen(false); };
+  const notNow = () => {
+    try { localStorage.setItem(SNOOZE_KEY, String(Date.now() + VOTE_SNOOZE_MS)); } catch { /* ignore */ }
+    setOpen(false);
+    setTimeout(() => recheck((n) => n + 1), VOTE_SNOOZE_MS + 100);
+  };
 
   return (
     <Sheet open={open} onClose={thanks ? () => setOpen(false) : notNow} title="Vote for LearnIt">
