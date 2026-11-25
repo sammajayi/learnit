@@ -3,8 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useAuth } from "@/lib/useAuth";
-import { BadgeCheck, Check, ChevronsUpDown, Copy, LogOut, UserRound } from "@/components/icons";
-import { short } from "@learnit/backend/format";
+import { BadgeCheck, ChevronsUpDown, LogOut, Settings, UserRound } from "@/components/icons";
 import { useMe } from "@/lib/useMe";
 import { cn } from "@/lib/cn";
 import { Avatar } from "./Avatar";
@@ -16,7 +15,6 @@ export function ProfileMenu({ placement = "down", showName = false }: { placemen
   const { logout } = useAuth();
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,9 +29,6 @@ export function ProfileMenu({ placement = "down", showName = false }: { placemen
   if (!me) return <Sk className={cn("rounded-full", showName ? "h-11 w-full rounded-btn" : "h-9 w-9")} />;
   const name = me.displayName || (me.username ? `@${me.username}` : "Your account");
 
-  async function copy() {
-    try { await navigator.clipboard.writeText(me!.wallet); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch {}
-  }
 
   const item = "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm font-medium text-ink-2 transition hover:bg-sunken hover:text-ink";
 
@@ -46,7 +41,6 @@ export function ProfileMenu({ placement = "down", showName = false }: { placemen
           <>
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-semibold text-ink">{name}</span>
-              <span className="block truncate font-mono text-xs text-muted">{short(me.wallet)}</span>
             </span>
             <ChevronsUpDown size={16} className="text-muted" aria-hidden />
           </>
@@ -68,12 +62,9 @@ export function ProfileMenu({ placement = "down", showName = false }: { placemen
                   : me.username && me.displayName && <p className="truncate text-xs text-muted">@{me.username}</p>}
               </div>
             </div>
-            <button role="menuitem" onClick={copy} className="flex w-full items-center justify-between gap-3 rounded-input border border-line bg-canvas px-3 py-2.5 text-left transition hover:border-line-strong" aria-label="Copy wallet address">
-              <span><span className="block text-[11px] font-medium uppercase tracking-wider text-muted">Wallet</span><span className="font-mono text-[13px] text-ink">{short(me.wallet)}</span></span>
-              {copied ? <Check size={16} className="text-sage-700" aria-hidden /> : <Copy size={16} className="text-muted" aria-hidden />}
-            </button>
-            <div className="mt-2 grid gap-0.5 border-t border-line pt-2">
+            <div className="grid gap-0.5 border-t border-line pt-2">
               <Link role="menuitem" href="/profile" onClick={() => setOpen(false)} className={item}><UserRound size={16} aria-hidden /> Profile and progress</Link>
+              <Link role="menuitem" href="/settings" onClick={() => setOpen(false)} className={item}><Settings size={16} aria-hidden /> Settings</Link>
               <button role="menuitem" onClick={() => void logout()} className={item}><LogOut size={16} aria-hidden /> Sign out</button>
             </div>
           </motion.div>

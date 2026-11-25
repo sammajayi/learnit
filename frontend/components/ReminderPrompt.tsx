@@ -16,7 +16,7 @@ const HOURS = Array.from({ length: 24 }, (_, h) => h);
 /**
  * An invitation to turn on the daily reminder, shown where it makes sense: after a finished lesson, and on Home for people who
  * have already learned. Calm and optional: one button, a quiet "Not now" that hides it for a week, and nothing at all when
- * reminders are already on or the browser cannot do them. The full switch stays on the Profile page.
+ * reminders are already on or the browser cannot do them. The full switch lives in Settings.
  */
 export function ReminderPrompt({ enabled = true, className }: { enabled?: boolean; className?: string }) {
   const id = useId();
@@ -37,7 +37,7 @@ export function ReminderPrompt({ enabled = true, className }: { enabled?: boolea
     return (
       <section aria-label="Daily reminder" className={shell}>
         <p role="status" className="flex items-center gap-2 text-[15px] font-semibold text-ink"><Check size={20} aria-hidden className="text-sage-700" /> Reminder on for {hourLabel(doneAt)}</p>
-        <p className="mt-1 text-sm text-muted">You can change the time or turn it off on your profile.</p>
+        <p className="mt-1 text-sm text-muted">Change it in Settings.</p>
       </section>
     );
   }
@@ -66,8 +66,8 @@ export function ReminderPrompt({ enabled = true, className }: { enabled?: boolea
         <div className="min-w-0">
           <h2 id={`${id}-t`} className="text-[15px] font-semibold text-ink">Get a daily reminder</h2>
           <p className="mt-1 text-pretty text-sm leading-relaxed text-ink-2">
-            {install ? "On iPhone, add LearnIt to your Home Screen first (Share, then Add to Home Screen). Then come back to turn on reminders."
-              : "One short nudge a day, at a time you choose. Skipped if you have already learned."}
+            {install ? "Add LearnIt to your Home Screen first (Share, then Add to Home Screen)."
+              : "Skipped if you've learned."}
           </p>
         </div>
       </div>
@@ -78,15 +78,15 @@ export function ReminderPrompt({ enabled = true, className }: { enabled?: boolea
           <select id={`${id}-h`} value={at} onChange={(e) => setHour(Number(e.target.value))} className={cn(fieldClass, "h-11 w-auto py-0 pr-8")}>
             {HOURS.map((h) => <option key={h} value={h}>{hourLabel(h)}</option>)}
           </select>
-          <p className="mt-1.5 text-xs text-muted">In your own time zone.</p>
+          
         </div>
       )}
       {err && <Notice tone="danger" className="mt-3">{err}</Notice>}
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        {!install && <Button variant="secondary" size="md" loading={busy} onClick={() => void turnOn()}>Remind me at {hourLabel(at)}</Button>}
-        {!install && !changing && <Button variant="ghost" size="md" onClick={() => setChanging(true)}>Change time</Button>}
-        <Button variant="ghost" size="md" onClick={notNow} disabled={busy}>Not now</Button>
+        {!install && <Button variant="outline" size="sm" loading={busy} onClick={() => void turnOn()}>Remind me at {hourLabel(at)}</Button>}
+        {!install && !changing && <Button variant="ghost" size="sm" onClick={() => setChanging(true)}>Change time</Button>}
+        <Button variant="ghost" size="sm" onClick={notNow} disabled={busy}>Not now</Button>
       </div>
     </section>
   );

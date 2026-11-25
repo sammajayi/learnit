@@ -4,27 +4,31 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Bell, ChevronDown, Loader2 } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { needsInstallFirst, pushSupported, PermissionDenied, subscribeThisDevice, unsubscribeThisDevice } from "@/lib/push";
-import { Sk } from "./Skeletons";
-import { Card, Notice } from "./ui";
 import { cn } from "@/lib/cn";
 
 type Settings = { available: boolean; subscribed: boolean; reminderHour: number };
-const HOURS = Array.from({ length: 24 }, (_, h) => ({ h, label: new Date(2000, 0, 1, h).toLocaleTimeString("en", { hour: "numeric", minute: "2-digit" }) }));
+const HOURS = Array.from({ length: 24 }, (_, h) => ({ h, label: new Date(2000, 0, 1, h).toLocaleTimeString("en-GB", { hour: "numeric", minute: "2-digit" }) }));
 
-/** Daily reminder: a switch and a time. The reminder is sent at that hour in the learner's own timezone. */
-export function ReminderCard() {
+/** The daily reminder as one settings row: a switch and a time. It is sent at that hour in the learner's own timezone. */
+export function ReminderRow() {
   const api = useApi();
   const qc = useQueryClient();
   const { data, isError } = useQuery({ queryKey: ["push"], queryFn: () => api<Settings>("/api/push/settings"), retry: false });
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
-  const head = <h2 id="reminder" className="flex items-center gap-2 text-[15px] font-semibold text-ink"><Bell size={16} strokeWidth={2} aria-hidden /> Daily reminder</h2>;
-  if (isError) return <Card className="p-4">{head}<p className="mt-1 text-sm text-muted">Reminders are not available right now.</p></Card>;
-  if (!data) return <Sk className="h-[68px] w-full rounded-card" />;
+  const label = (
+    <span className="flex min-w-0 items-center gap-3">
+      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-input bg-sunken text-ink-2"><Bell size={18} strokeWidth={1.85} aria-hidden /></span>
+      <span className="min-w-0 text-sm font-medium text-ink">Daily reminder <span className="font-normal text-muted">(skipped if you&apos;ve learned)</span></span>
+    </span>
+  );
+  const note = (text: string) => <div className="px-5 py-4">{label}<p className="mt-2 pl-12 text-sm text-muted">{text}</p></div>;
 
-  const supported = pushSupported();
-  const installFirst = needsInstallFirst();
+  if (isError || (data && !data.available)) return note("Reminders are off right now. Try again later.");
+  if (!data) return <div className="h-[68px]" aria-hidden />;
+  if (needsInstallFirst()) return note("Add LearnIt to your Home Screen first (Share, then Add to Home Screen).");
+  if (!pushSupported()) return note("This browser can't send notifications. Try Chrome or Safari.");
   const hour = data.reminderHour;
 
   async function turnOn() {
@@ -49,34 +53,25 @@ export function ReminderCard() {
   }
 
   return (
-    <Card className="p-4" aria-labelledby="reminder" role="region">
-      {head}
-      {!data.available ? (
-        <p className="mt-1 text-sm text-muted">Reminders are not available right now.</p>
-      ) : installFirst ? (
-        <p className="mt-1 text-pretty text-sm leading-relaxed text-muted">On iPhone, add LearnIt to your Home Screen first (Share, then Add to Home Screen). Then come back here to turn on reminders.</p>
-      ) : !supported ? (
-        <p className="mt-1 text-sm text-muted">This browser does not support notifications.</p>
-      ) : (
-        <div className="mt-1 flex items-center justify-between gap-3">
-          <p className="min-w-0 text-pretty text-xs text-muted">One nudge a day, skipped if you have already learned. Your timezone.</p>
-          <div className="flex shrink-0 items-center gap-3">
-            <div className="relative">
-              <select id="remind-at" aria-label="Reminder time" value={hour} onChange={(e) => void changeHour(Number(e.target.value))} className="h-9 appearance-none rounded-input border border-line bg-surface pl-3 pr-8 text-sm text-ink">
-                {HOURS.map(({ h, label }) => <option key={h} value={h}>{label}</option>)}
-              </select>
-              <ChevronDown size={14} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted" aria-hidden />
-            </div>
-            <button role="switch" aria-checked={data.subscribed} aria-label="Daily reminder" disabled={busy} onClick={() => (data.subscribed ? turnOff() : turnOn())}
-              className={cn("relative h-6 w-10 shrink-0 rounded-full transition-colors duration-200 disabled:opacity-60", data.subscribed ? "bg-sage-600" : "bg-line-strong")}>
-              <span className={cn("absolute top-0.5 grid h-5 w-5 place-items-center rounded-full bg-white shadow-card transition-[left] duration-200 ease-soft", data.subscribed ? "left-[18px]" : "left-0.5")}>
-                {busy && <Loader2 className="animate-spin text-muted" size={11} aria-hidden />}
-              </span>
-            </button>
+    <div className="px-5 py-4">
+      <div className="flex items-center justify-between gap-3">
+        {label}
+        <div className="flex shrink-0 items-center gap-3">
+          <div className="relative">
+            <select aria-label="Reminder time" value={hour} onChange={(e) => void changeHour(Number(e.target.value))} className="h-9 appearance-none rounded-input border border-line bg-surface pl-3 pr-8 text-sm text-ink">
+              {HOURS.map(({ h, label }) => <option key={h} value={h}>{label}</option>)}
+            </select>
+            <ChevronDown size={14} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted" aria-hidden />
           </div>
+          <button role="switch" aria-checked={data.subscribed} aria-label="Daily reminder" disabled={busy} onClick={() => (data.subscribed ? turnOff() : turnOn())}
+            className={cn("relative h-6 w-10 shrink-0 rounded-full transition-colors duration-200 disabled:opacity-60", data.subscribed ? "bg-sage-600" : "bg-line-strong")}>
+            <span className={cn("absolute top-0.5 grid h-5 w-5 place-items-center rounded-full bg-white shadow-card transition-[left] duration-200 ease-soft", data.subscribed ? "left-[18px]" : "left-0.5")}>
+              {busy && <Loader2 className="animate-spin text-muted" size={11} aria-hidden />}
+            </span>
+          </button>
         </div>
-      )}
-      {err && <Notice tone="danger" className="mt-3">{err}</Notice>}
-    </Card>
+      </div>
+      {err && <p role="alert" className="mt-3 text-sm text-coral-700">{err}</p>}
+    </div>
   );
 }
