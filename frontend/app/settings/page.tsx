@@ -2,7 +2,7 @@
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
-import { BadgeCheck, Check, ChevronRight, ExternalLink, UserRound, Wallet, Languages, ScanFace } from "@/components/icons";
+import { BadgeCheck, Check, ChevronRight, ExternalLink, LogOut, UserRound, Wallet, Languages, ScanFace } from "@/components/icons";
 import { useMe } from "@/lib/useMe";
 import { short } from "@learnit/backend/format";
 import { AppShell } from "@/components/AppShell";
@@ -10,7 +10,7 @@ import { EditProfileSheet } from "@/components/EditProfileSheet";
 import { ReminderRow } from "@/components/ReminderCard";
 import { Sk } from "@/components/Skeletons";
 import { useAuthGate } from "@/components/useAuthGate";
-import { Badge, Card } from "@/components/ui";
+import { Badge, Button, Card } from "@/components/ui";
 import { cn } from "@/lib/cn";
 
 const rowClass = "flex w-full items-center gap-3 px-5 py-3.5 text-left text-sm transition-colors duration-100 hover:bg-canvas active:bg-sunken focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-ink/15";
@@ -86,8 +86,7 @@ export default function Settings() {
         </Group>
 
         <div>
-          <button type="button" onClick={() => void logout()}
-            className="rounded text-sm font-medium text-muted underline-offset-4 transition-colors duration-100 hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15">Sign out</button>
+          <Button variant="outline" icon={LogOut} onClick={() => void logout()}>Sign out</Button>
         </div>
       </div>
       <EditProfileSheet open={editing} onClose={() => setEditing(false)} />

@@ -28,7 +28,7 @@ export function TipsCard() {
   const slides: Slide[] = [];
   if (referral.enabled) slides.push({
     key: "invite", Icon: Users, title: "Invite friends",
-    body: "Counts after they verify, finish a lesson, and claim G$.",
+    body: "",
     action: (
       <div className="flex gap-2">
         <Button size="sm" variant="outline" icon={invite.copied === "code" ? Check : Copy} onClick={() => invite.copy("code")}>{invite.copied === "code" ? "Copied" : "Copy invite code"}</Button>
@@ -39,7 +39,7 @@ export function TipsCard() {
   if (!vote.voted) slides.push({
     key: "vote", Icon: Award, title: "Vote for LearnIt",
     body: "Back LearnIt with 10 votes.",
-    action: <Button size="sm" variant="outline" icon={Award} onClick={vote.onVote} loading={vote.isPending || vote.checking || vote.claiming} disabled={!vote.ballot}>{vote.label}</Button>,
+    action: <Button size="sm" variant="outline" icon={Award} onClick={vote.onVote} loading={vote.isPending || vote.checking || vote.claiming} disabled={!vote.ballot}>{vote.shortLabel}</Button>,
   });
   slides.push({
     key: "stake", Icon: PiggyBank, title: "Stake G$ on your streak",

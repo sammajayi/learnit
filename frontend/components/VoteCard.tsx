@@ -121,7 +121,9 @@ export function useVote() {
   }
 
   const label = voted ? "Voted" : ballot?.kind === "needs-claim" ? "Claim votes and vote for LearnIt" : "Vote for LearnIt";
-  return { voted: !!voted, ballot, checking, isPending, claiming, result, onVote, label, votes: POPUP_VOTES.toString() };
+  /** The same action in few words, for a button that sits beside text or inside a slide. */
+  const shortLabel = voted ? "Voted" : ballot?.kind === "needs-claim" ? "Claim votes and vote" : "Vote";
+  return { voted: !!voted, ballot, checking, isPending, claiming, result, onVote, label, shortLabel, votes: POPUP_VOTES.toString() };
 }
 
 /** A one-tap ballot for the GoodDollar Flow Council LearnIt is listed in. Works with any connected

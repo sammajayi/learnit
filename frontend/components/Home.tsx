@@ -17,6 +17,7 @@ import { InstallPrompt } from "./InstallPrompt";
 import { ReminderPrompt } from "./ReminderPrompt";
 import { GoalCard } from "./GoalCard";
 import { TipsCard } from "./TipsCard";
+import { VotePrompt } from "./VotePrompt";
 import { StatusChips } from "./StatusChips";
 import { fmtWait, useProjectedLives, useSecondsUntil } from "./Lives";
 import { Flag } from "./Flag";
@@ -76,6 +77,7 @@ export function Home() {
 
         {me && <div className="grid gap-6 empty:hidden">{t && <GoalCard t={t} verified={me.verified} />}<InstallPrompt /><ReminderPrompt enabled={!!t && t.units.some((u) => u.done > 0)} /></div>}
       </div>
+      {me && <VotePrompt />}
     </AppShell>
   );
 }
