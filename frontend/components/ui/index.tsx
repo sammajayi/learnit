@@ -30,8 +30,8 @@ const SIZE: Record<Size, string> = {
 
 export function buttonClass({ variant = "primary", size = "md", block = false, className }: { variant?: Variant; size?: Size; block?: boolean; className?: string } = {}) {
   return cn(
-    "inline-flex select-none items-center justify-center whitespace-nowrap rounded-btn font-semibold tracking-[-0.01em] transition duration-200 ease-soft",
-    "active:scale-[0.985] disabled:pointer-events-none disabled:opacity-45",
+    "inline-flex select-none items-center justify-center whitespace-nowrap rounded-btn font-semibold tracking-[-0.01em] transition duration-100 ease-soft",
+    "active:scale-[0.97] disabled:pointer-events-none disabled:opacity-45",
     VARIANT[variant], SIZE[size], block && "w-full", className,
   );
 }

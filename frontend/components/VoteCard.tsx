@@ -7,7 +7,7 @@ import { friendlyError } from "@/lib/txErrors";
 import { ApiError, useApi } from "@/lib/useApi";
 import { ADDR, identityAbi } from "@learnit/backend/chain";
 import { flowClaimMessage } from "@learnit/backend/flowClaim";
-import { Award, Trophy } from "@/components/icons";
+import { Award, Check } from "@/components/icons";
 import { Button, Card, Notice } from "./ui";
 
 // GoodDollar's "GoodBuilders" Flow Council: Celo wallets with voting power there choose how a funding
@@ -70,11 +70,9 @@ function useNextBallot() {
   });
 }
 
-/** A one-tap ballot for the GoodDollar Flow Council LearnIt is listed in. Works with any connected
- *  wallet (embedded or external) since it only uses plain wagmi hooks, same as every other
- *  on-chain action in the app. A wallet with no voting power there gets a clear message instead of
- *  a wallet popup that would only fail. */
-export function VoteCard() {
+/** Everything a vote button needs: whether this wallet has voted, the label for the button, and the tap itself.
+ *  Shared by the profile card and the Tips card on Home, so both agree and a person who has voted sees neither ask again. */
+export function useVote() {
   const { writeContractAsync, isPending } = useWriteContract();
   const { signMessageAsync } = useSignMessage();
   const { address } = useAccount();
@@ -122,25 +120,23 @@ export function VoteCard() {
     }
   }
 
+  const label = voted ? "Voted" : ballot?.kind === "needs-claim" ? "Claim votes and vote for LearnIt" : "Vote for LearnIt";
+  return { voted: !!voted, ballot, checking, isPending, claiming, result, onVote, label, votes: POPUP_VOTES.toString() };
+}
+
+/** A one-tap ballot for the GoodDollar Flow Council LearnIt is listed in. Works with any connected
+ *  wallet (embedded or external). Once this wallet has voted it shrinks to a single "Voted" line. */
+export function VoteCard() {
+  const v = useVote();
+  if (v.voted) return <p className="flex items-center gap-2 text-sm font-medium text-sage-700"><Check size={16} aria-hidden /> Voted</p>;
   return (
     <Card className="p-4">
-      <div className="flex items-baseline justify-between gap-3">
-        <h2 className="text-[15px] font-semibold text-ink">Vote for LearnIt</h2>
-        <Trophy size={18} className="text-coral-600" aria-hidden />
-      </div>
-      <p className="mt-0.5 text-xs text-muted">
-        GoodDollar's GoodBuilders Flow Council funds projects by vote. One tap puts {POPUP_VOTES.toString()} votes behind LearnIt.
-      </p>
-      <Button onClick={onVote} loading={isPending || checking || claiming} disabled={voted || !ballot} icon={Award} block className="mt-3">
-        {voted ? "Voted" : ballot?.kind === "needs-claim" ? "Claim votes and vote for LearnIt" : "Vote for LearnIt"}
-      </Button>
-      {claiming && <p className="mt-2 text-xs text-muted">Sign the free message in your wallet. Then your vote goes in.</p>}
-      {isPending && <p className="mt-2 text-xs text-muted">Check your wallet app. If it opened but shows nothing after a few seconds, close and reopen it, or try the tap again.</p>}
-      {(result || voted) && (
-        <Notice tone={voted ? "success" : "danger"} className="mt-3">
-          {voted ? "Thank you! Your vote for LearnIt is in." : result?.message}
-        </Notice>
-      )}
+      <h2 className="text-[15px] font-semibold text-ink">Vote for LearnIt</h2>
+      <p className="mt-0.5 text-xs text-muted">Back LearnIt with {v.votes} votes.</p>
+      <Button onClick={v.onVote} loading={v.isPending || v.checking || v.claiming} disabled={!v.ballot} icon={Award} block className="mt-3">{v.label}</Button>
+      {v.claiming && <p className="mt-2 text-xs text-muted">Sign the free message in your wallet.</p>}
+      {v.isPending && <p className="mt-2 text-xs text-muted">Check your wallet app. If it opened but shows nothing after a few seconds, close and reopen it, then try again.</p>}
+      {v.result && !v.result.ok && <Notice tone="danger" className="mt-3">{v.result.message}</Notice>}
     </Card>
   );
 }

@@ -56,6 +56,10 @@ import {
   Search01Icon,
   SecurityCheckIcon,
   SentIcon,
+  CustomerSupportIcon,
+  LanguagesIcon,
+  Edit02Icon,
+  Settings01Icon,
   Share01Icon,
   SlidersHorizontalIcon,
   SmartPhone01Icon,
@@ -141,6 +145,10 @@ export const ScanFace = make(ScanFaceIcon, "ScanFace");
 export const Search = make(Search01Icon, "Search");
 export const Send = make(SentIcon, "Send");
 export const SendHorizontal = make(SentIcon, "SendHorizontal");
+export const Headset = make(CustomerSupportIcon, "Headset");
+export const Languages = make(LanguagesIcon, "Languages");
+export const Pencil = make(Edit02Icon, "Pencil");
+export const Settings = make(Settings01Icon, "Settings");
 export const Share = make(Share01Icon, "Share");
 export const ShieldCheck = make(SecurityCheckIcon, "ShieldCheck");
 export const SlidersHorizontal = make(SlidersHorizontalIcon, "SlidersHorizontal");
