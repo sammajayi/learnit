@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { LogoMark } from "./LogoMark";
 
 const KEY = "learnit.splash-seen";
 const SHOW_MS = 1500;
@@ -35,25 +36,7 @@ export function Splash() {
           className="pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-canvas"
           initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: "easeOut" }}
         >
-          <motion.svg
-            viewBox="0 0 512 512" width={112} height={112} className="overflow-visible"
-            initial={reduce ? false : { scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          >
-            <rect width="512" height="512" rx="116" fill="#46624f" />
-            <g transform="translate(0 9)" strokeLinecap="round" fill="none">
-              <motion.line
-                x1="256" y1="384" x2="256" y2="280" stroke="#f8f6f1" strokeWidth="92"
-                initial={reduce ? false : { pathLength: 0 }} animate={{ pathLength: 1 }}
-                transition={{ delay: 0.25, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <motion.line
-                x1="230" y1="170" x2="296" y2="96" stroke="#eaa48f" strokeWidth="64"
-                initial={reduce ? false : { y: -70, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, type: "spring", stiffness: 420, damping: 14 }}
-              />
-            </g>
-          </motion.svg>
+          <LogoMark mode="draw" />
         </motion.div>
       )}
     </AnimatePresence>
