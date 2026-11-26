@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
-import { BookOpen, CheckCircle2, ChevronDown, Clock, ExternalLink, Gift, Trophy, XCircle } from "@/components/icons";
+import { BookOpen, CheckCircle2, ChevronDown, Clock, Gift, Trophy, XCircle } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { friendlyError, STALE_ERRORS } from "@/lib/txErrors";
 import { rewardsPoolAbi } from "@learnit/backend/abis";
@@ -39,7 +39,6 @@ export default function Earn() {
   const { writeContractAsync } = useWriteContract();
   const [step, setStep] = useState<Step>(null);
   const [err, setErr] = useState<string | null>(null);
-  const [tx, setTx] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
   const [showHistory, setShowHistory] = useState(false);
   const live = Boolean(ADDR.rewardsPool);
@@ -70,7 +69,7 @@ export default function Earn() {
 
   async function claim(batch: V[]) {
     if (!pc || !address || !live) return setErr("Rewards are not live yet.");
-    setErr(null); setTx(null); setDone(null); setStep("checking");
+    setErr(null); setDone(null); setStep("checking");
     try {
       const call = batch.length === 1
         ? { functionName: "claim", args: [toArg(batch[0]), batch[0].signature] }
@@ -79,7 +78,7 @@ export default function Earn() {
       const { request } = await pc.simulateContract({ account: address, address: ADDR.rewardsPool, abi: rewardsPoolAbi, ...call } as never);
       setStep("wallet");
       const hash = await writeContractAsync(request as never);
-      setTx(hash); setStep("confirming");
+      setStep("confirming");
       const receipt = await pc.waitForTransactionReceipt({ hash });
       if (receipt.status !== "success") throw new Error("The transaction failed on the network. Your reward is still here; try again.");
       await qc.invalidateQueries({ queryKey: ["vouchers"] });
@@ -180,11 +179,6 @@ export default function Earn() {
       <div className="mt-4 grid gap-3" aria-live="polite">
         {busy && ready.length <= 1 && <Notice tone="info">{STEP_LABEL[step!]}</Notice>}
         {done && <Notice tone="success">{done}</Notice>}
-        {tx && (
-          <p className="text-sm text-muted">Transaction{" "}
-            <a className="inline-flex items-center gap-1 font-mono text-ink underline-offset-2 hover:underline" href={`https://celoscan.io/tx/${tx}`} target="_blank" rel="noreferrer">{tx.slice(0, 10)}…{tx.slice(-6)} <ExternalLink size={12} aria-hidden /></a>
-          </p>
-        )}
         {err && <Notice tone="danger">{err}</Notice>}
       </div>
     </AppShell>

@@ -1,5 +1,5 @@
 import { requireUser, authFail } from "../auth";
-import { readUbiStatus } from "../ubi";
+import { readUbiStatus, withLocalClaim } from "../ubi";
 import { db } from "../db";
 
 export async function GET(req: Request) {
@@ -9,7 +9,8 @@ export async function GET(req: Request) {
       readUbiStatus(user.wallet as `0x${string}`),
       db.ubiClaim.findFirst({ where: { userId: user.id }, orderBy: { claimedAt: "desc" } }),
     ]);
-    return Response.json({ ...status, lastClaimTx: last?.txHash ?? null });
+    // The transaction hash stays on the server: the app never shows it.
+    return Response.json(withLocalClaim(status, last ? Math.floor(last.claimedAt.getTime() / 1000) : null));
   } catch (e) {
     return authFail(e);
   }
