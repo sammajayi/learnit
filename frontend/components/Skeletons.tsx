@@ -1,5 +1,5 @@
+import { BootLoader } from "./BootLoader";
 import { AppShell } from "./AppShell";
-import { Logo } from "./Logo";
 import { Sk } from "./ui/Sk";
 
 export { Sk };
@@ -139,14 +139,9 @@ export function LessonSkeleton({ label = "Loading your lesson" }: { label?: stri
   );
 }
 
-/** First paint while sign-in starts. Neutral, since we don't know yet whether to show the landing page or the app. */
+/** First paint while sign-in starts: the animated symbol, so we never guess whether to show the landing page or the app. */
 export function BootSkeleton() {
-  return (
-    <main role="status" aria-busy="true" className="grid min-h-[100dvh] place-items-center">
-      <span className="sr-only">Loading LearnIt</span>
-      <div className="flex flex-col items-center gap-5 motion-safe:animate-pulse"><Logo /></div>
-    </main>
-  );
+  return <BootLoader />;
 }
 
 export function ProfileSkeleton() {
