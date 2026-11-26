@@ -3,7 +3,7 @@ export const VOTE_APP_URL = "https://app.uselearnit.xyz";
 export const VOTE_TELEGRAM_URL = "https://t.me/+X7qoy1SGH-I5YTc0";
 
 export function voteEmail() {
-  const subject = "Vote for LearnIt in GoodBuilders Season 5";
+  const subject = "Vote for LearnIt in GoodBuilders Season 5: how to vote";
   const home = `${VOTE_APP_URL}/home`;
   const logo = `${VOTE_APP_URL}/icon-512.png`;
   const p = "margin:0 0 14px;font-size:15px;line-height:1.6;color:#334155;";

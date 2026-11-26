@@ -4,7 +4,7 @@ import { voteEmail, VOTE_APP_URL, VOTE_TELEGRAM_URL } from "../src/voteEmail";
 describe("vote email", () => {
   const { subject, html } = voteEmail();
   it("has a subject and the app and Telegram links", () => {
-    expect(subject).toBe("Vote for LearnIt in GoodBuilders Season 5");
+    expect(subject).toBe("Vote for LearnIt in GoodBuilders Season 5: how to vote");
     expect(html).toContain(`${VOTE_APP_URL}/home`);
     expect(html).toContain(VOTE_TELEGRAM_URL);
   });
