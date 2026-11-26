@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { withLocalClaim, type UbiStatus } from "../src/ubi";
+import { nextUbiDay, withLocalClaim, type UbiStatus } from "../src/ubi";
 
 const DAY = 86400;
 const end = 1_800_000_000;                      // when the current UBI day ends
@@ -24,5 +24,21 @@ describe("withLocalClaim: a claim we recorded beats a node that is a block behin
   });
   it("counts a claim made in the very first second of the day", () => {
     expect(withLocalClaim(open, end - DAY)).toEqual(done);
+  });
+});
+
+describe("nextUbiDay: the day boundary comes from the clock, never from a node that may be behind", () => {
+  const start = 1_700_000_000; // the scheme's start time
+  it("is always in the future, so the card can never say the next claim is now", () => {
+    for (const now of [start, start + 1, start + 86399, start + 86400, start + 5 * 86400 + 4000]) expect(nextUbiDay(start, now)).toBeGreaterThan(now);
+  });
+  it("is at most one day away and lands on a day boundary", () => {
+    const now = start + 3 * 86400 + 4321;
+    expect(nextUbiDay(start, now) - now).toBeLessThanOrEqual(86400);
+    expect((nextUbiDay(start, now) - start) % 86400).toBe(0);
+  });
+  it("rolls over exactly at the boundary", () => {
+    expect(nextUbiDay(start, start + 86400 - 1)).toBe(start + 86400);
+    expect(nextUbiDay(start, start + 86400)).toBe(start + 2 * 86400);
   });
 });
