@@ -16,7 +16,7 @@ const CSP_REPORT_ONLY = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
+  "img-src 'self' data: blob: https://explorer-api.walletconnect.com",
   "font-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",
