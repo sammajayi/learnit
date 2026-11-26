@@ -27,9 +27,9 @@ export function StatusChips({ streak, todayDone, freezes, lives: snapshot }: { s
       detail: todayDone ? `${days} streak. You have learned today, so it is safe.` : streak > 0 ? `${days} streak. Finish a lesson today to keep it going.` : "No streak yet. Finish a lesson today to start one.",
     },
     {
-      key: "lives", Icon: Heart, value: String(lives.lives), sub: lives.lives < lives.max && lives.nextAt ? fmtWait(wait) : `/${lives.max}`,
-      label: `Lives: ${lives.lives} of ${lives.max}`,
-      detail: lives.lives >= lives.max ? `${lives.max} of ${lives.max} lives. A wrong answer in a lesson costs one, and one comes back every 30 minutes.`
+      key: "lives", Icon: Heart, value: String(lives.lives), sub: lives.lives < lives.max && lives.nextAt ? fmtWait(wait) : undefined,
+      label: lives.lives >= lives.max ? `Lives: ${lives.max}, all full` : `Lives: ${lives.lives} of ${lives.max}`,
+      detail: lives.lives >= lives.max ? `Your ${lives.max} lives are full. A wrong answer in a lesson costs one, and one comes back every 30 minutes.`
         : `${lives.lives} of ${lives.max} lives. A wrong answer costs one. The next one is back in ${fmtWait(wait)}.${empty ? " Lessons are paused until then." : ""}`,
     },
     {

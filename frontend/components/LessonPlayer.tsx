@@ -456,7 +456,7 @@ function Intro({ words, tip, lang, title, lives, onStart }: { words: { target: s
       <main className="mx-auto w-full max-w-2xl flex-1 px-5 pb-36 pt-10 sm:pt-14">
         <p className="text-eyebrow uppercase text-sage-700">New words</p>
         <h1 className="mt-3 text-display-md text-ink sm:text-[2rem]">Meet the words first</h1>
-        <p className="mt-2 text-[15px] text-muted">Tap a word to hear it. Then you will practise them.{lives && ` You have ${lives.lives} of ${lives.max} lives, shared across lessons. A wrong answer costs one, and one comes back every 30 minutes.`}</p>
+        <p className="mt-2 text-[15px] text-muted">Tap a word to hear it. Then you will practise them.{lives && ` You have ${lives.lives >= lives.max ? lives.max : `${lives.lives} of ${lives.max}`} lives, shared across lessons. A wrong answer costs one, and one comes back every 30 minutes.`}</p>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {words.map((w, i) => (
             <motion.li key={w.target} initial={reduce ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}>
