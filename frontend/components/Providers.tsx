@@ -1,4 +1,5 @@
 "use client";
+import { Splash } from "./Splash";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { WagmiProvider, createConfig } from "@privy-io/wagmi";
 import { WagmiProvider as PlainWagmiProvider, createConfig as createPlainConfig, injected } from "wagmi";
@@ -67,6 +68,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     >
       <QueryClientProvider client={qc}>
         <CacheGuard />
+        <Splash />
         <ReferralCapture />
         <WagmiProvider config={wagmiConfig}>{children}</WagmiProvider>
       </QueryClientProvider>

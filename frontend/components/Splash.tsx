@@ -1,0 +1,61 @@
+"use client";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+
+const KEY = "learnit.splash-seen";
+const SHOW_MS = 1500;
+
+/**
+ * The LearnIt "i" symbol, drawn in on the first screen of a visit: the tile settles, the stem grows up, then the accent drops in
+ * with a small bounce. It plays once per browser session on app screens (never on the public landing page or /admin), covers the
+ * page for about a second and a half, then fades out. With reduced motion it is a still symbol that simply fades.
+ * The artwork is the same as /brand/learnit-symbol-light.svg.
+ */
+export function Splash() {
+  const path = usePathname();
+  const reduce = useReducedMotion();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (path === "/" || path === "/admin" || path.startsWith("/admin/")) return;
+    try { if (sessionStorage.getItem(KEY)) return; sessionStorage.setItem(KEY, "1"); } catch { /* private window: it just plays again next visit */ }
+    setShow(true);
+    const t = setTimeout(() => setShow(false), reduce ? 700 : SHOW_MS);
+    return () => clearTimeout(t);
+    // Only the first screen of a visit decides; later navigation must not restart it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          key="splash" aria-hidden
+          className="pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-canvas"
+          initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease: "easeOut" }}
+        >
+          <motion.svg
+            viewBox="0 0 512 512" width={112} height={112} className="overflow-visible"
+            initial={reduce ? false : { scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          >
+            <rect width="512" height="512" rx="116" fill="#46624f" />
+            <g transform="translate(0 9)" strokeLinecap="round" fill="none">
+              <motion.line
+                x1="256" y1="384" x2="256" y2="280" stroke="#f8f6f1" strokeWidth="92"
+                initial={reduce ? false : { pathLength: 0 }} animate={{ pathLength: 1 }}
+                transition={{ delay: 0.25, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.line
+                x1="230" y1="170" x2="296" y2="96" stroke="#eaa48f" strokeWidth="64"
+                initial={reduce ? false : { y: -70, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, type: "spring", stiffness: 420, damping: 14 }}
+              />
+            </g>
+          </motion.svg>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
