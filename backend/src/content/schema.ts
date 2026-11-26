@@ -3,6 +3,9 @@ import { z } from "zod";
 export const LangSchema = z.enum(["fr", "es"]);
 export type Lang = z.infer<typeof LangSchema>;
 
+export const LevelSchema = z.enum(["A0", "A1", "A2"]);
+export type Level = z.infer<typeof LevelSchema>;
+
 export const McSchema = z.object({
   id: z.string(),
   type: z.literal("mc"),
@@ -44,6 +47,8 @@ export const LessonSchema = z.object({
   exercises: z.array(ExerciseSchema).min(5).max(12),
   /** The new words this lesson teaches, shown on a "new words" card before any question. */
   intro: z.array(z.object({ target: z.string(), english: z.string() })).max(6).optional(),
+  /** A short grammar note shown with the new words on part 1 of a theme. */
+  tip: z.object({ title: z.string(), body: z.string() }).optional(),
 });
 
 export const CheckpointSchema = z.object({
@@ -57,7 +62,7 @@ export const CheckpointSchema = z.object({
 export const UnitSchema = z.object({
   lang: LangSchema,
   unit: z.number().int(),
-  level: z.literal("A1"),
+  level: LevelSchema,
   title: z.string(),
   blurb: z.string().default(""),
   speechLang: z.string(),

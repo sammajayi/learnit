@@ -1,0 +1,2345 @@
+{
+  "lang": "es",
+  "unit": 9,
+  "level": "A2",
+  "title": "Yesterday",
+  "blurb": "Talk about what happened, from this morning to last weekend.",
+  "speechLang": "es-ES",
+  "lessons": [
+    {
+      "id": "es-a2-u9-l1",
+      "title": "Time markers, part 1",
+      "theme": "time markers",
+      "exercises": [
+        {
+          "id": "es-a2u9-w1-te",
+          "type": "mc",
+          "prompt": "What does \"ayer\" mean?",
+          "speak": "ayer",
+          "options": [
+            "last year",
+            "this morning",
+            "last night",
+            "yesterday"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w1"
+        },
+        {
+          "id": "es-a2u9-w2-et",
+          "type": "mc",
+          "prompt": "How do you say \"last night\"?",
+          "options": [
+            "anoche",
+            "el año pasado",
+            "la semana pasada",
+            "ayer"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w2"
+        },
+        {
+          "id": "es-a2-u9-l1-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w1",
+              "target": "ayer",
+              "english": "yesterday"
+            },
+            {
+              "wordId": "es-a2u9-w2",
+              "target": "anoche",
+              "english": "last night"
+            },
+            {
+              "wordId": "es-a2u9-w3",
+              "target": "esta mañana",
+              "english": "this morning"
+            },
+            {
+              "wordId": "es-a2u9-w4",
+              "target": "la semana pasada",
+              "english": "last week"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w3-te",
+          "type": "mc",
+          "prompt": "What does \"esta mañana\" mean?",
+          "speak": "esta mañana",
+          "options": [
+            "yesterday",
+            "last week",
+            "this morning",
+            "last year"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w3"
+        },
+        {
+          "id": "es-a2u9-w4-et",
+          "type": "mc",
+          "prompt": "How do you say \"last week\"?",
+          "options": [
+            "ayer",
+            "hace dos días",
+            "la semana pasada",
+            "esta mañana"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w4"
+        },
+        {
+          "id": "es-a2-u9-l1-s",
+          "type": "translate",
+          "prompt": "I was here two days ago",
+          "answer": [
+            "Hace",
+            "dos",
+            "días",
+            "estuve",
+            "aquí"
+          ],
+          "bank": [
+            "días",
+            "dentro",
+            "Hace",
+            "dos",
+            "aquí",
+            "estuve",
+            "tres"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "ayer",
+          "english": "yesterday"
+        },
+        {
+          "target": "anoche",
+          "english": "last night"
+        },
+        {
+          "target": "esta mañana",
+          "english": "this morning"
+        },
+        {
+          "target": "la semana pasada",
+          "english": "last week"
+        }
+      ],
+      "tip": {
+        "title": "Start with a time word",
+        "body": "Put a time word first to talk about the past. Ayer comí arroz means yesterday I ate rice. Hace dos días means two days ago."
+      }
+    },
+    {
+      "id": "es-a2-u9-l2",
+      "title": "Time markers, part 2",
+      "theme": "time markers",
+      "exercises": [
+        {
+          "id": "es-a2u9-w5-te",
+          "type": "mc",
+          "prompt": "What does \"hace dos días\" mean?",
+          "speak": "hace dos días",
+          "options": [
+            "last week",
+            "last night",
+            "two days ago",
+            "an hour ago"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w5"
+        },
+        {
+          "id": "es-a2u9-w6-et",
+          "type": "mc",
+          "prompt": "How do you say \"last year\"?",
+          "options": [
+            "el fin de semana pasado",
+            "hace dos días",
+            "el año pasado",
+            "hace una hora"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w6"
+        },
+        {
+          "id": "es-a2-u9-l2-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w5",
+              "target": "hace dos días",
+              "english": "two days ago"
+            },
+            {
+              "wordId": "es-a2u9-w6",
+              "target": "el año pasado",
+              "english": "last year"
+            },
+            {
+              "wordId": "es-a2u9-w7",
+              "target": "el fin de semana pasado",
+              "english": "last weekend"
+            },
+            {
+              "wordId": "es-a2u9-w8",
+              "target": "hace una hora",
+              "english": "an hour ago"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w7-te",
+          "type": "mc",
+          "prompt": "What does \"el fin de semana pasado\" mean?",
+          "speak": "el fin de semana pasado",
+          "options": [
+            "last weekend",
+            "last night",
+            "last year",
+            "two days ago"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w7"
+        },
+        {
+          "id": "es-a2u9-w8-et",
+          "type": "mc",
+          "prompt": "How do you say \"an hour ago\"?",
+          "options": [
+            "la semana pasada",
+            "el año pasado",
+            "hace una hora",
+            "anoche"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w8"
+        },
+        {
+          "id": "es-a2-u9-l2-s",
+          "type": "translate",
+          "prompt": "Last week I worked a lot",
+          "answer": [
+            "La",
+            "semana",
+            "pasada",
+            "trabajé",
+            "mucho"
+          ],
+          "bank": [
+            "mucho",
+            "trabajé",
+            "trabajo",
+            "La",
+            "pasada",
+            "próxima",
+            "semana"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "hace dos días",
+          "english": "two days ago"
+        },
+        {
+          "target": "el año pasado",
+          "english": "last year"
+        },
+        {
+          "target": "el fin de semana pasado",
+          "english": "last weekend"
+        },
+        {
+          "target": "hace una hora",
+          "english": "an hour ago"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u9-l3",
+      "title": "Regular -ar verbs, part 1",
+      "theme": "regular -ar verbs",
+      "exercises": [
+        {
+          "id": "es-a2u9-w9-te",
+          "type": "mc",
+          "prompt": "What does \"hablé\" mean?",
+          "speak": "hablé",
+          "options": [
+            "I bought",
+            "I arrived",
+            "I cooked",
+            "I spoke"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w9"
+        },
+        {
+          "id": "es-a2u9-w10-et",
+          "type": "mc",
+          "prompt": "How do you say \"you spoke\"?",
+          "options": [
+            "hablé",
+            "trabajé",
+            "llegué",
+            "hablaste"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w10"
+        },
+        {
+          "id": "es-a2-u9-l3-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w9",
+              "target": "hablé",
+              "english": "I spoke"
+            },
+            {
+              "wordId": "es-a2u9-w10",
+              "target": "hablaste",
+              "english": "you spoke"
+            },
+            {
+              "wordId": "es-a2u9-w11",
+              "target": "habló",
+              "english": "he or she spoke"
+            },
+            {
+              "wordId": "es-a2u9-w12",
+              "target": "trabajé",
+              "english": "I worked"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w11-te",
+          "type": "mc",
+          "prompt": "What does \"habló\" mean?",
+          "speak": "habló",
+          "options": [
+            "I cooked",
+            "I spoke",
+            "I bought",
+            "he or she spoke"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w11"
+        },
+        {
+          "id": "es-a2u9-w12-et",
+          "type": "mc",
+          "prompt": "How do you say \"I worked\"?",
+          "options": [
+            "trabajé",
+            "caminé",
+            "cociné",
+            "hablé"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w12"
+        },
+        {
+          "id": "es-a2-u9-l3-s",
+          "type": "translate",
+          "prompt": "You spoke with her",
+          "answer": [
+            "Hablaste",
+            "con",
+            "ella"
+          ],
+          "bank": [
+            "hablé",
+            "Hablaste",
+            "con",
+            "él",
+            "ella"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "hablé",
+          "english": "I spoke"
+        },
+        {
+          "target": "hablaste",
+          "english": "you spoke"
+        },
+        {
+          "target": "habló",
+          "english": "he or she spoke"
+        },
+        {
+          "target": "trabajé",
+          "english": "I worked"
+        }
+      ],
+      "tip": {
+        "title": "Past of -ar verbs",
+        "body": "Drop -ar and add -é for I, -aste for you and -ó for he or she. Hablé, hablaste, habló. The accent matters: hablo is now, habló is past."
+      }
+    },
+    {
+      "id": "es-a2-u9-l4",
+      "title": "Regular -ar verbs, part 2",
+      "theme": "regular -ar verbs",
+      "exercises": [
+        {
+          "id": "es-a2u9-w13-te",
+          "type": "mc",
+          "prompt": "What does \"compré\" mean?",
+          "speak": "compré",
+          "options": [
+            "I worked",
+            "I walked",
+            "I bought",
+            "I spoke"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w13"
+        },
+        {
+          "id": "es-a2u9-w14-et",
+          "type": "mc",
+          "prompt": "How do you say \"I arrived\"?",
+          "options": [
+            "trabajé",
+            "llegué",
+            "habló",
+            "cociné"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u9-w14"
+        },
+        {
+          "id": "es-a2-u9-l4-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w13",
+              "target": "compré",
+              "english": "I bought"
+            },
+            {
+              "wordId": "es-a2u9-w14",
+              "target": "llegué",
+              "english": "I arrived"
+            },
+            {
+              "wordId": "es-a2u9-w15",
+              "target": "caminé",
+              "english": "I walked"
+            },
+            {
+              "wordId": "es-a2u9-w16",
+              "target": "cociné",
+              "english": "I cooked"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w15-te",
+          "type": "mc",
+          "prompt": "What does \"caminé\" mean?",
+          "speak": "caminé",
+          "options": [
+            "you spoke",
+            "I arrived",
+            "I worked",
+            "I walked"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w15"
+        },
+        {
+          "id": "es-a2u9-w16-et",
+          "type": "mc",
+          "prompt": "How do you say \"I cooked\"?",
+          "options": [
+            "compré",
+            "hablé",
+            "habló",
+            "cociné"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w16"
+        },
+        {
+          "id": "es-a2-u9-l4-s",
+          "type": "translate",
+          "prompt": "Yesterday I bought bread and cheese",
+          "answer": [
+            "Ayer",
+            "compré",
+            "pan",
+            "y",
+            "queso"
+          ],
+          "bank": [
+            "queso",
+            "compro",
+            "leche",
+            "Ayer",
+            "pan",
+            "compré",
+            "y"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "compré",
+          "english": "I bought"
+        },
+        {
+          "target": "llegué",
+          "english": "I arrived"
+        },
+        {
+          "target": "caminé",
+          "english": "I walked"
+        },
+        {
+          "target": "cociné",
+          "english": "I cooked"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u9-l5",
+      "title": "Regular -er and -ir verbs, part 1",
+      "theme": "regular -er and -ir verbs",
+      "exercises": [
+        {
+          "id": "es-a2u9-w17-te",
+          "type": "mc",
+          "prompt": "What does \"comí\" mean?",
+          "speak": "comí",
+          "options": [
+            "I ate",
+            "I lived",
+            "I wrote",
+            "I learned"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w17"
+        },
+        {
+          "id": "es-a2u9-w18-et",
+          "type": "mc",
+          "prompt": "How do you say \"you ate\"?",
+          "options": [
+            "comí",
+            "comiste",
+            "aprendí",
+            "escribí"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u9-w18"
+        },
+        {
+          "id": "es-a2-u9-l5-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w17",
+              "target": "comí",
+              "english": "I ate"
+            },
+            {
+              "wordId": "es-a2u9-w18",
+              "target": "comiste",
+              "english": "you ate"
+            },
+            {
+              "wordId": "es-a2u9-w19",
+              "target": "comió",
+              "english": "he or she ate"
+            },
+            {
+              "wordId": "es-a2u9-w20",
+              "target": "bebí",
+              "english": "I drank"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w19-te",
+          "type": "mc",
+          "prompt": "What does \"comió\" mean?",
+          "speak": "comió",
+          "options": [
+            "I lived",
+            "I ate",
+            "he or she ate",
+            "I learned"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w19"
+        },
+        {
+          "id": "es-a2u9-w20-et",
+          "type": "mc",
+          "prompt": "How do you say \"I drank\"?",
+          "options": [
+            "bebí",
+            "comió",
+            "escribí",
+            "comí"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w20"
+        },
+        {
+          "id": "es-a2-u9-l5-s",
+          "type": "translate",
+          "prompt": "You ate chicken last night",
+          "answer": [
+            "Comiste",
+            "pollo",
+            "anoche"
+          ],
+          "bank": [
+            "Comiste",
+            "como",
+            "pescado",
+            "anoche",
+            "pollo"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "comí",
+          "english": "I ate"
+        },
+        {
+          "target": "comiste",
+          "english": "you ate"
+        },
+        {
+          "target": "comió",
+          "english": "he or she ate"
+        },
+        {
+          "target": "bebí",
+          "english": "I drank"
+        }
+      ],
+      "tip": {
+        "title": "Past of -er and -ir verbs",
+        "body": "Drop -er or -ir and add -í for I, -iste for you and -ió for he or she. Comí, comiste, comió. Both verb types use the same endings."
+      }
+    },
+    {
+      "id": "es-a2-u9-l6",
+      "title": "Regular -er and -ir verbs, part 2",
+      "theme": "regular -er and -ir verbs",
+      "exercises": [
+        {
+          "id": "es-a2u9-w21-te",
+          "type": "mc",
+          "prompt": "What does \"salí\" mean?",
+          "speak": "salí",
+          "options": [
+            "I drank",
+            "I ate",
+            "I went out",
+            "he or she ate"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w21"
+        },
+        {
+          "id": "es-a2u9-w22-et",
+          "type": "mc",
+          "prompt": "How do you say \"I wrote\"?",
+          "options": [
+            "viví",
+            "comió",
+            "escribí",
+            "bebí"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w22"
+        },
+        {
+          "id": "es-a2-u9-l6-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w21",
+              "target": "salí",
+              "english": "I went out"
+            },
+            {
+              "wordId": "es-a2u9-w22",
+              "target": "escribí",
+              "english": "I wrote"
+            },
+            {
+              "wordId": "es-a2u9-w23",
+              "target": "aprendí",
+              "english": "I learned"
+            },
+            {
+              "wordId": "es-a2u9-w24",
+              "target": "viví",
+              "english": "I lived"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w23-te",
+          "type": "mc",
+          "prompt": "What does \"aprendí\" mean?",
+          "speak": "aprendí",
+          "options": [
+            "I went out",
+            "you ate",
+            "I learned",
+            "I wrote"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w23"
+        },
+        {
+          "id": "es-a2u9-w24-et",
+          "type": "mc",
+          "prompt": "How do you say \"I lived\"?",
+          "options": [
+            "comí",
+            "aprendí",
+            "escribí",
+            "viví"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w24"
+        },
+        {
+          "id": "es-a2-u9-l6-s",
+          "type": "translate",
+          "prompt": "I left home at eight",
+          "answer": [
+            "Salí",
+            "de",
+            "casa",
+            "a",
+            "las",
+            "ocho"
+          ],
+          "bank": [
+            "Salí",
+            "casa",
+            "de",
+            "nueve",
+            "a",
+            "salgo",
+            "las",
+            "ocho"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "salí",
+          "english": "I went out"
+        },
+        {
+          "target": "escribí",
+          "english": "I wrote"
+        },
+        {
+          "target": "aprendí",
+          "english": "I learned"
+        },
+        {
+          "target": "viví",
+          "english": "I lived"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u9-l7",
+      "title": "Irregular essentials, part 1",
+      "theme": "irregular essentials",
+      "exercises": [
+        {
+          "id": "es-a2u9-w25-te",
+          "type": "mc",
+          "prompt": "What does \"fui\" mean?",
+          "speak": "fui",
+          "options": [
+            "he or she did",
+            "you went",
+            "I went",
+            "I saw"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w25"
+        },
+        {
+          "id": "es-a2u9-w26-et",
+          "type": "mc",
+          "prompt": "How do you say \"you went\"?",
+          "options": [
+            "fuiste",
+            "fue",
+            "hice",
+            "fui"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w26"
+        },
+        {
+          "id": "es-a2-u9-l7-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w25",
+              "target": "fui",
+              "english": "I went"
+            },
+            {
+              "wordId": "es-a2u9-w26",
+              "target": "fuiste",
+              "english": "you went"
+            },
+            {
+              "wordId": "es-a2u9-w27",
+              "target": "hice",
+              "english": "I did"
+            },
+            {
+              "wordId": "es-a2u9-w28",
+              "target": "hizo",
+              "english": "he or she did"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w27-te",
+          "type": "mc",
+          "prompt": "What does \"hice\" mean?",
+          "speak": "hice",
+          "options": [
+            "it was",
+            "I saw",
+            "I did",
+            "he or she did"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w27"
+        },
+        {
+          "id": "es-a2u9-w28-et",
+          "type": "mc",
+          "prompt": "How do you say \"he or she did\"?",
+          "options": [
+            "fue",
+            "estuve",
+            "vi",
+            "hizo"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w28"
+        },
+        {
+          "id": "es-a2-u9-l7-s",
+          "type": "translate",
+          "prompt": "Yesterday I had a lot of work",
+          "answer": [
+            "Ayer",
+            "tuve",
+            "mucho",
+            "trabajo"
+          ],
+          "bank": [
+            "trabajo",
+            "tengo",
+            "Ayer",
+            "mucho",
+            "hice",
+            "tuve"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "fui",
+          "english": "I went"
+        },
+        {
+          "target": "fuiste",
+          "english": "you went"
+        },
+        {
+          "target": "hice",
+          "english": "I did"
+        },
+        {
+          "target": "hizo",
+          "english": "he or she did"
+        }
+      ],
+      "tip": {
+        "title": "Learn these as they are",
+        "body": "Some very common verbs have their own past forms. Fui al mercado (I went to the market). Hice la cena (I made dinner)."
+      }
+    },
+    {
+      "id": "es-a2-u9-l8",
+      "title": "Irregular essentials, part 2",
+      "theme": "irregular essentials",
+      "exercises": [
+        {
+          "id": "es-a2u9-w29-te",
+          "type": "mc",
+          "prompt": "What does \"vi\" mean?",
+          "speak": "vi",
+          "options": [
+            "he or she did",
+            "I saw",
+            "I had",
+            "you went"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u9-w29"
+        },
+        {
+          "id": "es-a2u9-w30-et",
+          "type": "mc",
+          "prompt": "How do you say \"I had\"?",
+          "options": [
+            "fue",
+            "tuve",
+            "fui",
+            "estuve"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u9-w30"
+        },
+        {
+          "id": "es-a2-u9-l8-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w29",
+              "target": "vi",
+              "english": "I saw"
+            },
+            {
+              "wordId": "es-a2u9-w30",
+              "target": "tuve",
+              "english": "I had"
+            },
+            {
+              "wordId": "es-a2u9-w31",
+              "target": "estuve",
+              "english": "I was there"
+            },
+            {
+              "wordId": "es-a2u9-w32",
+              "target": "fue",
+              "english": "it was"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w31-te",
+          "type": "mc",
+          "prompt": "What does \"estuve\" mean?",
+          "speak": "estuve",
+          "options": [
+            "it was",
+            "I was there",
+            "I did",
+            "I had"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u9-w31"
+        },
+        {
+          "id": "es-a2u9-w32-et",
+          "type": "mc",
+          "prompt": "How do you say \"it was\"?",
+          "options": [
+            "vi",
+            "fui",
+            "fue",
+            "tuve"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w32"
+        },
+        {
+          "id": "es-a2-u9-l8-s",
+          "type": "translate",
+          "prompt": "I saw your brother in the park",
+          "answer": [
+            "Vi",
+            "a",
+            "tu",
+            "hermano",
+            "en",
+            "el",
+            "parque"
+          ],
+          "bank": [
+            "a",
+            "el",
+            "parque",
+            "veo",
+            "tu",
+            "en",
+            "hermana",
+            "Vi",
+            "hermano"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "vi",
+          "english": "I saw"
+        },
+        {
+          "target": "tuve",
+          "english": "I had"
+        },
+        {
+          "target": "estuve",
+          "english": "I was there"
+        },
+        {
+          "target": "fue",
+          "english": "it was"
+        }
+      ]
+    },
+    {
+      "id": "es-a2-u9-l9",
+      "title": "Weekend stories, part 1",
+      "theme": "weekend stories",
+      "exercises": [
+        {
+          "id": "es-a2u9-w33-te",
+          "type": "mc",
+          "prompt": "What does \"qué hiciste\" mean?",
+          "speak": "qué hiciste",
+          "options": [
+            "where did you go",
+            "what did you do",
+            "I was tired (said by a man)",
+            "I had a good time"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u9-w33"
+        },
+        {
+          "id": "es-a2u9-w34-et",
+          "type": "mc",
+          "prompt": "How do you say \"where did you go\"?",
+          "options": [
+            "adónde fuiste",
+            "hacía calor",
+            "estaba cansado",
+            "cómo estuvo"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w34"
+        },
+        {
+          "id": "es-a2-u9-l9-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w33",
+              "target": "qué hiciste",
+              "english": "what did you do"
+            },
+            {
+              "wordId": "es-a2u9-w34",
+              "target": "adónde fuiste",
+              "english": "where did you go"
+            },
+            {
+              "wordId": "es-a2u9-w35",
+              "target": "cómo estuvo",
+              "english": "how was it"
+            },
+            {
+              "wordId": "es-a2u9-w36",
+              "target": "lo pasé bien",
+              "english": "I had a good time"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w35-te",
+          "type": "mc",
+          "prompt": "What does \"cómo estuvo\" mean?",
+          "speak": "cómo estuvo",
+          "options": [
+            "it was hot",
+            "what did you do",
+            "how was it",
+            "where did you go"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w35"
+        },
+        {
+          "id": "es-a2u9-w36-et",
+          "type": "mc",
+          "prompt": "How do you say \"I had a good time\"?",
+          "options": [
+            "qué hiciste",
+            "cómo estuvo",
+            "lo pasé bien",
+            "hacía calor"
+          ],
+          "answer": 2,
+          "wordId": "es-a2u9-w36"
+        },
+        {
+          "id": "es-a2-u9-l9-s",
+          "type": "translate",
+          "prompt": "What did you do last weekend",
+          "answer": [
+            "Qué",
+            "hiciste",
+            "el",
+            "fin",
+            "de",
+            "semana",
+            "pasado"
+          ],
+          "bank": [
+            "fuiste",
+            "el",
+            "Qué",
+            "fin",
+            "semana",
+            "hiciste",
+            "de",
+            "hice",
+            "pasado"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "qué hiciste",
+          "english": "what did you do"
+        },
+        {
+          "target": "adónde fuiste",
+          "english": "where did you go"
+        },
+        {
+          "target": "cómo estuvo",
+          "english": "how was it"
+        },
+        {
+          "target": "lo pasé bien",
+          "english": "I had a good time"
+        }
+      ],
+      "tip": {
+        "title": "Ask about someone's day",
+        "body": "Use the tú form to ask: ¿Qué hiciste ayer? means what did you do yesterday. For how things were, learn chunks like hacía calor and estaba cansado."
+      }
+    },
+    {
+      "id": "es-a2-u9-l10",
+      "title": "Weekend stories, part 2",
+      "theme": "weekend stories",
+      "exercises": [
+        {
+          "id": "es-a2u9-w37-te",
+          "type": "mc",
+          "prompt": "What does \"fue divertido\" mean?",
+          "speak": "fue divertido",
+          "options": [
+            "I had a good time",
+            "what did you do",
+            "it was hot",
+            "it was fun"
+          ],
+          "answer": 3,
+          "wordId": "es-a2u9-w37"
+        },
+        {
+          "id": "es-a2u9-w38-et",
+          "type": "mc",
+          "prompt": "How do you say \"it was hot\"?",
+          "options": [
+            "hacía calor",
+            "lo pasé bien",
+            "y después",
+            "adónde fuiste"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w38"
+        },
+        {
+          "id": "es-a2-u9-l10-m",
+          "type": "match",
+          "prompt": "Match the pairs",
+          "pairs": [
+            {
+              "wordId": "es-a2u9-w37",
+              "target": "fue divertido",
+              "english": "it was fun"
+            },
+            {
+              "wordId": "es-a2u9-w38",
+              "target": "hacía calor",
+              "english": "it was hot"
+            },
+            {
+              "wordId": "es-a2u9-w39",
+              "target": "estaba cansado",
+              "english": "I was tired (said by a man)"
+            },
+            {
+              "wordId": "es-a2u9-w40",
+              "target": "y después",
+              "english": "and then"
+            }
+          ]
+        },
+        {
+          "id": "es-a2u9-w39-te",
+          "type": "mc",
+          "prompt": "What does \"estaba cansado\" mean?",
+          "speak": "estaba cansado",
+          "options": [
+            "what did you do",
+            "I was tired (said by a man)",
+            "it was fun",
+            "where did you go"
+          ],
+          "answer": 1,
+          "wordId": "es-a2u9-w39"
+        },
+        {
+          "id": "es-a2u9-w40-et",
+          "type": "mc",
+          "prompt": "How do you say \"and then\"?",
+          "options": [
+            "y después",
+            "qué hiciste",
+            "hacía calor",
+            "lo pasé bien"
+          ],
+          "answer": 0,
+          "wordId": "es-a2u9-w40"
+        },
+        {
+          "id": "es-a2-u9-l10-s",
+          "type": "translate",
+          "prompt": "It was hot and I was tired",
+          "answer": [
+            "Hacía",
+            "calor",
+            "y",
+            "estaba",
+            "cansado"
+          ],
+          "bank": [
+            "calor",
+            "cansado",
+            "estaba",
+            "Hacía",
+            "estoy",
+            "hace",
+            "y"
+          ],
+          "wordIds": []
+        }
+      ],
+      "intro": [
+        {
+          "target": "fue divertido",
+          "english": "it was fun"
+        },
+        {
+          "target": "hacía calor",
+          "english": "it was hot"
+        },
+        {
+          "target": "estaba cansado",
+          "english": "I was tired (said by a man)"
+        },
+        {
+          "target": "y después",
+          "english": "and then"
+        }
+      ]
+    }
+  ],
+  "checkpoint": {
+    "id": "es-a2-u9-cp",
+    "title": "Unit 9 checkpoint",
+    "pool": [
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w1",
+        "type": "mc",
+        "prompt": "What does \"ayer\" mean?",
+        "speak": "ayer",
+        "options": [
+          "I saw",
+          "I bought",
+          "yesterday",
+          "I went"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u9-w1"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w2",
+        "type": "mc",
+        "prompt": "How do you say \"last night\"?",
+        "options": [
+          "anoche",
+          "cómo estuvo",
+          "qué hiciste",
+          "esta mañana"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w2"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w3",
+        "type": "mc",
+        "prompt": "What does \"esta mañana\" mean?",
+        "speak": "esta mañana",
+        "options": [
+          "yesterday",
+          "this morning",
+          "he or she did",
+          "I arrived"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w3"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w4",
+        "type": "mc",
+        "prompt": "How do you say \"last week\"?",
+        "options": [
+          "hablé",
+          "la semana pasada",
+          "hice",
+          "salí"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w4"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w5",
+        "type": "mc",
+        "prompt": "What does \"hace dos días\" mean?",
+        "speak": "hace dos días",
+        "options": [
+          "I was there",
+          "last weekend",
+          "I had",
+          "two days ago"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w5"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w6",
+        "type": "mc",
+        "prompt": "How do you say \"last year\"?",
+        "options": [
+          "fuiste",
+          "qué hiciste",
+          "estaba cansado",
+          "el año pasado"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w6"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w7",
+        "type": "mc",
+        "prompt": "What does \"el fin de semana pasado\" mean?",
+        "speak": "el fin de semana pasado",
+        "options": [
+          "I had a good time",
+          "last weekend",
+          "yesterday",
+          "you went"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w7"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w8",
+        "type": "mc",
+        "prompt": "How do you say \"an hour ago\"?",
+        "options": [
+          "anoche",
+          "habló",
+          "y después",
+          "hace una hora"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w8"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w9",
+        "type": "mc",
+        "prompt": "What does \"hablé\" mean?",
+        "speak": "hablé",
+        "options": [
+          "it was",
+          "I spoke",
+          "I wrote",
+          "I worked"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w9"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w10",
+        "type": "mc",
+        "prompt": "How do you say \"you spoke\"?",
+        "options": [
+          "hablaste",
+          "la semana pasada",
+          "caminé",
+          "cociné"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w10"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w11",
+        "type": "mc",
+        "prompt": "What does \"habló\" mean?",
+        "speak": "habló",
+        "options": [
+          "I was there",
+          "he or she spoke",
+          "I arrived",
+          "he or she did"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w11"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w12",
+        "type": "mc",
+        "prompt": "How do you say \"I worked\"?",
+        "options": [
+          "trabajé",
+          "hace una hora",
+          "salí",
+          "anoche"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w12"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w13",
+        "type": "mc",
+        "prompt": "What does \"compré\" mean?",
+        "speak": "compré",
+        "options": [
+          "I bought",
+          "I arrived",
+          "I cooked",
+          "I worked"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w13"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w14",
+        "type": "mc",
+        "prompt": "How do you say \"I arrived\"?",
+        "options": [
+          "llegué",
+          "salí",
+          "y después",
+          "aprendí"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w14"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w15",
+        "type": "mc",
+        "prompt": "What does \"caminé\" mean?",
+        "speak": "caminé",
+        "options": [
+          "last week",
+          "I saw",
+          "and then",
+          "I walked"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w15"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w16",
+        "type": "mc",
+        "prompt": "How do you say \"I cooked\"?",
+        "options": [
+          "anoche",
+          "hice",
+          "estaba cansado",
+          "cociné"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w16"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w17",
+        "type": "mc",
+        "prompt": "What does \"comí\" mean?",
+        "speak": "comí",
+        "options": [
+          "I ate",
+          "I lived",
+          "you spoke",
+          "you ate"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w17"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w18",
+        "type": "mc",
+        "prompt": "How do you say \"you ate\"?",
+        "options": [
+          "comiste",
+          "escribí",
+          "estaba cansado",
+          "hablé"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w18"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w19",
+        "type": "mc",
+        "prompt": "What does \"comió\" mean?",
+        "speak": "comió",
+        "options": [
+          "he or she ate",
+          "I was there",
+          "I worked",
+          "I cooked"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w19"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w20",
+        "type": "mc",
+        "prompt": "How do you say \"I drank\"?",
+        "options": [
+          "salí",
+          "bebí",
+          "hace dos días",
+          "hablé"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w20"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w21",
+        "type": "mc",
+        "prompt": "What does \"salí\" mean?",
+        "speak": "salí",
+        "options": [
+          "I went out",
+          "I was there",
+          "and then",
+          "I spoke"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w21"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w22",
+        "type": "mc",
+        "prompt": "How do you say \"I wrote\"?",
+        "options": [
+          "la semana pasada",
+          "bebí",
+          "cómo estuvo",
+          "escribí"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w22"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w23",
+        "type": "mc",
+        "prompt": "What does \"aprendí\" mean?",
+        "speak": "aprendí",
+        "options": [
+          "last week",
+          "it was hot",
+          "I learned",
+          "two days ago"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u9-w23"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w24",
+        "type": "mc",
+        "prompt": "How do you say \"I lived\"?",
+        "options": [
+          "hablé",
+          "llegué",
+          "viví",
+          "cociné"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u9-w24"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w25",
+        "type": "mc",
+        "prompt": "What does \"fui\" mean?",
+        "speak": "fui",
+        "options": [
+          "I went",
+          "yesterday",
+          "it was hot",
+          "I drank"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w25"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w26",
+        "type": "mc",
+        "prompt": "How do you say \"you went\"?",
+        "options": [
+          "esta mañana",
+          "el fin de semana pasado",
+          "fuiste",
+          "hace dos días"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u9-w26"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w27",
+        "type": "mc",
+        "prompt": "What does \"hice\" mean?",
+        "speak": "hice",
+        "options": [
+          "two days ago",
+          "I went",
+          "you ate",
+          "I did"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w27"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w28",
+        "type": "mc",
+        "prompt": "How do you say \"he or she did\"?",
+        "options": [
+          "fue",
+          "hizo",
+          "compré",
+          "esta mañana"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w28"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w29",
+        "type": "mc",
+        "prompt": "What does \"vi\" mean?",
+        "speak": "vi",
+        "options": [
+          "he or she spoke",
+          "two days ago",
+          "I was there",
+          "I saw"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w29"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w30",
+        "type": "mc",
+        "prompt": "How do you say \"I had\"?",
+        "options": [
+          "tuve",
+          "bebí",
+          "hablaste",
+          "vi"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w30"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w31",
+        "type": "mc",
+        "prompt": "What does \"estuve\" mean?",
+        "speak": "estuve",
+        "options": [
+          "I was there",
+          "I had a good time",
+          "you spoke",
+          "I learned"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w31"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w32",
+        "type": "mc",
+        "prompt": "How do you say \"it was\"?",
+        "options": [
+          "vi",
+          "fui",
+          "estaba cansado",
+          "fue"
+        ],
+        "answer": 3,
+        "wordId": "es-a2u9-w32"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w33",
+        "type": "mc",
+        "prompt": "What does \"qué hiciste\" mean?",
+        "speak": "qué hiciste",
+        "options": [
+          "I spoke",
+          "what did you do",
+          "I was tired (said by a man)",
+          "I cooked"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w33"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w34",
+        "type": "mc",
+        "prompt": "How do you say \"where did you go\"?",
+        "options": [
+          "caminé",
+          "adónde fuiste",
+          "comí",
+          "trabajé"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w34"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w35",
+        "type": "mc",
+        "prompt": "What does \"cómo estuvo\" mean?",
+        "speak": "cómo estuvo",
+        "options": [
+          "an hour ago",
+          "how was it",
+          "last week",
+          "it was fun"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w35"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w36",
+        "type": "mc",
+        "prompt": "How do you say \"I had a good time\"?",
+        "options": [
+          "bebí",
+          "lo pasé bien",
+          "hace dos días",
+          "qué hiciste"
+        ],
+        "answer": 1,
+        "wordId": "es-a2u9-w36"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w37",
+        "type": "mc",
+        "prompt": "What does \"fue divertido\" mean?",
+        "speak": "fue divertido",
+        "options": [
+          "it was fun",
+          "and then",
+          "he or she did",
+          "I went"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w37"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w38",
+        "type": "mc",
+        "prompt": "How do you say \"it was hot\"?",
+        "options": [
+          "estuve",
+          "hizo",
+          "hacía calor",
+          "fui"
+        ],
+        "answer": 2,
+        "wordId": "es-a2u9-w38"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w39",
+        "type": "mc",
+        "prompt": "What does \"estaba cansado\" mean?",
+        "speak": "estaba cansado",
+        "options": [
+          "I was tired (said by a man)",
+          "he or she ate",
+          "I ate",
+          "it was"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w39"
+      },
+      {
+        "id": "es-a2-u9-cp-es-a2u9-w40",
+        "type": "mc",
+        "prompt": "How do you say \"and then\"?",
+        "options": [
+          "y después",
+          "cociné",
+          "adónde fuiste",
+          "lo pasé bien"
+        ],
+        "answer": 0,
+        "wordId": "es-a2u9-w40"
+      },
+      {
+        "id": "es-a2-u9-cp-l1-s1",
+        "type": "translate",
+        "prompt": "Yesterday I ate rice",
+        "answer": [
+          "Ayer",
+          "comí",
+          "arroz"
+        ],
+        "bank": [
+          "como",
+          "arroz",
+          "Ayer",
+          "hoy",
+          "comí"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l1-s2",
+        "type": "translate",
+        "prompt": "I was here two days ago",
+        "answer": [
+          "Hace",
+          "dos",
+          "días",
+          "estuve",
+          "aquí"
+        ],
+        "bank": [
+          "estuve",
+          "dos",
+          "días",
+          "tres",
+          "aquí",
+          "Hace",
+          "dentro"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l1-s3",
+        "type": "translate",
+        "prompt": "Last week I worked a lot",
+        "answer": [
+          "La",
+          "semana",
+          "pasada",
+          "trabajé",
+          "mucho"
+        ],
+        "bank": [
+          "pasada",
+          "La",
+          "próxima",
+          "trabajé",
+          "semana",
+          "trabajo",
+          "mucho"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l2-s1",
+        "type": "translate",
+        "prompt": "I spoke with my mother",
+        "answer": [
+          "Hablé",
+          "con",
+          "mi",
+          "madre"
+        ],
+        "bank": [
+          "con",
+          "Hablé",
+          "mi",
+          "hermano",
+          "madre",
+          "hablo"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l2-s2",
+        "type": "translate",
+        "prompt": "Yesterday I bought bread and cheese",
+        "answer": [
+          "Ayer",
+          "compré",
+          "pan",
+          "y",
+          "queso"
+        ],
+        "bank": [
+          "compro",
+          "compré",
+          "queso",
+          "pan",
+          "Ayer",
+          "leche",
+          "y"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l2-s3",
+        "type": "translate",
+        "prompt": "You spoke with her",
+        "answer": [
+          "Hablaste",
+          "con",
+          "ella"
+        ],
+        "bank": [
+          "con",
+          "hablé",
+          "Hablaste",
+          "ella",
+          "él"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l3-s1",
+        "type": "translate",
+        "prompt": "You ate chicken last night",
+        "answer": [
+          "Comiste",
+          "pollo",
+          "anoche"
+        ],
+        "bank": [
+          "pescado",
+          "como",
+          "pollo",
+          "Comiste",
+          "anoche"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l3-s2",
+        "type": "translate",
+        "prompt": "Yesterday I drank a lot of water",
+        "answer": [
+          "Ayer",
+          "bebí",
+          "mucha",
+          "agua"
+        ],
+        "bank": [
+          "mucha",
+          "bebí",
+          "beber",
+          "agua",
+          "Ayer",
+          "jugo"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l3-s3",
+        "type": "translate",
+        "prompt": "I left home at eight",
+        "answer": [
+          "Salí",
+          "de",
+          "casa",
+          "a",
+          "las",
+          "ocho"
+        ],
+        "bank": [
+          "Salí",
+          "nueve",
+          "a",
+          "salgo",
+          "ocho",
+          "de",
+          "las",
+          "casa"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l4-s1",
+        "type": "translate",
+        "prompt": "I went to the market with my mother",
+        "answer": [
+          "Fui",
+          "al",
+          "mercado",
+          "con",
+          "mi",
+          "madre"
+        ],
+        "bank": [
+          "madre",
+          "mi",
+          "mercado",
+          "Fui",
+          "voy",
+          "tienda",
+          "con",
+          "al"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l4-s2",
+        "type": "translate",
+        "prompt": "Yesterday I had a lot of work",
+        "answer": [
+          "Ayer",
+          "tuve",
+          "mucho",
+          "trabajo"
+        ],
+        "bank": [
+          "mucho",
+          "trabajo",
+          "hice",
+          "tuve",
+          "Ayer",
+          "tengo"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l4-s3",
+        "type": "translate",
+        "prompt": "I saw your brother in the park",
+        "answer": [
+          "Vi",
+          "a",
+          "tu",
+          "hermano",
+          "en",
+          "el",
+          "parque"
+        ],
+        "bank": [
+          "el",
+          "tu",
+          "en",
+          "hermana",
+          "veo",
+          "hermano",
+          "Vi",
+          "parque",
+          "a"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l5-s1",
+        "type": "translate",
+        "prompt": "What did you do last weekend",
+        "answer": [
+          "Qué",
+          "hiciste",
+          "el",
+          "fin",
+          "de",
+          "semana",
+          "pasado"
+        ],
+        "bank": [
+          "semana",
+          "fuiste",
+          "fin",
+          "Qué",
+          "hiciste",
+          "pasado",
+          "de",
+          "hice",
+          "el"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l5-s2",
+        "type": "translate",
+        "prompt": "I went to the park and I had a good time",
+        "answer": [
+          "Fui",
+          "al",
+          "parque",
+          "y",
+          "lo",
+          "pasé",
+          "bien"
+        ],
+        "bank": [
+          "fue",
+          "pasé",
+          "y",
+          "lo",
+          "bien",
+          "al",
+          "voy",
+          "Fui",
+          "parque"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-l5-s3",
+        "type": "translate",
+        "prompt": "It was hot and I was tired",
+        "answer": [
+          "Hacía",
+          "calor",
+          "y",
+          "estaba",
+          "cansado"
+        ],
+        "bank": [
+          "Hacía",
+          "y",
+          "estoy",
+          "hace",
+          "estaba",
+          "cansado",
+          "calor"
+        ],
+        "wordIds": []
+      },
+      {
+        "id": "es-a2-u9-cp-m1",
+        "type": "match",
+        "prompt": "Match the pairs",
+        "pairs": [
+          {
+            "wordId": "es-a2u9-w2",
+            "target": "anoche",
+            "english": "last night"
+          },
+          {
+            "wordId": "es-a2u9-w5",
+            "target": "hace dos días",
+            "english": "two days ago"
+          },
+          {
+            "wordId": "es-a2u9-w6",
+            "target": "el año pasado",
+            "english": "last year"
+          },
+          {
+            "wordId": "es-a2u9-w1",
+            "target": "ayer",
+            "english": "yesterday"
+          },
+          {
+            "wordId": "es-a2u9-w8",
+            "target": "hace una hora",
+            "english": "an hour ago"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u9-cp-m2",
+        "type": "match",
+        "prompt": "Match the pairs",
+        "pairs": [
+          {
+            "wordId": "es-a2u9-w16",
+            "target": "cociné",
+            "english": "I cooked"
+          },
+          {
+            "wordId": "es-a2u9-w14",
+            "target": "llegué",
+            "english": "I arrived"
+          },
+          {
+            "wordId": "es-a2u9-w12",
+            "target": "trabajé",
+            "english": "I worked"
+          },
+          {
+            "wordId": "es-a2u9-w10",
+            "target": "hablaste",
+            "english": "you spoke"
+          },
+          {
+            "wordId": "es-a2u9-w9",
+            "target": "hablé",
+            "english": "I spoke"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u9-cp-m3",
+        "type": "match",
+        "prompt": "Match the pairs",
+        "pairs": [
+          {
+            "wordId": "es-a2u9-w24",
+            "target": "viví",
+            "english": "I lived"
+          },
+          {
+            "wordId": "es-a2u9-w19",
+            "target": "comió",
+            "english": "he or she ate"
+          },
+          {
+            "wordId": "es-a2u9-w18",
+            "target": "comiste",
+            "english": "you ate"
+          },
+          {
+            "wordId": "es-a2u9-w17",
+            "target": "comí",
+            "english": "I ate"
+          },
+          {
+            "wordId": "es-a2u9-w22",
+            "target": "escribí",
+            "english": "I wrote"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u9-cp-m4",
+        "type": "match",
+        "prompt": "Match the pairs",
+        "pairs": [
+          {
+            "wordId": "es-a2u9-w29",
+            "target": "vi",
+            "english": "I saw"
+          },
+          {
+            "wordId": "es-a2u9-w25",
+            "target": "fui",
+            "english": "I went"
+          },
+          {
+            "wordId": "es-a2u9-w31",
+            "target": "estuve",
+            "english": "I was there"
+          },
+          {
+            "wordId": "es-a2u9-w27",
+            "target": "hice",
+            "english": "I did"
+          },
+          {
+            "wordId": "es-a2u9-w26",
+            "target": "fuiste",
+            "english": "you went"
+          }
+        ]
+      },
+      {
+        "id": "es-a2-u9-cp-m5",
+        "type": "match",
+        "prompt": "Match the pairs",
+        "pairs": [
+          {
+            "wordId": "es-a2u9-w33",
+            "target": "qué hiciste",
+            "english": "what did you do"
+          },
+          {
+            "wordId": "es-a2u9-w38",
+            "target": "hacía calor",
+            "english": "it was hot"
+          },
+          {
+            "wordId": "es-a2u9-w40",
+            "target": "y después",
+            "english": "and then"
+          },
+          {
+            "wordId": "es-a2u9-w37",
+            "target": "fue divertido",
+            "english": "it was fun"
+          },
+          {
+            "wordId": "es-a2u9-w36",
+            "target": "lo pasé bien",
+            "english": "I had a good time"
+          }
+        ]
+      }
+    ],
+    "draw": 20
+  }
+}

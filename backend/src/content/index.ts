@@ -7,6 +7,8 @@ import fr5 from "./fr/unit5.json";
 import fr6 from "./fr/unit6.json";
 import fr7 from "./fr/unit7.json";
 import fr8 from "./fr/unit8.json";
+import fr9 from "./fr/unit9.json";
+import fr10 from "./fr/unit10.json";
 import es1 from "./es/unit1.json";
 import es2 from "./es/unit2.json";
 import es3 from "./es/unit3.json";
@@ -15,5 +17,7 @@ import es5 from "./es/unit5.json";
 import es6 from "./es/unit6.json";
 import es7 from "./es/unit7.json";
 import es8 from "./es/unit8.json";
+import es9 from "./es/unit9.json";
+import es10 from "./es/unit10.json";
 
-export const RAW_UNITS = { fr: [fr1, fr2, fr3, fr4, fr5, fr6, fr7, fr8], es: [es1, es2, es3, es4, es5, es6, es7, es8] };
+export const RAW_UNITS = { fr: [fr1, fr2, fr3, fr4, fr5, fr6, fr7, fr8, fr9, fr10], es: [es1, es2, es3, es4, es5, es6, es7, es8, es9, es10] };
