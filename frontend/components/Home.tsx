@@ -94,18 +94,19 @@ function ContinueCard({ t, course, verified }: { t: Today; course: string; verif
   return (
     <Card className="relative overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute -right-24 -top-32 h-72 w-72 rounded-full bg-sage-100/50 blur-3xl" />
-      <div className="relative p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <Flag code={lang.code} size={22} />
-            <p className="text-sm font-medium text-ink-2"><span lang={lang.code}>{lang.native}</span> <span className="text-muted">· {unit.level} · Unit {unit.n} of {t.units.length}</span></p>
-          </div>
-          {t.todayDone && <Badge tone="sage" icon={CheckCircle2}>Done today</Badge>}
+      {/* Fluid: padding and type scale smoothly with the screen, so every line stays on one line and nothing is cramped on a small phone or tiny on a big monitor. */}
+      <div className="relative p-[clamp(1rem,0.55rem+1.7vw,1.75rem)]">
+        <div className="flex items-center gap-2.5 whitespace-nowrap text-[clamp(0.8125rem,0.72rem+0.4vw,0.9375rem)]">
+          <Flag code={lang.code} size={22} />
+          <p className="font-medium text-ink-2"><span lang={lang.code}>{lang.native}</span> <span className="text-muted">· {unit.level} · Unit {unit.n} of {t.units.length}</span></p>
         </div>
-        <h2 className="mt-3 text-balance text-2xl font-semibold leading-tight tracking-[-0.025em] text-ink sm:text-[1.75rem]">{unit.title}</h2>
+        <div className="mt-3 flex items-center justify-between gap-3">
+          <h2 className="min-w-0 text-balance text-[clamp(1.5rem,1rem+2vw,2.25rem)] font-semibold leading-tight tracking-[-0.025em] text-ink">{unit.title}</h2>
+          {t.todayDone && <Badge tone="sage" icon={CheckCircle2} className="shrink-0">Done today</Badge>}
+        </div>
 
-        <div className="mt-4 max-w-md">
-          <div className="mb-2 flex items-baseline justify-between text-sm">
+        <div className="mt-[clamp(0.75rem,0.5rem+1vw,1.25rem)] sm:max-w-xl">
+          <div className="mb-2 flex items-baseline justify-between whitespace-nowrap text-[clamp(0.8125rem,0.75rem+0.3vw,0.9375rem)]">
             <span className="font-medium text-ink">Unit progress</span>
             <span className="tabular text-muted">{unit.done}/{unit.total}</span>
           </div>
@@ -120,7 +121,7 @@ function ContinueCard({ t, course, verified }: { t: Today; course: string; verif
             : allDone
             ? <ButtonLink href="/learn" size="lg" variant="secondary" iconRight={ArrowRight}>Review your path</ButtonLink>
             : <ButtonLink href={href} size="lg" iconRight={ArrowRight}>{unit.done === 0 && t.currentUnit === 1 ? "Start first lesson" : "Continue learning"}</ButtonLink>}
-          {nextTitle && lives.lives > 0 && <p className="text-sm text-muted">Next: <span className="font-medium text-ink-2">{nextTitle}</span></p>}
+          {nextTitle && lives.lives > 0 && <p className="text-[clamp(0.8125rem,0.75rem+0.3vw,0.9375rem)] text-muted">Next: <span className="font-medium text-ink-2">{nextTitle}</span></p>}
         </div>
       </div>
     </Card>
