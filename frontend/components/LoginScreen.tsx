@@ -257,7 +257,7 @@ function Languages({ onStart }: { onStart: () => void }) {
 const TRUST = [
   { Icon: ScanFace, title: "One person, one account", body: "Rewards need a quick GoodDollar face check, so they go to real learners and not bots. Lessons stay free either way." },
   { Icon: ShieldCheck, title: "Paid on-chain, on Celo", body: "Rewards are signed vouchers you claim from the LearnIt rewards pool contract. Every claim is a transaction anyone can look up." },
-  { Icon: PiggyBank, title: "Stake to stay committed", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Finish a lesson every day to get your stake back. Miss a day and it is shared with the people who finished." },
+  { Icon: PiggyBank, title: "Stake to stay committed", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Finish a lesson every day to get your stake back. Miss a day and you lose it. Most of it goes to the people who finished." },
   { Icon: Lock, title: "Fair by design", body: "A daily limit on rewards, a minimum time per lesson and contracts that can be paused if anything looks wrong." },
 ];
 
@@ -298,7 +298,7 @@ const FAQ = [
   { q: "Do I need a crypto wallet?", a: "No. Sign in with email and LearnIt creates a wallet for you. If you already use GoodDollar, connect that wallet instead." },
   { q: "Is it really free?", a: "Every lesson is free. Claiming rewards and staking need a one-time GoodDollar face check, and a little CELO for network fees, which you can get free in our Telegram group. Staking also uses your own G$." },
   { q: "How much can I earn?", a: "Each passed lesson and checkpoint earns a set G$ reward. A daily limit applies, and the amounts are shown in the app before you claim." },
-  { q: "What happens if I miss a day while staking?", a: "You lose that stake: it is shared with the people who finished. Staking is optional, and learning and rewards work without it." },
+  { q: "What happens if I miss a day while staking?", a: "You lose that stake. Most of it goes to the people who finished. Staking is optional, and learning and rewards work without it." },
 ];
 
 function Faq() {
