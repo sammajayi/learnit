@@ -4,14 +4,14 @@ export const VOTE_TELEGRAM_URL = "https://t.me/+X7qoy1SGH-I5YTc0";
 
 export function voteEmail() {
   const subject = "Vote for LearnIt in GoodBuilders Season 5";
-  const profile = `${VOTE_APP_URL}/profile`;
+  const home = `${VOTE_APP_URL}/home`;
   const logo = `${VOTE_APP_URL}/icon-512.png`;
   const p = "margin:0 0 14px;font-size:15px;line-height:1.6;color:#334155;";
   const li = "margin:0 0 6px;font-size:15px;line-height:1.6;color:#334155;";
   const html = `<!doctype html>
 <html>
   <body style="margin:0;padding:0;background:#f8f6f1;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
-    <span style="display:none;max-height:0;overflow:hidden;opacity:0;">It takes one tap on your profile page.</span>
+    <span style="display:none;max-height:0;overflow:hidden;opacity:0;">It takes one tap on your home page.</span>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8f6f1;padding:32px 0;">
       <tr>
         <td align="center">
@@ -33,24 +33,19 @@ export function voteEmail() {
                 <p style="${p}">LearnIt is in GoodDollar's GoodBuilders Season 5. Verified GoodDollar members vote on which projects get funded, and your vote helps us keep building.</p>
                 <p style="${p}">It takes about a minute:</p>
                 <ol style="margin:0 0 20px;padding-left:20px;">
-                  <li style="${li}">Open LearnIt and go to your <strong>Profile</strong>.</li>
-                  <li style="${li}">Scroll down to the card called <strong>Vote for LearnIt</strong>.</li>
-                  <li style="${li}">Tap <strong>Vote for LearnIt</strong>. If it says "Claim votes and vote", tap that. Your wallet asks you to sign a free message, then your vote goes in.</li>
+                  <li style="${li}">Open LearnIt. A <strong>Vote for LearnIt</strong> popup shows on your <strong>Home</strong> page.</li>
+                  <li style="${li}">It keeps showing each time you visit, until you have voted.</li>
+                  <li style="${li}">Tap the vote button. If it says "Claim votes and vote", tap that. Your wallet asks you to sign a free message, then your vote goes in.</li>
                 </ol>
                 <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px;">
                   <tr>
                     <td style="border-radius:12px;background:#b9563e;">
-                      <a href="${profile}" style="display:inline-block;padding:12px 24px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:12px;">Open my profile</a>
+                      <a href="${home}" style="display:inline-block;padding:12px 24px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:12px;">Open LearnIt</a>
                     </td>
                   </tr>
                 </table>
-                <p style="${p}">Good to know:</p>
-                <ul style="margin:0 0 20px;padding-left:20px;">
-                  <li style="${li}">You need to be verified with GoodDollar. If you are not, the card tells you.</li>
-                  <li style="${li}">The signature is free, and the vote is one time only.</li>
-                  <li style="${li}">The vote puts 10 votes behind LearnIt.</li>
-                </ul>
-                <p style="${p}">Questions? Ask in our <a href="${VOTE_TELEGRAM_URL}" style="color:#b9563e;">Telegram group</a>.</p>
+                <p style="${p}">How much we can keep paying out depends on the votes we get, so every vote helps.</p>
+                <p style="${p}">Need gas to vote, or have a question? Ask in our <a href="${VOTE_TELEGRAM_URL}" style="color:#b9563e;">Telegram group</a>.</p>
                 <p style="margin:0;font-size:15px;line-height:1.6;color:#334155;">Thank you for learning with us.<br>The LearnIt team</p>
               </td>
             </tr>
