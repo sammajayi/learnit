@@ -159,7 +159,7 @@ export function ClaimCard() {
           ) : (
             <div className="shrink-0 text-right">
               <p className="text-[9px] font-semibold uppercase tracking-[0.12em] opacity-60">Next claim</p>
-              <p className="tabular text-[13px] font-semibold" aria-live="off">{nextClaimText(left).replace(/^next in /, "in ").replace(/^next claim /, "")}</p>
+              <p className="tabular text-[13px] font-semibold" aria-live="off">{left !== null && left > 0 ? nextClaimText(left).replace(/^next in /, "in ") : "soon"}</p>
             </div>
           )}
         </div>

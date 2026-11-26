@@ -5,22 +5,26 @@ import { ADDR } from "./chain";
 const ubiAbi = parseAbi([
   "function checkEntitlement(address _member) view returns (uint256)",
   "function periodStart() view returns (uint256)",
-  "function currentDay() view returns (uint256)",
 ]);
 
 /** `dayEndsAt` is when the current UBI day ends, so the next claim opens then. It is always set, claimed or not. */
 export type UbiStatus = { claimable: string; canClaim: boolean; nextClaimAt: number | null; dayEndsAt: number };
 
-/** Entitlement is 0 once claimed today. Next claim = start of the next UBI day (same rule as the SDK's nextClaimTime). */
+/**
+ * When the current UBI day ends. The days are fixed 24-hour blocks counted from the scheme's start time, which never changes, so this comes from the
+ * clock. Asking a node for the current day instead returned an old day from a node that was behind, and the card said the next claim was "now".
+ */
+export function nextUbiDay(periodStart: number, nowSec: number) {
+  return periodStart + (Math.floor((nowSec - periodStart) / 86400) + 1) * 86400;
+}
+
+/** Entitlement is 0 once claimed today. The next claim opens when the UBI day ends. */
 export async function readUbiStatus(address: `0x${string}`): Promise<UbiStatus> {
-  const [entitlement, periodStart, day] = await Promise.all([
+  const [entitlement, periodStart] = await Promise.all([
     publicClient.readContract({ address: ADDR.ubiScheme, abi: ubiAbi, functionName: "checkEntitlement", args: [address] }),
     publicClient.readContract({ address: ADDR.ubiScheme, abi: ubiAbi, functionName: "periodStart" }),
-    publicClient.readContract({ address: ADDR.ubiScheme, abi: ubiAbi, functionName: "currentDay" }),
   ]);
-  const now = Math.floor(Date.now() / 1000);
-  let next = Number(periodStart) + Number(day) * 86400;
-  if (next <= now) next += 86400;
+  const next = nextUbiDay(Number(periodStart), Math.floor(Date.now() / 1000));
   return { claimable: entitlement.toString(), canClaim: entitlement > 0n, nextClaimAt: entitlement > 0n ? null : next, dayEndsAt: next };
 }
 
