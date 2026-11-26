@@ -3,7 +3,7 @@
   "unit": 8,
   "level": "A1",
   "title": "Shopping and travel",
-  "blurb": "Shop, travel and get help when you need it.",
+  "blurb": "Shop, travel and ask for help.",
   "speechLang": "fr-FR",
   "lessons": [
     {
@@ -41,7 +41,7 @@
         {
           "id": "fr-a1-u8-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w1",
@@ -95,7 +95,7 @@
         {
           "id": "fr-a1-u8-l1-s",
           "type": "translate",
-          "prompt": "How much does it cost",
+          "prompt": "How much does it cost?",
           "answer": [
             "Combien",
             "ça",
@@ -143,7 +143,7 @@
           "options": [
             "to pay",
             "money",
-            "change",
+            "change (money)",
             "expensive"
           ],
           "answer": 0,
@@ -165,7 +165,7 @@
         {
           "id": "fr-a1-u8-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w5",
@@ -185,7 +185,7 @@
             {
               "wordId": "fr-a1u8-w8",
               "target": "la monnaie",
-              "english": "change"
+              "english": "change (money)"
             }
           ]
         },
@@ -206,7 +206,7 @@
         {
           "id": "fr-a1u8-w8-et",
           "type": "mc",
-          "prompt": "How do you say \"change\"?",
+          "prompt": "How do you say \"change (money)\"?",
           "options": [
             "le prix",
             "la carte",
@@ -250,7 +250,7 @@
         },
         {
           "target": "la monnaie",
-          "english": "change"
+          "english": "change (money)"
         }
       ]
     },
@@ -289,7 +289,7 @@
         {
           "id": "fr-a1-u8-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w9",
@@ -415,7 +415,7 @@
         {
           "id": "fr-a1-u8-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w13",
@@ -541,7 +541,7 @@
         {
           "id": "fr-a1-u8-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w17",
@@ -667,7 +667,7 @@
         {
           "id": "fr-a1-u8-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w21",
@@ -768,7 +768,7 @@
           "speak": "au secours",
           "options": [
             "I am lost",
-            "help",
+            "help!",
             "police",
             "emergency"
           ],
@@ -791,12 +791,12 @@
         {
           "id": "fr-a1-u8-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w25",
               "target": "au secours",
-              "english": "help"
+              "english": "help!"
             },
             {
               "wordId": "fr-a1u8-w26",
@@ -821,7 +821,7 @@
           "prompt": "What does \"je suis perdu\" mean?",
           "speak": "je suis perdu",
           "options": [
-            "help",
+            "help!",
             "do you speak English",
             "police",
             "I am lost"
@@ -866,7 +866,7 @@
       "intro": [
         {
           "target": "au secours",
-          "english": "help"
+          "english": "help!"
         },
         {
           "target": "aidez-moi",
@@ -894,7 +894,7 @@
           "speak": "la police",
           "options": [
             "I am lost",
-            "help",
+            "help!",
             "police",
             "do you speak English"
           ],
@@ -917,7 +917,7 @@
         {
           "id": "fr-a1-u8-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w29",
@@ -947,7 +947,7 @@
           "prompt": "What does \"j'ai besoin de\" mean?",
           "speak": "j'ai besoin de",
           "options": [
-            "help",
+            "help!",
             "I am lost",
             "I need",
             "do you speak English"
@@ -1008,8 +1008,8 @@
     },
     {
       "id": "fr-a1-u8-l9",
-      "title": "Getting by, part 1",
-      "theme": "getting by",
+      "title": "Useful phrases, part 1",
+      "theme": "useful phrases",
       "exercises": [
         {
           "id": "fr-a1u8-w33-te",
@@ -1041,7 +1041,7 @@
         {
           "id": "fr-a1-u8-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w33",
@@ -1136,8 +1136,8 @@
     },
     {
       "id": "fr-a1-u8-l10",
-      "title": "Getting by, part 2",
-      "theme": "getting by",
+      "title": "Useful phrases, part 2",
+      "theme": "useful phrases",
       "exercises": [
         {
           "id": "fr-a1u8-w37-te",
@@ -1169,7 +1169,7 @@
         {
           "id": "fr-a1-u8-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u8-w37",
@@ -1223,7 +1223,7 @@
         {
           "id": "fr-a1-u8-l10-s",
           "type": "translate",
-          "prompt": "I am looking for the station",
+          "prompt": "I am looking for the train station",
           "answer": [
             "Je",
             "cherche",
@@ -1363,7 +1363,7 @@
       {
         "id": "fr-a1-u8-cp-fr-a1u8-w8",
         "type": "mc",
-        "prompt": "How do you say \"change\"?",
+        "prompt": "How do you say \"change (money)\"?",
         "options": [
           "l'urgence",
           "le manteau",
@@ -1542,7 +1542,7 @@
         "speak": "la valise",
         "options": [
           "cheap",
-          "help",
+          "help!",
           "suitcase",
           "to leave"
         ],
@@ -1569,7 +1569,7 @@
         "speak": "arriver",
         "options": [
           "to arrive",
-          "change",
+          "change (money)",
           "price",
           "shirt"
         ],
@@ -1596,7 +1596,7 @@
         "speak": "au secours",
         "options": [
           "coat",
-          "help",
+          "help!",
           "emergency",
           "good luck"
         ],
@@ -1705,7 +1705,7 @@
         "options": [
           "speak slowly",
           "that is all",
-          "help",
+          "help!",
           "shoes"
         ],
         "answer": 0,
@@ -1808,7 +1808,7 @@
       {
         "id": "fr-a1-u8-cp-l1-s1",
         "type": "translate",
-        "prompt": "How much does it cost",
+        "prompt": "How much does it cost?",
         "answer": [
           "Combien",
           "ça",
@@ -2034,7 +2034,7 @@
       {
         "id": "fr-a1-u8-cp-l5-s1",
         "type": "translate",
-        "prompt": "I am looking for the station",
+        "prompt": "I am looking for the train station",
         "answer": [
           "Je",
           "cherche",
@@ -2076,7 +2076,7 @@
       {
         "id": "fr-a1-u8-cp-l5-s3",
         "type": "translate",
-        "prompt": "What is this",
+        "prompt": "What is this?",
         "answer": [
           "Qu'est-ce",
           "que",
@@ -2094,7 +2094,7 @@
       {
         "id": "fr-a1-u8-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u8-w2",
@@ -2104,7 +2104,7 @@
           {
             "wordId": "fr-a1u8-w8",
             "target": "la monnaie",
-            "english": "change"
+            "english": "change (money)"
           },
           {
             "wordId": "fr-a1u8-w3",
@@ -2126,7 +2126,7 @@
       {
         "id": "fr-a1-u8-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u8-w16",
@@ -2158,7 +2158,7 @@
       {
         "id": "fr-a1-u8-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u8-w24",
@@ -2190,7 +2190,7 @@
       {
         "id": "fr-a1-u8-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u8-w31",
@@ -2205,7 +2205,7 @@
           {
             "wordId": "fr-a1u8-w25",
             "target": "au secours",
-            "english": "help"
+            "english": "help!"
           },
           {
             "wordId": "fr-a1u8-w29",
@@ -2222,7 +2222,7 @@
       {
         "id": "fr-a1-u8-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u8-w34",

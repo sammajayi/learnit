@@ -3,7 +3,7 @@
   "unit": 5,
   "level": "A1",
   "title": "Around town",
-  "blurb": "Find places, ask the way and ask questions.",
+  "blurb": "Find places, get directions and ask questions.",
   "speechLang": "es-ES",
   "lessons": [
     {
@@ -41,7 +41,7 @@
         {
           "id": "es-a1-u5-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w1",
@@ -167,7 +167,7 @@
         {
           "id": "es-a1-u5-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w5",
@@ -274,7 +274,7 @@
             "bus",
             "street",
             "bicycle",
-            "station"
+            "train station"
           ],
           "answer": 1,
           "wordId": "es-a1u5-w9"
@@ -282,7 +282,7 @@
         {
           "id": "es-a1u5-w10-et",
           "type": "mc",
-          "prompt": "How do you say \"station\"?",
+          "prompt": "How do you say \"train station\"?",
           "options": [
             "el taxi",
             "el coche",
@@ -295,7 +295,7 @@
         {
           "id": "es-a1-u5-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w9",
@@ -305,7 +305,7 @@
             {
               "wordId": "es-a1u5-w10",
               "target": "la estación",
-              "english": "station"
+              "english": "train station"
             },
             {
               "wordId": "es-a1u5-w11",
@@ -326,7 +326,7 @@
           "speak": "el aeropuerto",
           "options": [
             "airport",
-            "station",
+            "train station",
             "street",
             "car"
           ],
@@ -374,7 +374,7 @@
         },
         {
           "target": "la estación",
-          "english": "station"
+          "english": "train station"
         },
         {
           "target": "el aeropuerto",
@@ -397,7 +397,7 @@
           "prompt": "What does \"el taxi\" mean?",
           "speak": "el taxi",
           "options": [
-            "station",
+            "train station",
             "bicycle",
             "taxi",
             "car"
@@ -421,7 +421,7 @@
         {
           "id": "es-a1-u5-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w13",
@@ -547,7 +547,7 @@
         {
           "id": "es-a1-u5-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w17",
@@ -671,7 +671,7 @@
         {
           "id": "es-a1-u5-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w21",
@@ -725,7 +725,7 @@
         {
           "id": "es-a1-u5-l6-s",
           "type": "translate",
-          "prompt": "The station is far from here",
+          "prompt": "The train station is far from here",
           "answer": [
             "La",
             "estación",
@@ -801,7 +801,7 @@
         {
           "id": "es-a1-u5-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w25",
@@ -855,7 +855,7 @@
         {
           "id": "es-a1-u5-l7-s",
           "type": "translate",
-          "prompt": "Where is the station",
+          "prompt": "Where is the train station?",
           "answer": [
             "Dónde",
             "está",
@@ -927,7 +927,7 @@
         {
           "id": "es-a1-u5-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w29",
@@ -1051,7 +1051,7 @@
         {
           "id": "es-a1-u5-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w33",
@@ -1105,7 +1105,7 @@
         {
           "id": "es-a1-u5-l9-s",
           "type": "translate",
-          "prompt": "Who is it",
+          "prompt": "Who is it?",
           "answer": [
             "Quién",
             "es"
@@ -1173,7 +1173,7 @@
         {
           "id": "es-a1-u5-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u5-w37",
@@ -1193,7 +1193,7 @@
             {
               "wordId": "es-a1u5-w40",
               "target": "de dónde",
-              "english": "from where"
+              "english": "where from"
             }
           ]
         },
@@ -1204,7 +1204,7 @@
           "speak": "cuál",
           "options": [
             "when",
-            "from where",
+            "where from",
             "why",
             "which"
           ],
@@ -1214,7 +1214,7 @@
         {
           "id": "es-a1u5-w40-et",
           "type": "mc",
-          "prompt": "How do you say \"from where\"?",
+          "prompt": "How do you say \"where from\"?",
           "options": [
             "cuánto",
             "qué",
@@ -1227,7 +1227,7 @@
         {
           "id": "es-a1-u5-l10-s",
           "type": "translate",
-          "prompt": "When does the train leave",
+          "prompt": "When does the train leave?",
           "answer": [
             "Cuándo",
             "sale",
@@ -1260,7 +1260,7 @@
         },
         {
           "target": "de dónde",
-          "english": "from where"
+          "english": "where from"
         }
       ]
     }
@@ -1394,7 +1394,7 @@
       {
         "id": "es-a1-u5-cp-es-a1u5-w10",
         "type": "mc",
-        "prompt": "How do you say \"station\"?",
+        "prompt": "How do you say \"train station\"?",
         "options": [
           "dónde",
           "la tienda",
@@ -1520,7 +1520,7 @@
         "options": [
           "straight ahead",
           "on the right",
-          "from where",
+          "where from",
           "shop"
         ],
         "answer": 0,
@@ -1799,7 +1799,7 @@
       {
         "id": "es-a1-u5-cp-es-a1u5-w40",
         "type": "mc",
-        "prompt": "How do you say \"from where\"?",
+        "prompt": "How do you say \"where from\"?",
         "options": [
           "el centro",
           "de dónde",
@@ -1968,7 +1968,7 @@
       {
         "id": "es-a1-u5-cp-l3-s3",
         "type": "translate",
-        "prompt": "The station is far from here",
+        "prompt": "The train station is far from here",
         "answer": [
           "La",
           "estación",
@@ -1992,7 +1992,7 @@
       {
         "id": "es-a1-u5-cp-l4-s1",
         "type": "translate",
-        "prompt": "Where is the station",
+        "prompt": "Where is the train station?",
         "answer": [
           "Dónde",
           "está",
@@ -2050,7 +2050,7 @@
       {
         "id": "es-a1-u5-cp-l5-s1",
         "type": "translate",
-        "prompt": "Who is it",
+        "prompt": "Who is it?",
         "answer": [
           "Quién",
           "es"
@@ -2066,7 +2066,7 @@
       {
         "id": "es-a1-u5-cp-l5-s2",
         "type": "translate",
-        "prompt": "How much does it cost",
+        "prompt": "How much does it cost?",
         "answer": [
           "Cuánto",
           "cuesta"
@@ -2082,7 +2082,7 @@
       {
         "id": "es-a1-u5-cp-l5-s3",
         "type": "translate",
-        "prompt": "When does the train leave",
+        "prompt": "When does the train leave?",
         "answer": [
           "Cuándo",
           "sale",
@@ -2102,7 +2102,7 @@
       {
         "id": "es-a1-u5-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u5-w8",
@@ -2134,7 +2134,7 @@
       {
         "id": "es-a1-u5-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u5-w9",
@@ -2166,7 +2166,7 @@
       {
         "id": "es-a1-u5-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u5-w18",
@@ -2198,7 +2198,7 @@
       {
         "id": "es-a1-u5-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u5-w31",
@@ -2230,7 +2230,7 @@
       {
         "id": "es-a1-u5-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u5-w34",
@@ -2255,7 +2255,7 @@
           {
             "wordId": "es-a1u5-w40",
             "target": "de dónde",
-            "english": "from where"
+            "english": "where from"
           }
         ]
       }

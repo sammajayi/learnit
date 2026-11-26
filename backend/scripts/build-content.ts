@@ -50,7 +50,7 @@ function build(lang: Lang, data: UnitData, unitNum: number, known: Known, level:
     const s = themes[li].sentences[si];
     return { id, type: "translate", prompt: s.english, answer: s.target, bank: shuffle([...s.target, ...s.extra], r), wordIds: [] };
   };
-  const match = (id: string, ws: typeof all): Exercise => ({ id, type: "match", prompt: "Match the pairs", pairs: ws.map((w) => ({ wordId: w.id, target: w.t, english: w.e })) });
+  const match = (id: string, ws: typeof all): Exercise => ({ id, type: "match", prompt: "Match each pair", pairs: ws.map((w) => ({ wordId: w.id, target: w.t, english: w.e })) });
 
   const lessons = themes.flatMap((theme, li) => {
     const ws = all.filter((w) => w.li === li);

@@ -18,7 +18,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     return Response.json(out);
   } catch (e) {
     if (e instanceof SubmitError) return Response.json({ error: e.message }, { status: e.status });
-    if (e instanceof z.ZodError) return Response.json({ error: "Bad request" }, { status: 400 });
+    if (e instanceof z.ZodError) return Response.json({ error: "We could not read that answer. Try again." }, { status: 400 });
     return authFail(e);
   }
 }
