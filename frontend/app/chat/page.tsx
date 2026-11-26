@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { Keyboard, Mic, SendHorizontal, Sparkles } from "lucide-react";
+import { Keyboard, Mic, SendHorizontal, Sparkles } from "@/components/icons";
 import { AppShell } from "@/components/AppShell";
-import { Badge, Button, Card, Notice, PageHeader, fieldClass } from "@/components/ui";
+import { Badge, Button, Card, PageHeader, fieldClass } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { CHAT_ENABLED, type ChatMessage, type ChatMode } from "@/lib/chat";
 import { useAuthGate } from "@/components/useAuthGate";
@@ -12,9 +12,9 @@ import { langOf } from "@/lib/languages";
 // An example shown while chat is not live, so people can see how corrections will look. Not a real conversation.
 const EXAMPLE: Record<"fr" | "es", ChatMessage[]> = {
   fr: [
-    { id: "a1", role: "assistant", text: "Bonjour ! Comment s'est passée ta journée ?" },
+    { id: "a1", role: "assistant", text: "Bonjour ! Comment s'est passée ta journée ?" },
     { id: "u1", role: "user", text: "Je suis allé au marché et j'ai acheté des pommes rouge.", correction: { wrong: "rouge", right: "rouges", why: "An adjective agrees with its noun. Pommes is plural, so the adjective takes an s." } },
-    { id: "a2", role: "assistant", text: "Super ! Et qu'est-ce que tu as fait avec les pommes rouges ?" },
+    { id: "a2", role: "assistant", text: "Super ! Et qu'est-ce que tu as fait avec les pommes rouges ?" },
   ],
   es: [
     { id: "a1", role: "assistant", text: "¡Hola! ¿Cómo estuvo tu día?" },
@@ -36,15 +36,10 @@ export default function Chat() {
       <PageHeader
         eyebrow={lang.english}
         title="Chat"
-        description="An AI partner to talk with in the language you're learning is coming soon. It will correct your mistakes as you go and tell you why."
+        description="Practise with an AI partner in the language you are learning. It will correct your mistakes and tell you why."
         action={<Badge tone="coral" icon={Sparkles} className="px-3 py-1 text-sm">Coming soon</Badge>}
       />
 
-      {!CHAT_ENABLED && (
-        <Notice tone="info" className="mt-6" title="Chat is not live yet">
-          The AI partner is not connected, so you can't send messages for now. This is a preview of how a conversation and its corrections will look.
-        </Notice>
-      )}
 
       <Card className="mt-6 overflow-hidden">
         <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-4">

@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, BookOpen, Check, Coins, PiggyBank } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Coins, ExternalLink, PiggyBank, Send } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
+import { CELO_HELP_URL } from "@/lib/links";
 import { LanguageCards } from "./LanguageCards";
 import { ProfileEditor } from "./ProfileEditor";
 import { Logo } from "./Logo";
@@ -12,9 +13,9 @@ import { cn } from "@/lib/cn";
 import type { Course } from "@/lib/languages";
 
 const HOW: { Icon: typeof Coins; title: string; body: string }[] = [
-  { Icon: BookOpen, title: "Learn a little each day", body: "Short lessons. Pass at 80% to keep your streak and earn G$." },
-  { Icon: Coins, title: "Claim your daily G$", body: "Verified GoodDollar users claim their UBI here, then start a lesson." },
-  { Icon: PiggyBank, title: "Stake on your streak", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge and get it back when you finish." },
+  { Icon: BookOpen, title: "Learn a little each day", body: "Short lessons. Pass at 80% to keep your streak and earn G$, the GoodDollar token." },
+  { Icon: Coins, title: "Claim your daily G$", body: "Verified GoodDollar users can claim free G$ every day. This needs a quick face check." },
+  { Icon: PiggyBank, title: "Stake to stay accountable", body: "Optional. Put G$ on a 7, 14 or 30 day challenge to keep yourself on track. Finish it and get your stake back." },
 ];
 
 export function Onboarding() {
@@ -41,78 +42,58 @@ export function Onboarding() {
   const anim = reduce ? {} : { initial: { opacity: 0, x: 16 }, animate: { opacity: 1, x: 0 }, exit: { opacity: 0, x: -16 }, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const } };
 
   return (
-    <div className="min-h-[100dvh] lg:grid lg:grid-cols-[400px_1fr]">
-      {/* Desktop: a calm navy panel with the steps. */}
-      <aside className="grain relative hidden flex-col justify-between overflow-hidden bg-ink p-10 text-white lg:flex">
-        <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-sage-500/20 blur-3xl" />
-        <Logo inverse />
-        <ol className="relative grid gap-6">
-          {STEPS.map((label, i) => (
-            <li key={label} className="flex items-center gap-4">
-              <span className={cn("grid h-8 w-8 place-items-center rounded-full text-sm font-semibold transition",
-                i < step ? "bg-sage-500 text-white" : i === step ? "bg-white text-ink" : "border border-white/25 text-white/50")}>
-                {i < step ? <Check size={15} strokeWidth={3} aria-hidden /> : i + 1}
-              </span>
-              <span className={cn("text-[15px] font-medium", i === step ? "text-white" : "text-white/55")}>{label}</span>
-            </li>
-          ))}
-        </ol>
-        <p className="relative max-w-[30ch] text-sm leading-relaxed text-white/55">Lessons are free for everyone. Rewards and staking need a quick GoodDollar check.</p>
-      </aside>
-
-      <main className="mx-auto flex min-h-[100dvh] w-full max-w-xl flex-col px-5 pb-8 pt-6 sm:px-8 lg:justify-center lg:py-16">
-        {/* Mobile: logo and a slim step bar. */}
-        <div className="lg:hidden">
-          <Logo />
-          <div className="mt-6 flex items-center gap-2" role="progressbar" aria-label="Setup progress" aria-valuenow={step + 1} aria-valuemin={1} aria-valuemax={3}>
-            {[0, 1, 2].map((i) => <span key={i} className={cn("h-1.5 flex-1 rounded-full transition-colors duration-300", i <= step ? "bg-sage-500" : "bg-line")} />)}
-          </div>
-        </div>
-        <p className="mt-8 text-eyebrow uppercase text-muted lg:mt-0">Step {step + 1} of 3</p>
+    <main className="mx-auto flex min-h-[100dvh] w-full max-w-[420px] flex-col px-5 pb-8 pt-6 sm:justify-center sm:pb-10 sm:pt-10">
+      <Logo />
+      <div className="mt-5 flex items-center gap-1.5" role="progressbar" aria-label="Setup progress" aria-valuenow={step + 1} aria-valuemin={1} aria-valuemax={3}>
+        {[0, 1, 2].map((i) => <span key={i} className={cn("h-1.5 flex-1 rounded-full transition-colors duration-300", i <= step ? "bg-sage-500" : "bg-line")} />)}
+      </div>
+      <p className="mt-6 text-eyebrow uppercase text-muted">Step {step + 1} of 3</p>
 
         <AnimatePresence mode="wait" initial={false}>
           {step === 0 && (
             <motion.div key="s0" {...anim} className="flex flex-1 flex-col">
-              <h1 className="mt-3 font-display text-display-lg text-ink">What would you like to learn?</h1>
-              <p className="mt-3 text-[15px] text-muted">Pick one to start. You can switch any time and keep your progress.</p>
-              <div className="mt-8"><LanguageCards value={course} onSelect={setCourse} /></div>
-              <Button onClick={() => setStep(1)} disabled={!course} size="lg" variant="secondary" iconRight={ArrowRight} className="mt-10 w-full sm:w-auto sm:self-end">Continue</Button>
+              <h1 className="mt-2 font-display text-[26px] leading-[1.1] tracking-[-0.03em] text-ink">What would you like to learn?</h1>
+              <p className="mt-2.5 text-[15px] text-muted">Pick one to start. You can switch at any time and keep your progress.</p>
+              <div className="mt-6"><LanguageCards value={course} onSelect={setCourse} /></div>
+              <Button onClick={() => setStep(1)} disabled={!course} size="lg" variant="secondary" iconRight={ArrowRight} className="mt-6 self-end">Continue</Button>
             </motion.div>
           )}
 
           {step === 1 && (
             <motion.div key="s1" {...anim} className="flex flex-1 flex-col">
-              <h1 className="mt-3 font-display text-display-lg text-ink">Set up your profile</h1>
-              <p className="mt-3 text-[15px] text-muted">Add a photo and a username for the leaderboard. You can skip this and do it later.</p>
-              <div className="mt-8"><ProfileEditor submitLabel="Save and continue" allowSkipSave onDone={() => setStep(2)} /></div>
-              <div className="mt-4 flex items-center justify-between">
+              <h1 className="mt-2 font-display text-[26px] leading-[1.1] tracking-[-0.03em] text-ink">Set up your profile</h1>
+              <div className="mt-4"><ProfileEditor compact submitLabel="Save and continue" allowSkipSave onDone={() => setStep(2)} /></div>
+              <div className="mt-3 flex items-center justify-between">
                 <Button variant="ghost" size="sm" icon={ArrowLeft} onClick={() => setStep(0)} className="-ml-3">Back</Button>
-                <Button variant="ghost" size="sm" onClick={() => setStep(2)} className="-mr-3">Skip for now</Button>
               </div>
             </motion.div>
           )}
 
           {step === 2 && (
             <motion.div key="s2" {...anim} className="flex flex-1 flex-col">
-              <h1 className="mt-3 font-display text-display-lg text-ink">How LearnIt works</h1>
-              <ul className="mt-8 grid gap-3">
+              <h1 className="mt-2 font-display text-[26px] leading-[1.1] tracking-[-0.03em] text-ink">How LearnIt works</h1>
+              <ul className="mt-6 grid gap-2">
                 {HOW.map(({ Icon, title, body }) => (
-                  <li key={title} className="flex gap-4 rounded-card border border-line bg-surface p-5 shadow-card">
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-input bg-sage-50 text-sage-700"><Icon size={19} strokeWidth={1.85} aria-hidden /></span>
-                    <span><span className="block font-semibold text-ink">{title}</span><span className="mt-0.5 block text-pretty text-sm leading-relaxed text-muted">{body}</span></span>
+                  <li key={title} className="flex items-start gap-3 rounded-input border border-line bg-surface px-3.5 py-2.5">
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-sage-50 text-sage-700"><Icon size={17} strokeWidth={1.85} aria-hidden /></span>
+                    <span className="min-w-0"><span className="block text-sm font-semibold text-ink">{title}</span><span className="block text-pretty text-[13px] leading-snug text-muted">{body}</span></span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 text-pretty text-sm text-muted">Lessons are free for everyone. Claiming, earning and staking need a quick GoodDollar face check.</p>
+              <p className="mt-3 text-pretty text-[13px] text-muted">Lessons are free for everyone.</p>
+              <a href={CELO_HELP_URL} target="_blank" rel="noreferrer" className="group mt-3 flex items-center gap-3 rounded-input border border-sage-500 bg-sage-50 px-3.5 py-3 transition hover:bg-sage-100">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-surface text-sage-700"><Send size={17} strokeWidth={1.85} aria-hidden /></span>
+                <span className="min-w-0 flex-1"><span className="block text-sm font-semibold text-ink">Join our Telegram group</span><span className="block text-pretty text-[13px] leading-snug text-ink-2">Get free CELO to stake and claim on the app.</span></span>
+                <ExternalLink size={15} aria-hidden className="shrink-0 text-muted" />
+              </a>
               {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
-              <div className="mt-auto flex flex-col-reverse gap-3 pt-8 sm:mt-10 sm:flex-row sm:items-center sm:justify-between">
-                <Button variant="ghost" icon={ArrowLeft} onClick={() => setStep(1)} disabled={busy} className="sm:-ml-3">Back</Button>
+              <div className="mt-4 flex items-center justify-between">
+                <Button variant="ghost" icon={ArrowLeft} onClick={() => setStep(1)} disabled={busy} className="-ml-3">Back</Button>
                 <Button onClick={finish} loading={busy} size="lg" iconRight={ArrowRight}>Start learning</Button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </main>
-    </div>
+    </main>
   );
 }

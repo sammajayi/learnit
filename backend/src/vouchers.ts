@@ -85,8 +85,11 @@ export async function issueVoucher(user: User, attempt: { id: string; lessonId: 
   }, { maxWait: 15_000, timeout: 20_000 }); // the database can take seconds to wake up, and a burst of requests queues on the lock
 }
 
-/** Signs and records a weekly league bonus voucher for a verified root. `sourceId` is the LeagueBonus row id. */
-export async function issueLeagueVoucher(root: `0x${string}`, amount: bigint, sourceId: string) {
+/**
+ * Signs a voucher and stores it. `sourceId` is unique, so asking twice for the same source never pays twice.
+ * `createdAt` lets a late voucher carry the date of the lesson it rewards, so it does not use up today's limit.
+ */
+export async function issueVoucherFor(root: `0x${string}`, amount: bigint, reason: "lesson" | "checkpoint" | "league" | "welcome", sourceId: string, createdAt?: Date) {
   const key = process.env.SIGNER_PRIVATE_KEY as Hex | undefined;
   if (!key || !ADDR.rewardsPool) return null;
   const cfg = rewardConfig();
@@ -99,9 +102,12 @@ export async function issueLeagueVoucher(root: `0x${string}`, amount: bigint, so
     message: { root, amount, nonce, expiry },
   });
   return db.voucher.create({
-    data: { root, amount: amount.toString(), nonce: nonce.toString(), expiry: Number(expiry), reason: "league", sourceId, signature },
+    data: { root, amount: amount.toString(), nonce: nonce.toString(), expiry: Number(expiry), reason, sourceId, signature, ...(createdAt ? { createdAt } : {}) },
   });
 }
+
+/** Signs and records a weekly league bonus voucher for a verified root. `sourceId` is the LeagueBonus row id. */
+export const issueLeagueVoucher = (root: `0x${string}`, amount: bigint, sourceId: string) => issueVoucherFor(root, amount, "league", sourceId);
 
 export const publicVoucher = (v: { id: string; root: string; amount: string; nonce: string; expiry: number; signature: string; reason: string }) =>
   ({ id: v.id, root: v.root, amount: v.amount, nonce: v.nonce, expiry: v.expiry, signature: v.signature, reason: v.reason });

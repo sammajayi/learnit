@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/useAuth";
-import { Flame, Snowflake } from "lucide-react";
+import { Flame, Snowflake } from "@/components/icons";
 import { AppShell } from "@/components/AppShell";
 import { LearnSkeleton } from "@/components/Skeletons";
 import { LearnPath } from "@/components/LearnPath";

@@ -1,9 +1,9 @@
 {
   "lang": "es",
   "unit": 2,
-  "level": "A0",
-  "title": "Numbers, colours and days",
-  "blurb": "Count, name colours and talk about days.",
+  "level": "A1",
+  "title": "Numbers and time",
+  "blurb": "Numbers, colours, days",
   "speechLang": "es-ES",
   "lessons": [
     {
@@ -17,10 +17,10 @@
           "prompt": "What does \"uno\" mean?",
           "speak": "uno",
           "options": [
-            "5",
-            "6",
-            "1",
-            "8"
+            "five",
+            "six",
+            "one",
+            "eight"
           ],
           "answer": 2,
           "wordId": "es-a1u2-w1"
@@ -28,7 +28,7 @@
         {
           "id": "es-a1u2-w2-et",
           "type": "mc",
-          "prompt": "How do you say \"2\"?",
+          "prompt": "How do you say \"two\"?",
           "options": [
             "ocho",
             "siete",
@@ -41,27 +41,27 @@
         {
           "id": "es-a1-u2-l1-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w1",
               "target": "uno",
-              "english": "1"
+              "english": "one"
             },
             {
               "wordId": "es-a1u2-w2",
               "target": "dos",
-              "english": "2"
+              "english": "two"
             },
             {
               "wordId": "es-a1u2-w3",
               "target": "tres",
-              "english": "3"
+              "english": "three"
             },
             {
               "wordId": "es-a1u2-w4",
               "target": "cuatro",
-              "english": "4"
+              "english": "four"
             }
           ]
         },
@@ -71,10 +71,10 @@
           "prompt": "What does \"tres\" mean?",
           "speak": "tres",
           "options": [
-            "3",
-            "8",
-            "2",
-            "5"
+            "three",
+            "eight",
+            "two",
+            "five"
           ],
           "answer": 0,
           "wordId": "es-a1u2-w3"
@@ -82,7 +82,7 @@
         {
           "id": "es-a1u2-w4-et",
           "type": "mc",
-          "prompt": "How do you say \"4\"?",
+          "prompt": "How do you say \"four\"?",
           "options": [
             "ocho",
             "cuatro",
@@ -95,7 +95,7 @@
         {
           "id": "es-a1-u2-l1-s",
           "type": "translate",
-          "prompt": "1, 2, 3, 4",
+          "prompt": "One, two, three, four",
           "answer": [
             "Uno",
             "dos",
@@ -116,19 +116,19 @@
       "intro": [
         {
           "target": "uno",
-          "english": "1"
+          "english": "one"
         },
         {
           "target": "dos",
-          "english": "2"
+          "english": "two"
         },
         {
           "target": "tres",
-          "english": "3"
+          "english": "three"
         },
         {
           "target": "cuatro",
-          "english": "4"
+          "english": "four"
         }
       ]
     },
@@ -143,10 +143,10 @@
           "prompt": "What does \"cinco\" mean?",
           "speak": "cinco",
           "options": [
-            "6",
-            "3",
-            "4",
-            "5"
+            "six",
+            "three",
+            "four",
+            "five"
           ],
           "answer": 3,
           "wordId": "es-a1u2-w5"
@@ -154,7 +154,7 @@
         {
           "id": "es-a1u2-w6-et",
           "type": "mc",
-          "prompt": "How do you say \"6\"?",
+          "prompt": "How do you say \"six\"?",
           "options": [
             "cuatro",
             "cinco",
@@ -167,27 +167,27 @@
         {
           "id": "es-a1-u2-l2-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w5",
               "target": "cinco",
-              "english": "5"
+              "english": "five"
             },
             {
               "wordId": "es-a1u2-w6",
               "target": "seis",
-              "english": "6"
+              "english": "six"
             },
             {
               "wordId": "es-a1u2-w7",
               "target": "siete",
-              "english": "7"
+              "english": "seven"
             },
             {
               "wordId": "es-a1u2-w8",
               "target": "ocho",
-              "english": "8"
+              "english": "eight"
             }
           ]
         },
@@ -197,10 +197,10 @@
           "prompt": "What does \"siete\" mean?",
           "speak": "siete",
           "options": [
-            "8",
-            "7",
-            "6",
-            "5"
+            "eight",
+            "seven",
+            "six",
+            "five"
           ],
           "answer": 1,
           "wordId": "es-a1u2-w7"
@@ -208,7 +208,7 @@
         {
           "id": "es-a1u2-w8-et",
           "type": "mc",
-          "prompt": "How do you say \"8\"?",
+          "prompt": "How do you say \"eight\"?",
           "options": [
             "tres",
             "seis",
@@ -221,7 +221,7 @@
         {
           "id": "es-a1-u2-l2-s",
           "type": "translate",
-          "prompt": "5, 6, 7, 8",
+          "prompt": "Five, six, seven, eight",
           "answer": [
             "Cinco",
             "seis",
@@ -242,26 +242,26 @@
       "intro": [
         {
           "target": "cinco",
-          "english": "5"
+          "english": "five"
         },
         {
           "target": "seis",
-          "english": "6"
+          "english": "six"
         },
         {
           "target": "siete",
-          "english": "7"
+          "english": "seven"
         },
         {
           "target": "ocho",
-          "english": "8"
+          "english": "eight"
         }
       ]
     },
     {
       "id": "es-a1-u2-l3",
-      "title": "More numbers, part 1",
-      "theme": "more numbers",
+      "title": "Numbers 9 to 20, part 1",
+      "theme": "numbers 9 to 20",
       "exercises": [
         {
           "id": "es-a1u2-w9-te",
@@ -269,10 +269,10 @@
           "prompt": "What does \"cero\" mean?",
           "speak": "cero",
           "options": [
-            "9",
-            "12",
-            "11",
-            "0"
+            "nine",
+            "twelve",
+            "eleven",
+            "zero"
           ],
           "answer": 3,
           "wordId": "es-a1u2-w9"
@@ -280,7 +280,7 @@
         {
           "id": "es-a1u2-w10-et",
           "type": "mc",
-          "prompt": "How do you say \"9\"?",
+          "prompt": "How do you say \"nine\"?",
           "options": [
             "nueve",
             "once",
@@ -293,27 +293,27 @@
         {
           "id": "es-a1-u2-l3-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w9",
               "target": "cero",
-              "english": "0"
+              "english": "zero"
             },
             {
               "wordId": "es-a1u2-w10",
               "target": "nueve",
-              "english": "9"
+              "english": "nine"
             },
             {
               "wordId": "es-a1u2-w11",
               "target": "diez",
-              "english": "10"
+              "english": "ten"
             },
             {
               "wordId": "es-a1u2-w12",
               "target": "once",
-              "english": "11"
+              "english": "eleven"
             }
           ]
         },
@@ -323,10 +323,10 @@
           "prompt": "What does \"diez\" mean?",
           "speak": "diez",
           "options": [
-            "15",
-            "10",
-            "20",
-            "0"
+            "fifteen",
+            "ten",
+            "twenty",
+            "zero"
           ],
           "answer": 1,
           "wordId": "es-a1u2-w11"
@@ -334,7 +334,7 @@
         {
           "id": "es-a1u2-w12-et",
           "type": "mc",
-          "prompt": "How do you say \"11\"?",
+          "prompt": "How do you say \"eleven\"?",
           "options": [
             "once",
             "cero",
@@ -347,7 +347,7 @@
         {
           "id": "es-a1-u2-l3-s",
           "type": "translate",
-          "prompt": "9, 10, 11",
+          "prompt": "Nine, ten, eleven",
           "answer": [
             "Nueve",
             "diez",
@@ -366,26 +366,26 @@
       "intro": [
         {
           "target": "cero",
-          "english": "0"
+          "english": "zero"
         },
         {
           "target": "nueve",
-          "english": "9"
+          "english": "nine"
         },
         {
           "target": "diez",
-          "english": "10"
+          "english": "ten"
         },
         {
           "target": "once",
-          "english": "11"
+          "english": "eleven"
         }
       ]
     },
     {
       "id": "es-a1-u2-l4",
-      "title": "More numbers, part 2",
-      "theme": "more numbers",
+      "title": "Numbers 9 to 20, part 2",
+      "theme": "numbers 9 to 20",
       "exercises": [
         {
           "id": "es-a1u2-w13-te",
@@ -393,10 +393,10 @@
           "prompt": "What does \"doce\" mean?",
           "speak": "doce",
           "options": [
-            "12",
-            "10",
-            "20",
-            "15"
+            "twelve",
+            "ten",
+            "twenty",
+            "fifteen"
           ],
           "answer": 0,
           "wordId": "es-a1u2-w13"
@@ -404,7 +404,7 @@
         {
           "id": "es-a1u2-w14-et",
           "type": "mc",
-          "prompt": "How do you say \"15\"?",
+          "prompt": "How do you say \"fifteen\"?",
           "options": [
             "cien",
             "veinte",
@@ -417,27 +417,27 @@
         {
           "id": "es-a1-u2-l4-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w13",
               "target": "doce",
-              "english": "12"
+              "english": "twelve"
             },
             {
               "wordId": "es-a1u2-w14",
               "target": "quince",
-              "english": "15"
+              "english": "fifteen"
             },
             {
               "wordId": "es-a1u2-w15",
               "target": "veinte",
-              "english": "20"
+              "english": "twenty"
             },
             {
               "wordId": "es-a1u2-w16",
               "target": "cien",
-              "english": "100"
+              "english": "one hundred"
             }
           ]
         },
@@ -447,10 +447,10 @@
           "prompt": "What does \"veinte\" mean?",
           "speak": "veinte",
           "options": [
-            "11",
-            "0",
-            "15",
-            "20"
+            "eleven",
+            "zero",
+            "fifteen",
+            "twenty"
           ],
           "answer": 3,
           "wordId": "es-a1u2-w15"
@@ -458,7 +458,7 @@
         {
           "id": "es-a1u2-w16-et",
           "type": "mc",
-          "prompt": "How do you say \"100\"?",
+          "prompt": "How do you say \"one hundred\"?",
           "options": [
             "diez",
             "veinte",
@@ -471,7 +471,7 @@
         {
           "id": "es-a1-u2-l4-s",
           "type": "translate",
-          "prompt": "12 and 15",
+          "prompt": "Twelve and fifteen",
           "answer": [
             "Doce",
             "y",
@@ -490,19 +490,19 @@
       "intro": [
         {
           "target": "doce",
-          "english": "12"
+          "english": "twelve"
         },
         {
           "target": "quince",
-          "english": "15"
+          "english": "fifteen"
         },
         {
           "target": "veinte",
-          "english": "20"
+          "english": "twenty"
         },
         {
           "target": "cien",
-          "english": "100"
+          "english": "one hundred"
         }
       ]
     },
@@ -541,7 +541,7 @@
         {
           "id": "es-a1-u2-l5-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w17",
@@ -663,7 +663,7 @@
         {
           "id": "es-a1-u2-l6-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w21",
@@ -787,7 +787,7 @@
         {
           "id": "es-a1-u2-l7-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w25",
@@ -890,7 +890,7 @@
             "Friday",
             "Monday",
             "Thursday",
-            "week"
+            "the week"
           ],
           "answer": 0,
           "wordId": "es-a1u2-w29"
@@ -911,7 +911,7 @@
         {
           "id": "es-a1-u2-l8-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w29",
@@ -931,7 +931,7 @@
             {
               "wordId": "es-a1u2-w32",
               "target": "la semana",
-              "english": "week"
+              "english": "the week"
             }
           ]
         },
@@ -941,7 +941,7 @@
           "prompt": "What does \"domingo\" mean?",
           "speak": "domingo",
           "options": [
-            "week",
+            "the week",
             "Saturday",
             "Friday",
             "Sunday"
@@ -952,7 +952,7 @@
         {
           "id": "es-a1u2-w32-et",
           "type": "mc",
-          "prompt": "How do you say \"week\"?",
+          "prompt": "How do you say \"the week\"?",
           "options": [
             "jueves",
             "lunes",
@@ -996,7 +996,7 @@
         },
         {
           "target": "la semana",
-          "english": "week"
+          "english": "the week"
         }
       ]
     },
@@ -1012,9 +1012,9 @@
           "speak": "hoy",
           "options": [
             "today",
-            "day",
+            "the day",
             "tomorrow",
-            "night"
+            "the night"
           ],
           "answer": 0,
           "wordId": "es-a1u2-w33"
@@ -1035,7 +1035,7 @@
         {
           "id": "es-a1-u2-l9-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w33",
@@ -1055,7 +1055,7 @@
             {
               "wordId": "es-a1u2-w36",
               "target": "la mañana",
-              "english": "morning"
+              "english": "the morning"
             }
           ]
         },
@@ -1067,7 +1067,7 @@
           "options": [
             "yesterday",
             "now",
-            "day",
+            "the day",
             "tomorrow"
           ],
           "answer": 0,
@@ -1076,7 +1076,7 @@
         {
           "id": "es-a1u2-w36-et",
           "type": "mc",
-          "prompt": "How do you say \"morning\"?",
+          "prompt": "How do you say \"the morning\"?",
           "options": [
             "ahora",
             "ayer",
@@ -1120,7 +1120,7 @@
         },
         {
           "target": "la mañana",
-          "english": "morning"
+          "english": "the morning"
         }
       ]
     },
@@ -1135,10 +1135,10 @@
           "prompt": "What does \"la tarde\" mean?",
           "speak": "la tarde",
           "options": [
-            "night",
-            "morning",
-            "day",
-            "afternoon"
+            "the night",
+            "the morning",
+            "the day",
+            "the afternoon"
           ],
           "answer": 3,
           "wordId": "es-a1u2-w37"
@@ -1146,7 +1146,7 @@
         {
           "id": "es-a1u2-w38-et",
           "type": "mc",
-          "prompt": "How do you say \"night\"?",
+          "prompt": "How do you say \"the night\"?",
           "options": [
             "ahora",
             "la noche",
@@ -1159,22 +1159,22 @@
         {
           "id": "es-a1-u2-l10-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u2-w37",
               "target": "la tarde",
-              "english": "afternoon"
+              "english": "the afternoon"
             },
             {
               "wordId": "es-a1u2-w38",
               "target": "la noche",
-              "english": "night"
+              "english": "the night"
             },
             {
               "wordId": "es-a1u2-w39",
               "target": "el día",
-              "english": "day"
+              "english": "the day"
             },
             {
               "wordId": "es-a1u2-w40",
@@ -1189,10 +1189,10 @@
           "prompt": "What does \"el día\" mean?",
           "speak": "el día",
           "options": [
-            "day",
+            "the day",
             "today",
             "now",
-            "morning"
+            "the morning"
           ],
           "answer": 0,
           "wordId": "es-a1u2-w39"
@@ -1236,15 +1236,15 @@
       "intro": [
         {
           "target": "la tarde",
-          "english": "afternoon"
+          "english": "the afternoon"
         },
         {
           "target": "la noche",
-          "english": "night"
+          "english": "the night"
         },
         {
           "target": "el día",
-          "english": "day"
+          "english": "the day"
         },
         {
           "target": "ahora",
@@ -1263,10 +1263,10 @@
         "prompt": "What does \"uno\" mean?",
         "speak": "uno",
         "options": [
-          "20",
-          "1",
+          "twenty",
+          "one",
           "Saturday",
-          "5"
+          "five"
         ],
         "answer": 1,
         "wordId": "es-a1u2-w1"
@@ -1274,7 +1274,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w2",
         "type": "mc",
-        "prompt": "How do you say \"2\"?",
+        "prompt": "How do you say \"two\"?",
         "options": [
           "miércoles",
           "negro",
@@ -1290,10 +1290,10 @@
         "prompt": "What does \"tres\" mean?",
         "speak": "tres",
         "options": [
-          "10",
+          "ten",
           "blue",
-          "morning",
-          "3"
+          "the morning",
+          "three"
         ],
         "answer": 3,
         "wordId": "es-a1u2-w3"
@@ -1301,7 +1301,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w4",
         "type": "mc",
-        "prompt": "How do you say \"4\"?",
+        "prompt": "How do you say \"four\"?",
         "options": [
           "cuatro",
           "veinte",
@@ -1317,9 +1317,9 @@
         "prompt": "What does \"cinco\" mean?",
         "speak": "cinco",
         "options": [
-          "20",
-          "5",
-          "0",
+          "twenty",
+          "five",
+          "zero",
           "Sunday"
         ],
         "answer": 1,
@@ -1328,7 +1328,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w6",
         "type": "mc",
-        "prompt": "How do you say \"6\"?",
+        "prompt": "How do you say \"six\"?",
         "options": [
           "la mañana",
           "mañana",
@@ -1345,9 +1345,9 @@
         "speak": "siete",
         "options": [
           "Saturday",
-          "2",
-          "6",
-          "7"
+          "two",
+          "six",
+          "seven"
         ],
         "answer": 3,
         "wordId": "es-a1u2-w7"
@@ -1355,7 +1355,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w8",
         "type": "mc",
-        "prompt": "How do you say \"8\"?",
+        "prompt": "How do you say \"eight\"?",
         "options": [
           "ocho",
           "blanco",
@@ -1371,9 +1371,9 @@
         "prompt": "What does \"cero\" mean?",
         "speak": "cero",
         "options": [
-          "12",
+          "twelve",
           "Wednesday",
-          "0",
+          "zero",
           "Friday"
         ],
         "answer": 2,
@@ -1382,7 +1382,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w10",
         "type": "mc",
-        "prompt": "How do you say \"9\"?",
+        "prompt": "How do you say \"nine\"?",
         "options": [
           "lunes",
           "nueve",
@@ -1398,10 +1398,10 @@
         "prompt": "What does \"diez\" mean?",
         "speak": "diez",
         "options": [
-          "10",
-          "3",
+          "ten",
+          "three",
           "Saturday",
-          "day"
+          "the day"
         ],
         "answer": 0,
         "wordId": "es-a1u2-w11"
@@ -1409,7 +1409,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w12",
         "type": "mc",
-        "prompt": "How do you say \"11\"?",
+        "prompt": "How do you say \"eleven\"?",
         "options": [
           "mañana",
           "martes",
@@ -1425,9 +1425,9 @@
         "prompt": "What does \"doce\" mean?",
         "speak": "doce",
         "options": [
-          "morning",
+          "the morning",
           "green",
-          "12",
+          "twelve",
           "white"
         ],
         "answer": 2,
@@ -1436,7 +1436,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w14",
         "type": "mc",
-        "prompt": "How do you say \"15\"?",
+        "prompt": "How do you say \"fifteen\"?",
         "options": [
           "cuatro",
           "quince",
@@ -1452,10 +1452,10 @@
         "prompt": "What does \"veinte\" mean?",
         "speak": "veinte",
         "options": [
-          "20",
+          "twenty",
           "Thursday",
           "Friday",
-          "7"
+          "seven"
         ],
         "answer": 0,
         "wordId": "es-a1u2-w15"
@@ -1463,7 +1463,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w16",
         "type": "mc",
-        "prompt": "How do you say \"100\"?",
+        "prompt": "How do you say \"one hundred\"?",
         "options": [
           "mañana",
           "blanco",
@@ -1479,8 +1479,8 @@
         "prompt": "What does \"rojo\" mean?",
         "speak": "rojo",
         "options": [
-          "week",
-          "11",
+          "the week",
+          "eleven",
           "red",
           "Friday"
         ],
@@ -1534,9 +1534,9 @@
         "speak": "negro",
         "options": [
           "black",
-          "15",
+          "fifteen",
           "now",
-          "8"
+          "eight"
         ],
         "answer": 0,
         "wordId": "es-a1u2-w21"
@@ -1560,9 +1560,9 @@
         "prompt": "What does \"naranja\" mean?",
         "speak": "naranja",
         "options": [
-          "5",
-          "morning",
-          "1",
+          "five",
+          "the morning",
+          "one",
           "orange"
         ],
         "answer": 3,
@@ -1588,9 +1588,9 @@
         "speak": "lunes",
         "options": [
           "Wednesday",
-          "10",
+          "ten",
           "Monday",
-          "afternoon"
+          "the afternoon"
         ],
         "answer": 2,
         "wordId": "es-a1u2-w25"
@@ -1614,7 +1614,7 @@
         "prompt": "What does \"miércoles\" mean?",
         "speak": "miércoles",
         "options": [
-          "6",
+          "six",
           "Wednesday",
           "Sunday",
           "Monday"
@@ -1642,8 +1642,8 @@
         "speak": "viernes",
         "options": [
           "Monday",
-          "10",
-          "5",
+          "ten",
+          "five",
           "Friday"
         ],
         "answer": 3,
@@ -1669,9 +1669,9 @@
         "speak": "domingo",
         "options": [
           "Sunday",
-          "afternoon",
-          "8",
-          "morning"
+          "the afternoon",
+          "eight",
+          "the morning"
         ],
         "answer": 0,
         "wordId": "es-a1u2-w31"
@@ -1679,7 +1679,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w32",
         "type": "mc",
-        "prompt": "How do you say \"week\"?",
+        "prompt": "How do you say \"the week\"?",
         "options": [
           "once",
           "la semana",
@@ -1698,7 +1698,7 @@
           "today",
           "tomorrow",
           "blue",
-          "15"
+          "fifteen"
         ],
         "answer": 0,
         "wordId": "es-a1u2-w33"
@@ -1722,10 +1722,10 @@
         "prompt": "What does \"ayer\" mean?",
         "speak": "ayer",
         "options": [
-          "9",
-          "morning",
+          "nine",
+          "the morning",
           "yesterday",
-          "11"
+          "eleven"
         ],
         "answer": 2,
         "wordId": "es-a1u2-w35"
@@ -1733,7 +1733,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w36",
         "type": "mc",
-        "prompt": "How do you say \"morning\"?",
+        "prompt": "How do you say \"the morning\"?",
         "options": [
           "rosa",
           "nueve",
@@ -1751,8 +1751,8 @@
         "options": [
           "red",
           "Monday",
-          "afternoon",
-          "15"
+          "the afternoon",
+          "fifteen"
         ],
         "answer": 2,
         "wordId": "es-a1u2-w37"
@@ -1760,7 +1760,7 @@
       {
         "id": "es-a1-u2-cp-es-a1u2-w38",
         "type": "mc",
-        "prompt": "How do you say \"night\"?",
+        "prompt": "How do you say \"the night\"?",
         "options": [
           "verde",
           "dos",
@@ -1777,9 +1777,9 @@
         "speak": "el día",
         "options": [
           "Thursday",
-          "day",
-          "4",
-          "20"
+          "the day",
+          "four",
+          "twenty"
         ],
         "answer": 1,
         "wordId": "es-a1u2-w39"
@@ -1800,7 +1800,7 @@
       {
         "id": "es-a1-u2-cp-l1-s1",
         "type": "translate",
-        "prompt": "1, 2, 3, 4",
+        "prompt": "One, two, three, four",
         "answer": [
           "Uno",
           "dos",
@@ -1820,7 +1820,7 @@
       {
         "id": "es-a1-u2-cp-l1-s2",
         "type": "translate",
-        "prompt": "5, 6, 7, 8",
+        "prompt": "Five, six, seven, eight",
         "answer": [
           "Cinco",
           "seis",
@@ -1840,7 +1840,7 @@
       {
         "id": "es-a1-u2-cp-l1-s3",
         "type": "translate",
-        "prompt": "I have 3 friends",
+        "prompt": "I have three friends",
         "answer": [
           "Tengo",
           "tres",
@@ -1858,7 +1858,7 @@
       {
         "id": "es-a1-u2-cp-l2-s1",
         "type": "translate",
-        "prompt": "9, 10, 11",
+        "prompt": "Nine, ten, eleven",
         "answer": [
           "Nueve",
           "diez",
@@ -1876,7 +1876,7 @@
       {
         "id": "es-a1-u2-cp-l2-s2",
         "type": "translate",
-        "prompt": "I am 20 years old",
+        "prompt": "I am twenty years old",
         "answer": [
           "Tengo",
           "veinte",
@@ -1894,7 +1894,7 @@
       {
         "id": "es-a1-u2-cp-l2-s3",
         "type": "translate",
-        "prompt": "12 and 15",
+        "prompt": "Twelve and fifteen",
         "answer": [
           "Doce",
           "y",
@@ -2076,71 +2076,71 @@
       {
         "id": "es-a1-u2-cp-m1",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u2-w7",
             "target": "siete",
-            "english": "7"
+            "english": "seven"
           },
           {
             "wordId": "es-a1u2-w4",
             "target": "cuatro",
-            "english": "4"
+            "english": "four"
           },
           {
             "wordId": "es-a1u2-w8",
             "target": "ocho",
-            "english": "8"
+            "english": "eight"
           },
           {
             "wordId": "es-a1u2-w6",
             "target": "seis",
-            "english": "6"
+            "english": "six"
           },
           {
             "wordId": "es-a1u2-w5",
             "target": "cinco",
-            "english": "5"
+            "english": "five"
           }
         ]
       },
       {
         "id": "es-a1-u2-cp-m2",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u2-w14",
             "target": "quince",
-            "english": "15"
+            "english": "fifteen"
           },
           {
             "wordId": "es-a1u2-w12",
             "target": "once",
-            "english": "11"
+            "english": "eleven"
           },
           {
             "wordId": "es-a1u2-w11",
             "target": "diez",
-            "english": "10"
+            "english": "ten"
           },
           {
             "wordId": "es-a1u2-w10",
             "target": "nueve",
-            "english": "9"
+            "english": "nine"
           },
           {
             "wordId": "es-a1u2-w15",
             "target": "veinte",
-            "english": "20"
+            "english": "twenty"
           }
         ]
       },
       {
         "id": "es-a1-u2-cp-m3",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u2-w17",
@@ -2172,7 +2172,7 @@
       {
         "id": "es-a1-u2-cp-m4",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u2-w30",
@@ -2187,7 +2187,7 @@
           {
             "wordId": "es-a1u2-w32",
             "target": "la semana",
-            "english": "week"
+            "english": "the week"
           },
           {
             "wordId": "es-a1u2-w29",
@@ -2204,17 +2204,17 @@
       {
         "id": "es-a1-u2-cp-m5",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u2-w39",
             "target": "el día",
-            "english": "day"
+            "english": "the day"
           },
           {
             "wordId": "es-a1u2-w38",
             "target": "la noche",
-            "english": "night"
+            "english": "the night"
           },
           {
             "wordId": "es-a1u2-w35",
@@ -2224,7 +2224,7 @@
           {
             "wordId": "es-a1u2-w37",
             "target": "la tarde",
-            "english": "afternoon"
+            "english": "the afternoon"
           },
           {
             "wordId": "es-a1u2-w40",

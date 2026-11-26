@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { useAuth } from "@/lib/useAuth";
-import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpen, Check, Coins, Flame, Lock, Mail, ScanFace, ShieldCheck, Sparkles, PiggyBank, Volume2, Wallet, X } from "@/components/icons";
 import { LANGS } from "@/lib/languages";
 import { Badge, Button, Card } from "./ui";
 import { Logo } from "./Logo";
@@ -20,14 +20,18 @@ export function LoginScreen() {
   const { login } = useAuth();
   // Sessions are per-origin, so on the public site (apex) sign-in hands off to the app subdomain.
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
-  const handOff = () => {
+  const handOff = (kind: "email" | "wallet") => {
     if (!appUrl || window.location.origin === new URL(appUrl).origin) return false;
     if (window.location.hostname.startsWith("localhost") || window.location.hostname.endsWith(".vercel.app")) return false;
-    window.location.href = appUrl;
+    // Say which button was pressed, so the app opens that sign-in straight away and the visitor does not have to press it twice.
+    const to = new URL(appUrl);
+    to.search = window.location.search; // keeps ?ref= and ?c= so an invite survives the move to the app
+    to.searchParams.set("login", kind);
+    window.location.href = to.toString();
     return true;
   };
-  const email = () => { if (!handOff()) login({ loginMethods: ["email"] }); };
-  const wallet = () => { if (!handOff()) login({ loginMethods: ["wallet"] }); };
+  const email = () => { if (!handOff("email")) login({ loginMethods: ["email"] }); };
+  const wallet = () => { if (!handOff("wallet")) login({ loginMethods: ["wallet"] }); };
   const [choosing, setChoosing] = useState(false);
   const choose = () => setChoosing(true);
 
@@ -190,7 +194,7 @@ function SectionIntro({ eyebrow, title, body, center = false, inverse = false }:
 
 const STEPS = [
   { Icon: BookOpen, title: "Learn for ten minutes", body: "Short lessons that start from zero. Meet new words, hear them spoken, then practise until they stick." },
-  { Icon: Flame, title: "Show up each day", body: "Pass a lesson at 80% to keep your streak. Miss a day? A streak freeze can cover you." },
+  { Icon: Flame, title: "Show up each day", body: "Finish a lesson to keep your streak. Miss a day? A streak freeze can cover you." },
   { Icon: Coins, title: "Earn G$ for progress", body: "Passed lessons and unit checkpoints earn GoodDollar. Claim it to your wallet within 7 days." },
 ];
 
@@ -253,7 +257,7 @@ function Languages({ onStart }: { onStart: () => void }) {
 const TRUST = [
   { Icon: ScanFace, title: "One person, one account", body: "Rewards need a quick GoodDollar face check, so they go to real learners and not bots. Lessons stay free either way." },
   { Icon: ShieldCheck, title: "Paid on-chain, on Celo", body: "Rewards are signed vouchers you claim from the LearnIt rewards pool contract. Every claim is a transaction anyone can look up." },
-  { Icon: PiggyBank, title: "Stake to stay committed", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Pass a lesson every day to get your stake back. Miss a day and it is shared with the people who finished." },
+  { Icon: PiggyBank, title: "Stake to stay committed", body: "Optional. Put G$ behind a 7, 14 or 30 day challenge. Finish a lesson every day to get your stake back. Miss a day and it is shared with the people who finished." },
   { Icon: Lock, title: "Fair by design", body: "A daily limit on rewards, a minimum time per lesson and contracts that can be paused if anything looks wrong." },
 ];
 

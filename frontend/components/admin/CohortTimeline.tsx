@@ -6,9 +6,9 @@ import { cn } from "@/lib/cn";
 import { DAY, RESULTS_DEADLINE, cohortStatus, type Cohort, type CohortStatus } from "./data";
 import { CopyCommand, when } from "./bits";
 
-const STATUS: Record<CohortStatus, { label: string; tone: "sage" | "coral" | "neutral" | "navy" }> = {
+export const STATUS: Record<CohortStatus, { label: string; tone: "sage" | "coral" | "neutral" | "navy" }> = {
   upcoming: { label: "Upcoming", tone: "navy" }, open: { label: "Open to join", tone: "sage" }, running: { label: "Running", tone: "sage" },
-  finalize: { label: "Needs finalizing", tone: "coral" }, settle: { label: "Results confirmed, needs settling", tone: "coral" }, settled: { label: "Settled", tone: "neutral" }, voided: { label: "Cancelled, stakes refundable", tone: "neutral" },
+  finalize: { label: "Needs finalising", tone: "coral" }, settle: { label: "Results confirmed, needs settling", tone: "coral" }, settled: { label: "Settled", tone: "neutral" }, voided: { label: "Cancelled, stakes refundable", tone: "neutral" },
 };
 const SHOWN = 6;
 const axisDate = (s: number) => new Date(s * 1000).toLocaleDateString("en", { month: "short", day: "numeric" });

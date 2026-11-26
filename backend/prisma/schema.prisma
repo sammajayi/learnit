@@ -25,6 +25,8 @@ model User {
   bio             String?
   hasAvatar       Boolean  @default(false)
   avatarVersion   Int      @default(0) // bumped on every change so image URLs can be cached forever
+  lives           Int      @default(5) // shared by all lessons; see src/lives.ts
+  livesAt         DateTime? // when the current wait for the next life began
   streakFreezes   Int      @default(0) // banked freezes, earned at streak milestones, auto-spent to cover one missed day
   flagged         Boolean  @default(false) // set when an AbuseFlag is raised; reviewed manually, does not block learning
   createdAt       DateTime @default(now())
@@ -87,7 +89,7 @@ model Voucher {
   amount    String   // wei, as a decimal string
   nonce     String   @unique
   expiry    Int      // unix seconds
-  reason    String   // lesson | checkpoint | league
+  reason    String   // lesson | checkpoint | league | welcome
   sourceId  String   @unique // attempt id that earned it
   signature String
   status    String   @default("issued") // issued | claimed | expired
@@ -150,6 +152,30 @@ model LeagueBonus {
   @@map("league_bonuses")
 }
 
+/// Who has been told what about a league week ("result" after it ends, "midweek" during it), so a second cron run never sends the same push twice.
+model LeagueNotice {
+  id      String   @id @default(cuid())
+  userId  String
+  weekKey String
+  kind    String   @default("result")
+  sentAt  DateTime @default(now())
+
+  @@unique([userId, weekKey, kind])
+  @@map("league_notices")
+}
+
+/// Why a learner is learning and the streak goal they picked, written once and shown back on hard days. One per learner.
+model GoalNote {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  reason    String   // up to 200 characters
+  goalDays  Int      // 7, 14 or 30
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("goal_notes")
+}
+
 model AbuseFlag {
   id        String   @id @default(cuid())
   userId    String
@@ -188,4 +214,39 @@ model PushSubscription {
 
   @@index([reminderHour])
   @@map("push_subscriptions")
+}
+
+/// One row per Staked event on the vault, so the people in a challenge are a database count and not a scan of the chain.
+model StakeEvent {
+  id       String @id @default(cuid())
+  cohortId Int
+  wallet   String // as emitted by the vault (checksummed)
+  amount   String // what the vault actually received
+  block    BigInt
+  txHash   String
+  logIndex Int
+
+  @@unique([txHash, logIndex])
+  @@index([cohortId])
+  @@map("stake_events")
+}
+
+/// How far each chain reader has got, so the next run starts there and not at the vault's deploy block.
+model ChainCursor {
+  key   String @id
+  block BigInt // last block fully read
+  @@map("chain_cursors")
+}
+
+/// Who invited a user and which community link they came from. A separate table, so adding it changes no existing table.
+/// Plain ids, no foreign keys. Either referrerId or source (or both) is set.
+model Referral {
+  id         String   @id @default(cuid())
+  userId     String   @unique // the invited person; one referral per person
+  referrerId String?
+  source     String?  // community tag from the link, such as "celo"
+  createdAt  DateTime @default(now())
+
+  @@index([referrerId])
+  @@map("referrals")
 }

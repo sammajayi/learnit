@@ -6,7 +6,7 @@
 import Link from "next/link";
 import { forwardRef, type ComponentProps, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { AlertCircle, CheckCircle2, Info, Loader2, PauseCircle, type LucideIcon } from "lucide-react";
+import { AlertCircle, CheckCircle2, Info, Loader2, PauseCircle, type IconType } from "@/components/icons";
 import { cn } from "@/lib/cn";
 
 /* ---------- Button ---------- */
@@ -30,13 +30,13 @@ const SIZE: Record<Size, string> = {
 
 export function buttonClass({ variant = "primary", size = "md", block = false, className }: { variant?: Variant; size?: Size; block?: boolean; className?: string } = {}) {
   return cn(
-    "inline-flex select-none items-center justify-center whitespace-nowrap rounded-btn font-semibold tracking-[-0.01em] transition duration-200 ease-soft",
-    "active:scale-[0.985] disabled:pointer-events-none disabled:opacity-45",
+    "inline-flex select-none items-center justify-center whitespace-nowrap rounded-btn font-semibold tracking-[-0.01em] transition duration-100 ease-soft",
+    "active:scale-[0.97] disabled:pointer-events-none disabled:opacity-45",
     VARIANT[variant], SIZE[size], block && "w-full", className,
   );
 }
 
-type ButtonProps = ComponentProps<"button"> & { variant?: Variant; size?: Size; block?: boolean; loading?: boolean; icon?: LucideIcon; iconRight?: LucideIcon };
+type ButtonProps = ComponentProps<"button"> & { variant?: Variant; size?: Size; block?: boolean; loading?: boolean; icon?: IconType; iconRight?: IconType };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { variant, size, block, loading, icon: Icon, iconRight: IconRight, className, children, disabled, ...rest }, ref,
@@ -51,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   );
 });
 
-type ButtonLinkProps = ComponentProps<typeof Link> & { variant?: Variant; size?: Size; block?: boolean; icon?: LucideIcon; iconRight?: LucideIcon };
+type ButtonLinkProps = ComponentProps<typeof Link> & { variant?: Variant; size?: Size; block?: boolean; icon?: IconType; iconRight?: IconType };
 
 export function ButtonLink({ variant, size, block, icon: Icon, iconRight: IconRight, className, children, ...rest }: ButtonLinkProps) {
   const s = size === "sm" ? 16 : 18;
@@ -102,7 +102,7 @@ const TONE: Record<Tone, string> = {
   outline: "text-ink-2 ring-1 ring-inset ring-line-strong",
 };
 
-export function Badge({ tone = "neutral", icon: Icon, className, children }: { tone?: Tone; icon?: LucideIcon; className?: string; children: ReactNode }) {
+export function Badge({ tone = "neutral", icon: Icon, className, children }: { tone?: Tone; icon?: IconType; className?: string; children: ReactNode }) {
   return (
     <span className={cn("inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium", TONE[tone], className)}>
       {Icon && <Icon size={13} strokeWidth={2.25} aria-hidden />}
@@ -147,7 +147,7 @@ export function ProgressRing({ value, size = 48, stroke = 4, tone = "sage", clas
 /* ---------- Notice ---------- */
 
 type NoticeTone = "info" | "success" | "warning" | "danger" | "paused";
-const NOTICE: Record<NoticeTone, { cls: string; Icon: LucideIcon }> = {
+const NOTICE: Record<NoticeTone, { cls: string; Icon: IconType }> = {
   info: { cls: "border-line bg-surface text-ink-2", Icon: Info },
   success: { cls: "border-sage-100 bg-sage-50 text-sage-700", Icon: CheckCircle2 },
   warning: { cls: "border-coral-100 bg-coral-50 text-coral-700", Icon: AlertCircle },
@@ -198,7 +198,7 @@ export function PageHeader({ eyebrow, title, description, action, className }: {
 }
 
 /** A labelled number. Numbers use tabular figures so they don't jitter as they change. */
-export function Stat({ label, value, unit, hint, className, icon: Icon }: { label: ReactNode; value: ReactNode; unit?: ReactNode; hint?: ReactNode; className?: string; icon?: LucideIcon }) {
+export function Stat({ label, value, unit, hint, className, icon: Icon }: { label: ReactNode; value: ReactNode; unit?: ReactNode; hint?: ReactNode; className?: string; icon?: IconType }) {
   return (
     <div className={cn("min-w-0", className)}>
       <p className="flex items-center gap-1.5 text-[13px] font-medium text-muted">{Icon && <Icon size={14} strokeWidth={2} aria-hidden />}{label}</p>
@@ -210,7 +210,7 @@ export function Stat({ label, value, unit, hint, className, icon: Icon }: { labe
   );
 }
 
-export function EmptyState({ icon: Icon, title, children, action, className }: { icon: LucideIcon; title: ReactNode; children?: ReactNode; action?: ReactNode; className?: string }) {
+export function EmptyState({ icon: Icon, title, children, action, className }: { icon: IconType; title: ReactNode; children?: ReactNode; action?: ReactNode; className?: string }) {
   return (
     <div className={cn("flex flex-col items-center rounded-card border border-dashed border-line-strong bg-surface/60 px-6 py-10 text-center", className)}>
       <span className="grid h-11 w-11 place-items-center rounded-full bg-sunken text-ink-2"><Icon size={20} strokeWidth={1.75} aria-hidden /></span>

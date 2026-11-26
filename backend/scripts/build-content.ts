@@ -50,7 +50,7 @@ function build(lang: Lang, data: UnitData, unitNum: number, known: Known, level:
     const s = themes[li].sentences[si];
     return { id, type: "translate", prompt: s.english, answer: s.target, bank: shuffle([...s.target, ...s.extra], r), wordIds: [] };
   };
-  const match = (id: string, ws: typeof all): Exercise => ({ id, type: "match", prompt: "Match each pair", pairs: ws.map((w) => ({ wordId: w.id, target: w.t, english: w.e })) });
+  const match = (id: string, ws: typeof all): Exercise => ({ id, type: "match", prompt: "Match the pairs", pairs: ws.map((w) => ({ wordId: w.id, target: w.t, english: w.e })) });
 
   const lessons = themes.flatMap((theme, li) => {
     const ws = all.filter((w) => w.li === li);
@@ -83,7 +83,7 @@ function build(lang: Lang, data: UnitData, unitNum: number, known: Known, level:
 }
 
 /** Level shown to learners, by unit number. Ids stay as first published (see build). */
-const A1_LEVELS: Level[] = ["A0", "A0", "A0", "A1", "A1", "A1", "A1", "A1"];
+const A1_LEVELS: Level[] = ["A1", "A1", "A1", "A1", "A1", "A1", "A1", "A1"]; // units 1-3 can be relabelled A0 later; the ids never change
 const courses: Record<Lang, { data: UnitData; level: Level; idLevel: "a1" | "a2" }[]> = {
   fr: [...FR_A1.map((data, i) => ({ data, level: A1_LEVELS[i], idLevel: "a1" as const })), ...FR_A2.map((data) => ({ data, level: "A2" as Level, idLevel: "a2" as const }))],
   es: [...ES_A1.map((data, i) => ({ data, level: A1_LEVELS[i], idLevel: "a1" as const })), ...ES_A2.map((data) => ({ data, level: "A2" as Level, idLevel: "a2" as const }))],

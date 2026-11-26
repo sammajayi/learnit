@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { requireUser, authFail } from "../auth";
+import { notVerifiedResponse } from "../verifiedGate";
 import { submitAttempt, SubmitError } from "../attempts";
 import { findCheckpoint, seededDraw } from "../lessons";
 
@@ -8,6 +9,8 @@ const Body = z.object({ token: z.string(), answers: z.record(z.any()) });
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   try {
     const user = await requireUser(req);
+    const blocked = await notVerifiedResponse(user);
+    if (blocked) return blocked;
     const hit = findCheckpoint(params.id);
     if (!hit) return Response.json({ error: "Not found" }, { status: 404 });
     const b = Body.parse(await req.json());

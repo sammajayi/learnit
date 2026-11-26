@@ -3,7 +3,7 @@
   "unit": 5,
   "level": "A1",
   "title": "Around town",
-  "blurb": "Find places, get directions and ask questions.",
+  "blurb": "Find places, ask the way and ask questions.",
   "speechLang": "fr-FR",
   "lessons": [
     {
@@ -41,7 +41,7 @@
         {
           "id": "fr-a1-u5-l1-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w1",
@@ -169,7 +169,7 @@
         {
           "id": "fr-a1-u5-l2-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w5",
@@ -282,7 +282,7 @@
         {
           "id": "fr-a1u5-w10-et",
           "type": "mc",
-          "prompt": "How do you say \"train station\"?",
+          "prompt": "How do you say \"station\"?",
           "options": [
             "la voiture",
             "le taxi",
@@ -295,7 +295,7 @@
         {
           "id": "fr-a1-u5-l3-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w9",
@@ -305,7 +305,7 @@
             {
               "wordId": "fr-a1u5-w10",
               "target": "la gare",
-              "english": "train station"
+              "english": "station"
             },
             {
               "wordId": "fr-a1u5-w11",
@@ -376,7 +376,7 @@
         },
         {
           "target": "la gare",
-          "english": "train station"
+          "english": "station"
         },
         {
           "target": "l'aéroport",
@@ -423,7 +423,7 @@
         {
           "id": "fr-a1-u5-l4-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w13",
@@ -549,7 +549,7 @@
         {
           "id": "fr-a1-u5-l5-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w17",
@@ -673,7 +673,7 @@
         {
           "id": "fr-a1-u5-l6-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w21",
@@ -797,7 +797,7 @@
         {
           "id": "fr-a1-u5-l7-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w25",
@@ -925,7 +925,7 @@
         {
           "id": "fr-a1-u5-l8-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w29",
@@ -979,7 +979,7 @@
         {
           "id": "fr-a1-u5-l8-s",
           "type": "translate",
-          "prompt": "Where is the train station?",
+          "prompt": "Where is the station",
           "answer": [
             "Où",
             "est",
@@ -1051,7 +1051,7 @@
         {
           "id": "fr-a1-u5-l9-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w33",
@@ -1082,7 +1082,7 @@
           "speak": "quand",
           "options": [
             "which",
-            "where from",
+            "from where",
             "who",
             "when"
           ],
@@ -1105,10 +1105,10 @@
         {
           "id": "fr-a1-u5-l9-s",
           "type": "translate",
-          "prompt": "When does the train leave?",
+          "prompt": "When is the train",
           "answer": [
             "Quand",
-            "part",
+            "est",
             "le",
             "train"
           ],
@@ -1116,7 +1116,7 @@
             "qui",
             "Quand",
             "comment",
-            "part",
+            "est",
             "train",
             "le"
           ],
@@ -1154,7 +1154,7 @@
           "speak": "comment",
           "options": [
             "how",
-            "where from",
+            "from where",
             "how much",
             "why"
           ],
@@ -1177,7 +1177,7 @@
         {
           "id": "fr-a1-u5-l10-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u5-w37",
@@ -1197,7 +1197,7 @@
             {
               "wordId": "fr-a1u5-w40",
               "target": "d'où",
-              "english": "where from"
+              "english": "from where"
             }
           ]
         },
@@ -1207,7 +1207,7 @@
           "prompt": "What does \"quel\" mean?",
           "speak": "quel",
           "options": [
-            "where from",
+            "from where",
             "what",
             "which",
             "why"
@@ -1218,7 +1218,7 @@
         {
           "id": "fr-a1u5-w40-et",
           "type": "mc",
-          "prompt": "How do you say \"where from\"?",
+          "prompt": "How do you say \"from where\"?",
           "options": [
             "combien",
             "que",
@@ -1231,7 +1231,7 @@
         {
           "id": "fr-a1-u5-l10-s",
           "type": "translate",
-          "prompt": "How much does it cost?",
+          "prompt": "How much does it cost",
           "answer": [
             "Combien",
             "ça",
@@ -1262,7 +1262,7 @@
         },
         {
           "target": "d'où",
-          "english": "where from"
+          "english": "from where"
         }
       ]
     }
@@ -1277,9 +1277,9 @@
         "prompt": "What does \"la maison\" mean?",
         "speak": "la maison",
         "options": [
-          "where from",
+          "from where",
           "car",
-          "train station",
+          "station",
           "house"
         ],
         "answer": 3,
@@ -1396,7 +1396,7 @@
       {
         "id": "fr-a1-u5-cp-fr-a1u5-w10",
         "type": "mc",
-        "prompt": "How do you say \"train station\"?",
+        "prompt": "How do you say \"station\"?",
         "options": [
           "la gare",
           "à gauche",
@@ -1628,7 +1628,7 @@
         "prompt": "What does \"la ville\" mean?",
         "speak": "la ville",
         "options": [
-          "where from",
+          "from where",
           "far",
           "taxi",
           "city"
@@ -1682,7 +1682,7 @@
         "prompt": "What does \"la carte\" mean?",
         "speak": "la carte",
         "options": [
-          "train station",
+          "station",
           "taxi",
           "map",
           "city centre"
@@ -1801,7 +1801,7 @@
       {
         "id": "fr-a1-u5-cp-fr-a1u5-w40",
         "type": "mc",
-        "prompt": "How do you say \"where from\"?",
+        "prompt": "How do you say \"from where\"?",
         "options": [
           "le taxi",
           "le vélo",
@@ -1974,7 +1974,7 @@
       {
         "id": "fr-a1-u5-cp-l3-s3",
         "type": "translate",
-        "prompt": "The train station is far from here",
+        "prompt": "The station is far from here",
         "answer": [
           "La",
           "gare",
@@ -1996,7 +1996,7 @@
       {
         "id": "fr-a1-u5-cp-l4-s1",
         "type": "translate",
-        "prompt": "Where is the train station?",
+        "prompt": "Where is the station",
         "answer": [
           "Où",
           "est",
@@ -2058,7 +2058,7 @@
       {
         "id": "fr-a1-u5-cp-l5-s1",
         "type": "translate",
-        "prompt": "Who is it?",
+        "prompt": "Who is it",
         "answer": [
           "Qui",
           "est-ce"
@@ -2074,7 +2074,7 @@
       {
         "id": "fr-a1-u5-cp-l5-s2",
         "type": "translate",
-        "prompt": "How much does it cost?",
+        "prompt": "How much does it cost",
         "answer": [
           "Combien",
           "ça",
@@ -2092,17 +2092,17 @@
       {
         "id": "fr-a1-u5-cp-l5-s3",
         "type": "translate",
-        "prompt": "When does the train leave?",
+        "prompt": "When is the train",
         "answer": [
           "Quand",
-          "part",
+          "est",
           "le",
           "train"
         ],
         "bank": [
           "qui",
           "le",
-          "part",
+          "est",
           "train",
           "comment",
           "Quand"
@@ -2112,7 +2112,7 @@
       {
         "id": "fr-a1-u5-cp-m1",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u5-w5",
@@ -2144,7 +2144,7 @@
       {
         "id": "fr-a1-u5-cp-m2",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u5-w12",
@@ -2159,7 +2159,7 @@
           {
             "wordId": "fr-a1u5-w10",
             "target": "la gare",
-            "english": "train station"
+            "english": "station"
           },
           {
             "wordId": "fr-a1u5-w9",
@@ -2176,7 +2176,7 @@
       {
         "id": "fr-a1-u5-cp-m3",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u5-w18",
@@ -2208,7 +2208,7 @@
       {
         "id": "fr-a1-u5-cp-m4",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u5-w30",
@@ -2240,12 +2240,12 @@
       {
         "id": "fr-a1-u5-cp-m5",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u5-w40",
             "target": "d'où",
-            "english": "where from"
+            "english": "from where"
           },
           {
             "wordId": "fr-a1u5-w39",

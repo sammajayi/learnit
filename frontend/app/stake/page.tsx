@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAccount, useWriteContract, usePublicClient } from "wagmi";
 import { erc20Abi, formatUnits, parseUnits } from "viem";
-import { CalendarDays, Check, ChevronDown, Flame, Minus, SlidersHorizontal, Trophy, Users, PiggyBank } from "lucide-react";
+import { CalendarDays, Check, ChevronDown, Flame, Minus, SlidersHorizontal, Trophy, Users, PiggyBank } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
 import { friendlyError } from "@/lib/txErrors";
@@ -18,7 +18,7 @@ import { useAuthGate } from "@/components/useAuthGate";
 import { StakeSkeleton } from "@/components/Skeletons";
 
 type Cohort = {
-  id: number; start: number; end: number; min: string; max: string; pot: string; settled: boolean; voided: boolean; resultsFinal: boolean; bonusBps: number; voidableAt: number | null; joinable: boolean; members: number;
+  id: number; start: number; end: number; min: string; max: string; pot: string; settled: boolean; voided: boolean; resultsFinal: boolean; bonusBps: number; voidableAt: number | null; joinable: boolean; members: number | null;
   mine: { stake: string; finished: boolean; withdrawn: boolean; payout: string } | null;
   progress: { required: string[]; done: boolean[]; completed: number } | null;
 };
@@ -48,22 +48,42 @@ export default function Stake() {
   const { data: me } = useMe();
   const { writeContractAsync } = useWriteContract();
   const [amount, setAmount] = useState("");
+  const [pick, setPick] = useState(7); // which goal length to join: 7, 14 or 30 days
   const [step, setStep] = useState<Step>(null);
   const [paying, setPaying] = useState<number | null>(null); // which payout is being withdrawn, so only that row shows progress
   const [err, setErr] = useState<string | null>(null);
   // The lesson result screen links here with the minimum filled in.
-  useEffect(() => { const a = new URLSearchParams(window.location.search).get("amount"); if (a && /^\d*\.?\d*$/.test(a)) setAmount(a); }, []);
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const a = q.get("amount"); if (a && /^\d*\.?\d*$/.test(a)) setAmount(a);
+    const d = Number(q.get("days")); if ([7, 14, 30].includes(d)) setPick(d);
+  }, []);
   const live = Boolean(ADDR.streakVault);
   const busy = step !== null;
 
-  const { data } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: ok });
+  const { data, isError, refetch, isFetching } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: ok, retry: 3 });
   // Checked before the stake form is shown, so nobody hits a revert.
   const paused = useQuery({ queryKey: ["paused", "vault"], enabled: ok && live && !!pc, staleTime: 30_000,
     queryFn: () => pc!.readContract({ address: ADDR.streakVault, abi: streakVaultAbi, functionName: "paused" }) });
 
+  if (!data && isError) return (
+    <AppShell>
+      <PageHeader eyebrow="Rewards and staking" title="Streak challenge" action={<RewardsTabs />} />
+      <Notice tone="warning" className="mt-6" title="We could not load your challenges"
+        action={<Button variant="outline" size="sm" loading={isFetching} onClick={() => void refetch()}>Try again</Button>}>
+        Your stake is safe. This is a loading problem, not a problem with your account.
+      </Notice>
+    </AppShell>
+  );
   if (!data) return <StakeSkeleton />;
 
-  const c = data.cohorts[0];
+  // The challenge is always open. If you are in one that is running, that is shown; otherwise the one to join for the goal you pick.
+  const lenOf = (x: Cohort) => Math.round((x.end - x.start) / 86400);
+  const isIn = (x: Cohort) => !!x.mine && BigInt(x.mine.stake) > 0n;
+  const running = data.cohorts.find((x) => isIn(x) && !x.settled && !x.voided);
+  const joinables = data.cohorts.filter((x) => x.joinable && !isIn(x));
+  const lengths = [...new Set(joinables.map(lenOf))].sort((a, b) => a - b);
+  const c = running ?? joinables.find((x) => lenOf(x) === (lengths.includes(pick) ? pick : lengths[0])) ?? data.cohorts[0];
   const staked = !!c?.mine && BigInt(c.mine.stake) > 0n;
   // Closed challenges where a payout is still waiting. They stay visible even after a newer challenge opens.
   const owedOlder = data.cohorts.filter((x) => x.id !== c?.id && !!x.mine && BigInt(x.mine.payout) > 0n);
@@ -78,6 +98,7 @@ export default function Stake() {
     !live ? "Staking is not live yet."
     : !me?.verified ? "Staking needs a GoodDollar face check."
     : expiresBeforeEnd ? `Your verification expires ${new Date(verifiedUntilSec! * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" })}, before this challenge ends. Renew it to join.`
+    : address && me?.wallet && address.toLowerCase() !== me.wallet.toLowerCase() ? `Connect the wallet you signed in with (${me.wallet.slice(0, 6)}…${me.wallet.slice(-4)}) to stake. A stake from another wallet would not show on your account.`
     : null;
 
   async function run(fn: () => Promise<void>) {
@@ -99,14 +120,14 @@ export default function Stake() {
       setStep("approve");
       const h = await writeContractAsync({ address: ADDR.gd, abi: erc20Abi, functionName: "approve", args: [ADDR.streakVault, wei] });
       const r = await pc.waitForTransactionReceipt({ hash: h });
-      if (r.status !== "success") throw new Error("The approval didn't go through. Nothing was staked.");
+      if (r.status !== "success") throw new Error("The approval did not go through. Nothing was staked.");
     }
     setStep("checking");
     const { request } = await pc.simulateContract({ account: address, address: ADDR.streakVault, abi: streakVaultAbi, functionName: "stake", args: [BigInt(c.id), wei] });
     setStep("stake");
     const h2 = await writeContractAsync(request);
     const r2 = await pc.waitForTransactionReceipt({ hash: h2 });
-    if (r2.status !== "success") throw new Error("The stake didn't go through. Your G$ stayed in your wallet.");
+    if (r2.status !== "success") throw new Error("The stake did not go through. Your G$ stayed in your wallet.");
     setAmount("");
   });
 
@@ -116,7 +137,7 @@ export default function Stake() {
     setStep("withdraw");
     const h = await writeContractAsync(request);
     const r = await pc!.waitForTransactionReceipt({ hash: h });
-    if (r.status !== "success") throw new Error("The withdrawal didn't go through. Your payout is still waiting for you.");
+    if (r.status !== "success") throw new Error("The withdrawal did not go through. Your payout is still waiting for you.");
   }
 
   const withdraw = (id: number | undefined = c?.id) => run(async () => {
@@ -135,7 +156,7 @@ export default function Stake() {
     setStep("cancel");
     const h = await writeContractAsync(request);
     const r = await pc.waitForTransactionReceipt({ hash: h });
-    if (r.status !== "success") throw new Error("The cancellation didn't go through. Your stake is still in the challenge.");
+    if (r.status !== "success") throw new Error("The cancellation did not go through. Your stake is still in the challenge.");
     await sendWithdraw(id);
   });
 
@@ -151,11 +172,11 @@ export default function Stake() {
   const amt = wei !== null && !outOfBounds ? Number(formatUnits(wei, 18)).toLocaleString("en", { maximumFractionDigits: 4 }) : null;
   const stats = (cls: string, compact = false) => c ? (
       <>
-      {!compact && <p className={`px-4 py-3 text-sm text-muted sm:hidden ${cls}`}><span className="font-mono tabular font-semibold text-ink">{fmtGD(c.pot)} G$</span> staked by <span className="tabular font-semibold text-ink">{c.members}</span> {c.members === 1 ? "person" : "people"}</p>}
+      {!compact && <p className={`px-4 py-3 text-sm text-muted sm:hidden ${cls}`}><span className="font-mono tabular font-semibold text-ink">{fmtGD(c.pot)} G$</span> staked by <span className="tabular font-semibold text-ink">{c.members ?? "…"}</span> {c.members === 1 ? "person" : "people"}</p>}
       <dl className={`${compact ? "grid" : "hidden sm:grid"} grid-cols-2 divide-line sm:divide-x ${compact ? "" : "sm:grid-cols-4"} ${cls}`}>
         {[
           { Icon: PiggyBank, k: "Total staked", v: <><span className="font-mono tabular">{fmtGD(c.pot)}</span> <span className="font-mono text-sm font-medium text-muted">G$</span></> },
-          { Icon: Users, k: "People in", v: <span className="tabular">{c.members}</span> },
+          { Icon: Users, k: "People in", v: <span className="tabular">{c.members ?? "…"}</span> },
           { Icon: CalendarDays, k: "Length", v: <>{days} <span className="text-sm font-medium text-muted">days</span></> },
           { Icon: SlidersHorizontal, k: "Stake limits", v: <span className="font-mono tabular text-lg">{fmtGD(c.min, 0)}–{fmtGD(c.max, 0)}</span> },
         ].slice(0, compact ? 2 : 4).map(({ Icon, k, v }) => (
@@ -177,7 +198,7 @@ export default function Stake() {
       <ol className="mt-2 grid gap-5">
         {[
           { Icon: PiggyBank, t: "Stake G$", b: c ? `Pick ${fmtGD(c.min, 0)} to ${fmtGD(c.max, 0)} G$ while it is open.` : "Pick an amount while a challenge is open." },
-          { Icon: Flame, t: `Learn for ${days} days`, b: "Pass a lesson every day, in your timezone." },
+          { Icon: Flame, t: `Learn for ${days} days`, b: "Finish a lesson every day, in your timezone." },
           { Icon: Trophy, t: "Get it back", b: `Finish all ${days} days and withdraw it${bonusBps > 0 ? `, plus ${bonusBps / 100}% bonus` : ""}.` },
         ].map(({ Icon, t, b }, i) => (
           <li key={t} className="flex gap-4">
@@ -200,8 +221,8 @@ export default function Stake() {
 
       {isPaused && <Notice tone="paused" className="mt-6" title="Staking is paused">Your stake is safe. It will resume soon.</Notice>}
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
-        <div className="grid content-start gap-6">
+      <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
+        <div className="grid min-w-0 grid-cols-1 content-start gap-6">
           {!c && <EmptyState icon={CalendarDays} title="No open challenge">Check back soon.</EmptyState>}
 
           {owedOlder.length > 0 && (
@@ -224,6 +245,22 @@ export default function Stake() {
               </ul>
               {err && <Notice tone="danger" className="mt-4">{err}</Notice>}
             </section>
+          )}
+
+          {!running && lengths.length > 1 && (
+            <div role="radiogroup" aria-label="How many days" className="grid grid-cols-3 gap-2">
+              {lengths.map((L) => {
+                const x = joinables.find((j) => lenOf(j) === L)!;
+                const on = c?.id === x.id;
+                return (
+                  <button key={L} type="button" role="radio" aria-checked={on} onClick={() => setPick(L)}
+                    className={cn("rounded-card border px-3 py-3 text-left transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15", on ? "border-ink bg-surface shadow-card" : "border-line bg-sunken hover:border-line-strong")}>
+                    <span className="block text-[15px] font-semibold text-ink">{L} days</span>
+                    <span className="block text-xs text-muted">{x.bonusBps > 0 ? `${x.bonusBps / 100}% bonus` : "No bonus"}</span>
+                  </button>
+                );
+              })}
+            </div>
           )}
 
           {c && (
@@ -271,7 +308,7 @@ export default function Stake() {
                       if (c.settled || ended) return null;
                       const i = c.progress.required.indexOf(new Date().toLocaleDateString("en-CA"));
                       if (i < 0) return null;
-                      return <p className="mt-4 text-sm text-ink-2">{c.progress.done[i] ? "Done today." : "Pass a lesson today."}</p>;
+                      return <p className="mt-4 text-sm text-ink-2">{c.progress.done[i] ? "Done today." : "Finish a lesson today."}</p>;
                     })()}
                   </div>
                 )}
@@ -281,7 +318,7 @@ export default function Stake() {
                 {formShown && (
                   <form onSubmit={(e) => { e.preventDefault(); if (!busy) void stake(); }} noValidate>
                     <div className="mb-5 rounded-input bg-sunken px-4 lg:hidden">{howItWorks(false)}</div>
-                    {blocker && <Notice tone="warning" className="mb-5" action={!me?.verified && live ? <ButtonLink href="/home" variant="outline" size="sm">Verify on Home</ButtonLink> : undefined}>{blocker}</Notice>}
+                    {blocker && <Notice tone="warning" className="mb-5" action={!me?.verified && live ? <ButtonLink href="/home" variant="outline" size="sm">Verify with GoodDollar</ButtonLink> : undefined}>{blocker}</Notice>}
                     <Label htmlFor="amt">Amount</Label>
                     <div className="relative mt-2">
                       <input id="amt" inputMode="decimal" autoComplete="off" value={amount} onChange={(e) => { setAmount(e.target.value); setErr(null); }} placeholder={`e.g. ${fmtGD(c.min, 0)}…`} spellCheck={false} aria-invalid={outOfBounds} aria-describedby="amt-help"

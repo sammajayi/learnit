@@ -1,14 +1,15 @@
 # LearnIt curriculum: A0 to A2
 
-Last updated: 18 November 2026. Applies to French and Spanish. Both courses follow the same unit map, so a unit number means the same thing in either language.
+Last updated: 26 November 2026. Applies to French and Spanish. Both courses follow the same unit map, so a unit number means the same thing in either language.
 
 ## Status
 
+**Rule for every change to this course:** units 1 to 8 are live. Their lesson, word and checkpoint ids never change, because learners' progress is stored under them, and new work only adds units after them. Regenerating content must leave units 1 to 8 byte-for-byte identical to main.
+
 | Part | Status |
 |---|---|
-| A0 units 1 to 3 (word lessons) | Built |
-| A1 units 4 to 8 (word lessons) | Built |
-| A2 units 9 and 10 (word lessons with grammar tips) | Built, waiting for native-speaker review |
+| Units 1 to 8 (word lessons, shown as A1 today; units 1 to 3 can be relabelled A0 later without touching ids) | Built and live |
+| A2 units 9 and 10 (word lessons with grammar tips) | Built, no native-speaker review needed, ready to publish |
 | A2 units 11 to 16 | Planned below, not written |
 | Essays, story lessons, revision units, new-word card rule | Specified in this document, not built |
 
@@ -169,7 +170,7 @@ Essays and stories reuse words already taught, so they add reading practice with
 2. **No grammar tips in A0 and A1.** Units 1 to 8 teach through words and sentences only. Adding tips to units 4 to 8 is a small backfill.
 3. **Reading and listening only.** Lessons test reading, listening and building sentences. They do not test speaking or free writing. The AI chat and voice practice on the roadmap are the planned answer.
 4. **Level exams.** Each unit has a checkpoint and each level ends with a revision unit, but there is no separate exam. Worth deciding before anyone is told they have "reached A2".
-5. **Native review.** The A2 units were drafted with a list of uncertain points at the top of each source file. Essays and stories, once written, need the same review. A native speaker must review all target-language text before release.
+5. **No native-speaker review.** Decided 26 Nov 2026: we do not need a native speaker to review the A2 units, essays or stories. The list of uncertain points at the top of each source file is for our own spot checks.
 
 ## Decisions to confirm
 
@@ -208,5 +209,5 @@ All lesson text, tips and in-app copy follow the LearnIt voice in the design sys
 3. Write one essay per theme and one story for the unit, using only words taught so far.
 4. Run the check script until it prints `ok`.
 5. Run `npm run content`, then `npm test` and `npm run check`.
-6. Get a native speaker to review the target-language text before release.
+6. Spot-check the target-language text ourselves with the unit checker (`npx tsx scripts/check-units.ts a2 fr|es`) before release.
 7. Update the status table in this file.

@@ -1,12 +1,26 @@
 "use client";
 import { useState, type ReactNode } from "react";
-import { Copy, Check } from "lucide-react";
+import type { IconType } from "@/components/icons";
+import { Copy, Check } from "@/components/icons";
 import { parseUnits } from "viem";
 import { Button, Notice } from "@/components/ui";
 import type { ActivityDay, UbiDay } from "./data";
 
-export const when = (s: number) => new Date(s * 1000).toLocaleString("en", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
-export const shortAddr = (a: string) => `${a.slice(0, 6)}...${a.slice(-4)}`;
+export const when = (s: number) => new Date(s * 1000).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+/** One compact title row for an admin page: a short title, an optional one-line hint, and actions at the end. */
+export function AdminHeader({ title, hint, action }: { title: ReactNode; hint?: ReactNode; action?: ReactNode }) {
+  return (
+    <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+      <div className="min-w-0">
+        <h1 className="text-xl font-semibold tracking-[-0.01em] text-ink">{title}</h1>
+        {hint && <p className="mt-0.5 text-pretty text-sm text-muted">{hint}</p>}
+      </div>
+      {action && <div className="flex shrink-0 items-center gap-2">{action}</div>}
+    </header>
+  );
+}
+
+export const shortAddr = (a: string) => `${a.slice(0, 6)}…${a.slice(-4)}`;
 export const parseG = (v: string): bigint | null => {
   const t = v.trim();
   if (!/^\d*\.?\d*$/.test(t) || t === "" || t === ".") return null;
@@ -35,7 +49,28 @@ export function SafeTx({ to, data, note }: { to: string; data: `0x${string}`; no
 
 export function ErrorNote({ error }: { error: unknown }) {
   if (!error) return null;
-  return <Notice tone="danger">{error instanceof Error ? error.message : "Something went wrong."}</Notice>;
+  const detail = error instanceof Error ? error.message : null;
+  return <Notice tone="danger" title="We could not load these numbers">Try again in a moment.{detail ? ` (${detail})` : ""}</Notice>;
+}
+
+/**
+ * A button for an action that cannot be undone. The first click shows what will happen; a second, labelled click sends it.
+ * Focus lands on the safe choice, so a stray Enter keeps things as they are.
+ */
+export function ConfirmAction({ label, confirmLabel, consequence, onConfirm, loading, disabled, icon, className }: {
+  label: string; confirmLabel: string; consequence: ReactNode; onConfirm: () => void | Promise<void>; loading?: boolean; disabled?: boolean; icon?: IconType; className?: string;
+}) {
+  const [asking, setAsking] = useState(false);
+  if (!asking) return <Button variant="outline" size="sm" icon={icon} className={className} disabled={disabled} onClick={() => setAsking(true)}>{label}</Button>;
+  return (
+    <div role="group" aria-label={label} className={`grid gap-3 rounded-input border border-coral-100 bg-coral-50 p-4 text-sm ${className ?? ""}`}>
+      <p className="text-pretty leading-relaxed text-ink-2">{consequence}</p>
+      <div className="flex flex-wrap gap-2">
+        <Button size="sm" loading={loading} onClick={async () => { try { await onConfirm(); } finally { setAsking(false); } }}>{confirmLabel}</Button>
+        <Button size="sm" variant="ghost" disabled={loading} onClick={() => setAsking(false)} autoFocus>Keep it as it is</Button>
+      </div>
+    </div>
+  );
 }
 
 /** The last `n` UTC days, oldest first, with zeros for days nobody claimed. */
@@ -53,15 +88,27 @@ export function fillDays(days: UbiDay[], n: number): UbiDay[] {
 /** Whole G$ as a plain number, for charts. Precision below a thousandth is irrelevant at chart scale. */
 export const gdNum = (wei: bigint | string) => Number(BigInt(wei) / 10n ** 14n) / 10_000;
 
+/** A length of time for people: "45 s", "12 min", "3 h 20 min". */
+export function fmtDuration(seconds: number): string {
+  const s = Math.max(0, Math.round(seconds));
+  if (s < 60) return `${s} s`;
+  const m = Math.round(s / 60);
+  if (m < 60) return `${m} min`;
+  const h = Math.floor(m / 60), r = m % 60;
+  return r ? `${h.toLocaleString("en")} h ${r} min` : `${h.toLocaleString("en")} h`;
+}
+/** Short axis text for a chart of durations in seconds: "30m", "2h". */
+export const axisDuration = (s: number) => (s >= 3600 ? `${+(s / 3600).toFixed(1)}h` : `${Math.round(s / 60)}m`);
+
 /** "Mar 4" for a UTC date key. */
-export const dayLabel = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
+export const dayLabel = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 
 /** The last `n` UTC days of the activity series, oldest first, with zeros for any day the server left out. */
 export function fillActivity(rows: ActivityDay[], n: number): ActivityDay[] {
   const by = new Map(rows.map((r) => [r.day, r]));
   return Array.from({ length: n }, (_, i) => {
     const k = new Date(Date.now() - (n - 1 - i) * 86_400_000).toISOString().slice(0, 10);
-    return by.get(k) ?? { day: k, signups: 0, active: 0, passed: 0 };
+    return by.get(k) ?? { day: k, signups: 0, active: 0, passed: 0, seconds: 0 };
   });
 }
 

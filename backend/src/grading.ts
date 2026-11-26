@@ -2,7 +2,8 @@ import type { Exercise } from "./content/schema";
 
 export type Answer = number | string[] | { target: string; english: string }[];
 export const PASS_ACCURACY = 0.8;
-export const MIN_SECONDS = 40; // ~6 questions at a realistic pace; was 90 for 12-question lessons
+/** No longer a rule for passing. Kept only so the abuse check can spot attempts timed to the old floor. */
+export const MIN_SECONDS = 40;
 
 export type ExerciseResult = { id: string; score: number; correct: boolean; wordIds: string[] };
 
@@ -28,6 +29,17 @@ export function gradeAll(exercises: Exercise[], answers: Record<string, Answer>)
   return { results, accuracy, missedWordIds };
 }
 
-export function isPass(accuracy: number, durationS: number) {
-  return accuracy >= PASS_ACCURACY && durationS >= MIN_SECONDS;
+export function isPass(accuracy: number) {
+  return accuracy >= PASS_ACCURACY;
+}
+
+/**
+ * What an attempt earns. Time never counts against anyone.
+ * A lesson is done once every question has been answered: it opens the next lesson and extends the streak, whatever the score.
+ * The score is the share answered right on the first try, so every miss lowers it even though missed questions come back to be answered correctly.
+ * G$ rewards and leaderboard points need PASS_ACCURACY. A checkpoint is an exam, so it keeps the pass mark for everything.
+ */
+export function outcomeFor(kind: "lesson" | "checkpoint", accuracy: number) {
+  const passed = kind === "lesson" ? true : isPass(accuracy);
+  return { passed, rewardEligible: passed && isPass(accuracy) };
 }

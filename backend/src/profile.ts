@@ -15,7 +15,15 @@ export function validateUsername(raw: string): UsernameCheck {
   if (value.length > USERNAME_MAX) return { ok: false, reason: `Use ${USERNAME_MAX} characters or fewer` };
   if (!/^[a-z]/.test(value)) return { ok: false, reason: "Start with a letter" };
   if (!/^[a-z0-9_]+$/.test(value)) return { ok: false, reason: "Use only letters, numbers and underscores" };
-  if (RESERVED.has(value)) return { ok: false, reason: "That name is reserved" };
+  if (RESERVED.has(value)) return { ok: false, reason: "That username is not available" };
+  return { ok: true, value };
+}
+
+export const EMAIL_MAX = 254;
+/** A plain shape check. Real validity is proved by the first email we send. */
+export function validateEmail(raw: string): { ok: true; value: string } | { ok: false; reason: string } {
+  const value = raw.trim().toLowerCase();
+  if (value.length > EMAIL_MAX || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) return { ok: false, reason: "Enter a valid email, like name@example.com" };
   return { ok: true, value };
 }
 

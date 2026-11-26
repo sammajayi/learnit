@@ -20,6 +20,12 @@ describe("detectAnomaly", () => {
   it("flags three passed lessons within a few minutes", () => {
     expect(detectAnomaly([at(150, 0.9, 0), at(MIN + 70, 0.9, 1), at(170, 0.9, 2)])).toBe("high-velocity");
   });
+  it("does not flag a fast learner who passes three lessons in about three minutes", () => {
+    expect(detectAnomaly([at(90, 0.9, 0), at(100, 0.95, 1.5), at(80, 0.9, 3)])).toBeNull();
+  });
+  it("flags three lessons passed within two and a half minutes", () => {
+    expect(detectAnomaly([at(60, 0.9, 0), at(70, 0.95, 1), at(65, 0.9, 2)])).toBe("high-velocity");
+  });
   it("does not flag three lessons spread across the day", () => {
     expect(detectAnomaly([at(150, 0.9, 0), at(MIN + 70, 0.9, 60), at(170, 0.9, 200)])).toBeNull();
   });

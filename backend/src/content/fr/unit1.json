@@ -1,7 +1,7 @@
 {
   "lang": "fr",
   "unit": 1,
-  "level": "A0",
+  "level": "A1",
   "title": "First words",
   "blurb": "Say hello, be polite and introduce yourself.",
   "speechLang": "fr-FR",
@@ -41,7 +41,7 @@
         {
           "id": "fr-a1-u1-l1-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w1",
@@ -167,7 +167,7 @@
         {
           "id": "fr-a1-u1-l2-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w5",
@@ -293,7 +293,7 @@
         {
           "id": "fr-a1-u1-l3-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w9",
@@ -323,7 +323,7 @@
           "prompt": "What does \"merci beaucoup\" mean?",
           "speak": "merci beaucoup",
           "options": [
-            "gladly",
+            "with pleasure",
             "thank you",
             "excuse me",
             "thank you very much"
@@ -415,7 +415,7 @@
         {
           "id": "fr-a1-u1-l4-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w13",
@@ -430,12 +430,12 @@
             {
               "wordId": "fr-a1u1-w15",
               "target": "ce n'est pas grave",
-              "english": "it's fine"
+              "english": "it's okay"
             },
             {
               "wordId": "fr-a1u1-w16",
               "target": "avec plaisir",
-              "english": "gladly"
+              "english": "with pleasure"
             }
           ]
         },
@@ -445,9 +445,9 @@
           "prompt": "What does \"ce n'est pas grave\" mean?",
           "speak": "ce n'est pas grave",
           "options": [
-            "gladly",
+            "with pleasure",
             "thank you very much",
-            "it's fine",
+            "it's okay",
             "sorry"
           ],
           "answer": 2,
@@ -456,7 +456,7 @@
         {
           "id": "fr-a1u1-w16-et",
           "type": "mc",
-          "prompt": "How do you say \"gladly\"?",
+          "prompt": "How do you say \"with pleasure\"?",
           "options": [
             "avec plaisir",
             "de rien",
@@ -494,11 +494,11 @@
         },
         {
           "target": "ce n'est pas grave",
-          "english": "it's fine"
+          "english": "it's okay"
         },
         {
           "target": "avec plaisir",
-          "english": "gladly"
+          "english": "with pleasure"
         }
       ]
     },
@@ -537,7 +537,7 @@
         {
           "id": "fr-a1-u1-l5-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w17",
@@ -659,7 +659,7 @@
         {
           "id": "fr-a1-u1-l6-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w21",
@@ -762,7 +762,7 @@
             "nice to meet you",
             "me",
             "my name is",
-            "and you (informal)"
+            "and you"
           ],
           "answer": 2,
           "wordId": "fr-a1u1-w25"
@@ -770,7 +770,7 @@
         {
           "id": "fr-a1u1-w26-et",
           "type": "mc",
-          "prompt": "How do you say \"what is your name (polite)\"?",
+          "prompt": "How do you say \"what is your name\"?",
           "options": [
             "moi",
             "comment vous appelez-vous",
@@ -783,7 +783,7 @@
         {
           "id": "fr-a1-u1-l7-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w25",
@@ -793,7 +793,7 @@
             {
               "wordId": "fr-a1u1-w26",
               "target": "comment vous appelez-vous",
-              "english": "what is your name (polite)"
+              "english": "what is your name"
             },
             {
               "wordId": "fr-a1u1-w27",
@@ -837,7 +837,7 @@
         {
           "id": "fr-a1-u1-l7-s",
           "type": "translate",
-          "prompt": "What is your name?",
+          "prompt": "What is your name",
           "answer": [
             "Comment",
             "vous",
@@ -860,7 +860,7 @@
         },
         {
           "target": "comment vous appelez-vous",
-          "english": "what is your name (polite)"
+          "english": "what is your name"
         },
         {
           "target": "enchanté",
@@ -885,8 +885,8 @@
           "options": [
             "sir",
             "here is",
-            "what is your name (polite)",
-            "and you (informal)"
+            "what is your name",
+            "and you"
           ],
           "answer": 3,
           "wordId": "fr-a1u1-w29"
@@ -907,12 +907,12 @@
         {
           "id": "fr-a1-u1-l8-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w29",
               "target": "et toi",
-              "english": "and you (informal)"
+              "english": "and you"
             },
             {
               "wordId": "fr-a1u1-w30",
@@ -938,9 +938,9 @@
           "speak": "madame",
           "options": [
             "my name is",
-            "and you (informal)",
+            "and you",
             "madam",
-            "what is your name (polite)"
+            "what is your name"
           ],
           "answer": 2,
           "wordId": "fr-a1u1-w31"
@@ -980,7 +980,7 @@
       "intro": [
         {
           "target": "et toi",
-          "english": "and you (informal)"
+          "english": "and you"
         },
         {
           "target": "voici",
@@ -1008,7 +1008,7 @@
           "speak": "comment allez-vous",
           "options": [
             "and you (polite)",
-            "how are you (polite)",
+            "how are you",
             "I am fine",
             "how is it going"
           ],
@@ -1031,12 +1031,12 @@
         {
           "id": "fr-a1-u1-l9-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w33",
               "target": "comment allez-vous",
-              "english": "how are you (polite)"
+              "english": "how are you"
             },
             {
               "wordId": "fr-a1u1-w34",
@@ -1061,7 +1061,7 @@
           "prompt": "What does \"ça va bien\" mean?",
           "speak": "ça va bien",
           "options": [
-            "how are you (polite)",
+            "how are you",
             "how is it going",
             "it is going well",
             "so-so"
@@ -1104,7 +1104,7 @@
       "intro": [
         {
           "target": "comment allez-vous",
-          "english": "how are you (polite)"
+          "english": "how are you"
         },
         {
           "target": "ça va",
@@ -1132,7 +1132,7 @@
           "speak": "comme ci comme ça",
           "options": [
             "so-so",
-            "how are you (polite)",
+            "how are you",
             "how is it going",
             "and you (polite)"
           ],
@@ -1155,7 +1155,7 @@
         {
           "id": "fr-a1-u1-l10-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "fr-a1u1-w37",
@@ -1185,7 +1185,7 @@
           "prompt": "What does \"et vous\" mean?",
           "speak": "et vous",
           "options": [
-            "how are you (polite)",
+            "how are you",
             "very well",
             "bad",
             "and you (polite)"
@@ -1209,7 +1209,7 @@
         {
           "id": "fr-a1-u1-l10-s",
           "type": "translate",
-          "prompt": "How are you?",
+          "prompt": "How are you",
           "answer": [
             "Comment",
             "allez-vous"
@@ -1307,7 +1307,7 @@
         "prompt": "What does \"au revoir\" mean?",
         "speak": "au revoir",
         "options": [
-          "what is your name (polite)",
+          "what is your name",
           "nice to meet you",
           "hello",
           "goodbye"
@@ -1361,7 +1361,7 @@
         "prompt": "What does \"s'il vous plaît\" mean?",
         "speak": "s'il vous plaît",
         "options": [
-          "gladly",
+          "with pleasure",
           "welcome",
           "of course",
           "please"
@@ -1417,7 +1417,7 @@
         "options": [
           "I understand",
           "excuse me",
-          "what is your name (polite)",
+          "what is your name",
           "I don't know"
         ],
         "answer": 1,
@@ -1443,8 +1443,8 @@
         "speak": "ce n'est pas grave",
         "options": [
           "nice to meet you",
-          "it's fine",
-          "how are you (polite)",
+          "it's okay",
+          "how are you",
           "yes"
         ],
         "answer": 1,
@@ -1453,7 +1453,7 @@
       {
         "id": "fr-a1-u1-cp-fr-a1u1-w16",
         "type": "mc",
-        "prompt": "How do you say \"gladly\"?",
+        "prompt": "How do you say \"with pleasure\"?",
         "options": [
           "comment allez-vous",
           "bonjour",
@@ -1577,7 +1577,7 @@
         "prompt": "What does \"je m'appelle\" mean?",
         "speak": "je m'appelle",
         "options": [
-          "it's fine",
+          "it's okay",
           "sir",
           "please",
           "my name is"
@@ -1588,7 +1588,7 @@
       {
         "id": "fr-a1-u1-cp-fr-a1u1-w26",
         "type": "mc",
-        "prompt": "How do you say \"what is your name (polite)\"?",
+        "prompt": "How do you say \"what is your name\"?",
         "options": [
           "comment vous appelez-vous",
           "à bientôt",
@@ -1631,8 +1631,8 @@
         "prompt": "What does \"et toi\" mean?",
         "speak": "et toi",
         "options": [
-          "and you (informal)",
-          "it's fine",
+          "and you",
+          "it's okay",
           "see you soon",
           "very well"
         ],
@@ -1686,7 +1686,7 @@
         "speak": "comment allez-vous",
         "options": [
           "sorry",
-          "how are you (polite)",
+          "how are you",
           "my name is",
           "it is going well"
         ],
@@ -1713,7 +1713,7 @@
         "speak": "ça va bien",
         "options": [
           "hi",
-          "gladly",
+          "with pleasure",
           "it is going well",
           "no"
         ],
@@ -1742,7 +1742,7 @@
           "so-so",
           "see you soon",
           "sorry",
-          "how are you (polite)"
+          "how are you"
         ],
         "answer": 0,
         "wordId": "fr-a1u1-w37"
@@ -1988,7 +1988,7 @@
       {
         "id": "fr-a1-u1-cp-l4-s3",
         "type": "translate",
-        "prompt": "What is your name?",
+        "prompt": "What is your name",
         "answer": [
           "Comment",
           "vous",
@@ -2024,7 +2024,7 @@
       {
         "id": "fr-a1-u1-cp-l5-s2",
         "type": "translate",
-        "prompt": "How are you?",
+        "prompt": "How are you",
         "answer": [
           "Comment",
           "allez-vous"
@@ -2040,7 +2040,7 @@
       {
         "id": "fr-a1-u1-cp-l5-s3",
         "type": "translate",
-        "prompt": "Very well, and you?",
+        "prompt": "Very well, and you",
         "answer": [
           "Très",
           "bien",
@@ -2060,7 +2060,7 @@
       {
         "id": "fr-a1-u1-cp-m1",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u1-w3",
@@ -2092,7 +2092,7 @@
       {
         "id": "fr-a1-u1-cp-m2",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u1-w13",
@@ -2117,14 +2117,14 @@
           {
             "wordId": "fr-a1u1-w16",
             "target": "avec plaisir",
-            "english": "gladly"
+            "english": "with pleasure"
           }
         ]
       },
       {
         "id": "fr-a1-u1-cp-m3",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u1-w24",
@@ -2156,7 +2156,7 @@
       {
         "id": "fr-a1-u1-cp-m4",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u1-w32",
@@ -2176,7 +2176,7 @@
           {
             "wordId": "fr-a1u1-w29",
             "target": "et toi",
-            "english": "and you (informal)"
+            "english": "and you"
           },
           {
             "wordId": "fr-a1u1-w30",
@@ -2188,7 +2188,7 @@
       {
         "id": "fr-a1-u1-cp-m5",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "fr-a1u1-w39",
@@ -2213,7 +2213,7 @@
           {
             "wordId": "fr-a1u1-w33",
             "target": "comment allez-vous",
-            "english": "how are you (polite)"
+            "english": "how are you"
           }
         ]
       }

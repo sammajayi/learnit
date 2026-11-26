@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
-import { Coins, Download } from "lucide-react";
+import { Coins, Download } from "@/components/icons";
 import { fmtGD } from "@learnit/backend/format";
-import { Button, Card, CardHeader, EmptyState, PageHeader, Stat } from "@/components/ui";
+import { Button, Card, CardHeader, EmptyState, Stat } from "@/components/ui";
 import { Sk } from "@/components/ui/Sk";
 import { usePublicStats, type UbiDay } from "@/components/admin/data";
-import { ErrorNote, dayLabel as label, fillDays, gdNum } from "@/components/admin/bits";
+import { AdminHeader, ErrorNote, dayLabel as label, fillDays, gdNum } from "@/components/admin/bits";
 import { BarChart } from "@/components/admin/charts";
 import { cn } from "@/lib/cn";
 
 const SERIES = {
   gd: { name: "G$", caption: "claimed", pick: (d: UbiDay) => gdNum(d.total), format: (v: number) => `${v.toLocaleString("en", { maximumFractionDigits: v < 10 ? 2 : 0 })} G$` },
-  claims: { name: "Claims", caption: "claims", pick: (d: UbiDay) => d.claims, format: (v: number) => `${v.toLocaleString("en")} ${v === 1 ? "claim" : "claims"}` },
-  people: { name: "People", caption: "people", pick: (d: UbiDay) => d.claimers, format: (v: number) => `${v.toLocaleString("en")} ${v === 1 ? "person" : "people"}` },
+  claims: { name: "Claims", caption: "claims", pick: (d: UbiDay) => d.claims, format: (v: number) => `${v.toLocaleString("en-GB")} ${v === 1 ? "claim" : "claims"}` },
+  people: { name: "People", caption: "people", pick: (d: UbiDay) => d.claimers, format: (v: number) => `${v.toLocaleString("en-GB")} ${v === 1 ? "person" : "people"}` },
 } as const;
 type SeriesKey = keyof typeof SERIES;
 
@@ -33,8 +33,8 @@ export default function Ubi() {
   const active = days.filter((d) => d.claims > 0).length;
 
   return (
-    <div className="grid gap-8">
-      <PageHeader title="UBI claims" description="G$ claimed through LearnIt, by UTC day. Claims made in other apps are not counted. Totals only: no names or wallets."
+    <div className="grid gap-4">
+      <AdminHeader title="UBI claims" hint="G$ claimed through LearnIt, by UTC day. Claims made in other apps are not counted. Totals only: no names or wallets."
         action={ubi && <Button variant="outline" size="sm" icon={Download} onClick={() => csv(ubi.days)}>Export CSV</Button>} />
 
       <ErrorNote error={error} />
@@ -46,21 +46,21 @@ export default function Ubi() {
             <Stat label="Today" value={fmtGD(ubi.today.total)} unit="G$" hint={`${ubi.today.claims} claims, ${ubi.today.claimers} people`} />
             <Stat label="Last 30 days" value={fmtGD(total30)} unit="G$" hint={`${active} active days`} />
             <Stat label="All time" value={fmtGD(ubi.allTime.total)} unit="G$" hint={`${ubi.allTime.claims} claims`} />
-            <Stat label="People who claimed" value={ubi.allTime.claimers.toLocaleString("en")} hint="All time" />
+            <Stat label="People who claimed" value={ubi.allTime.claimers.toLocaleString("en-GB")} hint="All time" />
           </Card>
 
-          <Card className="p-6">
+          <Card className="p-4">
             <CardHeader title="Last 30 days"
               description={series === "gd" ? "G$ claimed per day." : series === "claims" ? "Claims made per day." : "Different people who claimed, per day."}
               action={
                 <div role="radiogroup" aria-label="Chart shows" className="inline-flex shrink-0 rounded-btn bg-sunken p-0.5">
                   {(Object.keys(SERIES) as SeriesKey[]).map((k) => (
                     <button key={k} type="button" role="radio" aria-checked={series === k} onClick={() => setSeries(k)}
-                      className={cn("h-8 rounded-[10px] px-3 text-sm font-medium transition duration-150", series === k ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink")}>{SERIES[k].name}</button>
+                      className={cn("h-10 rounded-[10px] px-3 text-sm font-medium transition duration-150 sm:h-8", series === k ? "bg-surface text-ink shadow-card" : "text-muted hover:text-ink")}>{SERIES[k].name}</button>
                   ))}
                 </div>
               } />
-            <div className="mt-5">
+            <div className="mt-3">
               <BarChart key={series} values={days.map(SERIES[series].pick)} labels={days.map((d) => label(d.day))} format={SERIES[series].format} caption={SERIES[series].caption} height={200} />
             </div>
           </Card>

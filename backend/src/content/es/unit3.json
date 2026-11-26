@@ -1,15 +1,15 @@
 {
   "lang": "es",
   "unit": 3,
-  "level": "A0",
+  "level": "A1",
   "title": "About me",
   "blurb": "Talk about yourself, your family and where you are from.",
   "speechLang": "es-ES",
   "lessons": [
     {
       "id": "es-a1-u3-l1",
-      "title": "Pronouns, part 1",
-      "theme": "pronouns",
+      "title": "I, you, he, she, part 1",
+      "theme": "i, you, he, she",
       "exercises": [
         {
           "id": "es-a1u3-w1-te",
@@ -17,7 +17,7 @@
           "prompt": "What does \"yo\" mean?",
           "speak": "yo",
           "options": [
-            "you (informal)",
+            "you (one friend)",
             "I",
             "they (men or mixed)",
             "you (polite)"
@@ -28,7 +28,7 @@
         {
           "id": "es-a1u3-w2-et",
           "type": "mc",
-          "prompt": "How do you say \"you (informal)\"?",
+          "prompt": "How do you say \"you (one friend)\"?",
           "options": [
             "tú",
             "yo",
@@ -41,7 +41,7 @@
         {
           "id": "es-a1-u3-l1-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w1",
@@ -51,7 +51,7 @@
             {
               "wordId": "es-a1u3-w2",
               "target": "tú",
-              "english": "you (informal)"
+              "english": "you (one friend)"
             },
             {
               "wordId": "es-a1u3-w3",
@@ -74,7 +74,7 @@
             "he",
             "I",
             "they (men or mixed)",
-            "you (informal)"
+            "you (one friend)"
           ],
           "answer": 0,
           "wordId": "es-a1u3-w3"
@@ -118,7 +118,7 @@
         },
         {
           "target": "tú",
-          "english": "you (informal)"
+          "english": "you (one friend)"
         },
         {
           "target": "él",
@@ -132,8 +132,8 @@
     },
     {
       "id": "es-a1-u3-l2",
-      "title": "Pronouns, part 2",
-      "theme": "pronouns",
+      "title": "I, you, he, she, part 2",
+      "theme": "i, you, he, she",
       "exercises": [
         {
           "id": "es-a1u3-w5-te",
@@ -144,7 +144,7 @@
             "we",
             "they (women)",
             "I",
-            "you (informal)"
+            "you (one friend)"
           ],
           "answer": 0,
           "wordId": "es-a1u3-w5"
@@ -165,7 +165,7 @@
         {
           "id": "es-a1-u3-l2-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w5",
@@ -289,7 +289,7 @@
         {
           "id": "es-a1-u3-l3-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w9",
@@ -413,7 +413,7 @@
         {
           "id": "es-a1-u3-l4-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w13",
@@ -539,7 +539,7 @@
         {
           "id": "es-a1-u3-l5-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w17",
@@ -665,7 +665,7 @@
         {
           "id": "es-a1-u3-l6-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w21",
@@ -793,7 +793,7 @@
         {
           "id": "es-a1-u3-l7-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w25",
@@ -917,7 +917,7 @@
         {
           "id": "es-a1-u3-l8-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w29",
@@ -1041,7 +1041,7 @@
         {
           "id": "es-a1-u3-l9-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w33",
@@ -1165,7 +1165,7 @@
         {
           "id": "es-a1-u3-l10-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u3-w37",
@@ -1274,7 +1274,7 @@
       {
         "id": "es-a1-u3-cp-es-a1u3-w2",
         "type": "mc",
-        "prompt": "How do you say \"you (informal)\"?",
+        "prompt": "How do you say \"you (one friend)\"?",
         "options": [
           "España",
           "tú",
@@ -1346,7 +1346,7 @@
         "options": [
           "they (men or mixed)",
           "I live",
-          "you (informal)",
+          "you (one friend)",
           "friend (male)"
         ],
         "answer": 0,
@@ -1697,7 +1697,7 @@
         "options": [
           "friend (female)",
           "I am",
-          "you (informal)",
+          "you (one friend)",
           "people"
         ],
         "answer": 1,
@@ -2076,7 +2076,7 @@
       {
         "id": "es-a1-u3-cp-m1",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u3-w6",
@@ -2108,7 +2108,7 @@
       {
         "id": "es-a1-u3-cp-m2",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u3-w12",
@@ -2140,7 +2140,7 @@
       {
         "id": "es-a1-u3-cp-m3",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u3-w22",
@@ -2172,7 +2172,7 @@
       {
         "id": "es-a1-u3-cp-m4",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u3-w31",
@@ -2204,7 +2204,7 @@
       {
         "id": "es-a1-u3-cp-m5",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u3-w37",

@@ -1,7 +1,7 @@
 {
   "lang": "es",
   "unit": 1,
-  "level": "A0",
+  "level": "A1",
   "title": "First words",
   "blurb": "Say hello, be polite and introduce yourself.",
   "speechLang": "es-ES",
@@ -41,7 +41,7 @@
         {
           "id": "es-a1-u1-l1-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w1",
@@ -61,7 +61,7 @@
             {
               "wordId": "es-a1u1-w4",
               "target": "buenas noches",
-              "english": "good evening or good night"
+              "english": "good night"
             }
           ]
         },
@@ -82,7 +82,7 @@
         {
           "id": "es-a1u1-w4-et",
           "type": "mc",
-          "prompt": "How do you say \"good evening or good night\"?",
+          "prompt": "How do you say \"good night\"?",
           "options": [
             "buenas tardes",
             "buenas noches",
@@ -128,7 +128,7 @@
         },
         {
           "target": "buenas noches",
-          "english": "good evening or good night"
+          "english": "good night"
         }
       ]
     },
@@ -167,7 +167,7 @@
         {
           "id": "es-a1-u1-l2-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w5",
@@ -269,8 +269,8 @@
           "options": [
             "excuse me",
             "please",
-            "gladly",
-            "it's fine"
+            "with pleasure",
+            "it's okay"
           ],
           "answer": 1,
           "wordId": "es-a1u1-w9"
@@ -291,7 +291,7 @@
         {
           "id": "es-a1-u1-l3-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w9",
@@ -322,7 +322,7 @@
           "speak": "muchas gracias",
           "options": [
             "please",
-            "it's fine",
+            "it's okay",
             "thank you very much",
             "thank you"
           ],
@@ -413,7 +413,7 @@
         {
           "id": "es-a1-u1-l4-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w13",
@@ -428,12 +428,12 @@
             {
               "wordId": "es-a1u1-w15",
               "target": "no pasa nada",
-              "english": "it's fine"
+              "english": "it's okay"
             },
             {
               "wordId": "es-a1u1-w16",
               "target": "con gusto",
-              "english": "gladly"
+              "english": "with pleasure"
             }
           ]
         },
@@ -445,7 +445,7 @@
           "options": [
             "sorry",
             "you're welcome",
-            "it's fine",
+            "it's okay",
             "thank you"
           ],
           "answer": 2,
@@ -454,7 +454,7 @@
         {
           "id": "es-a1u1-w16-et",
           "type": "mc",
-          "prompt": "How do you say \"gladly\"?",
+          "prompt": "How do you say \"with pleasure\"?",
           "options": [
             "de nada",
             "muchas gracias",
@@ -492,11 +492,11 @@
         },
         {
           "target": "no pasa nada",
-          "english": "it's fine"
+          "english": "it's okay"
         },
         {
           "target": "con gusto",
-          "english": "gladly"
+          "english": "with pleasure"
         }
       ]
     },
@@ -535,7 +535,7 @@
         {
           "id": "es-a1-u1-l5-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w17",
@@ -657,7 +657,7 @@
         {
           "id": "es-a1-u1-l6-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w21",
@@ -770,7 +770,7 @@
         {
           "id": "es-a1u1-w26-et",
           "type": "mc",
-          "prompt": "How do you say \"what is your name (informal)\"?",
+          "prompt": "How do you say \"what is your name\"?",
           "options": [
             "me llamo",
             "señora",
@@ -783,7 +783,7 @@
         {
           "id": "es-a1-u1-l7-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w25",
@@ -793,7 +793,7 @@
             {
               "wordId": "es-a1u1-w26",
               "target": "cómo te llamas",
-              "english": "what is your name (informal)"
+              "english": "what is your name"
             },
             {
               "wordId": "es-a1u1-w27",
@@ -837,7 +837,7 @@
         {
           "id": "es-a1-u1-l7-s",
           "type": "translate",
-          "prompt": "What is your name?",
+          "prompt": "What is your name",
           "answer": [
             "Cómo",
             "te",
@@ -860,7 +860,7 @@
         },
         {
           "target": "cómo te llamas",
-          "english": "what is your name (informal)"
+          "english": "what is your name"
         },
         {
           "target": "mucho gusto",
@@ -883,10 +883,10 @@
           "prompt": "What does \"y tú\" mean?",
           "speak": "y tú",
           "options": [
-            "and you (informal)",
+            "and you",
             "here is",
             "I",
-            "what is your name (informal)"
+            "what is your name"
           ],
           "answer": 0,
           "wordId": "es-a1u1-w29"
@@ -907,12 +907,12 @@
         {
           "id": "es-a1-u1-l8-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w29",
               "target": "y tú",
-              "english": "and you (informal)"
+              "english": "and you"
             },
             {
               "wordId": "es-a1u1-w30",
@@ -980,7 +980,7 @@
       "intro": [
         {
           "target": "y tú",
-          "english": "and you (informal)"
+          "english": "and you"
         },
         {
           "target": "aquí está",
@@ -1031,7 +1031,7 @@
         {
           "id": "es-a1-u1-l9-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w33",
@@ -1155,7 +1155,7 @@
         {
           "id": "es-a1-u1-l10-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u1-w37",
@@ -1209,7 +1209,7 @@
         {
           "id": "es-a1-u1-l10-s",
           "type": "translate",
-          "prompt": "How are you?",
+          "prompt": "How are you",
           "answer": [
             "Cómo",
             "estás"
@@ -1291,7 +1291,7 @@
       {
         "id": "es-a1-u1-cp-es-a1u1-w4",
         "type": "mc",
-        "prompt": "How do you say \"good evening or good night\"?",
+        "prompt": "How do you say \"good night\"?",
         "options": [
           "perdón",
           "me llamo",
@@ -1336,7 +1336,7 @@
         "options": [
           "see you tomorrow",
           "how is it going",
-          "it's fine",
+          "it's okay",
           "okay"
         ],
         "answer": 0,
@@ -1362,7 +1362,7 @@
         "speak": "por favor",
         "options": [
           "please",
-          "it's fine",
+          "it's okay",
           "welcome",
           "I understand"
         ],
@@ -1389,7 +1389,7 @@
         "speak": "muchas gracias",
         "options": [
           "I",
-          "what is your name (informal)",
+          "what is your name",
           "thank you very much",
           "I don't understand"
         ],
@@ -1444,7 +1444,7 @@
         "options": [
           "good morning",
           "I don't know",
-          "it's fine",
+          "it's okay",
           "nice to meet you"
         ],
         "answer": 2,
@@ -1453,7 +1453,7 @@
       {
         "id": "es-a1-u1-cp-es-a1u1-w16",
         "type": "mc",
-        "prompt": "How do you say \"gladly\"?",
+        "prompt": "How do you say \"with pleasure\"?",
         "options": [
           "yo",
           "no",
@@ -1472,7 +1472,7 @@
           "yes",
           "I don't know",
           "how are you",
-          "good evening or good night"
+          "good night"
         ],
         "answer": 0,
         "wordId": "es-a1u1-w17"
@@ -1553,7 +1553,7 @@
           "how are you",
           "bad",
           "I understand",
-          "gladly"
+          "with pleasure"
         ],
         "answer": 2,
         "wordId": "es-a1u1-w23"
@@ -1588,7 +1588,7 @@
       {
         "id": "es-a1-u1-cp-es-a1u1-w26",
         "type": "mc",
-        "prompt": "How do you say \"what is your name (informal)\"?",
+        "prompt": "How do you say \"what is your name\"?",
         "options": [
           "cómo te llamas",
           "vale",
@@ -1631,9 +1631,9 @@
         "prompt": "What does \"y tú\" mean?",
         "speak": "y tú",
         "options": [
-          "and you (informal)",
+          "and you",
           "no",
-          "what is your name (informal)",
+          "what is your name",
           "more or less"
         ],
         "answer": 0,
@@ -1739,10 +1739,10 @@
         "prompt": "What does \"así así\" mean?",
         "speak": "así así",
         "options": [
-          "good evening or good night",
+          "good night",
           "welcome",
           "so-so",
-          "it's fine"
+          "it's okay"
         ],
         "answer": 2,
         "wordId": "es-a1u1-w37"
@@ -1984,7 +1984,7 @@
       {
         "id": "es-a1-u1-cp-l4-s3",
         "type": "translate",
-        "prompt": "What is your name?",
+        "prompt": "What is your name",
         "answer": [
           "Cómo",
           "te",
@@ -2020,7 +2020,7 @@
       {
         "id": "es-a1-u1-cp-l5-s2",
         "type": "translate",
-        "prompt": "How are you?",
+        "prompt": "How are you",
         "answer": [
           "Cómo",
           "estás"
@@ -2036,7 +2036,7 @@
       {
         "id": "es-a1-u1-cp-l5-s3",
         "type": "translate",
-        "prompt": "Very well, and you?",
+        "prompt": "Very well, and you",
         "answer": [
           "Muy",
           "bien",
@@ -2056,7 +2056,7 @@
       {
         "id": "es-a1-u1-cp-m1",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u1-w7",
@@ -2076,7 +2076,7 @@
           {
             "wordId": "es-a1u1-w4",
             "target": "buenas noches",
-            "english": "good evening or good night"
+            "english": "good night"
           },
           {
             "wordId": "es-a1u1-w3",
@@ -2088,7 +2088,7 @@
       {
         "id": "es-a1-u1-cp-m2",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u1-w10",
@@ -2103,7 +2103,7 @@
           {
             "wordId": "es-a1u1-w15",
             "target": "no pasa nada",
-            "english": "it's fine"
+            "english": "it's okay"
           },
           {
             "wordId": "es-a1u1-w14",
@@ -2120,7 +2120,7 @@
       {
         "id": "es-a1-u1-cp-m3",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u1-w17",
@@ -2152,12 +2152,12 @@
       {
         "id": "es-a1-u1-cp-m4",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u1-w26",
             "target": "cómo te llamas",
-            "english": "what is your name (informal)"
+            "english": "what is your name"
           },
           {
             "wordId": "es-a1u1-w32",
@@ -2177,14 +2177,14 @@
           {
             "wordId": "es-a1u1-w29",
             "target": "y tú",
-            "english": "and you (informal)"
+            "english": "and you"
           }
         ]
       },
       {
         "id": "es-a1-u1-cp-m5",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u1-w36",

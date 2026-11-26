@@ -21,11 +21,10 @@ describe("currentUnitFor", () => {
 
 describe("course content", () => {
   for (const lang of ["fr", "es"] as const) {
-    it(`${lang}: levels run A0, A1, A2 in order and unit numbers are 1..n`, () => {
+    it(`${lang}: units 1-8 stay A1 (unchanged for learners), units 9+ are A2, and unit numbers are 1..n`, () => {
       const units = COURSES[lang];
       expect(units.map((u) => u.unit)).toEqual(units.map((_, i) => i + 1));
-      expect(units.slice(0, 3).every((u) => u.level === "A0")).toBe(true);
-      expect(units.slice(3, 8).every((u) => u.level === "A1")).toBe(true);
+      expect(units.slice(0, 8).every((u) => u.level === "A1")).toBe(true);
       expect(units.slice(8).every((u) => u.level === "A2")).toBe(true);
     });
     it(`${lang}: ids of the first 8 units never change (learner progress is stored under them)`, () => {

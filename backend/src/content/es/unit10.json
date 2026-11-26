@@ -41,7 +41,7 @@
         {
           "id": "es-a2-u10-l1-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w1",
@@ -171,7 +171,7 @@
         {
           "id": "es-a2-u10-l2-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w5",
@@ -299,7 +299,7 @@
         {
           "id": "es-a2-u10-l3-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w9",
@@ -431,7 +431,7 @@
         {
           "id": "es-a2-u10-l4-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w13",
@@ -561,7 +561,7 @@
         {
           "id": "es-a2-u10-l5-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w17",
@@ -691,7 +691,7 @@
         {
           "id": "es-a2-u10-l6-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w21",
@@ -819,7 +819,7 @@
         {
           "id": "es-a2-u10-l7-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w25",
@@ -953,7 +953,7 @@
         {
           "id": "es-a2-u10-l8-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w29",
@@ -1083,7 +1083,7 @@
         {
           "id": "es-a2-u10-l9-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w33",
@@ -1213,7 +1213,7 @@
         {
           "id": "es-a2-u10-l10-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a2u10-w37",
@@ -2196,7 +2196,7 @@
       {
         "id": "es-a2-u10-cp-m1",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a2u10-w7",
@@ -2228,7 +2228,7 @@
       {
         "id": "es-a2-u10-cp-m2",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a2u10-w13",
@@ -2260,7 +2260,7 @@
       {
         "id": "es-a2-u10-cp-m3",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a2u10-w20",
@@ -2292,7 +2292,7 @@
       {
         "id": "es-a2-u10-cp-m4",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a2u10-w25",
@@ -2324,7 +2324,7 @@
       {
         "id": "es-a2-u10-cp-m5",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a2u10-w40",

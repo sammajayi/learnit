@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * app subdomain (NEXT_PUBLIC_APP_URL, e.g. https://app.example.com). App routes requested on any
  * other host are redirected to the app host. Unset in local dev, where this does nothing.
  */
-const APP_PATHS = ["/home", "/learn", "/chat", "/earn", "/stake", "/profile", "/leaderboard", "/league", "/language", "/admin"];
+const APP_PATHS = ["/home", "/learn", "/chat", "/earn", "/stake", "/profile", "/settings", "/leaderboard", "/league", "/language", "/admin"];
 
 export function middleware(req: NextRequest) {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;

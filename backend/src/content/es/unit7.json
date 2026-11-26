@@ -41,7 +41,7 @@
         {
           "id": "es-a1-u7-l1-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w1",
@@ -167,7 +167,7 @@
         {
           "id": "es-a1-u7-l2-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w5",
@@ -271,8 +271,8 @@
           "options": [
             "happy",
             "sad",
-            "ill",
-            "free (not busy)"
+            "sick",
+            "free"
           ],
           "answer": 0,
           "wordId": "es-a1u7-w9"
@@ -293,7 +293,7 @@
         {
           "id": "es-a1-u7-l3-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w9",
@@ -324,9 +324,9 @@
           "speak": "cansado",
           "options": [
             "angry",
-            "free (not busy)",
+            "free",
             "tired",
-            "ill"
+            "sick"
           ],
           "answer": 2,
           "wordId": "es-a1u7-w11"
@@ -393,8 +393,8 @@
           "options": [
             "busy",
             "ready",
-            "ill",
-            "free (not busy)"
+            "sick",
+            "free"
           ],
           "answer": 2,
           "wordId": "es-a1u7-w13"
@@ -415,12 +415,12 @@
         {
           "id": "es-a1-u7-l4-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w13",
               "target": "enfermo",
-              "english": "ill"
+              "english": "sick"
             },
             {
               "wordId": "es-a1u7-w14",
@@ -435,7 +435,7 @@
             {
               "wordId": "es-a1u7-w16",
               "target": "libre",
-              "english": "free (not busy)"
+              "english": "free"
             }
           ]
         },
@@ -456,7 +456,7 @@
         {
           "id": "es-a1u7-w16-et",
           "type": "mc",
-          "prompt": "How do you say \"free (not busy)\"?",
+          "prompt": "How do you say \"free\"?",
           "options": [
             "listo",
             "libre",
@@ -488,7 +488,7 @@
       "intro": [
         {
           "target": "enfermo",
-          "english": "ill"
+          "english": "sick"
         },
         {
           "target": "listo",
@@ -500,7 +500,7 @@
         },
         {
           "target": "libre",
-          "english": "free (not busy)"
+          "english": "free"
         }
       ]
     },
@@ -539,7 +539,7 @@
         {
           "id": "es-a1-u7-l5-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w17",
@@ -571,7 +571,7 @@
           "options": [
             "nose",
             "eyes",
-            "back (body)",
+            "back",
             "foot"
           ],
           "answer": 3,
@@ -665,7 +665,7 @@
         {
           "id": "es-a1-u7-l6-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w21",
@@ -685,7 +685,7 @@
             {
               "wordId": "es-a1u7-w24",
               "target": "la espalda",
-              "english": "back (body)"
+              "english": "back"
             }
           ]
         },
@@ -706,7 +706,7 @@
         {
           "id": "es-a1u7-w24-et",
           "type": "mc",
-          "prompt": "How do you say \"back (body)\"?",
+          "prompt": "How do you say \"back\"?",
           "options": [
             "la espalda",
             "el pie",
@@ -754,7 +754,7 @@
         },
         {
           "target": "la espalda",
-          "english": "back (body)"
+          "english": "back"
         }
       ]
     },
@@ -769,7 +769,7 @@
           "prompt": "What does \"hace buen tiempo\" mean?",
           "speak": "hace buen tiempo",
           "options": [
-            "it is hot outside",
+            "it is hot",
             "the weather is nice",
             "wind",
             "sun"
@@ -793,7 +793,7 @@
         {
           "id": "es-a1-u7-l7-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w25",
@@ -808,12 +808,12 @@
             {
               "wordId": "es-a1u7-w27",
               "target": "hace calor",
-              "english": "it is hot outside"
+              "english": "it is hot"
             },
             {
               "wordId": "es-a1u7-w28",
               "target": "hace frío",
-              "english": "it is cold outside"
+              "english": "it is cold"
             }
           ]
         },
@@ -824,9 +824,9 @@
           "speak": "hace calor",
           "options": [
             "snow",
-            "it is cold outside",
+            "it is cold",
             "it is raining",
-            "it is hot outside"
+            "it is hot"
           ],
           "answer": 3,
           "wordId": "es-a1u7-w27"
@@ -834,7 +834,7 @@
         {
           "id": "es-a1u7-w28-et",
           "type": "mc",
-          "prompt": "How do you say \"it is cold outside\"?",
+          "prompt": "How do you say \"it is cold\"?",
           "options": [
             "hace frío",
             "llueve",
@@ -876,11 +876,11 @@
         },
         {
           "target": "hace calor",
-          "english": "it is hot outside"
+          "english": "it is hot"
         },
         {
           "target": "hace frío",
-          "english": "it is cold outside"
+          "english": "it is cold"
         }
       ]
     },
@@ -919,7 +919,7 @@
         {
           "id": "es-a1-u7-l8-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w29",
@@ -950,7 +950,7 @@
           "speak": "el viento",
           "options": [
             "rain",
-            "it is cold outside",
+            "it is cold",
             "the weather is nice",
             "wind"
           ],
@@ -1041,7 +1041,7 @@
         {
           "id": "es-a1-u7-l9-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w33",
@@ -1163,7 +1163,7 @@
         {
           "id": "es-a1-u7-l10-m",
           "type": "match",
-          "prompt": "Match each pair",
+          "prompt": "Match the pairs",
           "pairs": [
             {
               "wordId": "es-a1u7-w37",
@@ -1292,7 +1292,7 @@
         "prompt": "What does \"bueno\" mean?",
         "speak": "bueno",
         "options": [
-          "it is hot outside",
+          "it is hot",
           "good",
           "eyes",
           "it is raining"
@@ -1322,7 +1322,7 @@
           "new",
           "arm",
           "busy",
-          "it is cold outside"
+          "it is cold"
         ],
         "answer": 0,
         "wordId": "es-a1u7-w5"
@@ -1376,7 +1376,7 @@
           "happy",
           "sun",
           "the weather is nice",
-          "free (not busy)"
+          "free"
         ],
         "answer": 0,
         "wordId": "es-a1u7-w9"
@@ -1400,7 +1400,7 @@
         "prompt": "What does \"cansado\" mean?",
         "speak": "cansado",
         "options": [
-          "free (not busy)",
+          "free",
           "tired",
           "fast",
           "busy"
@@ -1430,7 +1430,7 @@
           "eyes",
           "hot",
           "long",
-          "ill"
+          "sick"
         ],
         "answer": 3,
         "wordId": "es-a1u7-w13"
@@ -1465,7 +1465,7 @@
       {
         "id": "es-a1-u7-cp-es-a1u7-w16",
         "type": "mc",
-        "prompt": "How do you say \"free (not busy)\"?",
+        "prompt": "How do you say \"free\"?",
         "options": [
           "grande",
           "libre",
@@ -1509,7 +1509,7 @@
         "speak": "el pie",
         "options": [
           "head",
-          "free (not busy)",
+          "free",
           "rain",
           "foot"
         ],
@@ -1565,7 +1565,7 @@
           "foot",
           "arm",
           "happy",
-          "free (not busy)"
+          "free"
         ],
         "answer": 1,
         "wordId": "es-a1u7-w23"
@@ -1573,7 +1573,7 @@
       {
         "id": "es-a1-u7-cp-es-a1u7-w24",
         "type": "mc",
-        "prompt": "How do you say \"back (body)\"?",
+        "prompt": "How do you say \"back\"?",
         "options": [
           "la espalda",
           "hace buen tiempo",
@@ -1619,7 +1619,7 @@
           "eyes",
           "ready",
           "nose",
-          "it is hot outside"
+          "it is hot"
         ],
         "answer": 3,
         "wordId": "es-a1u7-w27"
@@ -1627,7 +1627,7 @@
       {
         "id": "es-a1-u7-cp-es-a1u7-w28",
         "type": "mc",
-        "prompt": "How do you say \"it is cold outside\"?",
+        "prompt": "How do you say \"it is cold\"?",
         "options": [
           "libre",
           "ocupado",
@@ -1673,7 +1673,7 @@
           "foot",
           "wind",
           "small",
-          "ill"
+          "sick"
         ],
         "answer": 1,
         "wordId": "es-a1u7-w31"
@@ -1697,7 +1697,7 @@
         "prompt": "What does \"bonito\" mean?",
         "speak": "bonito",
         "options": [
-          "ill",
+          "sick",
           "tired",
           "pretty",
           "beautiful"
@@ -1725,7 +1725,7 @@
         "speak": "fácil",
         "options": [
           "easy",
-          "back (body)",
+          "back",
           "head",
           "happy"
         ],
@@ -1753,7 +1753,7 @@
         "options": [
           "fast",
           "sun",
-          "ill",
+          "sick",
           "beautiful"
         ],
         "answer": 0,
@@ -1781,7 +1781,7 @@
           "arm",
           "long",
           "ready",
-          "it is hot outside"
+          "it is hot"
         ],
         "answer": 1,
         "wordId": "es-a1u7-w39"
@@ -2088,7 +2088,7 @@
       {
         "id": "es-a1-u7-cp-m1",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u7-w4",
@@ -2120,7 +2120,7 @@
       {
         "id": "es-a1-u7-cp-m2",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u7-w10",
@@ -2152,7 +2152,7 @@
       {
         "id": "es-a1-u7-cp-m3",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u7-w19",
@@ -2184,7 +2184,7 @@
       {
         "id": "es-a1-u7-cp-m4",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u7-w29",
@@ -2216,7 +2216,7 @@
       {
         "id": "es-a1-u7-cp-m5",
         "type": "match",
-        "prompt": "Match each pair",
+        "prompt": "Match the pairs",
         "pairs": [
           {
             "wordId": "es-a1u7-w34",
