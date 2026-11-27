@@ -24,6 +24,15 @@ type AllBoard = { scope: "all"; rows: Row[]; you: { rank: number; points: number
 // Gold, silver and bronze, softened to sit with the rest of the palette.
 const MEDAL: Record<number, string> = { 1: "bg-[#f3e3b5] text-[#7a5a12]", 2: "bg-[#e3e6ea] text-[#475163]", 3: "bg-[#f0d9c8] text-[#87502c]" };
 
+/** "3 days" until the last day, then "5 hours" so the last day does not read as "1 day". */
+function timeLeft(endsAt: string) {
+  const ms = Math.max(0, new Date(endsAt).getTime() - Date.now());
+  const hours = Math.ceil(ms / 3600_000);
+  if (hours <= 24) return { n: Math.max(1, hours), unit: hours === 1 ? "hour" : "hours" };
+  const days = Math.ceil(ms / 86400_000);
+  return { n: days, unit: days === 1 ? "day" : "days" };
+}
+
 const pts = (n: number) => n.toLocaleString("en");
 const word = (n: number) => (n === 1 ? "point" : "points");
 
@@ -133,6 +142,7 @@ function Contest({ data }: { data: ContestBoard | undefined }) {
       </Card>
     );
   }
+  const left = timeLeft(contest.endsAt);
   const inRace = data.rows.filter((r) => !r.missed);
   const out = data.rows.filter((r) => r.missed);
   const status = !me.verified ? null : me.missed ? "You missed a day, so you are out of the race. Your points still count on Overall."
@@ -145,6 +155,7 @@ function Contest({ data }: { data: ContestBoard | undefined }) {
             <p className="text-[13px] font-medium text-muted">Day <span className="tabular">{dayNo}</span> of <span className="tabular">{contest.dates.length}</span></p>
             <p className="tabular mt-1.5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">{me.verified && me.rank !== null ? `#${me.rank}` : me.verified ? "Not ranked" : "Not entered"}{me.verified && me.rank !== null && <span className="text-sm font-medium tracking-normal text-muted"> of {data.inRace}</span>}</p>
           </div>
+          <p aria-label={`Ends in ${left.n} ${left.unit}`} className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sunken px-3 py-1.5 text-sm font-semibold text-ink"><CalendarDays size={18} strokeWidth={1.75} aria-hidden /><span className="tabular">{left.n}</span> {left.unit} left</p>
         </div>
         {status && <p className={cn("mt-4 border-t border-line pt-3 text-sm font-medium", me.missed ? "text-coral-700" : "text-sage-700")}>{status}</p>}
         {!me.verified && <Notice tone="info" className="mt-4" title="Verify to enter">Only verified people can win. Your points still count on Overall.</Notice>}
