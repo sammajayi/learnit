@@ -41,7 +41,7 @@
         {
           "id": "fr-a1-u7-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w1",
@@ -167,7 +167,7 @@
         {
           "id": "fr-a1-u7-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w5",
@@ -272,7 +272,7 @@
             "ready",
             "sad",
             "happy",
-            "free"
+            "free (not busy)"
           ],
           "answer": 2,
           "wordId": "fr-a1u7-w9"
@@ -293,7 +293,7 @@
         {
           "id": "fr-a1-u7-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w9",
@@ -325,7 +325,7 @@
           "options": [
             "sad",
             "tired",
-            "sick",
+            "ill",
             "angry"
           ],
           "answer": 1,
@@ -393,7 +393,7 @@
           "prompt": "What does \"malade\" mean?",
           "speak": "malade",
           "options": [
-            "sick",
+            "ill",
             "angry",
             "sad",
             "ready"
@@ -417,12 +417,12 @@
         {
           "id": "fr-a1-u7-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w13",
               "target": "malade",
-              "english": "sick"
+              "english": "ill"
             },
             {
               "wordId": "fr-a1u7-w14",
@@ -437,7 +437,7 @@
             {
               "wordId": "fr-a1u7-w16",
               "target": "libre",
-              "english": "free"
+              "english": "free (not busy)"
             }
           ]
         },
@@ -448,7 +448,7 @@
           "speak": "occupé",
           "options": [
             "tired",
-            "sick",
+            "ill",
             "angry",
             "busy"
           ],
@@ -458,7 +458,7 @@
         {
           "id": "fr-a1u7-w16-et",
           "type": "mc",
-          "prompt": "How do you say \"free\"?",
+          "prompt": "How do you say \"free (not busy)\"?",
           "options": [
             "occupé",
             "content",
@@ -490,7 +490,7 @@
       "intro": [
         {
           "target": "malade",
-          "english": "sick"
+          "english": "ill"
         },
         {
           "target": "prêt",
@@ -502,7 +502,7 @@
         },
         {
           "target": "libre",
-          "english": "free"
+          "english": "free (not busy)"
         }
       ]
     },
@@ -520,7 +520,7 @@
             "nose",
             "mouth",
             "head",
-            "back"
+            "back (body)"
           ],
           "answer": 2,
           "wordId": "fr-a1u7-w17"
@@ -541,7 +541,7 @@
         {
           "id": "fr-a1-u7-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w17",
@@ -669,7 +669,7 @@
         {
           "id": "fr-a1-u7-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w21",
@@ -689,7 +689,7 @@
             {
               "wordId": "fr-a1u7-w24",
               "target": "le dos",
-              "english": "back"
+              "english": "back (body)"
             }
           ]
         },
@@ -710,7 +710,7 @@
         {
           "id": "fr-a1u7-w24-et",
           "type": "mc",
-          "prompt": "How do you say \"back\"?",
+          "prompt": "How do you say \"back (body)\"?",
           "options": [
             "la tête",
             "la bouche",
@@ -758,7 +758,7 @@
         },
         {
           "target": "le dos",
-          "english": "back"
+          "english": "back (body)"
         }
       ]
     },
@@ -774,8 +774,8 @@
           "speak": "il fait beau",
           "options": [
             "wind",
-            "it is cold",
-            "it is hot",
+            "it is cold outside",
+            "it is hot outside",
             "the weather is nice"
           ],
           "answer": 3,
@@ -797,7 +797,7 @@
         {
           "id": "fr-a1-u7-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w25",
@@ -812,12 +812,12 @@
             {
               "wordId": "fr-a1u7-w27",
               "target": "il fait chaud",
-              "english": "it is hot"
+              "english": "it is hot outside"
             },
             {
               "wordId": "fr-a1u7-w28",
               "target": "il fait froid",
-              "english": "it is cold"
+              "english": "it is cold outside"
             }
           ]
         },
@@ -827,7 +827,7 @@
           "prompt": "What does \"il fait chaud\" mean?",
           "speak": "il fait chaud",
           "options": [
-            "it is hot",
+            "it is hot outside",
             "it is raining",
             "the weather is nice",
             "snow"
@@ -838,7 +838,7 @@
         {
           "id": "fr-a1u7-w28-et",
           "type": "mc",
-          "prompt": "How do you say \"it is cold\"?",
+          "prompt": "How do you say \"it is cold outside\"?",
           "options": [
             "la pluie",
             "il fait froid",
@@ -880,11 +880,11 @@
         },
         {
           "target": "il fait chaud",
-          "english": "it is hot"
+          "english": "it is hot outside"
         },
         {
           "target": "il fait froid",
-          "english": "it is cold"
+          "english": "it is cold outside"
         }
       ]
     },
@@ -901,7 +901,7 @@
           "options": [
             "sun",
             "rain",
-            "it is cold",
+            "it is cold outside",
             "snow"
           ],
           "answer": 0,
@@ -923,7 +923,7 @@
         {
           "id": "fr-a1-u7-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w29",
@@ -1047,7 +1047,7 @@
         {
           "id": "fr-a1-u7-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w33",
@@ -1169,7 +1169,7 @@
         {
           "id": "fr-a1-u7-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u7-w37",
@@ -1434,7 +1434,7 @@
         "speak": "malade",
         "options": [
           "arm",
-          "sick",
+          "ill",
           "nose",
           "bad"
         ],
@@ -1460,8 +1460,8 @@
         "prompt": "What does \"occupé\" mean?",
         "speak": "occupé",
         "options": [
-          "sick",
-          "it is hot",
+          "ill",
+          "it is hot outside",
           "busy",
           "head"
         ],
@@ -1471,7 +1471,7 @@
       {
         "id": "fr-a1-u7-cp-fr-a1u7-w16",
         "type": "mc",
-        "prompt": "How do you say \"free\"?",
+        "prompt": "How do you say \"free (not busy)\"?",
         "options": [
           "les yeux",
           "libre",
@@ -1579,7 +1579,7 @@
       {
         "id": "fr-a1-u7-cp-fr-a1u7-w24",
         "type": "mc",
-        "prompt": "How do you say \"back\"?",
+        "prompt": "How do you say \"back (body)\"?",
         "options": [
           "le pied",
           "le dos",
@@ -1622,10 +1622,10 @@
         "prompt": "What does \"il fait chaud\" mean?",
         "speak": "il fait chaud",
         "options": [
-          "it is cold",
+          "it is cold outside",
           "hand",
           "nose",
-          "it is hot"
+          "it is hot outside"
         ],
         "answer": 3,
         "wordId": "fr-a1u7-w27"
@@ -1633,7 +1633,7 @@
       {
         "id": "fr-a1-u7-cp-fr-a1u7-w28",
         "type": "mc",
-        "prompt": "How do you say \"it is cold\"?",
+        "prompt": "How do you say \"it is cold outside\"?",
         "options": [
           "il fait froid",
           "bon",
@@ -1705,7 +1705,7 @@
         "options": [
           "good",
           "beautiful",
-          "it is hot",
+          "it is hot outside",
           "mouth"
         ],
         "answer": 1,
@@ -1787,7 +1787,7 @@
           "long",
           "beautiful",
           "the weather is nice",
-          "free"
+          "free (not busy)"
         ],
         "answer": 0,
         "wordId": "fr-a1u7-w39"
@@ -2098,7 +2098,7 @@
       {
         "id": "fr-a1-u7-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u7-w4",
@@ -2130,7 +2130,7 @@
       {
         "id": "fr-a1-u7-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u7-w11",
@@ -2140,7 +2140,7 @@
           {
             "wordId": "fr-a1u7-w16",
             "target": "libre",
-            "english": "free"
+            "english": "free (not busy)"
           },
           {
             "wordId": "fr-a1u7-w15",
@@ -2150,7 +2150,7 @@
           {
             "wordId": "fr-a1u7-w13",
             "target": "malade",
-            "english": "sick"
+            "english": "ill"
           },
           {
             "wordId": "fr-a1u7-w12",
@@ -2162,7 +2162,7 @@
       {
         "id": "fr-a1-u7-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u7-w19",
@@ -2187,14 +2187,14 @@
           {
             "wordId": "fr-a1u7-w24",
             "target": "le dos",
-            "english": "back"
+            "english": "back (body)"
           }
         ]
       },
       {
         "id": "fr-a1-u7-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u7-w32",
@@ -2204,7 +2204,7 @@
           {
             "wordId": "fr-a1u7-w28",
             "target": "il fait froid",
-            "english": "it is cold"
+            "english": "it is cold outside"
           },
           {
             "wordId": "fr-a1u7-w30",
@@ -2219,14 +2219,14 @@
           {
             "wordId": "fr-a1u7-w27",
             "target": "il fait chaud",
-            "english": "it is hot"
+            "english": "it is hot outside"
           }
         ]
       },
       {
         "id": "fr-a1-u7-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u7-w33",

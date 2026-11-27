@@ -3,7 +3,7 @@
   "unit": 4,
   "level": "A1",
   "title": "Food and drink",
-  "blurb": "Order a drink, a meal and say what you like.",
+  "blurb": "Order a drink and a meal, and say what you like.",
   "speechLang": "fr-FR",
   "lessons": [
     {
@@ -41,7 +41,7 @@
         {
           "id": "fr-a1-u4-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w1",
@@ -169,7 +169,7 @@
         {
           "id": "fr-a1-u4-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w5",
@@ -295,7 +295,7 @@
         {
           "id": "fr-a1-u4-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w9",
@@ -419,7 +419,7 @@
         {
           "id": "fr-a1-u4-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w13",
@@ -547,7 +547,7 @@
         {
           "id": "fr-a1-u4-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w17",
@@ -675,7 +675,7 @@
         {
           "id": "fr-a1-u4-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w21",
@@ -778,8 +778,8 @@
           "speak": "j'ai faim",
           "options": [
             "it is good",
-            "the bill",
-            "the menu",
+            "bill",
+            "menu",
             "I am hungry"
           ],
           "answer": 3,
@@ -801,7 +801,7 @@
         {
           "id": "fr-a1-u4-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w25",
@@ -821,7 +821,7 @@
             {
               "wordId": "fr-a1u4-w28",
               "target": "l'addition",
-              "english": "the bill"
+              "english": "bill"
             }
           ]
         },
@@ -834,7 +834,7 @@
             "delicious",
             "it is good",
             "I would like",
-            "the bill"
+            "bill"
           ],
           "answer": 2,
           "wordId": "fr-a1u4-w27"
@@ -842,7 +842,7 @@
         {
           "id": "fr-a1u4-w28-et",
           "type": "mc",
-          "prompt": "How do you say \"the bill\"?",
+          "prompt": "How do you say \"bill\"?",
           "options": [
             "j'ai soif",
             "l'addition",
@@ -884,7 +884,7 @@
         },
         {
           "target": "l'addition",
-          "english": "the bill"
+          "english": "bill"
         }
       ]
     },
@@ -902,7 +902,7 @@
             "I am thirsty",
             "it is good",
             "delicious",
-            "the menu"
+            "menu"
           ],
           "answer": 3,
           "wordId": "fr-a1u4-w29"
@@ -923,12 +923,12 @@
         {
           "id": "fr-a1-u4-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w29",
               "target": "le menu",
-              "english": "the menu"
+              "english": "menu"
             },
             {
               "wordId": "fr-a1u4-w30",
@@ -998,7 +998,7 @@
       "intro": [
         {
           "target": "le menu",
-          "english": "the menu"
+          "english": "menu"
         },
         {
           "target": "délicieux",
@@ -1016,8 +1016,8 @@
     },
     {
       "id": "fr-a1-u4-l9",
-      "title": "Likes, part 1",
-      "theme": "likes",
+      "title": "Likes and dislikes, part 1",
+      "theme": "likes and dislikes",
       "exercises": [
         {
           "id": "fr-a1u4-w33-te",
@@ -1049,7 +1049,7 @@
         {
           "id": "fr-a1-u4-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w33",
@@ -1142,8 +1142,8 @@
     },
     {
       "id": "fr-a1-u4-l10",
-      "title": "Likes, part 2",
-      "theme": "likes",
+      "title": "Likes and dislikes, part 2",
+      "theme": "likes and dislikes",
       "exercises": [
         {
           "id": "fr-a1u4-w37-te",
@@ -1175,7 +1175,7 @@
         {
           "id": "fr-a1-u4-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a1u4-w37",
@@ -1549,7 +1549,7 @@
         "prompt": "What does \"la pomme de terre\" mean?",
         "speak": "la pomme de terre",
         "options": [
-          "the bill",
+          "bill",
           "I would like",
           "tea",
           "potato"
@@ -1605,7 +1605,7 @@
         "options": [
           "I am hungry",
           "milk",
-          "the menu",
+          "menu",
           "delicious"
         ],
         "answer": 0,
@@ -1641,7 +1641,7 @@
       {
         "id": "fr-a1-u4-cp-fr-a1u4-w28",
         "type": "mc",
-        "prompt": "How do you say \"the bill\"?",
+        "prompt": "How do you say \"bill\"?",
         "options": [
           "sans",
           "l'addition",
@@ -1659,7 +1659,7 @@
         "options": [
           "rice",
           "with",
-          "the menu",
+          "menu",
           "milk"
         ],
         "answer": 2,
@@ -2112,7 +2112,7 @@
       {
         "id": "fr-a1-u4-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u4-w5",
@@ -2144,7 +2144,7 @@
       {
         "id": "fr-a1-u4-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u4-w16",
@@ -2176,7 +2176,7 @@
       {
         "id": "fr-a1-u4-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u4-w22",
@@ -2208,17 +2208,17 @@
       {
         "id": "fr-a1-u4-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u4-w29",
             "target": "le menu",
-            "english": "the menu"
+            "english": "menu"
           },
           {
             "wordId": "fr-a1u4-w28",
             "target": "l'addition",
-            "english": "the bill"
+            "english": "bill"
           },
           {
             "wordId": "fr-a1u4-w25",
@@ -2240,7 +2240,7 @@
       {
         "id": "fr-a1-u4-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a1u4-w36",

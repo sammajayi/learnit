@@ -41,7 +41,7 @@
         {
           "id": "fr-a2-u9-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w1",
@@ -137,7 +137,7 @@
       ],
       "tip": {
         "title": "Time words",
-        "body": "Put the time word first or last. Hier soir, j'ai mangé. J'ai mangé hier soir. Il y a deux jours means 2 days ago."
+        "body": "A time word can go first or last. Hier soir j'ai mangé and J'ai mangé hier soir both mean I ate last night. Il y a deux jours means 2 days ago."
       }
     },
     {
@@ -175,7 +175,7 @@
         {
           "id": "fr-a2-u9-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w5",
@@ -307,7 +307,7 @@
         {
           "id": "fr-a2-u9-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w9",
@@ -401,7 +401,7 @@
       ],
       "tip": {
         "title": "Past with avoir",
-        "body": "Most past verbs use j'ai plus a past form. J'ai mangé means I ate. Tu as vu means you saw."
+        "body": "For most verbs, the past is j'ai plus the past form of the verb. J'ai mangé means I ate. Tu as vu means you saw."
       }
     },
     {
@@ -439,7 +439,7 @@
         {
           "id": "fr-a2-u9-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w13",
@@ -567,7 +567,7 @@
         {
           "id": "fr-a2-u9-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w17",
@@ -663,7 +663,7 @@
       ],
       "tip": {
         "title": "Past with être",
-        "body": "Verbs of movement use je suis, not j'ai. Je suis allé au parc. A woman adds an e in writing: je suis allée."
+        "body": "Verbs like aller, arriver and partir use je suis, not j'ai. Je suis allé au parc. A woman adds an e when writing: je suis allée."
       }
     },
     {
@@ -701,7 +701,7 @@
         {
           "id": "fr-a2-u9-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w21",
@@ -831,7 +831,7 @@
         {
           "id": "fr-a2-u9-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w25",
@@ -923,7 +923,7 @@
       ],
       "tip": {
         "title": "How it was",
-        "body": "Use c'était and il faisait to say how things were. Learn them as set phrases for now. C'était super. Il faisait beau."
+        "body": "Use c'était and il faisait to say how things were. Learn them as set phrases for now. Try C'était super or Il faisait beau."
       }
     },
     {
@@ -961,7 +961,7 @@
         {
           "id": "fr-a2-u9-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w29",
@@ -1065,10 +1065,10 @@
           "prompt": "What does \"qu'est-ce que tu as fait\" mean?",
           "speak": "qu'est-ce que tu as fait",
           "options": [
-            "did you like it",
+            "did you like it (informal)",
             "when",
             "what did you do (polite)",
-            "what did you do"
+            "what did you do (informal)"
           ],
           "answer": 3,
           "wordId": "fr-a2u9-w33"
@@ -1089,12 +1089,12 @@
         {
           "id": "fr-a2-u9-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w33",
               "target": "qu'est-ce que tu as fait",
-              "english": "what did you do"
+              "english": "what did you do (informal)"
             },
             {
               "wordId": "fr-a2u9-w34",
@@ -1104,7 +1104,7 @@
             {
               "wordId": "fr-a2u9-w35",
               "target": "où es-tu allé",
-              "english": "where did you go"
+              "english": "where did you go (informal)"
             },
             {
               "wordId": "fr-a2u9-w36",
@@ -1119,10 +1119,10 @@
           "prompt": "What does \"où es-tu allé\" mean?",
           "speak": "où es-tu allé",
           "options": [
-            "where did you go",
+            "where did you go (informal)",
             "what did you do (polite)",
             "when",
-            "did you like it"
+            "did you like it (informal)"
           ],
           "answer": 0,
           "wordId": "fr-a2u9-w35"
@@ -1143,7 +1143,7 @@
         {
           "id": "fr-a2-u9-l9-s",
           "type": "translate",
-          "prompt": "What did you do yesterday",
+          "prompt": "What did you do yesterday?",
           "answer": [
             "Qu'est-ce",
             "que",
@@ -1168,7 +1168,7 @@
       "intro": [
         {
           "target": "qu'est-ce que tu as fait",
-          "english": "what did you do"
+          "english": "what did you do (informal)"
         },
         {
           "target": "qu'est-ce que vous avez fait",
@@ -1176,7 +1176,7 @@
         },
         {
           "target": "où es-tu allé",
-          "english": "where did you go"
+          "english": "where did you go (informal)"
         },
         {
           "target": "avec qui",
@@ -1200,9 +1200,9 @@
           "speak": "tu as bien dormi",
           "options": [
             "when",
-            "did you sleep well",
-            "did you like it",
-            "what did you do"
+            "did you sleep well (informal)",
+            "did you like it (informal)",
+            "what did you do (informal)"
           ],
           "answer": 1,
           "wordId": "fr-a2u9-w37"
@@ -1223,12 +1223,12 @@
         {
           "id": "fr-a2-u9-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "fr-a2u9-w37",
               "target": "tu as bien dormi",
-              "english": "did you sleep well"
+              "english": "did you sleep well (informal)"
             },
             {
               "wordId": "fr-a2u9-w38",
@@ -1243,7 +1243,7 @@
             {
               "wordId": "fr-a2u9-w40",
               "target": "tu as aimé",
-              "english": "did you like it"
+              "english": "did you like it (informal)"
             }
           ]
         },
@@ -1254,9 +1254,9 @@
           "speak": "quand",
           "options": [
             "when",
-            "where did you go",
+            "where did you go (informal)",
             "how was it",
-            "what did you do"
+            "what did you do (informal)"
           ],
           "answer": 0,
           "wordId": "fr-a2u9-w39"
@@ -1264,7 +1264,7 @@
         {
           "id": "fr-a2u9-w40-et",
           "type": "mc",
-          "prompt": "How do you say \"did you like it\"?",
+          "prompt": "How do you say \"did you like it (informal)\"?",
           "options": [
             "tu as aimé",
             "tu as bien dormi",
@@ -1277,7 +1277,7 @@
         {
           "id": "fr-a2-u9-l10-s",
           "type": "translate",
-          "prompt": "Where did you go this morning",
+          "prompt": "Where did you go this morning?",
           "answer": [
             "Où",
             "es-tu",
@@ -1300,7 +1300,7 @@
       "intro": [
         {
           "target": "tu as bien dormi",
-          "english": "did you sleep well"
+          "english": "did you sleep well (informal)"
         },
         {
           "target": "c'était comment",
@@ -1312,7 +1312,7 @@
         },
         {
           "target": "tu as aimé",
-          "english": "did you like it"
+          "english": "did you like it (informal)"
         }
       ]
     }
@@ -1357,7 +1357,7 @@
           "yesterday afternoon",
           "I had",
           "I spoke",
-          "did you like it"
+          "did you like it (informal)"
         ],
         "answer": 0,
         "wordId": "fr-a2u9-w3"
@@ -1545,7 +1545,7 @@
         "options": [
           "I went",
           "it was raining",
-          "where did you go",
+          "where did you go (informal)",
           "yesterday"
         ],
         "answer": 0,
@@ -1570,8 +1570,8 @@
         "prompt": "What does \"je suis resté\" mean?",
         "speak": "je suis resté",
         "options": [
-          "where did you go",
-          "what did you do",
+          "where did you go (informal)",
+          "what did you do (informal)",
           "I stayed",
           "yesterday"
         ],
@@ -1654,7 +1654,7 @@
           "the weather was nice",
           "I ate",
           "2 days ago",
-          "where did you go"
+          "where did you go (informal)"
         ],
         "answer": 0,
         "wordId": "fr-a2u9-w25"
@@ -1681,7 +1681,7 @@
           "I came",
           "last night",
           "it was great",
-          "what did you do"
+          "what did you do (informal)"
         ],
         "answer": 2,
         "wordId": "fr-a2u9-w27"
@@ -1762,7 +1762,7 @@
           "I met",
           "yesterday afternoon",
           "2 days ago",
-          "what did you do"
+          "what did you do (informal)"
         ],
         "answer": 3,
         "wordId": "fr-a2u9-w33"
@@ -1786,9 +1786,9 @@
         "prompt": "What does \"où es-tu allé\" mean?",
         "speak": "où es-tu allé",
         "options": [
-          "did you like it",
+          "did you like it (informal)",
           "it was great",
-          "where did you go",
+          "where did you go (informal)",
           "I ate"
         ],
         "answer": 2,
@@ -1815,7 +1815,7 @@
         "options": [
           "I ate",
           "last week",
-          "did you sleep well",
+          "did you sleep well (informal)",
           "I went out"
         ],
         "answer": 2,
@@ -1851,7 +1851,7 @@
       {
         "id": "fr-a2-u9-cp-fr-a2u9-w40",
         "type": "mc",
-        "prompt": "How do you say \"did you like it\"?",
+        "prompt": "How do you say \"did you like it (informal)\"?",
         "options": [
           "tu as aimé",
           "il y a deux jours",
@@ -2136,7 +2136,7 @@
       {
         "id": "fr-a2-u9-cp-l5-s1",
         "type": "translate",
-        "prompt": "What did you do yesterday",
+        "prompt": "What did you do yesterday?",
         "answer": [
           "Qu'est-ce",
           "que",
@@ -2160,7 +2160,7 @@
       {
         "id": "fr-a2-u9-cp-l5-s2",
         "type": "translate",
-        "prompt": "Where did you go this morning",
+        "prompt": "Where did you go this morning?",
         "answer": [
           "Où",
           "es-tu",
@@ -2182,7 +2182,7 @@
       {
         "id": "fr-a2-u9-cp-l5-s3",
         "type": "translate",
-        "prompt": "Did you like the film",
+        "prompt": "Did you like the film?",
         "answer": [
           "Tu",
           "as",
@@ -2204,7 +2204,7 @@
       {
         "id": "fr-a2-u9-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a2u9-w7",
@@ -2236,7 +2236,7 @@
       {
         "id": "fr-a2-u9-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a2u9-w12",
@@ -2268,7 +2268,7 @@
       {
         "id": "fr-a2-u9-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a2u9-w21",
@@ -2300,7 +2300,7 @@
       {
         "id": "fr-a2-u9-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a2u9-w29",
@@ -2332,7 +2332,7 @@
       {
         "id": "fr-a2-u9-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "fr-a2u9-w36",
@@ -2357,7 +2357,7 @@
           {
             "wordId": "fr-a2u9-w35",
             "target": "où es-tu allé",
-            "english": "where did you go"
+            "english": "where did you go (informal)"
           }
         ]
       }

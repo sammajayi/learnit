@@ -3,7 +3,7 @@
   "unit": 8,
   "level": "A1",
   "title": "Shopping and travel",
-  "blurb": "Shop, travel and get help when you need it.",
+  "blurb": "Shop, travel and ask for help.",
   "speechLang": "es-ES",
   "lessons": [
     {
@@ -41,7 +41,7 @@
         {
           "id": "es-a1-u8-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w1",
@@ -73,7 +73,7 @@
           "options": [
             "to pay",
             "card",
-            "change",
+            "change (money)",
             "cheap"
           ],
           "answer": 3,
@@ -142,7 +142,7 @@
           "speak": "pagar",
           "options": [
             "price",
-            "change",
+            "change (money)",
             "money",
             "to pay"
           ],
@@ -165,7 +165,7 @@
         {
           "id": "es-a1-u8-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w5",
@@ -185,7 +185,7 @@
             {
               "wordId": "es-a1u8-w8",
               "target": "el cambio",
-              "english": "change"
+              "english": "change (money)"
             }
           ]
         },
@@ -206,7 +206,7 @@
         {
           "id": "es-a1u8-w8-et",
           "type": "mc",
-          "prompt": "How do you say \"change\"?",
+          "prompt": "How do you say \"change (money)\"?",
           "options": [
             "la tarjeta",
             "el dinero",
@@ -219,7 +219,7 @@
         {
           "id": "es-a1-u8-l2-s",
           "type": "translate",
-          "prompt": "How much does it cost",
+          "prompt": "How much does it cost?",
           "answer": [
             "Cuánto",
             "cuesta"
@@ -248,7 +248,7 @@
         },
         {
           "target": "el cambio",
-          "english": "change"
+          "english": "change (money)"
         }
       ]
     },
@@ -287,7 +287,7 @@
         {
           "id": "es-a1-u8-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w9",
@@ -413,7 +413,7 @@
         {
           "id": "es-a1-u8-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w13",
@@ -539,7 +539,7 @@
         {
           "id": "es-a1-u8-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w17",
@@ -665,7 +665,7 @@
         {
           "id": "es-a1-u8-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w21",
@@ -770,7 +770,7 @@
             "I need",
             "help me",
             "do you speak English",
-            "help"
+            "help!"
           ],
           "answer": 3,
           "wordId": "es-a1u8-w25"
@@ -791,12 +791,12 @@
         {
           "id": "es-a1-u8-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w25",
               "target": "socorro",
-              "english": "help"
+              "english": "help!"
             },
             {
               "wordId": "es-a1u8-w26",
@@ -823,7 +823,7 @@
           "options": [
             "I need",
             "help me",
-            "help",
+            "help!",
             "I am lost"
           ],
           "answer": 3,
@@ -864,7 +864,7 @@
       "intro": [
         {
           "target": "socorro",
-          "english": "help"
+          "english": "help!"
         },
         {
           "target": "ayúdeme",
@@ -894,7 +894,7 @@
             "help me",
             "police",
             "emergency",
-            "help"
+            "help!"
           ],
           "answer": 1,
           "wordId": "es-a1u8-w29"
@@ -915,7 +915,7 @@
         {
           "id": "es-a1-u8-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w29",
@@ -1004,8 +1004,8 @@
     },
     {
       "id": "es-a1-u8-l9",
-      "title": "Getting by, part 1",
-      "theme": "getting by",
+      "title": "Useful phrases, part 1",
+      "theme": "useful phrases",
       "exercises": [
         {
           "id": "es-a1u8-w33-te",
@@ -1037,7 +1037,7 @@
         {
           "id": "es-a1-u8-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w33",
@@ -1130,8 +1130,8 @@
     },
     {
       "id": "es-a1-u8-l10",
-      "title": "Getting by, part 2",
-      "theme": "getting by",
+      "title": "Useful phrases, part 2",
+      "theme": "useful phrases",
       "exercises": [
         {
           "id": "es-a1u8-w37-te",
@@ -1163,7 +1163,7 @@
         {
           "id": "es-a1-u8-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u8-w37",
@@ -1217,7 +1217,7 @@
         {
           "id": "es-a1-u8-l10-s",
           "type": "translate",
-          "prompt": "I am looking for the station",
+          "prompt": "I am looking for the train station",
           "answer": [
             "Busco",
             "la",
@@ -1320,7 +1320,7 @@
           "to arrive",
           "to pay",
           "card",
-          "change"
+          "change (money)"
         ],
         "answer": 1,
         "wordId": "es-a1u8-w5"
@@ -1355,7 +1355,7 @@
       {
         "id": "es-a1-u8-cp-es-a1u8-w8",
         "type": "mc",
-        "prompt": "How do you say \"change\"?",
+        "prompt": "How do you say \"change (money)\"?",
         "options": [
           "caro",
           "el cambio",
@@ -1509,7 +1509,7 @@
           "police",
           "to leave",
           "passport",
-          "change"
+          "change (money)"
         ],
         "answer": 2,
         "wordId": "es-a1u8-w19"
@@ -1561,7 +1561,7 @@
         "speak": "llegar",
         "options": [
           "I need",
-          "help",
+          "help!",
           "that is all",
           "to arrive"
         ],
@@ -1588,7 +1588,7 @@
         "speak": "socorro",
         "options": [
           "that is all",
-          "help",
+          "help!",
           "price",
           "speak slowly"
         ],
@@ -1800,7 +1800,7 @@
       {
         "id": "es-a1-u8-cp-l1-s1",
         "type": "translate",
-        "prompt": "How much does it cost",
+        "prompt": "How much does it cost?",
         "answer": [
           "Cuánto",
           "cuesta"
@@ -2018,7 +2018,7 @@
       {
         "id": "es-a1-u8-cp-l5-s1",
         "type": "translate",
-        "prompt": "I am looking for the station",
+        "prompt": "I am looking for the train station",
         "answer": [
           "Busco",
           "la",
@@ -2056,7 +2056,7 @@
       {
         "id": "es-a1-u8-cp-l5-s3",
         "type": "translate",
-        "prompt": "What is this",
+        "prompt": "What is this?",
         "answer": [
           "Qué",
           "es",
@@ -2074,7 +2074,7 @@
       {
         "id": "es-a1-u8-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u8-w7",
@@ -2106,7 +2106,7 @@
       {
         "id": "es-a1-u8-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u8-w15",
@@ -2138,7 +2138,7 @@
       {
         "id": "es-a1-u8-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u8-w17",
@@ -2170,7 +2170,7 @@
       {
         "id": "es-a1-u8-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u8-w28",
@@ -2202,7 +2202,7 @@
       {
         "id": "es-a1-u8-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u8-w39",

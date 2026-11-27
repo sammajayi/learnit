@@ -3,7 +3,7 @@
   "unit": 4,
   "level": "A1",
   "title": "Food and drink",
-  "blurb": "Order a drink, a meal and say what you like.",
+  "blurb": "Order a drink and a meal, and say what you like.",
   "speechLang": "es-ES",
   "lessons": [
     {
@@ -41,7 +41,7 @@
         {
           "id": "es-a1-u4-l1-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w1",
@@ -167,7 +167,7 @@
         {
           "id": "es-a1-u4-l2-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w5",
@@ -293,7 +293,7 @@
         {
           "id": "es-a1-u4-l3-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w9",
@@ -417,7 +417,7 @@
         {
           "id": "es-a1-u4-l4-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w13",
@@ -543,7 +543,7 @@
         {
           "id": "es-a1-u4-l5-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w17",
@@ -669,7 +669,7 @@
         {
           "id": "es-a1-u4-l6-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w21",
@@ -773,7 +773,7 @@
           "options": [
             "I am thirsty",
             "I am hungry",
-            "the bill",
+            "bill",
             "delicious"
           ],
           "answer": 1,
@@ -795,7 +795,7 @@
         {
           "id": "es-a1-u4-l7-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w25",
@@ -815,7 +815,7 @@
             {
               "wordId": "es-a1u4-w28",
               "target": "la cuenta",
-              "english": "the bill"
+              "english": "bill"
             }
           ]
         },
@@ -836,7 +836,7 @@
         {
           "id": "es-a1u4-w28-et",
           "type": "mc",
-          "prompt": "How do you say \"the bill\"?",
+          "prompt": "How do you say \"bill\"?",
           "options": [
             "el menú",
             "delicioso",
@@ -878,7 +878,7 @@
         },
         {
           "target": "la cuenta",
-          "english": "the bill"
+          "english": "bill"
         }
       ]
     },
@@ -893,7 +893,7 @@
           "prompt": "What does \"el menú\" mean?",
           "speak": "el menú",
           "options": [
-            "the menu",
+            "menu",
             "it is tasty",
             "I would like",
             "delicious"
@@ -917,12 +917,12 @@
         {
           "id": "es-a1-u4-l8-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w29",
               "target": "el menú",
-              "english": "the menu"
+              "english": "menu"
             },
             {
               "wordId": "es-a1u4-w30",
@@ -948,9 +948,9 @@
           "speak": "está rico",
           "options": [
             "it is tasty",
-            "the bill",
+            "bill",
             "I am hungry",
-            "the menu"
+            "menu"
           ],
           "answer": 0,
           "wordId": "es-a1u4-w31"
@@ -992,7 +992,7 @@
       "intro": [
         {
           "target": "el menú",
-          "english": "the menu"
+          "english": "menu"
         },
         {
           "target": "delicioso",
@@ -1010,8 +1010,8 @@
     },
     {
       "id": "es-a1-u4-l9",
-      "title": "Likes, part 1",
-      "theme": "likes",
+      "title": "Likes and dislikes, part 1",
+      "theme": "likes and dislikes",
       "exercises": [
         {
           "id": "es-a1u4-w33-te",
@@ -1043,7 +1043,7 @@
         {
           "id": "es-a1-u4-l9-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w33",
@@ -1138,8 +1138,8 @@
     },
     {
       "id": "es-a1-u4-l10",
-      "title": "Likes, part 2",
-      "theme": "likes",
+      "title": "Likes and dislikes, part 2",
+      "theme": "likes and dislikes",
       "exercises": [
         {
           "id": "es-a1u4-w37-te",
@@ -1171,7 +1171,7 @@
         {
           "id": "es-a1-u4-l10-m",
           "type": "match",
-          "prompt": "Match the pairs",
+          "prompt": "Match each pair",
           "pairs": [
             {
               "wordId": "es-a1u4-w37",
@@ -1302,8 +1302,8 @@
         "prompt": "What does \"el té\" mean?",
         "speak": "el té",
         "options": [
-          "the menu",
-          "the bill",
+          "menu",
+          "bill",
           "juice",
           "tea"
         ],
@@ -1637,7 +1637,7 @@
       {
         "id": "es-a1-u4-cp-es-a1u4-w28",
         "type": "mc",
-        "prompt": "How do you say \"the bill\"?",
+        "prompt": "How do you say \"bill\"?",
         "options": [
           "la cuenta",
           "el pescado",
@@ -1653,7 +1653,7 @@
         "prompt": "What does \"el menú\" mean?",
         "speak": "el menú",
         "options": [
-          "the menu",
+          "menu",
           "I don't like",
           "chicken",
           "enjoy your meal"
@@ -2102,7 +2102,7 @@
       {
         "id": "es-a1-u4-cp-m1",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u4-w6",
@@ -2134,7 +2134,7 @@
       {
         "id": "es-a1-u4-cp-m2",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u4-w16",
@@ -2166,7 +2166,7 @@
       {
         "id": "es-a1-u4-cp-m3",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u4-w23",
@@ -2198,7 +2198,7 @@
       {
         "id": "es-a1-u4-cp-m4",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u4-w32",
@@ -2213,7 +2213,7 @@
           {
             "wordId": "es-a1u4-w28",
             "target": "la cuenta",
-            "english": "the bill"
+            "english": "bill"
           },
           {
             "wordId": "es-a1u4-w31",
@@ -2230,7 +2230,7 @@
       {
         "id": "es-a1-u4-cp-m5",
         "type": "match",
-        "prompt": "Match the pairs",
+        "prompt": "Match each pair",
         "pairs": [
           {
             "wordId": "es-a1u4-w39",
