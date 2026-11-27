@@ -140,8 +140,8 @@ export default function Earn() {
 
       <div className="mt-6 grid gap-3">
         {!data.verified && <Notice tone="warning" title="Verify to earn" action={<ButtonLink href="/home" variant="outline" size="sm">Verify with GoodDollar</ButtonLink>}>Rewards need a quick GoodDollar face check. You can keep learning in the meantime.</Notice>}
-        {!live && <Notice tone="info">Rewards aren&apos;t live yet. Anything you earn will be kept here.</Notice>}
-        {isPaused && <Notice tone="paused" title="Rewards are paused">Your rewards are safe and will be here when claiming resumes.</Notice>}
+        {!live && <Notice tone="info">Rewards are not live yet. Lessons and your streak work as normal.</Notice>}
+        {isPaused && <Notice tone="paused" title="Claiming is paused">Each reward is valid for 7 days, so claim as soon as claiming reopens.</Notice>}
       </div>
 
       <Card className="mt-8 overflow-hidden">

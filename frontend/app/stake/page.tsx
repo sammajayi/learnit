@@ -217,9 +217,9 @@ export default function Stake() {
 
   return (
     <AppShell>
-      <PageHeader eyebrow="Rewards and staking" title="Streak challenge" description={`Finish ${days} days, get your stake back.`} action={<RewardsTabs />} />
+      <PageHeader eyebrow="Rewards and staking" title="Streak challenge" description={`Finish ${days} days and get your stake back. Miss a day and you lose it.`} action={<RewardsTabs />} />
 
-      {isPaused && <Notice tone="paused" className="mt-6" title="Staking is paused">Your stake is safe. It will resume soon.</Notice>}
+      {isPaused && <Notice tone="paused" className="mt-6" title="Staking is paused">You cannot add a new stake for now. Stakes you have already made are not affected.</Notice>}
 
       <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:gap-8">
         <div className="grid min-w-0 grid-cols-1 content-start gap-6">
@@ -362,7 +362,7 @@ export default function Stake() {
                     </div>
                   );
                 })()}
-                {staked && c.settled && !c.mine!.finished && <Notice tone="warning" className="mt-6" title="You missed a day">Your stake was shared out, mostly to the people who finished.</Notice>}
+                {staked && c.settled && !c.mine!.finished && <Notice tone="warning" className="mt-6" title="You missed a day">Your stake was not returned. Most of it went to the people who finished.</Notice>}
                 {staked && c.mine!.withdrawn && <Notice tone="success" className="mt-6" >Withdrawn to your wallet.</Notice>}
                 {staked && c.voided && !c.mine!.withdrawn && (
                   <div className="mt-6 rounded-card bg-sunken p-5 ring-1 ring-inset ring-line">
