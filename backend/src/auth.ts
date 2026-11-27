@@ -23,7 +23,9 @@ export async function requireUser(req: Request) {
   let userId: string;
   try {
     userId = (await privy().verifyAuthToken(token)).userId;
-  } catch {
+  } catch (e) {
+    // An expired or forged token is normal. Anything else (a missing secret, a library that cannot run here) must show up in the logs.
+    console.error("auth: token check failed:", e instanceof Error ? `${e.name}: ${e.message}` : e);
     throw new AuthError("Invalid token");
   }
   const hit = userCache.get(userId);
