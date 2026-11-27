@@ -61,7 +61,7 @@ export default function Stake() {
   const live = Boolean(ADDR.streakVault);
   const busy = step !== null;
 
-  const { data, isError, refetch, isFetching } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: ok, retry: 3 });
+  const { data, isError, refetch, isFetching } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: ok, retry: 3, staleTime: 10_000, refetchOnWindowFocus: true }); // a challenge can settle while the page sits open, so look again when you come back
   // Checked before the stake form is shown, so nobody hits a revert.
   const paused = useQuery({ queryKey: ["paused", "vault"], enabled: ok && live && !!pc, staleTime: 30_000,
     queryFn: () => pc!.readContract({ address: ADDR.streakVault, abi: streakVaultAbi, functionName: "paused" }) });
