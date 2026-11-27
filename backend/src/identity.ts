@@ -1,10 +1,12 @@
-import { createPublicClient, fallback, http } from "viem";
+import { createPublicClient } from "viem";
+import { freshestTransport } from "./rpc";
 import { CHAIN, ADDR, RPC_URL, RPC_FALLBACK_URLS, identityAbi } from "./chain";
 
-// The public RPC sometimes stalls. Give each endpoint 6 seconds and one retry, then move to the next, so one slow server never fails a page.
+// The public RPC sometimes stalls, and its nodes are not always at the same block. Reads go to the node that is furthest ahead (see rpc.ts), and fall
+// back down the list when one cannot be reached, so neither a slow server nor a node that is behind can fail or mislead a page.
 export const publicClient = createPublicClient({
   chain: CHAIN,
-  transport: fallback([RPC_URL, ...RPC_FALLBACK_URLS.filter((u) => u !== RPC_URL)].map((u) => http(u, { timeout: 6_000, retryCount: 1 }))),
+  transport: freshestTransport([RPC_URL, ...RPC_FALLBACK_URLS.filter((u) => u !== RPC_URL)]),
 });
 
 const ZERO = "0x0000000000000000000000000000000000000000";
