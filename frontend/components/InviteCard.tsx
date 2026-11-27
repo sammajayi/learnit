@@ -52,13 +52,14 @@ function VoteRow() {
  * Invite friends as one line (icon, "5 invited · 1 counted", chevron). Tap it for the code and the vote.
  * Without referrals it is just the vote. The vote is a secondary action here and becomes "Voted" once it is done.
  */
-export function InviteCard() {
+export function InviteCard({ showVote = true }: { showVote?: boolean } = {}) {
   const { enabled, data } = useReferral();
   const { copied, copy, share, canShare } = useInviteActions(data?.code);
   const [open, setOpen] = useState(false);
   const iconBtn = "grid h-9 w-9 shrink-0 place-items-center rounded-input border border-line text-ink-2 transition-colors duration-100 hover:bg-sunken active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15";
   const summary = enabled && data ? `${data.invited} invited · ${data.counted} counted` : "Vote for LearnIt";
 
+  if (!showVote && !(enabled && data)) return null; // nothing to show without referrals once the vote has its own card
   return (
     <Card>
       <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open}
@@ -86,7 +87,7 @@ export function InviteCard() {
               </div>
             </>
           )}
-          <div className={cn(enabled && data && "border-t border-line pt-3")}><VoteRow /></div>
+          {showVote && <div className={cn(enabled && data && "border-t border-line pt-3")}><VoteRow /></div>}
         </div>
       )}
     </Card>
