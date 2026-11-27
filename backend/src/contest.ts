@@ -2,7 +2,7 @@ import type { User } from "@prisma/client";
 import { db } from "./db";
 import { nameFor, avatarUrlFor } from "./profile";
 import { pointsFor } from "./points";
-import { contestWindow, contestPoolG, missedADay, prizeAmounts, rankContest, utcDay, PRIZE_RANKS, type ContestWindow } from "./contestRules";
+import { contestWindow, contestPoolG, joinedOn, missedADay, prizeAmounts, rankContest, utcDay, PRIZE_RANKS, type ContestWindow } from "./contestRules";
 
 export const CONTEST_SHOWN = 25; // rows sent to the app: the top of the board, plus the person asking
 
@@ -70,6 +70,7 @@ export async function contestBoard(user: User, now = new Date()) {
 
   // The person asking: where they stand, and which of the days so far they showed up on. They may not be in the board (not verified, or no lesson yet).
   const myDays = days.get(user.id) ?? new Set<string>();
+  const myJoined = joinedOn(w.dates, myDays);
   const mine = rows.find((r) => r.userId === user.id) ?? null;
   const meVerified = verified.has(user.id) || (await verifiedSet([user.id], now)).has(user.id);
   const shown = rows.filter((r, i) => i < CONTEST_SHOWN || r.userId === user.id);
@@ -82,7 +83,8 @@ export async function contestBoard(user: User, now = new Date()) {
     rows: shown.map((r) => ({ you: r.userId === user.id, name: r.name, avatarUrl: r.avatarUrl, points: r.points, days: r.days, missed: r.missed, rank: r.rank, prize: r.prize })),
     me: {
       verified: meVerified, points: points.get(user.id) ?? 0, days: myDays.size, missed: mine?.missed ?? false, rank: mine?.rank ?? null, prize: mine?.prize ?? null,
-      attended: w.dates.map((d) => (d > todayUtc ? null : myDays.has(d))), // per day: true showed up, false did not, null not yet
+      // per day: true showed up, false missed, null not a day that counts (still to come, or before they joined)
+      attended: w.dates.map((d) => (d > todayUtc || (myJoined === null || d < myJoined) ? null : myDays.has(d))),
     },
   };
 }

@@ -1,7 +1,7 @@
 /**
  * The biweekly contest rules, kept free of the database so they are easy to test.
- * A contest is 14 days. They repeat back to back from CONTEST_START. Only GoodDollar-verified people take part. You stay in the prize race
- * only while you have passed a lesson on every day of the contest so far. The top 10 who are still in share the prize pool.
+ * A contest is 14 days. They repeat back to back from CONTEST_START. Only GoodDollar-verified people take part, and anyone can join on any day. You stay in the
+ * prize race only while you have passed a lesson on every day since you joined. The top 10 who are still in share the prize pool.
  */
 export const CONTEST_DAYS = 14;
 export const PRIZE_RANKS = 10;
@@ -46,8 +46,18 @@ export function contestWindow(today: string, anchor = contestStart()): ContestWi
  */
 export const closedDates = (dates: string[], todayUtc: string) => dates.filter((d) => d <= addDays(todayUtc, -2));
 
-/** True if the person missed any closed day: they have no passed lesson on it. */
-export const missedADay = (dates: string[], attended: Set<string>, todayUtc: string) => closedDates(dates, todayUtc).some((d) => !attended.has(d));
+/**
+ * True if the person missed a closed day since they joined. Anyone can join any day: your first passed lesson in the contest is the day you join, and
+ * from then on every closed day needs a pass. Days before you joined were never yours, so they are not missed.
+ */
+export const missedADay = (dates: string[], attended: Set<string>, todayUtc: string) => {
+  const joined = dates.find((d) => attended.has(d));
+  if (!joined) return false; // not joined yet, so nothing to miss
+  return closedDates(dates, todayUtc).some((d) => d >= joined && !attended.has(d));
+};
+
+/** The first day a person showed up in the contest (the day they joined), or null. */
+export const joinedOn = (dates: string[], attended: Set<string>) => dates.find((d) => attended.has(d)) ?? null;
 
 export type Entry = { userId: string; points: number; days: number; missed: boolean };
 

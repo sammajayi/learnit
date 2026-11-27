@@ -100,7 +100,7 @@ export default function Leaderboard() {
 
   const header = (
     <PageHeader eyebrow={tab === "contest" ? undefined : "Overall"} title="Leaderboard" action={switcher}
-      description={tab === "contest" ? "Pass a lesson every day. The top 10 who never miss a day share the prize." : "Every lesson and checkpoint you have finished, at your best score. Only the weekly top 3 earn a bonus."} />
+      description={tab === "contest" ? "Pass a lesson every day. The top 10 who never miss a day share the prize. Anyone can join anytime." : "Every lesson and checkpoint you have finished, at your best score. Only the weekly top 3 earn a bonus."} />
   );
 
   return (

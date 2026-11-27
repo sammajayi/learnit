@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { CONTEST_DAYS, DEFAULT_SHARES, PRIZE_RANKS, addDays, closedDates, contestWindow, missedADay, prizeAmounts, rankContest } from "../src/contestRules";
+import { CONTEST_DAYS, DEFAULT_SHARES, PRIZE_RANKS, addDays, closedDates, contestWindow, joinedOn, missedADay, prizeAmounts, rankContest } from "../src/contestRules";
 
 const A = "2026-11-30"; // the anchor
 
@@ -31,14 +31,28 @@ describe("showing up every day", () => {
   it("is not missed while every closed day has a pass, even if later days are not here yet", () => {
     expect(missedADay(w.dates, days(2), "2026-12-03")).toBe(false);
   });
-  it("is missed when a closed day has no pass", () => {
-    expect(missedADay(w.dates, new Set(["2026-11-30"]), "2026-12-03")).toBe(true);
-    expect(missedADay(w.dates, new Set(["2026-12-01"]), "2026-12-03")).toBe(true);
+  it("is missed when a closed day since joining has no pass", () => {
+    expect(missedADay(w.dates, new Set(["2026-11-30"]), "2026-12-03")).toBe(true); // joined day 1, nothing on day 2
+    expect(missedADay(w.dates, new Set(["2026-11-30", "2026-12-02"]), "2026-12-05")).toBe(true); // a gap on 12-01
   });
-  it("a whole contest is only perfect with all 14 days", () => {
+  it("anyone can join anytime: days before you joined are not missed", () => {
+    expect(missedADay(w.dates, new Set(["2026-12-01"]), "2026-12-03")).toBe(false); // joined on day 2, so day 1 was never theirs
+    expect(missedADay(w.dates, new Set(["2026-12-03", "2026-12-04", "2026-12-05"]), "2026-12-07")).toBe(false);
+  });
+  it("but once you have joined, every closed day after counts", () => {
+    expect(missedADay(w.dates, new Set(["2026-12-03", "2026-12-05"]), "2026-12-07")).toBe(true); // joined day 4, nothing on day 5 (12-04)
+  });
+  it("someone who has not joined has missed nothing", () => {
+    expect(missedADay(w.dates, new Set(), "2026-12-10")).toBe(false);
+    expect(joinedOn(w.dates, new Set())).toBeNull();
+    expect(joinedOn(w.dates, new Set(["2026-12-02", "2026-12-04"]))).toBe("2026-12-02");
+  });
+  it("a whole contest needs every day from the day you joined to the last day", () => {
     const done = contestWindow("2026-12-13", A);
-    expect(missedADay(done.dates, new Set(done.dates.slice(0, 13)), addDays("2026-12-13", 2))).toBe(true);
-    expect(missedADay(done.dates, new Set(done.dates), addDays("2026-12-13", 2))).toBe(false);
+    const end = addDays("2026-12-13", 2);
+    expect(missedADay(done.dates, new Set(done.dates.slice(0, 13)), end)).toBe(true);  // joined on day 1, missed the last
+    expect(missedADay(done.dates, new Set(done.dates), end)).toBe(false);
+    expect(missedADay(done.dates, new Set(done.dates.slice(5)), end)).toBe(false);     // joined on day 6 and never missed after
   });
 });
 

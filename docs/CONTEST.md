@@ -14,7 +14,7 @@ How the contest works and how it is calculated. The rules live in `backend/src/c
 
 - **Points** are the same as the other boards: for each lesson or checkpoint, its best score in the window counts once, worth 10 (lesson) or 30 (checkpoint) scaled by accuracy, never below 1. Only attempts inside the 14 days count.
 - **A day** is the day on the learner's own clock (the same day their streak uses), taken from each passed attempt's local date.
-- **A missed day** is only counted once the date is closed everywhere: two UTC days behind. People are in different timezones, so a day ends at different moments for them. This means someone shows as "out" about a day later than they actually missed.
+- **A missed day** is a closed day on or after the day you joined with no pass. It is only counted once the date is closed everywhere: two UTC days behind. People are in different timezones, so a day ends at different moments for them. This means someone shows as "out" about a day later than they actually missed.
 - **Ranking:** people still in the race are ranked 1, 2, 3... by points, then by days shown up, then by id so ties never flip. People who missed a day come after, with no rank.
 - **Prizes:** `prizeAmounts(pool)` splits `CONTEST_POOL_G` by the shares, rounded down to 2 decimals, so the total never exceeds the pool.
 
@@ -42,5 +42,6 @@ Winners are checked on-chain at that moment (a winner who is no longer verified,
 
 ## Open questions
 
-- Is "every single day" the right rule? In a trial over 2026-11-18 to 2026-12-01 (14 days), nobody showed up on all 14 days; the best was 9. A softer rule (for example, allow one missed day, or let a streak freeze cover a day) would leave real winners.
+- **Staking.** An idea to require a minimum stake to win is under review. The current minimum stake is 800 G$, which most learners do not hold. Nothing is built for it.
+- Is "every single day since you joined" the right rule? In a trial over 2026-11-18 to 2026-12-01 (14 days), nobody showed up on all 14 days; the best was 9. A softer rule (for example, allow one missed day, or let a streak freeze cover a day) would leave real winners.
 - What happens to the weekly group league payouts (top 3 per group)? The weekly board is replaced in the app, but the weekly payout cron is untouched.
