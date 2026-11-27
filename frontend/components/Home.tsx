@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useReducedMotion } from "motion/react";
 import { ArrowRight, CheckCircle2, Coins, Trophy, PiggyBank, type IconType } from "@/components/icons";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
@@ -15,8 +16,8 @@ import { GasCard } from "./GasCard";
 import { WelcomeCard } from "./WelcomeCard";
 import { InstallPrompt } from "./InstallPrompt";
 import { ReminderPrompt } from "./ReminderPrompt";
-import { GoalCard } from "./GoalCard";
-import { TipsCard } from "./TipsCard";
+import { VoteCard } from "./VoteCard";
+import { InviteCard } from "./InviteCard";
 import { VotePrompt } from "./VotePrompt";
 import { StatusChips } from "./StatusChips";
 import { fmtWait, useProjectedLives, useSecondsUntil } from "./Lives";
@@ -58,24 +59,25 @@ export function Home() {
 
         {error && <Notice tone="danger" title="We could not load your account">Check your connection, then refresh the page.</Notice>}
 
-        {/* The hero */}
-        {t && me ? <ContinueCard t={t} course={me.course} verified={me.verified} /> : <ContinueSkeleton />}
-
-        {/* Money: the CELO banner (only at zero) sits above the daily claim */}
-        {isLoading && <Sk className="h-[72px] w-full rounded-card" />}
-        {me && (
-          <div className="grid gap-3 empty:hidden">
-            {me.verified && <GasCard />}
-            {me.verified ? <ClaimCard /> : <VerifyCard />}
-            {me.verified && <WelcomeCard />}
+        {/* Two columns from the lg breakpoint: the lesson and earning on the left, the card and quick actions in a narrow rail on the right.
+            On a phone the columns dissolve (contents) and `order` stacks the blocks: lesson, banners, daily claim, vote, earn, invite, prompts. */}
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start lg:gap-7">
+          <div className="grid min-w-0 gap-6 max-lg:contents">
+            <div className="max-lg:order-1">{t && me ? <ContinueCard t={t} course={me.course} verified={me.verified} /> : <ContinueSkeleton />}</div>
+            {me && <div className="max-lg:order-5"><EarnSection verified={me.verified} /></div>}
+            {me && <div className="grid gap-6 empty:hidden max-lg:order-7"><InstallPrompt /><ReminderPrompt enabled={!!t && t.units.some((u) => u.done > 0)} /></div>}
           </div>
-        )}
 
-        {me && <EarnSection verified={me.verified} />}
-
-        {me && <TipsCard />}
-
-        {me && <div className="grid gap-6 empty:hidden">{t && <GoalCard t={t} verified={me.verified} />}<InstallPrompt /><ReminderPrompt enabled={!!t && t.units.some((u) => u.done > 0)} /></div>}
+          <div className="grid content-start gap-4 max-lg:contents">
+            {isLoading && <Sk className="aspect-[1.75/1] w-full max-w-[400px] rounded-[20px] max-lg:order-3" />}
+            {/* The CELO banner (only at zero) sits above the daily claim */}
+            {me && me.verified && <div className="empty:hidden max-lg:order-2"><GasCard /></div>}
+            {me && <div className="max-lg:order-3">{me.verified ? <ClaimCard /> : <VerifyCard />}</div>}
+            {me && me.verified && <div className="empty:hidden max-lg:order-3"><WelcomeCard /></div>}
+            {me && me.verified && <div className="empty:hidden max-lg:order-4"><VoteCard /></div>}
+            {me && <div className="empty:hidden max-lg:order-6"><InviteCard showVote={false} /></div>}
+          </div>
+        </div>
       </div>
       {me && <VotePrompt />}
     </AppShell>
@@ -151,13 +153,43 @@ function EarnSection({ verified }: { verified: boolean }) {
     { href: "/leaderboard", Icon: Trophy, title: "Leaderboard", sub: "Top 3 win a weekly G$ bonus" },
     { href: "/earn", Icon: Coins, title: "Rewards", sub: ready > 0n ? `${fmtGD(ready)} G$ ready` : "Claim your G$", highlight: ready > 0n },
   ];
+  const reduce = useReducedMotion();
+  const list = useRef<HTMLUListElement>(null);
+  const [at, setAt] = useState(0);
+  const atRef = useRef(0);
+  const touched = useRef(false);
+  const stop = () => { touched.current = true; };
+  const go = (i: number) => {
+    const el = list.current, tile = el?.children[i] as HTMLElement | undefined, first = el?.children[0] as HTMLElement | undefined;
+    if (!el || !tile || !first) return;
+    el.scrollTo({ left: tile.offsetLeft - first.offsetLeft, behavior: reduce ? "auto" : "smooth" });
+    atRef.current = i; setAt(i);
+  };
+  const onScroll = () => {
+    const el = list.current; if (!el || el.children.length < 2) return;
+    const step = (el.children[1] as HTMLElement).offsetLeft - (el.children[0] as HTMLElement).offsetLeft;
+    const i = Math.max(0, Math.min(tiles.length - 1, Math.round(el.scrollLeft / step)));
+    atRef.current = i; setAt(i);
+  };
+  useEffect(() => {
+    if (reduce) return;
+    const id = setInterval(() => {
+      const el = list.current;
+      if (touched.current || !el || el.scrollWidth <= el.clientWidth + 4) return; // touched, or wide enough to show all three
+      go((atRef.current + 1) % tiles.length);
+    }, 4000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduce, tiles.length]);
   return (
     <section aria-labelledby="earn">
       <h2 id="earn" className="mb-2 text-sm font-semibold text-muted">Earn</h2>
-      <ul className="grid grid-cols-3 gap-3">
+      {/* A phone swipes through the tiles, one at a time, and moves on by itself until touched. From sm they sit in a row of three. */}
+      <ul ref={list} onScroll={onScroll} onPointerDown={stop} onTouchStart={stop} onWheel={stop}
+        className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0">
         {tiles.map(({ href, Icon, title, sub, highlight }) => (
-          <li key={href}>
-            <Link href={href} className="group flex h-full flex-col gap-2 rounded-card border border-line bg-surface p-3.5 shadow-card transition-[border-color,transform] duration-100 hover:border-line-strong active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ink/15">
+          <li key={href} className="w-[74%] shrink-0 snap-start sm:w-auto">
+            <Link href={href} className="group flex h-full flex-col gap-2 rounded-card border border-line bg-surface p-3.5 shadow-card transition-[border-color,transform] duration-100 hover:border-line-strong active:scale-[0.97]">
               <span className={`grid h-9 w-9 place-items-center rounded-input ${highlight ? "bg-coral-50 text-coral-700" : "bg-sunken text-ink-2"}`}><Icon size={18} strokeWidth={1.85} aria-hidden /></span>
               <span className="min-w-0">
                 <span className="block text-sm font-semibold text-ink">{title}</span>
@@ -167,6 +199,12 @@ function EarnSection({ verified }: { verified: boolean }) {
           </li>
         ))}
       </ul>
+      <div className="mt-3 flex justify-center gap-1.5 sm:hidden" aria-label="Earn tiles">
+        {tiles.map((t, i) => (
+          <button key={t.href} type="button" onClick={() => { stop(); go(i); }} aria-label={`Show ${t.title}`} aria-current={i === at}
+            className={`h-[7px] rounded-full transition-all duration-200 ${i === at ? "w-5 bg-ink" : "w-[7px] bg-line-strong"}`} />
+        ))}
+      </div>
     </section>
   );
 }

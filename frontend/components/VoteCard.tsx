@@ -130,7 +130,8 @@ export function useVote() {
  *  wallet (embedded or external). Once this wallet has voted it shrinks to a single "Voted" line. */
 export function VoteCard() {
   const v = useVote();
-  if (v.voted) return <p className="flex items-center gap-2 text-sm font-medium text-sage-700"><Check size={16} aria-hidden /> Voted</p>;
+  // Once this wallet has voted the card is gone, and it stays out of the way until the chain has been read so it never flashes for someone who already voted.
+  if (v.voted || !v.ballot) return null;
   return (
     <Card className="p-4">
       <h2 className="text-[15px] font-semibold text-ink">Vote for LearnIt</h2>
