@@ -130,8 +130,9 @@ export function useVote() {
  *  wallet (embedded or external). Once this wallet has voted it shrinks to a single "Voted" line. */
 export function VoteCard() {
   const v = useVote();
-  // Once this wallet has voted the card is gone, and it stays out of the way until the chain has been read so it never flashes for someone who already voted.
-  if (v.voted || !v.ballot) return null;
+  // Once this wallet has voted the card is gone. While the chain is being read it stays hidden, so it never flashes for someone who already voted.
+  // If the wallet is not connected yet there is nothing to read, so the card still shows (its button waits for the wallet), as the old carousel slide did.
+  if (v.voted || v.checking) return null;
   return (
     <Card className="p-4">
       <h2 className="text-[15px] font-semibold text-ink">Vote for LearnIt</h2>
