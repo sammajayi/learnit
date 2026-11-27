@@ -100,7 +100,7 @@ export default function Leaderboard() {
 
   const header = (
     <PageHeader eyebrow={tab === "contest" ? "Biweekly contest" : "Overall"} title="Leaderboard" action={switcher}
-      description={tab === "contest" ? "Pass a lesson every day for two weeks. The top 10 who never miss a day share the prize pool. Only verified people can win." : "Every lesson and checkpoint you have finished, at your best score. Only the weekly top 3 earn a bonus."} />
+      description={tab === "contest" ? "Pass a lesson every day. The top 10 who never miss a day share the prize." : "Every lesson and checkpoint you have finished, at your best score. Only the weekly top 3 earn a bonus."} />
   );
 
   return (
@@ -114,17 +114,15 @@ export default function Leaderboard() {
 const dayLabel = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 const gd = (n: number) => `${n.toLocaleString("en", { maximumFractionDigits: 2 })} G$`;
 
-/** One row of the contest. In the race: ranked, and the top 10 show the prize they are on course for. Out of the race: no rank, quieter. */
+/** One row of the contest, as a fine ledger line: rank, name, the prize for the top 10, points. Out of the race: no rank, quieter. */
 function ContestRowItem({ r }: { r: ContestRow }) {
   return (
-    <li className={cn("flex items-center gap-3 px-4 py-3 sm:gap-4 sm:px-5", r.you && "border-y border-sage-100 bg-sage-50 shadow-[inset_3px_0_0_var(--sage-600)]", r.missed && "opacity-60")}>
-      <span className={cn("tabular grid h-7 min-w-7 shrink-0 place-items-center rounded-full px-1 text-sm font-semibold", r.rank !== null && MEDAL[r.rank] ? MEDAL[r.rank] : "text-muted")}>
-        {r.rank === null ? "" : r.rank <= 3 ? <Medal size={15} role="img" aria-label={`Rank ${r.rank}`} /> : r.rank}
-      </span>
-      <Avatar src={r.avatarUrl} name={r.name} size={32} className="shrink-0" />
-      <span className={cn("min-w-0 flex-1 truncate text-[15px] text-ink", r.you ? "font-semibold" : "font-medium")}>{r.name}{r.you && <span className="sr-only"> (you)</span>}</span>
-      {r.prize !== null && <span className="tabular shrink-0 rounded-full bg-sage-100 px-2.5 py-0.5 text-xs font-semibold text-sage-700">{gd(r.prize)}</span>}
-      <span className="tabular shrink-0 text-right text-sm font-semibold text-ink">{pts(r.points)}<span className="sr-only"> points</span></span>
+    <li className={cn("flex items-center gap-3 px-4 py-2.5 sm:px-5", r.you && "bg-sage-50 shadow-[inset_2px_0_0_var(--sage-600)]", r.missed && "opacity-55")}>
+      <span className={cn("tabular grid h-6 w-6 shrink-0 place-items-center rounded-full text-[12px] font-semibold", r.rank !== null && MEDAL[r.rank] ? MEDAL[r.rank] : "text-muted")}>{r.rank ?? ""}</span>
+      <Avatar src={r.avatarUrl} name={r.name} size={28} className="shrink-0" />
+      <span className={cn("min-w-0 flex-1 truncate text-sm text-ink", r.you ? "font-semibold" : "font-medium")}>{r.you ? "You" : r.name}</span>
+      {r.prize !== null && <span className="tabular shrink-0 rounded-full bg-sage-100 px-2 py-px text-[11px] font-semibold text-sage-700">{gd(r.prize)}</span>}
+      <span className="tabular w-10 shrink-0 text-right text-sm font-semibold text-ink">{pts(r.points)}<span className="sr-only"> points</span></span>
     </li>
   );
 }
@@ -132,13 +130,14 @@ function ContestRowItem({ r }: { r: ContestRow }) {
 function Contest({ data }: { data: ContestBoard | undefined }) {
   if (!data) return <ListSkeleton />;
   const { contest, me } = data;
-  const range = `${dayLabel(contest.start)} to ${dayLabel(contest.end)}`;
+  const dayNo = Math.min(contest.dates.length, contest.dates.filter((d) => d <= contest.today).length);
+  const startsIn = Math.max(1, Math.round((Date.parse(`${contest.start}T00:00:00Z`) - Date.parse(`${contest.today}T00:00:00Z`)) / 86400_000));
   if (contest.status === "upcoming") {
     return (
       <Card className="mt-8 p-5 sm:p-6">
         <p className="text-[13px] font-medium text-muted">Next contest</p>
-        <p className="mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-ink">Starts {dayLabel(contest.start)}</p>
-        <p className="mt-2 text-sm text-ink-2">{range}. Pass a lesson every day to stay in the prize race.{data.poolG > 0 ? ` The top ${data.prizeRanks} share ${gd(data.poolG)}.` : ""}</p>
+        <p className="mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-ink">Starts in {startsIn} day{startsIn === 1 ? "" : "s"}</p>
+        <p className="mt-2 text-sm text-ink-2">Pass a lesson every day for 14 days.{data.poolG > 0 ? ` The top ${data.prizeRanks} share ${gd(data.poolG)}.` : ""}</p>
         {!me.verified && <Notice tone="info" className="mt-4" title="Verify to enter">Only verified people can win. A quick GoodDollar face check takes a minute.</Notice>}
       </Card>
     );
@@ -146,14 +145,14 @@ function Contest({ data }: { data: ContestBoard | undefined }) {
   const left = timeLeft(contest.endsAt);
   const inRace = data.rows.filter((r) => !r.missed);
   const out = data.rows.filter((r) => r.missed);
-  const status = !me.verified ? null : me.missed ? "You missed a day, so you are out of the prize race. Your points still count on Overall."
+  const status = !me.verified ? null : me.missed ? "You missed a day, so you are out of the race. Your points still count on Overall."
     : me.rank !== null ? (me.prize ? `On course for ${gd(me.prize)}` : me.rank <= data.prizeRanks ? "In the prize race" : `Reach the top ${data.prizeRanks} to win`) : "Pass a lesson today to join the contest.";
   return (
     <>
       <Card className="mt-8 p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-[13px] font-medium text-muted">{range}</p>
+            <p className="text-[13px] font-medium text-muted">Day <span className="tabular">{dayNo}</span> of <span className="tabular">{contest.dates.length}</span></p>
             <p className="tabular mt-1.5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">{me.verified && me.rank !== null ? `#${me.rank}` : me.verified ? "Not ranked" : "Not entered"}{me.verified && me.rank !== null && <span className="text-sm font-medium tracking-normal text-muted"> of {data.inRace}</span>}</p>
           </div>
           <p aria-label={`Ends in ${left.n} ${left.unit}`} className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sunken px-3 py-1.5 text-sm font-semibold text-ink"><CalendarDays size={18} strokeWidth={1.75} aria-hidden /><span className="tabular">{left.n}</span> {left.unit} left</p>
@@ -162,8 +161,7 @@ function Contest({ data }: { data: ContestBoard | undefined }) {
         {!me.verified && <Notice tone="info" className="mt-4" title="Verify to enter">Only verified people can win. Your points still count on Overall.</Notice>}
         {me.verified && (
           <div className="mt-4">
-            <p className="mb-2 text-xs font-medium text-muted">Days you showed up: <span className="tabular text-ink">{me.attended.filter((x) => x === true).length}</span> of <span className="tabular">{me.attended.filter((x) => x !== null).length}</span> so far</p>
-            <ul className="flex gap-1" aria-label="Days you showed up">
+            <ul className="flex gap-1" aria-label="Your 14 days">
               {me.attended.map((x, i) => (
                 <li key={i} aria-label={`${dayLabel(contest.dates[i])}: ${x === null ? "not yet" : x ? "showed up" : "missed"}`}
                   className={cn("h-2 flex-1 rounded-full", x === true ? "bg-sage-600" : x === false ? "bg-coral-500" : "bg-line-strong/60")} />
@@ -171,18 +169,18 @@ function Contest({ data }: { data: ContestBoard | undefined }) {
             </ul>
           </div>
         )}
-        <p className="mt-4 text-xs text-muted">{data.poolG > 0 ? `The top ${data.prizeRanks} who never miss a day share ${gd(data.poolG)}.` : `The top ${data.prizeRanks} who never miss a day win. The prize pool will be announced.`}</p>
+        <p className="mt-3 text-xs text-muted">{data.poolG > 0 ? `${gd(data.poolG)} shared by the top ${data.prizeRanks}` : "Prize to be announced"}</p>
       </Card>
 
       {inRace.length === 0 ? (
         <EmptyState icon={Users} title="Nobody is in yet" className="mt-6" action={<ButtonLink href="/learn">Start a lesson</ButtonLink>}>Pass a lesson today to be first on the board.</EmptyState>
       ) : (
-        <ul className="mt-6 divide-y divide-line overflow-clip rounded-card border border-line bg-surface shadow-card">{inRace.map((r, i) => <ContestRowItem key={i} r={r} />)}</ul>
+        <ul className="mt-5 divide-y divide-line/70 overflow-clip rounded-card border border-line bg-surface">{inRace.map((r, i) => <ContestRowItem key={i} r={r} />)}</ul>
       )}
       {out.length > 0 && (
         <details className="mt-4 overflow-clip rounded-card border border-line bg-surface">
-          <summary className="cursor-pointer list-none px-4 py-3 text-sm font-medium text-muted hover:text-ink sm:px-5">Out of the prize race ({out.length})</summary>
-          <ul className="divide-y divide-line border-t border-line">{out.map((r, i) => <ContestRowItem key={i} r={r} />)}</ul>
+          <summary className="cursor-pointer list-none px-4 py-2.5 text-[13px] font-medium text-muted hover:text-ink sm:px-5">Out of the race ({out.length})</summary>
+          <ul className="divide-y divide-line/70 border-t border-line">{out.map((r, i) => <ContestRowItem key={i} r={r} />)}</ul>
         </details>
       )}
     </>
