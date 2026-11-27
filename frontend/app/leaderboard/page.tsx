@@ -130,7 +130,6 @@ function ContestRowItem({ r }: { r: ContestRow }) {
 function Contest({ data }: { data: ContestBoard | undefined }) {
   if (!data) return <ListSkeleton />;
   const { contest, me } = data;
-  const dayNo = Math.min(contest.dates.length, contest.dates.filter((d) => d <= contest.today).length);
   const startsIn = Math.max(1, Math.round((Date.parse(`${contest.start}T00:00:00Z`) - Date.parse(`${contest.today}T00:00:00Z`)) / 86400_000));
   if (contest.status === "upcoming") {
     return (
@@ -152,8 +151,7 @@ function Contest({ data }: { data: ContestBoard | undefined }) {
       <Card className="mt-8 p-5 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-[13px] font-medium text-muted">Day <span className="tabular">{dayNo}</span> of <span className="tabular">{contest.dates.length}</span></p>
-            <p className="tabular mt-1.5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">{me.verified && me.rank !== null ? `#${me.rank}` : me.verified ? "Not ranked" : "Not entered"}{me.verified && me.rank !== null && <span className="text-sm font-medium tracking-normal text-muted"> of {data.inRace}</span>}</p>
+                        <p className="tabular text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">{me.verified && me.rank !== null ? `#${me.rank}` : me.verified ? "Not ranked" : "Not entered"}{me.verified && me.rank !== null && <span className="text-sm font-medium tracking-normal text-muted"> of {data.inRace}</span>}</p>
           </div>
           <p aria-label={`Ends in ${left.n} ${left.unit}`} className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sunken px-3 py-1.5 text-sm font-semibold text-ink"><CalendarDays size={18} strokeWidth={1.75} aria-hidden /><span className="tabular">{left.n}</span> {left.unit} left</p>
         </div>
