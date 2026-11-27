@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
+  engineType = "client" // no native engine: queries go through a driver adapter, so it runs on Cloudflare Workers too
 }
 
 datasource db {

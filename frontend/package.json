@@ -7,7 +7,10 @@
     "build": "npm run prisma:generate -w @learnit/backend && next build",
     "start": "next start",
     "lint": "next lint",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
@@ -16,6 +19,7 @@
     "@hugeicons/core-free-icons": "^4.4.0",
     "@hugeicons/react": "^1.1.10",
     "@learnit/backend": "*",
+    "@opennextjs/cloudflare": "^1.14.0",
     "@privy-io/react-auth": "^3.51.0",
     "@privy-io/wagmi": "^4.0.19",
     "@tanstack/react-query": "^5.0.0",
@@ -37,6 +41,7 @@
     "autoprefixer": "^10",
     "postcss": "^8",
     "tailwindcss": "^3.4.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.169.0"
   }
 }

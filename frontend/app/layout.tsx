@@ -4,7 +4,7 @@ import "@fontsource/fraunces/latin-500.css";
 import "@fontsource/fraunces/latin-600.css";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-import { Providers } from "@/components/Providers";
+import { ClientProviders as Providers } from "@/components/ClientProviders";
 
 export const dynamic = "force-dynamic"; // Privy needs a real app id at runtime, not at build
 
