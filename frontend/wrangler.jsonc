@@ -6,5 +6,30 @@
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
   "minify": true,
+  // Secrets (database URLs, private keys, API keys, APP_SECRET, CRON_SECRET) are NOT here: set them in the dashboard as type Secret.
+  "keep_vars": true,
+  "vars": {
+    "ADMIN": "0x32eE3537304f246B54Fe9921d4A24B509ee19831",
+    "ADMIN_WALLETS": "0x32543670B1cB370F107E1fd01412367b47E5604C",
+    "CHECKPOINT_REWARD_G": "2",
+    "DAILY_CAP_G": "2",
+    "GUARDIAN": "0x32eE3537304f246B54Fe9921d4A24B509ee19831",
+    "LEAGUE_BONUS_1_G": "2",
+    "LEAGUE_BONUS_2_G": "1.5",
+    "LEAGUE_BONUS_3_G": "1",
+    "LESSON_REWARD_G": "0.5",
+    "NEXT_PUBLIC_GOODDOLLAR_TOKEN_ADDRESS": "0x62B8B11039FcfE5aB0C56E502b1C372A3d2a9c7A",
+    "NEXT_PUBLIC_IDENTITY_ADDRESS": "0xC361A6E67822a0EDc17D899227dd9FC50BD62F42",
+    "NEXT_PUBLIC_PRIVY_APP_ID": "cmw0l8bir013c0hl89kxmd3ps",
+    "NEXT_PUBLIC_REWARDS_POOL_ADDRESS": "0xBF55B8bBD6e34aC64BE744CB1679EA2e47A9521d",
+    "NEXT_PUBLIC_STREAK_VAULT_ADDRESS": "0x19e3832165e1C7b16b15Bcde31b661EE4aD0c4B9",
+    "NEXT_PUBLIC_UBI_SCHEME_ADDRESS": "0x43d72Ff17701B2DA814620735C39C620Ce0ea4A1",
+    "NEXT_PUBLIC_VAPID_PUBLIC_KEY": "BBz8BgvaTCQnC8f3xo1kwqxKWNW0LLyfwOTzjen6jLXmn216BdqVl8S1kmeMnX6a0IrpXXgd5i4k5UWBqeXBGcA",
+    "RESEND_SEGMENT_ID": "84553cb7-782e-497c-8415-0776ce15dbaa",
+    "SIGNER": "0x32543670B1cB370F107E1fd01412367b47E5604C",
+    "UBI_ADDRESS": "0x32543670B1cB370F107E1fd01412367b47E5604C",
+    "VAPID_SUBJECT": "https://github.com/sammajayi/learnit",
+    "VAULT_DEPLOY_BLOCK": "81999859"
+  },
   "observability": { "enabled": true }
 }
