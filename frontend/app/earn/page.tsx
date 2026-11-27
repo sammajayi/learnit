@@ -6,7 +6,7 @@ import { BookOpen, CheckCircle2, ChevronDown, Clock, Gift, Trophy, XCircle } fro
 import { useApi } from "@/lib/useApi";
 import { friendlyError, STALE_ERRORS } from "@/lib/txErrors";
 import { rewardsPoolAbi } from "@learnit/backend/abis";
-import { ADDR } from "@learnit/backend/chain";
+import { useContracts } from "@/lib/useContracts";
 import { fmtGD } from "@learnit/backend/format";
 import { AppShell } from "@/components/AppShell";
 import { RewardsTabs } from "@/components/RewardsTabs";
@@ -41,20 +41,21 @@ export default function Earn() {
   const [err, setErr] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
   const [showHistory, setShowHistory] = useState(false);
-  const live = Boolean(ADDR.rewardsPool);
+  const { rewardsPool, ready: configReady } = useContracts();
+  const live = Boolean(rewardsPool);
   const busy = step !== null;
 
   const { data } = useQuery({ queryKey: ["vouchers"], queryFn: () => api<Data>("/api/vouchers"), enabled: ok });
 
   // Is the pool paused? Checked before we offer a Claim button, so nobody hits a revert.
   const paused = useQuery({ queryKey: ["paused", "pool"], enabled: ok && live && !!pc, staleTime: 30_000,
-    queryFn: () => pc!.readContract({ address: ADDR.rewardsPool, abi: rewardsPoolAbi, functionName: "paused" }) });
+    queryFn: () => pc!.readContract({ address: rewardsPool, abi: rewardsPoolAbi, functionName: "paused" }) });
 
   // Has any voucher already been claimed (for example on another device)? The contract is the source of truth.
   const list = data?.vouchers ?? [];
   const used = useQuery({ queryKey: ["nonces", list.map((v) => v.id).join()], enabled: ok && live && !!pc && list.length > 0,
     queryFn: async () => {
-      const res = await pc!.multicall({ allowFailure: true, contracts: list.map((v) => ({ address: ADDR.rewardsPool, abi: rewardsPoolAbi, functionName: "nonceUsed" as const, args: [v.root, BigInt(v.nonce)] as const })) });
+      const res = await pc!.multicall({ allowFailure: true, contracts: list.map((v) => ({ address: rewardsPool, abi: rewardsPoolAbi, functionName: "nonceUsed" as const, args: [v.root, BigInt(v.nonce)] as const })) });
       return Object.fromEntries(list.map((v, i) => [v.id, res[i].status === "success" && res[i].result === true])) as Record<string, boolean>;
     } });
   useEffect(() => { if (Object.values(used.data ?? {}).some(Boolean)) void qc.invalidateQueries({ queryKey: ["vouchers"] }); }, [used.data, qc]);
@@ -75,7 +76,7 @@ export default function Earn() {
         ? { functionName: "claim", args: [toArg(batch[0]), batch[0].signature] }
         : { functionName: "claimBatch", args: [batch.map(toArg), batch.map((v) => v.signature)] };
       // Simulate first: a revert becomes a clear message instead of a failed, fee-costing transaction.
-      const { request } = await pc.simulateContract({ account: address, address: ADDR.rewardsPool, abi: rewardsPoolAbi, ...call } as never);
+      const { request } = await pc.simulateContract({ account: address, address: rewardsPool, abi: rewardsPoolAbi, ...call } as never);
       setStep("wallet");
       const hash = await writeContractAsync(request as never);
       setStep("confirming");
@@ -140,7 +141,7 @@ export default function Earn() {
 
       <div className="mt-6 grid gap-3">
         {!data.verified && <Notice tone="warning" title="Verify to earn" action={<ButtonLink href="/home" variant="outline" size="sm">Verify with GoodDollar</ButtonLink>}>Rewards need a quick GoodDollar face check. You can keep learning in the meantime.</Notice>}
-        {!live && <Notice tone="info">Rewards are not live yet. Lessons and your streak work as normal.</Notice>}
+        {!live && configReady && <Notice tone="info">Rewards are not live yet. Lessons and your streak work as normal.</Notice>}
         {isPaused && <Notice tone="paused" title="Claiming is paused">Each reward is valid for 7 days, so claim as soon as claiming reopens.</Notice>}
       </div>
 

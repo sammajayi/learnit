@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Flame, Target, X } from "@/components/icons";
-import { ADDR } from "@learnit/backend/chain";
+import { useContracts } from "@/lib/useContracts";
 import { fmtGD } from "@learnit/backend/format";
 import { useApi } from "@/lib/useApi";
 import { useGoal } from "@/lib/useGoal";
@@ -21,7 +21,8 @@ const SNOOZE_MS = 2 * 86_400_000;
 export function GoalCard({ t, verified }: { t: Today; verified: boolean }) {
   const api = useApi();
   const { data: goal, isLoading } = useGoal();
-  const live = Boolean(ADDR.streakVault);
+  const { streakVault } = useContracts();
+  const live = Boolean(streakVault);
   const { data } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: live && verified, retry: 1 });
   const [snoozed, setSnoozed] = useState(true); // hidden until we have looked, so it never flashes
   useEffect(() => { try { setSnoozed(Number(localStorage.getItem(SNOOZE_KEY) ?? 0) > Date.now()); } catch { setSnoozed(false); } }, []);

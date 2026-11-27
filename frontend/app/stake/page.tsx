@@ -9,6 +9,7 @@ import { useMe } from "@/lib/useMe";
 import { friendlyError } from "@/lib/txErrors";
 import { streakVaultAbi } from "@learnit/backend/abis";
 import { ADDR } from "@learnit/backend/chain";
+import { useContracts } from "@/lib/useContracts";
 import { fmtGD } from "@learnit/backend/format";
 import { AppShell } from "@/components/AppShell";
 import { RewardsTabs } from "@/components/RewardsTabs";
@@ -58,13 +59,14 @@ export default function Stake() {
     const a = q.get("amount"); if (a && /^\d*\.?\d*$/.test(a)) setAmount(a);
     const d = Number(q.get("days")); if ([7, 14, 30].includes(d)) setPick(d);
   }, []);
-  const live = Boolean(ADDR.streakVault);
+  const { streakVault } = useContracts();
+  const live = Boolean(streakVault);
   const busy = step !== null;
 
   const { data, isError, refetch, isFetching } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: Cohort[] }>("/api/cohorts/open"), enabled: ok, retry: 3, staleTime: 10_000, refetchOnWindowFocus: true }); // a challenge can settle while the page sits open, so look again when you come back
   // Checked before the stake form is shown, so nobody hits a revert.
   const paused = useQuery({ queryKey: ["paused", "vault"], enabled: ok && live && !!pc, staleTime: 30_000,
-    queryFn: () => pc!.readContract({ address: ADDR.streakVault, abi: streakVaultAbi, functionName: "paused" }) });
+    queryFn: () => pc!.readContract({ address: streakVault, abi: streakVaultAbi, functionName: "paused" }) });
 
   if (!data && isError) return (
     <AppShell>
@@ -115,15 +117,15 @@ export default function Stake() {
     if (outOfBounds) throw new Error(`Stake between ${fmtGD(c.min)} and ${fmtGD(c.max)} G$.`);
     setStep("checking");
     // Approve only when the current allowance is too small. Two prompts, two receipts.
-    const allowance = await pc.readContract({ address: ADDR.gd, abi: erc20Abi, functionName: "allowance", args: [address, ADDR.streakVault] });
+    const allowance = await pc.readContract({ address: ADDR.gd, abi: erc20Abi, functionName: "allowance", args: [address, streakVault] });
     if (allowance < wei) {
       setStep("approve");
-      const h = await writeContractAsync({ address: ADDR.gd, abi: erc20Abi, functionName: "approve", args: [ADDR.streakVault, wei] });
+      const h = await writeContractAsync({ address: ADDR.gd, abi: erc20Abi, functionName: "approve", args: [streakVault, wei] });
       const r = await pc.waitForTransactionReceipt({ hash: h });
       if (r.status !== "success") throw new Error("The approval did not go through. Nothing was staked.");
     }
     setStep("checking");
-    const { request } = await pc.simulateContract({ account: address, address: ADDR.streakVault, abi: streakVaultAbi, functionName: "stake", args: [BigInt(c.id), wei] });
+    const { request } = await pc.simulateContract({ account: address, address: streakVault, abi: streakVaultAbi, functionName: "stake", args: [BigInt(c.id), wei] });
     setStep("stake");
     const h2 = await writeContractAsync(request);
     const r2 = await pc.waitForTransactionReceipt({ hash: h2 });
@@ -133,7 +135,7 @@ export default function Stake() {
 
   async function sendWithdraw(id: number) {
     setStep("checking");
-    const { request } = await pc!.simulateContract({ account: address!, address: ADDR.streakVault, abi: streakVaultAbi, functionName: "withdraw", args: [BigInt(id)] });
+    const { request } = await pc!.simulateContract({ account: address!, address: streakVault, abi: streakVaultAbi, functionName: "withdraw", args: [BigInt(id)] });
     setStep("withdraw");
     const h = await writeContractAsync(request);
     const r = await pc!.waitForTransactionReceipt({ hash: h });
@@ -152,7 +154,7 @@ export default function Stake() {
     if (!pc || !address) throw new Error("Connect your wallet first.");
     setPaying(id);
     setStep("checking");
-    const { request } = await pc.simulateContract({ account: address, address: ADDR.streakVault, abi: streakVaultAbi, functionName: "voidCohort", args: [BigInt(id)] });
+    const { request } = await pc.simulateContract({ account: address, address: streakVault, abi: streakVaultAbi, functionName: "voidCohort", args: [BigInt(id)] });
     setStep("cancel");
     const h = await writeContractAsync(request);
     const r = await pc.waitForTransactionReceipt({ hash: h });
