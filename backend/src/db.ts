@@ -1,25 +1,27 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient as NodePrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 /**
- * Neon's pooled URL goes through PgBouncer (transaction mode), so Prisma needs pgbouncer=true.
- * Connections can take several seconds to open (idle compute waking up, slow links), and Prisma's
- * defaults (5s connect, 10s pool) are too tight, so widen them.
+ * Neon's pooled URL goes through PgBouncer (transaction mode). Connections can take several seconds to open
+ * (an idle compute waking up), so the connect timeout is wide.
  */
-function runtimeUrl() {
-  const u = process.env.DATABASE_URL;
-  if (!u) return u;
-  const add: string[] = [];
-  if (u.includes("-pooler") && !u.includes("pgbouncer=")) add.push("pgbouncer=true");
-  if (!u.includes("connect_timeout=")) add.push("connect_timeout=30");
-  if (!u.includes("pool_timeout=")) add.push("pool_timeout=30");
-  return add.length ? u + (u.includes("?") ? "&" : "?") + add.join("&") : u;
+function adapter() {
+  return new PrismaPg({ connectionString: process.env.DATABASE_URL, connectionTimeoutMillis: 30_000, max: 5 });
 }
+
+const workerRequest = () => (globalThis as unknown as Record<symbol, { ctx?: object } | undefined>)[Symbol.for("__cloudflare-context__")]?.ctx;
 
 /** Short-lived cache of user rows so auth does not cost a database round trip on every request. Cleared on any user write. */
 export const userCache = new Map<string, { at: number; user: import("@prisma/client").User }>();
 
+/** Workers cannot read the engine from disk, so there Prisma is loaded from its wasm build instead. */
+function prismaClass(): typeof NodePrismaClient {
+  return workerRequest() ? require("@prisma/client/wasm").PrismaClient : NodePrismaClient;
+}
+
 function create() {
-  return new PrismaClient({ datasources: { db: { url: runtimeUrl() } } }).$extends({
+  const PrismaClient = prismaClass();
+  return new PrismaClient({ adapter: adapter() }).$extends({
     query: {
       user: {
         async $allOperations({ operation, args, query }) {
@@ -31,7 +33,30 @@ function create() {
     },
   });
 }
+type Client = ReturnType<typeof create>;
 
-const g = globalThis as unknown as { prisma?: ReturnType<typeof create> };
-export const db = g.prisma ?? create();
-if (process.env.NODE_ENV !== "production") g.prisma = db;
+/**
+ * On Cloudflare Workers a socket belongs to the request that opened it and cannot be reused by the next one,
+ * so each request gets its own client (the runtime exposes the request context under this symbol).
+ * Everywhere else (Node, local dev, scripts) one client is shared.
+ */
+const perRequest = new WeakMap<object, Client>();
+const g = globalThis as unknown as { prisma?: Client };
+
+function current(): Client {
+  const ctx = workerRequest();
+  if (ctx) {
+    let c = perRequest.get(ctx);
+    if (!c) { c = create(); perRequest.set(ctx, c); }
+    return c;
+  }
+  return (g.prisma ??= create());
+}
+
+export const db: Client = new Proxy({} as Client, {
+  get: (_t, prop) => {
+    const c = current();
+    const v = Reflect.get(c, prop, c);
+    return typeof v === "function" ? v.bind(c) : v;
+  },
+});
