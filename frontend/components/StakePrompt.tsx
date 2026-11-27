@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, PiggyBank } from "@/components/icons";
-import { ADDR } from "@learnit/backend/chain";
+import { useContracts } from "@/lib/useContracts";
 import { fmtGD } from "@learnit/backend/format";
 import { useApi } from "@/lib/useApi";
 import { useMe } from "@/lib/useMe";
@@ -24,7 +24,8 @@ export function StakePrompt() {
   const { data: goal } = useGoal();
   const [hidden, setHidden] = useState(true); // hidden until we have looked, so it never flashes
   useEffect(() => { try { setHidden(Number(localStorage.getItem(SNOOZE_KEY) ?? 0) > Date.now()); } catch { setHidden(false); } }, []);
-  const live = Boolean(ADDR.streakVault);
+  const { streakVault } = useContracts();
+  const live = Boolean(streakVault);
   const { data } = useQuery({ queryKey: ["cohorts"], queryFn: () => api<{ cohorts: OpenCohort[] }>("/api/cohorts/open"), enabled: live && !!me?.verified });
   const cohorts = data?.cohorts ?? [];
   const inOne = cohorts.some((x) => !!x.mine && BigInt(x.mine.stake) > 0n && !x.settled && !x.voided);
