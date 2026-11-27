@@ -1,6 +1,7 @@
 import { PrivyClient } from "@privy-io/server-auth";
 import { getAddress } from "viem";
 import { db, userCache } from "./db";
+import { privyKeys, verifyPrivyToken } from "./privyToken";
 
 const USER_TTL_MS = 20_000;
 
@@ -14,6 +15,23 @@ function privy() {
   return _privy;
 }
 
+/** WebCrypto check first (it works the same on Node and Workers); Privy's own library is the fallback. */
+async function checkToken(token: string) {
+  const appId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
+  if (!appId) throw new Error("Privy app id missing");
+  try {
+    try { return await verifyPrivyToken(token, appId, () => privyKeys(appId)); }
+    catch (e) {
+      // A key we have not seen yet (Privy rotated keys): refresh once and try again.
+      if (e instanceof Error && e.message === "unknown signing key") return await verifyPrivyToken(token, appId, () => privyKeys(appId, true));
+      throw e;
+    }
+  } catch (first) {
+    try { return (await privy().verifyAuthToken(token)).userId; }
+    catch { throw first; }
+  }
+}
+
 export class AuthError extends Error {}
 
 /** Verifies the Privy access token and returns the app user (created on first sight), keyed privyUserId -> wallet. */
@@ -22,7 +40,7 @@ export async function requireUser(req: Request) {
   if (!token) throw new AuthError("Missing token");
   let userId: string;
   try {
-    userId = (await privy().verifyAuthToken(token)).userId;
+    userId = await checkToken(token);
   } catch (e) {
     // An expired or forged token is normal. Anything else (a missing secret, a library that cannot run here) must show up in the logs.
     console.error("auth: token check failed:", e instanceof Error ? `${e.name}: ${e.message}` : e);
