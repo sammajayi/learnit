@@ -28,7 +28,7 @@
         {
           "id": "es-a2u10-w2-et",
           "type": "mc",
-          "prompt": "How do you say \"you are going to\"?",
+          "prompt": "How do you say \"you are going to (informal)\"?",
           "options": [
             "vamos a",
             "vas a",
@@ -51,7 +51,7 @@
             {
               "wordId": "es-a2u10-w2",
               "target": "vas a",
-              "english": "you are going to"
+              "english": "you are going to (informal)"
             },
             {
               "wordId": "es-a2u10-w3",
@@ -74,7 +74,7 @@
             "he or she is going to",
             "I am going to",
             "we are going to",
-            "you are going to"
+            "you are going to (informal)"
           ],
           "answer": 0,
           "wordId": "es-a2u10-w3"
@@ -120,7 +120,7 @@
         },
         {
           "target": "vas a",
-          "english": "you are going to"
+          "english": "you are going to (informal)"
         },
         {
           "target": "va a",
@@ -133,7 +133,7 @@
       ],
       "tip": {
         "title": "Plans with ir a",
-        "body": "Use ir a and a verb for plans. Voy a comer means I am going to eat. Vamos a salir means we are going to go out."
+        "body": "Use voy a, vas a or vamos a plus a verb for plans. Voy a comer means I am going to eat. Vamos a salir means we are going to go out."
       }
     },
     {
@@ -191,7 +191,7 @@
             {
               "wordId": "es-a2u10-w8",
               "target": "qué vas a hacer",
-              "english": "what are you going to do"
+              "english": "what are you going to do (informal)"
             }
           ]
         },
@@ -212,7 +212,7 @@
         {
           "id": "es-a2u10-w8-et",
           "type": "mc",
-          "prompt": "How do you say \"what are you going to do\"?",
+          "prompt": "How do you say \"what are you going to do (informal)\"?",
           "options": [
             "va a",
             "voy a viajar",
@@ -225,7 +225,7 @@
         {
           "id": "es-a2-u10-l2-s",
           "type": "translate",
-          "prompt": "What are you going to do tomorrow",
+          "prompt": "What are you going to do tomorrow?",
           "answer": [
             "Qué",
             "vas",
@@ -260,7 +260,7 @@
         },
         {
           "target": "qué vas a hacer",
-          "english": "what are you going to do"
+          "english": "what are you going to do (informal)"
         }
       ]
     },
@@ -276,7 +276,7 @@
           "speak": "mañana",
           "options": [
             "tomorrow",
-            "in two days",
+            "in 2 days",
             "next Saturday",
             "next week"
           ],
@@ -393,7 +393,7 @@
       ],
       "tip": {
         "title": "Looking ahead",
-        "body": "Que viene means next: la semana que viene. Dentro de means in, for time ahead: dentro de dos días. Pasado mañana is the day after tomorrow."
+        "body": "Que viene means next: la semana que viene. Dentro de means in, for time ahead: dentro de dos días is in 2 days. Pasado mañana is the day after tomorrow."
       }
     },
     {
@@ -407,7 +407,7 @@
           "prompt": "What does \"pronto\" mean?",
           "speak": "pronto",
           "options": [
-            "in two days",
+            "in 2 days",
             "tonight",
             "soon",
             "next Saturday"
@@ -418,7 +418,7 @@
         {
           "id": "es-a2u10-w14-et",
           "type": "mc",
-          "prompt": "How do you say \"in two days\"?",
+          "prompt": "How do you say \"in 2 days\"?",
           "options": [
             "pasado mañana",
             "dentro de dos días",
@@ -441,7 +441,7 @@
             {
               "wordId": "es-a2u10-w14",
               "target": "dentro de dos días",
-              "english": "in two days"
+              "english": "in 2 days"
             },
             {
               "wordId": "es-a2u10-w15",
@@ -464,7 +464,7 @@
             "next week",
             "tonight",
             "next month",
-            "in two days"
+            "in 2 days"
           ],
           "answer": 2,
           "wordId": "es-a2u10-w15"
@@ -514,7 +514,7 @@
         },
         {
           "target": "dentro de dos días",
-          "english": "in two days"
+          "english": "in 2 days"
         },
         {
           "target": "el mes que viene",
@@ -538,9 +538,9 @@
           "speak": "quieres venir",
           "options": [
             "gladly",
-            "do you want to come",
+            "do you want to come (informal)",
             "let's go",
-            "can you come"
+            "can you come (informal)"
           ],
           "answer": 1,
           "wordId": "es-a2u10-w17"
@@ -548,7 +548,7 @@
         {
           "id": "es-a2u10-w18-et",
           "type": "mc",
-          "prompt": "How do you say \"can you come\"?",
+          "prompt": "How do you say \"can you come (informal)\"?",
           "options": [
             "quieres venir",
             "quizás otro día",
@@ -566,12 +566,12 @@
             {
               "wordId": "es-a2u10-w17",
               "target": "quieres venir",
-              "english": "do you want to come"
+              "english": "do you want to come (informal)"
             },
             {
               "wordId": "es-a2u10-w18",
               "target": "puedes venir",
-              "english": "can you come"
+              "english": "can you come (informal)"
             },
             {
               "wordId": "es-a2u10-w19",
@@ -615,7 +615,7 @@
         {
           "id": "es-a2-u10-l5-s",
           "type": "translate",
-          "prompt": "Do you want to come to the park",
+          "prompt": "Do you want to come to the park?",
           "answer": [
             "Quieres",
             "venir",
@@ -636,11 +636,11 @@
       "intro": [
         {
           "target": "quieres venir",
-          "english": "do you want to come"
+          "english": "do you want to come (informal)"
         },
         {
           "target": "puedes venir",
-          "english": "can you come"
+          "english": "can you come (informal)"
         },
         {
           "target": "te invito",
@@ -653,7 +653,7 @@
       ],
       "tip": {
         "title": "Yes and no, politely",
-        "body": "After querer and poder, use the infinitive: ¿Quieres venir? To say no, say sorry first and give a reason: Lo siento, no puedo."
+        "body": "After quieres or puedes, use the plain verb: ¿Quieres venir? To say no, say sorry first and give a reason: Lo siento, no puedo hoy."
       }
     },
     {
@@ -667,7 +667,7 @@
           "prompt": "What does \"me encantaría\" mean?",
           "speak": "me encantaría",
           "options": [
-            "can you come",
+            "can you come (informal)",
             "my treat",
             "I would love to",
             "maybe another day"
@@ -723,8 +723,8 @@
           "options": [
             "let's go",
             "I am sorry",
-            "do you want to come",
-            "can you come"
+            "do you want to come (informal)",
+            "can you come (informal)"
           ],
           "answer": 1,
           "wordId": "es-a2u10-w23"
@@ -745,7 +745,7 @@
         {
           "id": "es-a2-u10-l6-s",
           "type": "translate",
-          "prompt": "I would love to but I am busy",
+          "prompt": "I would love to, but I am busy",
           "answer": [
             "Me",
             "encantaría",
@@ -795,7 +795,7 @@
           "prompt": "What does \"la cita\" mean?",
           "speak": "la cita",
           "options": [
-            "at one",
+            "at 1",
             "at what time",
             "the appointment",
             "on the dot"
@@ -839,7 +839,7 @@
             {
               "wordId": "es-a2u10-w28",
               "target": "a las tres",
-              "english": "at three"
+              "english": "at 3"
             }
           ]
         },
@@ -851,7 +851,7 @@
           "options": [
             "at what time",
             "to arrive early",
-            "at three",
+            "at 3",
             "the meeting"
           ],
           "answer": 0,
@@ -860,7 +860,7 @@
         {
           "id": "es-a2u10-w28-et",
           "type": "mc",
-          "prompt": "How do you say \"at three\"?",
+          "prompt": "How do you say \"at 3\"?",
           "options": [
             "a las tres",
             "a la una",
@@ -873,7 +873,7 @@
         {
           "id": "es-a2-u10-l7-s",
           "type": "translate",
-          "prompt": "The appointment is at three",
+          "prompt": "The appointment is at 3",
           "answer": [
             "La",
             "cita",
@@ -910,7 +910,7 @@
         },
         {
           "target": "a las tres",
-          "english": "at three"
+          "english": "at 3"
         }
       ],
       "tip": {
@@ -930,7 +930,7 @@
           "speak": "a la una",
           "options": [
             "on the dot",
-            "at one",
+            "at 1",
             "at what time",
             "the meeting"
           ],
@@ -958,7 +958,7 @@
             {
               "wordId": "es-a2u10-w29",
               "target": "a la una",
-              "english": "at one"
+              "english": "at 1"
             },
             {
               "wordId": "es-a2u10-w30",
@@ -985,7 +985,7 @@
           "options": [
             "to arrive early",
             "at what time",
-            "at three",
+            "at 3",
             "on the dot"
           ],
           "answer": 3,
@@ -1007,7 +1007,7 @@
         {
           "id": "es-a2-u10-l8-s",
           "type": "translate",
-          "prompt": "What time is the meeting",
+          "prompt": "What time is the meeting?",
           "answer": [
             "A",
             "qué",
@@ -1032,7 +1032,7 @@
       "intro": [
         {
           "target": "a la una",
-          "english": "at one"
+          "english": "at 1"
         },
         {
           "target": "hacia el mediodía",
@@ -1330,7 +1330,7 @@
       {
         "id": "es-a2-u10-cp-es-a2u10-w2",
         "type": "mc",
-        "prompt": "How do you say \"you are going to\"?",
+        "prompt": "How do you say \"you are going to (informal)\"?",
         "options": [
           "vas a",
           "va a hacer calor",
@@ -1376,7 +1376,7 @@
           "my treat",
           "gladly",
           "I am going to travel",
-          "do you want to come"
+          "do you want to come (informal)"
         ],
         "answer": 2,
         "wordId": "es-a2u10-w5"
@@ -1411,7 +1411,7 @@
       {
         "id": "es-a2-u10-cp-es-a2u10-w8",
         "type": "mc",
-        "prompt": "How do you say \"what are you going to do\"?",
+        "prompt": "How do you say \"what are you going to do (informal)\"?",
         "options": [
           "quizás otro día",
           "la semana que viene",
@@ -1454,7 +1454,7 @@
         "prompt": "What does \"la semana que viene\" mean?",
         "speak": "la semana que viene",
         "options": [
-          "do you want to come",
+          "do you want to come (informal)",
           "it is going to be hot",
           "next week",
           "at what time"
@@ -1492,7 +1492,7 @@
       {
         "id": "es-a2-u10-cp-es-a2u10-w14",
         "type": "mc",
-        "prompt": "How do you say \"in two days\"?",
+        "prompt": "How do you say \"in 2 days\"?",
         "options": [
           "lo siento",
           "a las tres",
@@ -1537,7 +1537,7 @@
         "options": [
           "the appointment",
           "it is going to rain",
-          "do you want to come",
+          "do you want to come (informal)",
           "the forecast"
         ],
         "answer": 2,
@@ -1546,7 +1546,7 @@
       {
         "id": "es-a2-u10-cp-es-a2u10-w18",
         "type": "mc",
-        "prompt": "How do you say \"can you come\"?",
+        "prompt": "How do you say \"can you come (informal)\"?",
         "options": [
           "va a",
           "va a nevar",
@@ -1681,7 +1681,7 @@
       {
         "id": "es-a2-u10-cp-es-a2u10-w28",
         "type": "mc",
-        "prompt": "How do you say \"at three\"?",
+        "prompt": "How do you say \"at 3\"?",
         "options": [
           "en punto",
           "a las tres",
@@ -1697,10 +1697,10 @@
         "prompt": "What does \"a la una\" mean?",
         "speak": "a la una",
         "options": [
-          "can you come",
+          "can you come (informal)",
           "the sky",
           "soon",
-          "at one"
+          "at 1"
         ],
         "answer": 3,
         "wordId": "es-a2u10-w29"
@@ -1727,7 +1727,7 @@
           "on the dot",
           "tomorrow",
           "the sky",
-          "at one"
+          "at 1"
         ],
         "answer": 0,
         "wordId": "es-a2u10-w31"
@@ -1780,7 +1780,7 @@
         "options": [
           "tonight",
           "it is going to snow",
-          "at one",
+          "at 1",
           "I am not going to work"
         ],
         "answer": 1,
@@ -1876,7 +1876,7 @@
       {
         "id": "es-a2-u10-cp-l1-s2",
         "type": "translate",
-        "prompt": "What are you going to do tomorrow",
+        "prompt": "What are you going to do tomorrow?",
         "answer": [
           "Qué",
           "vas",
@@ -1898,7 +1898,7 @@
       {
         "id": "es-a2-u10-cp-l1-s3",
         "type": "translate",
-        "prompt": "She is going to arrive at eight",
+        "prompt": "She is going to arrive at 8",
         "answer": [
           "Ella",
           "va",
@@ -1970,7 +1970,7 @@
       {
         "id": "es-a2-u10-cp-l2-s3",
         "type": "translate",
-        "prompt": "In two days we are going to go out",
+        "prompt": "In 2 days we are going to go out",
         "answer": [
           "Dentro",
           "de",
@@ -1996,7 +1996,7 @@
       {
         "id": "es-a2-u10-cp-l3-s1",
         "type": "translate",
-        "prompt": "Do you want to come to the park",
+        "prompt": "Do you want to come to the park?",
         "answer": [
           "Quieres",
           "venir",
@@ -2016,7 +2016,7 @@
       {
         "id": "es-a2-u10-cp-l3-s2",
         "type": "translate",
-        "prompt": "I would love to but I am busy",
+        "prompt": "I would love to, but I am busy",
         "answer": [
           "Me",
           "encantaría",
@@ -2038,7 +2038,7 @@
       {
         "id": "es-a2-u10-cp-l3-s3",
         "type": "translate",
-        "prompt": "I am sorry I can't today",
+        "prompt": "I am sorry, I can't today",
         "answer": [
           "Lo",
           "siento",
@@ -2060,7 +2060,7 @@
       {
         "id": "es-a2-u10-cp-l4-s1",
         "type": "translate",
-        "prompt": "The appointment is at three",
+        "prompt": "The appointment is at 3",
         "answer": [
           "La",
           "cita",
@@ -2084,7 +2084,7 @@
       {
         "id": "es-a2-u10-cp-l4-s2",
         "type": "translate",
-        "prompt": "What time is the meeting",
+        "prompt": "What time is the meeting?",
         "answer": [
           "A",
           "qué",
@@ -2253,7 +2253,7 @@
           {
             "wordId": "es-a2u10-w14",
             "target": "dentro de dos días",
-            "english": "in two days"
+            "english": "in 2 days"
           }
         ]
       },
@@ -2312,7 +2312,7 @@
           {
             "wordId": "es-a2u10-w29",
             "target": "a la una",
-            "english": "at one"
+            "english": "at 1"
           },
           {
             "wordId": "es-a2u10-w32",

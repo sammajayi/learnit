@@ -95,7 +95,7 @@
         {
           "id": "es-a2-u9-l1-s",
           "type": "translate",
-          "prompt": "I was here two days ago",
+          "prompt": "I was here 2 days ago",
           "answer": [
             "Hace",
             "dos",
@@ -135,7 +135,7 @@
       ],
       "tip": {
         "title": "Start with a time word",
-        "body": "Put a time word first to talk about the past. Ayer comí arroz means yesterday I ate rice. Hace dos días means two days ago."
+        "body": "A time word usually goes first. Ayer comí arroz means yesterday I ate rice. Hace plus a time means ago: hace dos días is 2 days ago."
       }
     },
     {
@@ -151,7 +151,7 @@
           "options": [
             "last week",
             "last night",
-            "two days ago",
+            "2 days ago",
             "an hour ago"
           ],
           "answer": 2,
@@ -178,7 +178,7 @@
             {
               "wordId": "es-a2u9-w5",
               "target": "hace dos días",
-              "english": "two days ago"
+              "english": "2 days ago"
             },
             {
               "wordId": "es-a2u9-w6",
@@ -206,7 +206,7 @@
             "last weekend",
             "last night",
             "last year",
-            "two days ago"
+            "2 days ago"
           ],
           "answer": 0,
           "wordId": "es-a2u9-w7"
@@ -250,7 +250,7 @@
       "intro": [
         {
           "target": "hace dos días",
-          "english": "two days ago"
+          "english": "2 days ago"
         },
         {
           "target": "el año pasado",
@@ -288,7 +288,7 @@
         {
           "id": "es-a2u9-w10-et",
           "type": "mc",
-          "prompt": "How do you say \"you spoke\"?",
+          "prompt": "How do you say \"you spoke (informal)\"?",
           "options": [
             "hablé",
             "trabajé",
@@ -311,7 +311,7 @@
             {
               "wordId": "es-a2u9-w10",
               "target": "hablaste",
-              "english": "you spoke"
+              "english": "you spoke (informal)"
             },
             {
               "wordId": "es-a2u9-w11",
@@ -355,7 +355,7 @@
         {
           "id": "es-a2-u9-l3-s",
           "type": "translate",
-          "prompt": "You spoke with her",
+          "prompt": "You spoke to her",
           "answer": [
             "Hablaste",
             "con",
@@ -378,7 +378,7 @@
         },
         {
           "target": "hablaste",
-          "english": "you spoke"
+          "english": "you spoke (informal)"
         },
         {
           "target": "habló",
@@ -391,7 +391,7 @@
       ],
       "tip": {
         "title": "Past of -ar verbs",
-        "body": "Drop -ar and add -é for I, -aste for you and -ó for he or she. Hablé, hablaste, habló. The accent matters: hablo is now, habló is past."
+        "body": "Drop -ar and add -é for I, -aste for you and -ó for he or she: hablé, hablaste, habló. The accent matters: hablo is I speak, habló is he or she spoke. Llegar adds a u: llegué."
       }
     },
     {
@@ -459,7 +459,7 @@
           "prompt": "What does \"caminé\" mean?",
           "speak": "caminé",
           "options": [
-            "you spoke",
+            "you spoke (informal)",
             "I arrived",
             "I worked",
             "I walked"
@@ -536,7 +536,7 @@
             "I ate",
             "I lived",
             "I wrote",
-            "I learned"
+            "I learnt"
           ],
           "answer": 0,
           "wordId": "es-a2u9-w17"
@@ -544,7 +544,7 @@
         {
           "id": "es-a2u9-w18-et",
           "type": "mc",
-          "prompt": "How do you say \"you ate\"?",
+          "prompt": "How do you say \"you ate (informal)\"?",
           "options": [
             "comí",
             "comiste",
@@ -567,7 +567,7 @@
             {
               "wordId": "es-a2u9-w18",
               "target": "comiste",
-              "english": "you ate"
+              "english": "you ate (informal)"
             },
             {
               "wordId": "es-a2u9-w19",
@@ -590,7 +590,7 @@
             "I lived",
             "I ate",
             "he or she ate",
-            "I learned"
+            "I learnt"
           ],
           "answer": 2,
           "wordId": "es-a2u9-w19"
@@ -634,7 +634,7 @@
         },
         {
           "target": "comiste",
-          "english": "you ate"
+          "english": "you ate (informal)"
         },
         {
           "target": "comió",
@@ -663,7 +663,7 @@
           "options": [
             "I drank",
             "I ate",
-            "I went out",
+            "I left",
             "he or she ate"
           ],
           "answer": 2,
@@ -690,7 +690,7 @@
             {
               "wordId": "es-a2u9-w21",
               "target": "salí",
-              "english": "I went out"
+              "english": "I left"
             },
             {
               "wordId": "es-a2u9-w22",
@@ -700,7 +700,7 @@
             {
               "wordId": "es-a2u9-w23",
               "target": "aprendí",
-              "english": "I learned"
+              "english": "I learnt"
             },
             {
               "wordId": "es-a2u9-w24",
@@ -715,9 +715,9 @@
           "prompt": "What does \"aprendí\" mean?",
           "speak": "aprendí",
           "options": [
-            "I went out",
-            "you ate",
-            "I learned",
+            "I left",
+            "you ate (informal)",
+            "I learnt",
             "I wrote"
           ],
           "answer": 2,
@@ -739,7 +739,7 @@
         {
           "id": "es-a2-u9-l6-s",
           "type": "translate",
-          "prompt": "I left home at eight",
+          "prompt": "I left home at 8",
           "answer": [
             "Salí",
             "de",
@@ -764,7 +764,7 @@
       "intro": [
         {
           "target": "salí",
-          "english": "I went out"
+          "english": "I left"
         },
         {
           "target": "escribí",
@@ -772,7 +772,7 @@
         },
         {
           "target": "aprendí",
-          "english": "I learned"
+          "english": "I learnt"
         },
         {
           "target": "viví",
@@ -792,7 +792,7 @@
           "speak": "fui",
           "options": [
             "he or she did",
-            "you went",
+            "you went (informal)",
             "I went",
             "I saw"
           ],
@@ -802,7 +802,7 @@
         {
           "id": "es-a2u9-w26-et",
           "type": "mc",
-          "prompt": "How do you say \"you went\"?",
+          "prompt": "How do you say \"you went (informal)\"?",
           "options": [
             "fuiste",
             "fue",
@@ -825,7 +825,7 @@
             {
               "wordId": "es-a2u9-w26",
               "target": "fuiste",
-              "english": "you went"
+              "english": "you went (informal)"
             },
             {
               "wordId": "es-a2u9-w27",
@@ -894,7 +894,7 @@
         },
         {
           "target": "fuiste",
-          "english": "you went"
+          "english": "you went (informal)"
         },
         {
           "target": "hice",
@@ -924,7 +924,7 @@
             "he or she did",
             "I saw",
             "I had",
-            "you went"
+            "you went (informal)"
           ],
           "answer": 1,
           "wordId": "es-a2u9-w29"
@@ -1053,8 +1053,8 @@
           "prompt": "What does \"qué hiciste\" mean?",
           "speak": "qué hiciste",
           "options": [
-            "where did you go",
-            "what did you do",
+            "where did you go (informal)",
+            "what did you do (informal)",
             "I was tired (said by a man)",
             "I had a good time"
           ],
@@ -1064,7 +1064,7 @@
         {
           "id": "es-a2u9-w34-et",
           "type": "mc",
-          "prompt": "How do you say \"where did you go\"?",
+          "prompt": "How do you say \"where did you go (informal)\"?",
           "options": [
             "adónde fuiste",
             "hacía calor",
@@ -1082,12 +1082,12 @@
             {
               "wordId": "es-a2u9-w33",
               "target": "qué hiciste",
-              "english": "what did you do"
+              "english": "what did you do (informal)"
             },
             {
               "wordId": "es-a2u9-w34",
               "target": "adónde fuiste",
-              "english": "where did you go"
+              "english": "where did you go (informal)"
             },
             {
               "wordId": "es-a2u9-w35",
@@ -1108,9 +1108,9 @@
           "speak": "cómo estuvo",
           "options": [
             "it was hot",
-            "what did you do",
+            "what did you do (informal)",
             "how was it",
-            "where did you go"
+            "where did you go (informal)"
           ],
           "answer": 2,
           "wordId": "es-a2u9-w35"
@@ -1131,7 +1131,7 @@
         {
           "id": "es-a2-u9-l9-s",
           "type": "translate",
-          "prompt": "What did you do last weekend",
+          "prompt": "What did you do last weekend?",
           "answer": [
             "Qué",
             "hiciste",
@@ -1158,11 +1158,11 @@
       "intro": [
         {
           "target": "qué hiciste",
-          "english": "what did you do"
+          "english": "what did you do (informal)"
         },
         {
           "target": "adónde fuiste",
-          "english": "where did you go"
+          "english": "where did you go (informal)"
         },
         {
           "target": "cómo estuvo",
@@ -1175,7 +1175,7 @@
       ],
       "tip": {
         "title": "Ask about someone's day",
-        "body": "Use the tú form to ask: ¿Qué hiciste ayer? means what did you do yesterday. For how things were, learn chunks like hacía calor and estaba cansado."
+        "body": "To ask a friend, say ¿Qué hiciste ayer? (what did you do yesterday?). For how things were, learn hacía calor and estaba cansado as set phrases."
       }
     },
     {
@@ -1190,7 +1190,7 @@
           "speak": "fue divertido",
           "options": [
             "I had a good time",
-            "what did you do",
+            "what did you do (informal)",
             "it was hot",
             "it was fun"
           ],
@@ -1243,10 +1243,10 @@
           "prompt": "What does \"estaba cansado\" mean?",
           "speak": "estaba cansado",
           "options": [
-            "what did you do",
+            "what did you do (informal)",
             "I was tired (said by a man)",
             "it was fun",
-            "where did you go"
+            "where did you go (informal)"
           ],
           "answer": 1,
           "wordId": "es-a2u9-w39"
@@ -1374,7 +1374,7 @@
           "I was there",
           "last weekend",
           "I had",
-          "two days ago"
+          "2 days ago"
         ],
         "answer": 3,
         "wordId": "es-a2u9-w5"
@@ -1401,7 +1401,7 @@
           "I had a good time",
           "last weekend",
           "yesterday",
-          "you went"
+          "you went (informal)"
         ],
         "answer": 1,
         "wordId": "es-a2u9-w7"
@@ -1436,7 +1436,7 @@
       {
         "id": "es-a2-u9-cp-es-a2u9-w10",
         "type": "mc",
-        "prompt": "How do you say \"you spoke\"?",
+        "prompt": "How do you say \"you spoke (informal)\"?",
         "options": [
           "hablaste",
           "la semana pasada",
@@ -1535,8 +1535,8 @@
         "options": [
           "I ate",
           "I lived",
-          "you spoke",
-          "you ate"
+          "you spoke (informal)",
+          "you ate (informal)"
         ],
         "answer": 0,
         "wordId": "es-a2u9-w17"
@@ -1544,7 +1544,7 @@
       {
         "id": "es-a2-u9-cp-es-a2u9-w18",
         "type": "mc",
-        "prompt": "How do you say \"you ate\"?",
+        "prompt": "How do you say \"you ate (informal)\"?",
         "options": [
           "comiste",
           "escribí",
@@ -1587,7 +1587,7 @@
         "prompt": "What does \"salí\" mean?",
         "speak": "salí",
         "options": [
-          "I went out",
+          "I left",
           "I was there",
           "and then",
           "I spoke"
@@ -1616,8 +1616,8 @@
         "options": [
           "last week",
           "it was hot",
-          "I learned",
-          "two days ago"
+          "I learnt",
+          "2 days ago"
         ],
         "answer": 2,
         "wordId": "es-a2u9-w23"
@@ -1652,7 +1652,7 @@
       {
         "id": "es-a2-u9-cp-es-a2u9-w26",
         "type": "mc",
-        "prompt": "How do you say \"you went\"?",
+        "prompt": "How do you say \"you went (informal)\"?",
         "options": [
           "esta mañana",
           "el fin de semana pasado",
@@ -1668,9 +1668,9 @@
         "prompt": "What does \"hice\" mean?",
         "speak": "hice",
         "options": [
-          "two days ago",
+          "2 days ago",
           "I went",
-          "you ate",
+          "you ate (informal)",
           "I did"
         ],
         "answer": 3,
@@ -1696,7 +1696,7 @@
         "speak": "vi",
         "options": [
           "he or she spoke",
-          "two days ago",
+          "2 days ago",
           "I was there",
           "I saw"
         ],
@@ -1724,8 +1724,8 @@
         "options": [
           "I was there",
           "I had a good time",
-          "you spoke",
-          "I learned"
+          "you spoke (informal)",
+          "I learnt"
         ],
         "answer": 0,
         "wordId": "es-a2u9-w31"
@@ -1750,7 +1750,7 @@
         "speak": "qué hiciste",
         "options": [
           "I spoke",
-          "what did you do",
+          "what did you do (informal)",
           "I was tired (said by a man)",
           "I cooked"
         ],
@@ -1760,7 +1760,7 @@
       {
         "id": "es-a2-u9-cp-es-a2u9-w34",
         "type": "mc",
-        "prompt": "How do you say \"where did you go\"?",
+        "prompt": "How do you say \"where did you go (informal)\"?",
         "options": [
           "caminé",
           "adónde fuiste",
@@ -1872,7 +1872,7 @@
       {
         "id": "es-a2-u9-cp-l1-s2",
         "type": "translate",
-        "prompt": "I was here two days ago",
+        "prompt": "I was here 2 days ago",
         "answer": [
           "Hace",
           "dos",
@@ -1916,7 +1916,7 @@
       {
         "id": "es-a2-u9-cp-l2-s1",
         "type": "translate",
-        "prompt": "I spoke with my mother",
+        "prompt": "I spoke to my mother",
         "answer": [
           "Hablé",
           "con",
@@ -1958,7 +1958,7 @@
       {
         "id": "es-a2-u9-cp-l2-s3",
         "type": "translate",
-        "prompt": "You spoke with her",
+        "prompt": "You spoke to her",
         "answer": [
           "Hablaste",
           "con",
@@ -2014,7 +2014,7 @@
       {
         "id": "es-a2-u9-cp-l3-s3",
         "type": "translate",
-        "prompt": "I left home at eight",
+        "prompt": "I left home at 8",
         "answer": [
           "Salí",
           "de",
@@ -2108,7 +2108,7 @@
       {
         "id": "es-a2-u9-cp-l5-s1",
         "type": "translate",
-        "prompt": "What did you do last weekend",
+        "prompt": "What did you do last weekend?",
         "answer": [
           "Qué",
           "hiciste",
@@ -2192,7 +2192,7 @@
           {
             "wordId": "es-a2u9-w5",
             "target": "hace dos días",
-            "english": "two days ago"
+            "english": "2 days ago"
           },
           {
             "wordId": "es-a2u9-w6",
@@ -2234,7 +2234,7 @@
           {
             "wordId": "es-a2u9-w10",
             "target": "hablaste",
-            "english": "you spoke"
+            "english": "you spoke (informal)"
           },
           {
             "wordId": "es-a2u9-w9",
@@ -2261,7 +2261,7 @@
           {
             "wordId": "es-a2u9-w18",
             "target": "comiste",
-            "english": "you ate"
+            "english": "you ate (informal)"
           },
           {
             "wordId": "es-a2u9-w17",
@@ -2303,7 +2303,7 @@
           {
             "wordId": "es-a2u9-w26",
             "target": "fuiste",
-            "english": "you went"
+            "english": "you went (informal)"
           }
         ]
       },
@@ -2315,7 +2315,7 @@
           {
             "wordId": "es-a2u9-w33",
             "target": "qué hiciste",
-            "english": "what did you do"
+            "english": "what did you do (informal)"
           },
           {
             "wordId": "es-a2u9-w38",

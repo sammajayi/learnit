@@ -28,7 +28,7 @@
         {
           "id": "fr-a2u10-w2-et",
           "type": "mc",
-          "prompt": "How do you say \"you are going to\"?",
+          "prompt": "How do you say \"you are going to (informal)\"?",
           "options": [
             "tu vas",
             "il va",
@@ -51,7 +51,7 @@
             {
               "wordId": "fr-a2u10-w2",
               "target": "tu vas",
-              "english": "you are going to"
+              "english": "you are going to (informal)"
             },
             {
               "wordId": "fr-a2u10-w3",
@@ -74,7 +74,7 @@
             "he is going to",
             "they are going to",
             "you are going to (polite or plural)",
-            "you are going to"
+            "you are going to (informal)"
           ],
           "answer": 0,
           "wordId": "fr-a2u10-w3"
@@ -122,7 +122,7 @@
         },
         {
           "target": "tu vas",
-          "english": "you are going to"
+          "english": "you are going to (informal)"
         },
         {
           "target": "il va",
@@ -134,8 +134,8 @@
         }
       ],
       "tip": {
-        "title": "Near future",
-        "body": "To say what you are going to do, use aller plus a verb. Je vais manger. Nous allons partir."
+        "title": "Plans with aller",
+        "body": "Use a form of aller plus a verb to say what you are going to do. Je vais manger. Nous allons partir."
       }
     },
     {
@@ -397,7 +397,7 @@
       ],
       "tip": {
         "title": "In and ago",
-        "body": "Dans plus a time means in. Dans deux jours is in 2 days. Il y a deux jours is 2 days ago."
+        "body": "Dans plus a time means in: dans deux jours is in 2 days. Il y a plus a time means ago: il y a deux jours is 2 days ago."
       }
     },
     {
@@ -543,7 +543,7 @@
           "options": [
             "good idea",
             "another time",
-            "do you want to come",
+            "do you want to come (informal)",
             "do you want (polite)"
           ],
           "answer": 2,
@@ -552,7 +552,7 @@
         {
           "id": "fr-a2u10-w18-et",
           "type": "mc",
-          "prompt": "How do you say \"can you come\"?",
+          "prompt": "How do you say \"can you come (informal)\"?",
           "options": [
             "tu veux venir",
             "je ne peux pas",
@@ -570,12 +570,12 @@
             {
               "wordId": "fr-a2u10-w17",
               "target": "tu veux venir",
-              "english": "do you want to come"
+              "english": "do you want to come (informal)"
             },
             {
               "wordId": "fr-a2u10-w18",
               "target": "tu peux venir",
-              "english": "can you come"
+              "english": "can you come (informal)"
             },
             {
               "wordId": "fr-a2u10-w19",
@@ -597,7 +597,7 @@
           "options": [
             "I can't",
             "good idea",
-            "do you want to come",
+            "do you want to come (informal)",
             "do you want (polite)"
           ],
           "answer": 3,
@@ -619,7 +619,7 @@
         {
           "id": "fr-a2-u10-l5-s",
           "type": "translate",
-          "prompt": "Do you want to come to the park",
+          "prompt": "Do you want to come to the park?",
           "answer": [
             "Tu",
             "veux",
@@ -642,11 +642,11 @@
       "intro": [
         {
           "target": "tu veux venir",
-          "english": "do you want to come"
+          "english": "do you want to come (informal)"
         },
         {
           "target": "tu peux venir",
-          "english": "can you come"
+          "english": "can you come (informal)"
         },
         {
           "target": "vous voulez",
@@ -659,7 +659,7 @@
       ],
       "tip": {
         "title": "Want and can",
-        "body": "Vouloir and pouvoir are followed by a verb. Tu veux venir ? Tu peux venir ? To decline kindly, say désolé and offer une autre fois."
+        "body": "After tu veux or tu peux, add a verb, as in tu veux venir ? To say no kindly, say désolé and suggest une autre fois."
       }
     },
     {
@@ -676,7 +676,7 @@
             "good idea",
             "do you want (polite)",
             "sorry",
-            "can you come"
+            "can you come (informal)"
           ],
           "answer": 0,
           "wordId": "fr-a2u10-w21"
@@ -807,7 +807,7 @@
           "options": [
             "around noon",
             "at what time",
-            "appointment",
+            "the appointment",
             "at noon"
           ],
           "answer": 2,
@@ -834,7 +834,7 @@
             {
               "wordId": "fr-a2u10-w25",
               "target": "le rendez-vous",
-              "english": "appointment"
+              "english": "the appointment"
             },
             {
               "wordId": "fr-a2u10-w26",
@@ -862,7 +862,7 @@
             "around noon",
             "at noon",
             "at what time",
-            "appointment"
+            "the appointment"
           ],
           "answer": 0,
           "wordId": "fr-a2u10-w27"
@@ -908,7 +908,7 @@
       "intro": [
         {
           "target": "le rendez-vous",
-          "english": "appointment"
+          "english": "the appointment"
         },
         {
           "target": "à quelle heure",
@@ -925,7 +925,7 @@
       ],
       "tip": {
         "title": "Telling the time",
-        "body": "À quelle heure asks what time. À midi is exactly noon. Vers midi is around noon."
+        "body": "À quelle heure asks what time. Use à for an exact time (à midi, à deux heures) and vers for around (vers midi)."
       }
     },
     {
@@ -1017,7 +1017,7 @@
         {
           "id": "fr-a2-u10-l8-s",
           "type": "translate",
-          "prompt": "What time shall we meet",
+          "prompt": "What time shall we meet?",
           "answer": [
             "À",
             "quelle",
@@ -1071,7 +1071,7 @@
           "options": [
             "it will be windy",
             "the weather forecast",
-            "it will be cold",
+            "it is going to be cold",
             "it is going to snow"
           ],
           "answer": 1,
@@ -1113,7 +1113,7 @@
             {
               "wordId": "fr-a2u10-w36",
               "target": "il va faire beau",
-              "english": "the weather will be nice"
+              "english": "it is going to be nice"
             }
           ]
         },
@@ -1123,10 +1123,10 @@
           "prompt": "What does \"il va neiger\" mean?",
           "speak": "il va neiger",
           "options": [
-            "it will be cold",
+            "it is going to be cold",
             "it is going to snow",
             "the weather forecast",
-            "it will be hot"
+            "it is going to be hot"
           ],
           "answer": 1,
           "wordId": "fr-a2u10-w35"
@@ -1134,7 +1134,7 @@
         {
           "id": "fr-a2u10-w36-et",
           "type": "mc",
-          "prompt": "How do you say \"the weather will be nice\"?",
+          "prompt": "How do you say \"it is going to be nice\"?",
           "options": [
             "il va faire beau",
             "il va pleuvoir",
@@ -1180,12 +1180,12 @@
         },
         {
           "target": "il va faire beau",
-          "english": "the weather will be nice"
+          "english": "it is going to be nice"
         }
       ],
       "tip": {
         "title": "Forecasts",
-        "body": "Il va plus a weather verb says what is coming. Il va pleuvoir. Il va faire beau."
+        "body": "Il va plus a verb says what is coming: il va pleuvoir, il va faire beau. Il y aura du soleil and il y aura du vent are set phrases for now."
       }
     },
     {
@@ -1200,7 +1200,7 @@
           "speak": "il va faire froid",
           "options": [
             "it will be windy",
-            "it will be cold",
+            "it is going to be cold",
             "it is going to snow",
             "it will be sunny"
           ],
@@ -1210,7 +1210,7 @@
         {
           "id": "fr-a2u10-w38-et",
           "type": "mc",
-          "prompt": "How do you say \"it will be hot\"?",
+          "prompt": "How do you say \"it is going to be hot\"?",
           "options": [
             "il va faire beau",
             "il va faire chaud",
@@ -1228,12 +1228,12 @@
             {
               "wordId": "fr-a2u10-w37",
               "target": "il va faire froid",
-              "english": "it will be cold"
+              "english": "it is going to be cold"
             },
             {
               "wordId": "fr-a2u10-w38",
               "target": "il va faire chaud",
-              "english": "it will be hot"
+              "english": "it is going to be hot"
             },
             {
               "wordId": "fr-a2u10-w39",
@@ -1254,9 +1254,9 @@
           "speak": "il y aura du soleil",
           "options": [
             "it will be sunny",
-            "it will be cold",
+            "it is going to be cold",
             "it is going to rain",
-            "it will be hot"
+            "it is going to be hot"
           ],
           "answer": 0,
           "wordId": "fr-a2u10-w39"
@@ -1277,7 +1277,7 @@
         {
           "id": "fr-a2-u10-l10-s",
           "type": "translate",
-          "prompt": "It will be nice this weekend",
+          "prompt": "It is going to be nice this weekend",
           "answer": [
             "Ce",
             "week-end",
@@ -1302,11 +1302,11 @@
       "intro": [
         {
           "target": "il va faire froid",
-          "english": "it will be cold"
+          "english": "it is going to be cold"
         },
         {
           "target": "il va faire chaud",
-          "english": "it will be hot"
+          "english": "it is going to be hot"
         },
         {
           "target": "il y aura du soleil",
@@ -1330,7 +1330,7 @@
         "speak": "je vais",
         "options": [
           "I am going to",
-          "can you come",
+          "can you come (informal)",
           "I am going to eat",
           "the day after tomorrow"
         ],
@@ -1340,7 +1340,7 @@
       {
         "id": "fr-a2-u10-cp-fr-a2u10-w2",
         "type": "mc",
-        "prompt": "How do you say \"you are going to\"?",
+        "prompt": "How do you say \"you are going to (informal)\"?",
         "options": [
           "je vais partir",
           "vous voulez",
@@ -1359,7 +1359,7 @@
           "they are going to",
           "the weather forecast",
           "he is going to",
-          "appointment"
+          "the appointment"
         ],
         "answer": 2,
         "wordId": "fr-a2u10-w3"
@@ -1412,7 +1412,7 @@
         "options": [
           "I am going to eat",
           "it will be sunny",
-          "the weather will be nice",
+          "it is going to be nice",
           "I am going to"
         ],
         "answer": 0,
@@ -1437,7 +1437,7 @@
         "prompt": "What does \"demain\" mean?",
         "speak": "demain",
         "options": [
-          "appointment",
+          "the appointment",
           "the weather forecast",
           "tomorrow",
           "the day after tomorrow"
@@ -1520,7 +1520,7 @@
         "options": [
           "soon",
           "around noon",
-          "you are going to",
+          "you are going to (informal)",
           "in 2 days"
         ],
         "answer": 0,
@@ -1548,7 +1548,7 @@
           "the day after tomorrow",
           "sorry",
           "I am going to leave",
-          "do you want to come"
+          "do you want to come (informal)"
         ],
         "answer": 3,
         "wordId": "fr-a2u10-w17"
@@ -1556,7 +1556,7 @@
       {
         "id": "fr-a2-u10-cp-fr-a2u10-w18",
         "type": "mc",
-        "prompt": "How do you say \"can you come\"?",
+        "prompt": "How do you say \"can you come (informal)\"?",
         "options": [
           "nous allons",
           "une autre fois",
@@ -1574,7 +1574,7 @@
         "options": [
           "next week",
           "do you want (polite)",
-          "you are going to",
+          "you are going to (informal)",
           "another time"
         ],
         "answer": 1,
@@ -1626,8 +1626,8 @@
         "prompt": "What does \"je ne peux pas\" mean?",
         "speak": "je ne peux pas",
         "options": [
-          "it will be cold",
-          "appointment",
+          "it is going to be cold",
+          "the appointment",
           "I can't",
           "another time"
         ],
@@ -1653,8 +1653,8 @@
         "prompt": "What does \"le rendez-vous\" mean?",
         "speak": "le rendez-vous",
         "options": [
-          "you are going to",
-          "appointment",
+          "you are going to (informal)",
+          "the appointment",
           "around noon",
           "next week"
         ],
@@ -1680,7 +1680,7 @@
         "prompt": "What does \"vers midi\" mean?",
         "speak": "vers midi",
         "options": [
-          "do you want to come",
+          "do you want to come (informal)",
           "sorry",
           "they are going to",
           "around noon"
@@ -1799,7 +1799,7 @@
       {
         "id": "fr-a2-u10-cp-fr-a2u10-w36",
         "type": "mc",
-        "prompt": "How do you say \"the weather will be nice\"?",
+        "prompt": "How do you say \"it is going to be nice\"?",
         "options": [
           "le rendez-vous",
           "ce week-end",
@@ -1815,8 +1815,8 @@
         "prompt": "What does \"il va faire froid\" mean?",
         "speak": "il va faire froid",
         "options": [
-          "appointment",
-          "it will be cold",
+          "the appointment",
+          "it is going to be cold",
           "at half past 8",
           "it is going to snow"
         ],
@@ -1826,7 +1826,7 @@
       {
         "id": "fr-a2-u10-cp-fr-a2u10-w38",
         "type": "mc",
-        "prompt": "How do you say \"it will be hot\"?",
+        "prompt": "How do you say \"it is going to be hot\"?",
         "options": [
           "ce soir",
           "il va faire chaud",
@@ -1845,7 +1845,7 @@
           "they are going to",
           "it will be windy",
           "it will be sunny",
-          "the weather will be nice"
+          "it is going to be nice"
         ],
         "answer": 2,
         "wordId": "fr-a2u10-w39"
@@ -2002,7 +2002,7 @@
       {
         "id": "fr-a2-u10-cp-l3-s1",
         "type": "translate",
-        "prompt": "Do you want to come to the park",
+        "prompt": "Do you want to come to the park?",
         "answer": [
           "Tu",
           "veux",
@@ -2100,7 +2100,7 @@
       {
         "id": "fr-a2-u10-cp-l4-s2",
         "type": "translate",
-        "prompt": "What time shall we meet",
+        "prompt": "What time shall we meet?",
         "answer": [
           "À",
           "quelle",
@@ -2166,7 +2166,7 @@
       {
         "id": "fr-a2-u10-cp-l5-s2",
         "type": "translate",
-        "prompt": "It will be nice this weekend",
+        "prompt": "It is going to be nice this weekend",
         "answer": [
           "Ce",
           "week-end",
@@ -2234,7 +2234,7 @@
           {
             "wordId": "fr-a2u10-w2",
             "target": "tu vas",
-            "english": "you are going to"
+            "english": "you are going to (informal)"
           },
           {
             "wordId": "fr-a2u10-w6",
@@ -2288,7 +2288,7 @@
           {
             "wordId": "fr-a2u10-w17",
             "target": "tu veux venir",
-            "english": "do you want to come"
+            "english": "do you want to come (informal)"
           },
           {
             "wordId": "fr-a2u10-w22",
@@ -2362,12 +2362,12 @@
           {
             "wordId": "fr-a2u10-w38",
             "target": "il va faire chaud",
-            "english": "it will be hot"
+            "english": "it is going to be hot"
           },
           {
             "wordId": "fr-a2u10-w36",
             "target": "il va faire beau",
-            "english": "the weather will be nice"
+            "english": "it is going to be nice"
           }
         ]
       }
