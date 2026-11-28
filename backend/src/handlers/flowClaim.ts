@@ -22,9 +22,10 @@ export async function POST(req: Request) {
     if (!(await verifyMessage({ address, message: flowClaimMessage(address, issuedAt), signature }))) return reply({ error: "The signature does not match this wallet." }, 400);
 
     const res = await fetch("https://flowstate.network/api/flow-council/eligibility", {
-      method: "POST", headers: { "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(15_000), redirect: "error",
+      method: "POST", headers: { "Content-Type": "application/json" }, cache: "no-store", signal: AbortSignal.timeout(15_000), redirect: "manual", // Workers has no "error"; a redirect is refused below
       body: JSON.stringify({ address, issuedAt, signature, chainId: FLOW_CHAIN, councilId: FLOW_COUNCIL }),
     });
+    if (res.status >= 300 && res.status < 400) return reply({ error: "Flow State could not grant voting rights right now. Try again in a moment." }, 503);
     const data = (await res.json().catch(() => null)) as { success?: boolean; alreadyClaimed?: boolean; notWhitelisted?: boolean } | null;
     if (res.ok && data?.success === true) return reply({ ok: true });
     if (data?.alreadyClaimed) return reply({ error: "This GoodDollar identity already has voting rights on another wallet. Vote from that wallet on Flow State.", code: "ALREADY_CLAIMED" }, 409);
